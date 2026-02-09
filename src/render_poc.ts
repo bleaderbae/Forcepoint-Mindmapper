@@ -2,50 +2,114 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 function run() {
-    const mermaidPath = path.join(process.cwd(), 'mindmap.mmd');
-    const htmlPath = path.join(process.cwd(), 'index.html');
-    
-    if (!fs.existsSync(mermaidPath)) {
-        console.error('mindmap.mmd not found');
+    const mmdPath = path.join(process.cwd(), 'mindmap.mmd');
+    if (!fs.existsSync(mmdPath)) {
+        console.error('mindmap.mmd not found.');
         return;
     }
 
-    const mermaidContent = fs.readFileSync(mermaidPath, 'utf-8');
-    
-    const htmlTemplate = `<!DOCTYPE html>
+    const mermaidContent = fs.readFileSync(mmdPath, 'utf-8');
+
+    const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forcepoint Mind Map POC</title>
+    <title>Forcepoint Documentation Mind Map</title>
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ 
             startOnLoad: true,
             theme: 'base',
             themeVariables: {
-                primaryColor: '#007bff',
-                edgeColor: '#007bff',
-                nodeBorder: '#007bff'
+                primaryColor: '#00af9a',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#007565',
+                lineColor: '#00af9a',
+                secondaryColor: '#f5f6f6',
+                tertiaryColor: '#1d252c',
+                mainBkg: '#fff',
+                nodeBorder: '#00af9a',
+                clusterBkg: '#f5f6f6',
+                titleColor: '#1d252c',
+                edgeColor: '#007565'
             }
         });
     </script>
     <style>
-        body { font-family: sans-serif; background: #f4f4f9; margin: 0; padding: 20px; }
-        .mermaid { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { color: #333; text-align: center; }
+        :root {
+            --fp-green: #00af9a;
+            --fp-dark-green: #007565;
+            --fp-navy: #1d252c;
+            --fp-gray: #636569;
+            --fp-light: #f5f6f6;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--fp-light); 
+            margin: 0; 
+            padding: 0;
+            color: var(--fp-navy);
+        }
+        header {
+            background-color: var(--fp-navy);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        header h1 { margin: 0; font-size: 1.5rem; }
+        .container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: auto;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        .btn {
+            background-color: var(--fp-green);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: var(--fp-dark-green);
+        }
     </style>
 </head>
 <body>
-    <h1>Forcepoint Documentation Mind Map (POC)</h1>
-    <div class="mermaid">
+    <header>
+        <h1>Forcepoint Documentation Mind Map</h1>
+        <a href="https://help.forcepoint.com" class="btn">View Original Docs</a>
+    </header>
+    <div class="container">
+        <div class="card">
+            <div class="mermaid">
 ${mermaidContent}
+            </div>
+        </div>
     </div>
 </body>
 </html>`;
 
-    fs.writeFileSync(htmlPath, htmlTemplate);
-    console.log('POC index.html generated.');
+    fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
+    console.log('POC index.html updated with Forcepoint branding.');
 }
 
 run();

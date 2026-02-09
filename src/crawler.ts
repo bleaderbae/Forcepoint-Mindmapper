@@ -9,23 +9,21 @@ interface DocNode {
     title: string;
     content?: string;
     breadcrumbs: string[];
-    parentUrl?: string;
+    parentUrl?: string | undefined;
     nextUrl?: string | undefined;
     prevUrl?: string | undefined;
     relatedUrls: string[];
     lastScraped?: string;
 }
 
-const START_URL = 'https://help.forcepoint.com/dlp/10.4.0/dlphelp/index.html';
+// START from the global sitemap to get EVERYTHING
+const START_URL = 'https://help.forcepoint.com/docs/index.html';
 const BASE_DOMAIN = 'help.forcepoint.com';
-// We allow crawling anything under the same path prefix to avoid escaping to other products/versions unexpectedly,
-// but we can relax this if needed. For now, strict to avoid massive crawl.
-const ALLOWED_PATH_PREFIX = '/dlp/10.4.0/dlphelp/';
-const MAX_CONCURRENCY = 5;
+const MAX_CONCURRENCY = 10;
+const MAX_PAGES = 10000;
 const DATA_FILE = path.join(process.cwd(), 'full_site_data.json');
 
 let results: DocNode[] = [];
-// Load existing data if available to resume
 if (fs.existsSync(DATA_FILE)) {
     try {
         results = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
@@ -35,36 +33,31 @@ if (fs.existsSync(DATA_FILE)) {
 }
 
 const visited = new Set<string>(results.map(r => r.url));
-const queue: string[] = [];
+const queue: { url: string; parentUrl?: string }[] = [];
 
 if (!visited.has(START_URL)) {
-    queue.push(START_URL);
+    queue.push({ url: START_URL });
 }
 
-let activeRequests = 0;
+let processing = 0;
 
-function isAllowedUrl(url: string): boolean {
-    try {
-        const parsed = new URL(url);
-        return parsed.hostname === BASE_DOMAIN && parsed.pathname.startsWith(ALLOWED_PATH_PREFIX);
-    } catch (e) {
-        return false;
-    }
-}
-
-async function processUrl(url: string) {
-    if (visited.has(url)) return;
+async function processUrl(url: string, parentUrl?: string) {
+    if (visited.has(url) && results.find(r => r.url === url)) return;
     visited.add(url);
 
     try {
-        console.log(`[Active: ${activeRequests} | Queue: ${queue.length} | Saved: ${results.length}] Crawling: ${url}`);
-        const response = await axios.get(url, {
-            timeout: 10000,
-            headers: { 'User-Agent': 'Mozilla/5.0 ForcepointMindMapper/1.0' }
+        console.log(`[Queue: ${queue.length}] Crawling: ${url}`);
+        const response = await axios.get(url, { 
+            timeout: 15000,
+            headers: { 'User-Agent': 'Mozilla/5.0 ForcepointMindMapper/1.1' }
         });
-
         const $ = cheerio.load(response.data);
-        const title = $('h1.title').first().text().trim() || $('title').text().trim();
+
+        // Improved Title extraction
+        const title = $('article h1').first().text().trim() || 
+                      $('h1.title').first().text().trim() || 
+                      $('.wh_main_page_title').text().trim() ||
+                      $('title').text().trim();
 
         const breadcrumbs: string[] = [];
         $('.wh_breadcrumb a').each((_, el) => {
@@ -72,13 +65,14 @@ async function processUrl(url: string) {
             if (text && text !== 'Home') breadcrumbs.push(text);
         });
 
-        const content = $('article').text().replace(/\s+/g, ' ').trim();
+        // Content strictly from article or main body
+        const content = $('article, .wh_topic_content').text().replace(/\s+/g, ' ').trim();
 
-        // Extract semantic flow
-        const nextHref = $('.wh_next_topic a').attr('href') || $('a[rel="next"]').attr('href');
+        // Semantic Flow Extraction
+        const nextHref = $('.wh_next_topic a, a[rel="next"]').first().attr('href');
         const nextUrl = nextHref ? new URL(nextHref, url).toString() : undefined;
 
-        const prevHref = $('.wh_previous_topic a').attr('href') || $('a[rel="prev"]').attr('href');
+        const prevHref = $('.wh_previous_topic a, a[rel="prev"]').first().attr('href');
         const prevUrl = prevHref ? new URL(prevHref, url).toString() : undefined;
 
         const relatedUrls: string[] = [];
@@ -86,50 +80,39 @@ async function processUrl(url: string) {
             const href = $(el).attr('href');
             if (href) {
                 try {
-                    const fullUrl = new URL(href, url).toString();
-                    if (isAllowedUrl(fullUrl)) {
-                        relatedUrls.push(fullUrl);
-                    }
+                    relatedUrls.push(new URL(href, url).toString());
                 } catch (e) {}
             }
         });
 
-        // TOC Links (Structure)
-        const structuralLinks: string[] = [];
-        // Add more selectors for main page TOC and side TOC
-        $('.wh_side_toc a, .wh_main_page_toc a, .wh_main_page_toc_entry a, .wh_main_page_toc_accordion_header a, .wh_tile a').each((_, el) => {
+        // Link Extraction: Prioritize TOC but also capture sitemap links
+        const links: string[] = [];
+        $('.wh_side_toc a, .wh_topic_toc a, article a[href], .wh_main_page_toc a').each((_, el) => {
             const href = $(el).attr('href');
-            if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+            if (href && !href.startsWith('javascript:') && !href.startsWith('#') && !href.startsWith('mailto:')) {
                 try {
-                    const fullUrl = new URL(href, url).toString();
-                    if (isAllowedUrl(fullUrl) && !visited.has(fullUrl) && !queue.includes(fullUrl)) {
-                        structuralLinks.push(fullUrl);
+                    const absoluteUrl = new URL(href, url).toString();
+                    if (new URL(absoluteUrl).hostname === BASE_DOMAIN && !visited.has(absoluteUrl)) {
+                        links.push(absoluteUrl);
                     }
                 } catch (e) {}
             }
         });
 
-        // Add to results
         results.push({
             url,
             title,
             breadcrumbs,
-            content: content.substring(0, 500), // truncate for size
+            content: content.substring(0, 1000),
+            parentUrl,
             nextUrl,
             prevUrl,
             relatedUrls,
             lastScraped: new Date().toISOString()
         });
 
-        // Enqueue new links
-        if (nextUrl && isAllowedUrl(nextUrl) && !visited.has(nextUrl) && !queue.includes(nextUrl)) {
-            queue.push(nextUrl);
-        }
-
-        for (const link of structuralLinks) {
-            if (!visited.has(link) && !queue.includes(link)) {
-                queue.push(link);
-            }
+        for (const link of links) {
+            queue.push({ url: link, parentUrl: url });
         }
 
     } catch (error: any) {
@@ -138,40 +121,39 @@ async function processUrl(url: string) {
 }
 
 function save() {
+    console.log(`Saving ${results.length} pages...`);
     fs.writeFileSync(DATA_FILE, JSON.stringify(results, null, 2));
-    console.log(`Saved ${results.length} pages to ${DATA_FILE}`);
 }
 
-async function run() {
-    const processQueue = async () => {
-        while (queue.length > 0 || activeRequests > 0) {
-            if (queue.length > 0 && activeRequests < MAX_CONCURRENCY) {
-                const url = queue.shift();
-                if (url) {
-                    activeRequests++;
-                    processUrl(url).then(() => {
-                        activeRequests--;
-                        if (results.length % 20 === 0) save();
-                    }).catch(() => {
-                        activeRequests--;
-                    });
-                }
-            } else {
-                await new Promise(resolve => setTimeout(resolve, 100));
-            }
-        }
-    };
-
-    await processQueue();
-    save();
-    console.log(`Crawl finished. Total pages: ${results.length}`);
-}
-
-// Handle interrupts
 process.on('SIGINT', () => {
-    console.log('\nCrawler interrupted. Saving progress...');
     save();
     process.exit();
 });
+
+async function run() {
+    // If resuming, start from unvisited links in results or START_URL
+    if (results.length > 0 && queue.length === 0) {
+        queue.push({ url: START_URL });
+    }
+
+    while (queue.length > 0 || processing > 0) {
+        if (queue.length > 0 && processing < MAX_CONCURRENCY && visited.size < MAX_PAGES) {
+            const item = queue.shift();
+            if (item) {
+                processing++;
+                processUrl(item.url, item.parentUrl).then(() => {
+                    if (results.length % 100 === 0) save();
+                }).finally(() => {
+                    processing--;
+                });
+            }
+        } else {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            if (visited.size >= MAX_PAGES && processing === 0) break;
+        }
+    }
+    save();
+    console.log(`Crawl finished. Total pages: ${results.length}`);
+}
 
 run();
