@@ -16,9 +16,11 @@ interface DocNode {
     lastScraped?: string;
 }
 
-const START_URL = 'https://help.forcepoint.com/dlp/10.4.0/dlphelp/index.html';
+// START from the global sitemap to get EVERYTHING
+const START_URL = 'https://help.forcepoint.com/docs/index.html';
 const BASE_DOMAIN = 'help.forcepoint.com';
-const MAX_CONCURRENCY = 5;
+const MAX_CONCURRENCY = 10;
+const MAX_PAGES = 10000;
 const DATA_FILE = path.join(process.cwd(), 'full_site_data.json');
 
 let results: DocNode[] = [];
@@ -40,27 +42,31 @@ if (!visited.has(START_URL)) {
 let processing = 0;
 
 async function processUrl(url: string, parentUrl?: string) {
-    if (visited.has(url) && results.find(r => r.url === url)) {
-        return;
-    }
+    if (visited.has(url) && results.find(r => r.url === url)) return;
     visited.add(url);
 
     try {
         console.log(`[Queue: ${queue.length}] Crawling: ${url}`);
         const response = await axios.get(url, { 
-            timeout: 10000,
-            headers: { 'User-Agent': 'Mozilla/5.0 ForcepointMindMapper/1.0' }
+            timeout: 15000,
+            headers: { 'User-Agent': 'Mozilla/5.0 ForcepointMindMapper/1.1' }
         });
         const $ = cheerio.load(response.data);
 
-        const title = $('article h1').first().text().trim() || $('h1.title').first().text().trim() || $('title').text().trim();
+        // Improved Title extraction
+        const title = $('article h1').first().text().trim() || 
+                      $('h1.title').first().text().trim() || 
+                      $('.wh_main_page_title').text().trim() ||
+                      $('title').text().trim();
+
         const breadcrumbs: string[] = [];
         $('.wh_breadcrumb a').each((_, el) => {
             const text = $(el).text().trim();
             if (text && text !== 'Home') breadcrumbs.push(text);
         });
 
-        const content = $('article').text().replace(/\s+/g, ' ').trim();
+        // Content strictly from article or main body
+        const content = $('article, .wh_topic_content').text().replace(/\s+/g, ' ').trim();
 
         // Semantic Flow Extraction
         const nextHref = $('.wh_next_topic a, a[rel="next"]').first().attr('href');
@@ -79,14 +85,15 @@ async function processUrl(url: string, parentUrl?: string) {
             }
         });
 
-        const structuralLinks: string[] = [];
-        $('.wh_side_toc a').each((_, el) => {
+        // Link Extraction: Prioritize TOC but also capture sitemap links
+        const links: string[] = [];
+        $('.wh_side_toc a, .wh_topic_toc a, article a[href], .wh_main_page_toc a').each((_, el) => {
             const href = $(el).attr('href');
-            if (href && !href.startsWith('http') && !href.startsWith('#')) {
+            if (href && !href.startsWith('javascript:') && !href.startsWith('#') && !href.startsWith('mailto:')) {
                 try {
                     const absoluteUrl = new URL(href, url).toString();
                     if (new URL(absoluteUrl).hostname === BASE_DOMAIN && !visited.has(absoluteUrl)) {
-                        structuralLinks.push(absoluteUrl);
+                        links.push(absoluteUrl);
                     }
                 } catch (e) {}
             }
@@ -96,7 +103,7 @@ async function processUrl(url: string, parentUrl?: string) {
             url,
             title,
             breadcrumbs,
-            content: content.substring(0, 500),
+            content: content.substring(0, 1000),
             parentUrl,
             nextUrl,
             prevUrl,
@@ -104,12 +111,8 @@ async function processUrl(url: string, parentUrl?: string) {
             lastScraped: new Date().toISOString()
         });
 
-        for (const link of structuralLinks) {
+        for (const link of links) {
             queue.push({ url: link, parentUrl: url });
-        }
-        // Also queue nextUrl if not visited to ensure we follow the flowchart
-        if (nextUrl && !visited.has(nextUrl)) {
-            queue.push({ url: nextUrl, parentUrl: url });
         }
 
     } catch (error: any) {
@@ -128,23 +131,25 @@ process.on('SIGINT', () => {
 });
 
 async function run() {
+    // If resuming, start from unvisited links in results or START_URL
     if (results.length > 0 && queue.length === 0) {
         queue.push({ url: START_URL });
     }
 
     while (queue.length > 0 || processing > 0) {
-        if (queue.length > 0 && processing < MAX_CONCURRENCY) {
+        if (queue.length > 0 && processing < MAX_CONCURRENCY && visited.size < MAX_PAGES) {
             const item = queue.shift();
             if (item) {
                 processing++;
                 processUrl(item.url, item.parentUrl).then(() => {
-                    if (results.length % 50 === 0) save();
+                    if (results.length % 100 === 0) save();
                 }).finally(() => {
                     processing--;
                 });
             }
         } else {
             await new Promise(resolve => setTimeout(resolve, 100));
+            if (visited.size >= MAX_PAGES && processing === 0) break;
         }
     }
     save();
