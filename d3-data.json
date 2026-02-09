@@ -1,0 +1,2813 @@
+{
+  "name": "Forcepoint Documentation",
+  "children": [
+    {
+      "name": "DLP",
+      "children": [
+        {
+          "name": "10.4.0",
+          "children": [
+            {
+              "name": "Forcepoint DLP Administrator Help",
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/index.html",
+              "children": []
+            },
+            {
+              "name": "Overview",
+              "children": [
+                {
+                  "name": "Data classification",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/E38AA3ED-E6F8-4008-82B8-8400230E8B9D.html"
+                },
+                {
+                  "name": "Managing Forcepoint DLP",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/574AA3CD-C1F3-4C91-B3D4-DDD63589D996.html"
+                },
+                {
+                  "name": "Forcepoint DLP databases",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/034A81A6-7D55-46B1-8B41-92A37085D7FF.html"
+                },
+                {
+                  "name": "Forcepoint DLP basics",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D8B814AE-0699-4781-BF68-0D5B60B6BA29.html"
+                },
+                {
+                  "name": "Forcepoint DLP appliances",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/2AA22546-066F-4988-90B5-739055E671DD.html"
+                },
+                {
+                  "name": "What can I protect?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B3E8968C-3243-4141-95F2-C2D600321611.html"
+                },
+                {
+                  "name": "DLP in Forcepoint Web Security and Forcepoint Email Security",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/F0BF10E9-319A-418B-A7BC-DE166AD84A70.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-3e3ae49c-cb25-482b-a915-61ef93143f55.html"
+            },
+            {
+              "name": "Navigating the system",
+              "children": [
+                {
+                  "name": "Main options",
+                  "children": [
+                    {
+                      "name": "Reporting",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/36E70F19-135C-438C-8C16-EA48D110D31C.html"
+                    },
+                    {
+                      "name": "Status",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B3F29916-AA66-42C7-B3EC-D5E6D6E809B2.html"
+                    },
+                    {
+                      "name": "Policy Management",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/A7220D4E-46B7-4EBD-9A70-0205A203567B.html"
+                    },
+                    {
+                      "name": "Logs",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/0472666D-773E-4F2C-BF40-C291F8DDAC2D.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B5640891-94C3-441F-9C92-A7F4F2DB02C7.html"
+                },
+                {
+                  "name": "Deploy button",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/08CB6619-B538-4134-932A-87C9F896C288.html"
+                },
+                {
+                  "name": "Settings options",
+                  "children": [
+                    {
+                      "name": "General",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/34B33386-5F92-4975-BFE8-098A118956A5.html"
+                    },
+                    {
+                      "name": "Deployment",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/EBA9518B-3546-43AE-A997-F64131C5F580.html"
+                    },
+                    {
+                      "name": "Authorization",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/FF2DEBCC-CE68-440A-954A-20036ABCC819.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/EA6A36C8-8DCD-4C29-8195-1D983E8B3F68.html"
+                },
+                {
+                  "name": "Global and status icons",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/5BE2F32C-07D2-4255-809D-18D241ADA25F.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-01a10766-a933-4cf5-878f-3173b2d66e73.html"
+            },
+            {
+              "name": "Initial Setup",
+              "children": [
+                {
+                  "name": "Configuring the protector",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/69EEA9C6-4121-4580-BFAF-CD6380D23751.html"
+                },
+                {
+                  "name": "Configuring system modules",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6104ED8F-C38C-49CB-A5D8-D5A6525F1013.html"
+                },
+                {
+                  "name": "Defining general system settings and notifications",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/E4BCB3FA-D82D-4227-9105-C771816B9A7A.html"
+                },
+                {
+                  "name": "Entering a subscription key",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/0CCE03E0-F4E7-4427-B4C4-42FAA7C5988A.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-743c8588-cff6-43d0-84d1-d2daa70c1478.html"
+            },
+            {
+              "name": "Viewing Status",
+              "children": [
+                {
+                  "name": "Changing table properties",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/F7DC301D-9606-41A2-BFD2-2902EBD58426.html"
+                },
+                {
+                  "name": "Viewing endpoint status",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/860FDF47-0F50-4360-B649-1D5120D0C3F4.html"
+                },
+                {
+                  "name": "Viewing the Dashboard",
+                  "children": [
+                    {
+                      "name": "Health Alert Summary",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/686DB4DE-0D51-4885-8FEE-C84A4823FDFA.html"
+                    },
+                    {
+                      "name": "SSL Certificate Alerts",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/11FF378C-240D-48CB-B878-F95CE6FFF261.html"
+                    },
+                    {
+                      "name": "Discovery Incidents",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/CA61D9B3-ED32-40CF-B078-EDA18B6CEEE5.html"
+                    },
+                    {
+                      "name": "Business Value",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/DD885593-CC29-4AC8-B906-DC13671AA732.html"
+                    },
+                    {
+                      "name": "Data Loss Prevention Incidents",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/A1B8111A-72FC-48B9-9338-4E9020FB477D.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/AA9A7A34-99FC-4D48-B33A-903F3A71949D.html"
+                },
+                {
+                  "name": "Monitoring system health",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/BCB18B34-079E-4A65-B117-F9444A5EF5BC.html"
+                },
+                {
+                  "name": "Viewing deployment status",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D50B8A70-33C4-4513-AD4D-AEFCD9BBDFFD.html"
+                },
+                {
+                  "name": "Applying column filters",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/9E32ADAB-A18B-42B9-814A-E08D65C82ED4.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-13195525-102b-44c4-adc6-d8372d07c556.html"
+            },
+            {
+              "name": "Viewing Incidents and Reports",
+              "children": [
+                {
+                  "name": "Viewing the incident list",
+                  "children": [
+                    {
+                      "name": "Toolbar buttons",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/192102E9-7801-41D2-90EE-731B34E6ACCB.html"
+                    },
+                    {
+                      "name": "Remediating incidents",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/3E3127B0-41CF-463D-95CA-47524FF3BE8A.html"
+                    },
+                    {
+                      "name": "Managing incident workflow",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/59A705A9-4FB4-459F-BC37-FC1BD6458B6C.html"
+                    },
+                    {
+                      "name": "Previewing incidents",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/DE1172D4-5E19-47A0-BB3F-5621F6C9F7DA.html"
+                    },
+                    {
+                      "name": "Managing incident reports",
+                      "children": [
+                        {
+                          "name": "Editing table properties",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6BFC4FCB-6B60-4211-AF5B-5864AEF40B5A.html"
+                        },
+                        {
+                          "name": "Applying a column filter",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/26BACE49-F7AD-44E6-A811-C14694983D96.html"
+                        }
+                      ],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/35F39152-5C4F-495B-A53D-F23CD3B6BCB8.html"
+                    },
+                    {
+                      "name": "Escalating incidents",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/59B63A4C-9005-4C42-814D-CB520BE5A5E0.html"
+                    },
+                    {
+                      "name": "Tuning policies",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/81ECF879-800B-47DA-A3EA-BD16F263F6A3.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/554CB4B1-54F3-466F-AD19-1280F815AE4E.html"
+                },
+                {
+                  "name": "The report catalog",
+                  "children": [
+                    {
+                      "name": "Scheduling tasks",
+                      "children": [
+                        {
+                          "name": "Scheduling a new task",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/806E8DAD-E6A8-4B41-9E93-9F5230206C75.html"
+                        }
+                      ],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/31DEB755-C4E7-4143-B624-E6D45E8767D7.html"
+                    },
+                    {
+                      "name": "Editing a report",
+                      "children": [
+                        {
+                          "name": "Table Properties tab",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/ADC8AA40-2980-4FAD-9901-ED88DEACCD3C.html"
+                        }
+                      ],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/CE8C0D5E-1E04-4FB2-A24E-E73CDCFF1FBC.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/040D98E5-9592-413E-9742-4D3F4BAE3D48.html"
+                },
+                {
+                  "name": "Discovery reports",
+                  "children": [
+                    {
+                      "name": "Discovery dashboard",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B6441DB6-05A7-4131-87BE-CAB323EEC8AC.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/732033D4-C684-4F11-90DA-3E3496B8E092.html"
+                },
+                {
+                  "name": "Data Loss Prevention reports",
+                  "children": [
+                    {
+                      "name": "Incidents by geographical location",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6B933182-46D0-4B50-B909-BCB043C319F1.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4E7A2EB5-FB69-4756-BBFD-8FC7B4F58E81.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-086768f6-c674-4221-9bdd-c94dcbfb2c6f.html"
+            },
+            {
+              "name": "Policies Overview",
+              "children": [
+                {
+                  "name": "Viewing policies",
+                  "children": [
+                    {
+                      "name": "The policy toolbar",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/DA4D4E90-949E-4CD1-93E3-15F4DAA09987.html"
+                    },
+                    {
+                      "name": "Update rules of a current policy",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7F35EA02-B54B-47D2-9C80-7659A7D67E5A.html"
+                    },
+                    {
+                      "name": "Editing a policy",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/55B25209-9747-4518-BA0B-815109C7DBD6.html"
+                    },
+                    {
+                      "name": "Update rules of multiple policies",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/9B1BBAC9-32A5-4956-B8D2-17B33FFF6ED2.html"
+                    },
+                    {
+                      "name": "Update exceptions of multiple rules",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8D657BBC-DA38-4A1A-A679-1EF695051C5F.html"
+                    },
+                    {
+                      "name": "Update exceptions of current rule",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/88C50FCC-4718-4382-A31C-53E658C336E6.html"
+                    },
+                    {
+                      "name": "Policy levels",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/9BAAE2AE-BB10-47D4-8901-4504DAB7BD0E.html"
+                    },
+                    {
+                      "name": "Delete policies",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/86947A90-0009-4F1B-9924-03AE50092A09.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8A2EAAEF-B48F-4596-9E45-20F3155A33FF.html"
+                },
+                {
+                  "name": "What’s in a policy?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/FF9308AE-980A-48CD-AC96-3894D08B2859.html"
+                },
+                {
+                  "name": "Selecting items to include or exclude in a policy",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/F23372D7-7EAB-44B8-8476-2ADEA46A215B.html"
+                },
+                {
+                  "name": "Import and Export policies from Forcepoint Security Manager",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/19A57703-AA7C-459B-A6D4-A7AB94F26715.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-f89912ca-884a-4832-a395-995c8b66e7dc.html"
+            },
+            {
+              "name": "Configuring the Email DLP Policy",
+              "children": [
+                {
+                  "name": "Defining email DLP policy owners",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/1EB73A65-00FD-4052-BCCF-0A7B5DDB31E3.html"
+                },
+                {
+                  "name": "Configuring outbound and inbound email DLP attributes",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6840F3C0-B708-407B-86B8-451F4266C87C.html"
+                },
+                {
+                  "name": "Identifying email DLP trusted domains",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/5DE58B2C-1B1A-4D2F-8779-3E7EF7386163.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-696023b4-65d8-431b-b2ef-0cbfe0556c32.html"
+            },
+            {
+              "name": "Configuring the Web DLP Policy",
+              "children": [
+                {
+                  "name": "Selecting web DLP policy destinations",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/390B5A1B-4524-4635-8B6C-08EF1834A231.html"
+                },
+                {
+                  "name": "Configuring web DLP policy attributes",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/EC8523BA-AA49-4B75-AD65-AEB235CBC9D5.html"
+                },
+                {
+                  "name": "Web DLP policy configuration overview",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/12482556-08af-4382-9412-dde8c8516dda.html"
+                },
+                {
+                  "name": "Defining web DLP policy owners",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/E76B6206-624A-451A-A41E-29C510DA0124.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-01fbc82c-13ab-432c-9365-51d924465c4a.html"
+            },
+            {
+              "name": "Using Predefined DLP and Discovery Policies",
+              "children": [
+                {
+                  "name": "Changing the selected DLP or discovery policies",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D54EAD60-7EA0-4FF3-A90B-FA5E840A713E.html"
+                },
+                {
+                  "name": "Adding a predefined DLP or discovery policy",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/10877AAC-E619-4D84-AD10-B7D90B25820A.html"
+                },
+                {
+                  "name": "Changing policy industry or region settings",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D5289C27-B792-4EE0-8BB9-C687634337C5.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-e435cf34-2c4f-498b-a4e5-cfd3871dd773.html"
+            },
+            {
+              "name": "Creating Custom DLP Policies",
+              "children": [
+                {
+                  "name": "Custom Policy Wizard - Source",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D07DA880-1EEE-40F4-9B8C-853002D2BD41.html"
+                },
+                {
+                  "name": "Custom Policy Wizard - General",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/3EB22EFF-5178-41B1-A563-0337A49DBBBB.html"
+                },
+                {
+                  "name": "Custom Policy Wizard - Severity and Action",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/A703E958-27DB-479D-A31D-64D408D2CE02.html"
+                },
+                {
+                  "name": "Custom Policy Wizard - Condition",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/151BF03B-910B-468D-A5F3-27CEF1D07277.html"
+                },
+                {
+                  "name": "Managing exceptions",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/0C0AA412-6468-4785-A363-C64DA96C0B1C.html"
+                },
+                {
+                  "name": "Selecting a content classifier",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/5FACF39A-3E95-4CCD-A417-03CB3C770EF1.html"
+                },
+                {
+                  "name": "Rule Wizard - Finish",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/AEF7C12D-A93C-46C7-A743-78D6A03A4DC9.html"
+                },
+                {
+                  "name": "Managing rules",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4ECEB9AB-B06F-44A5-9153-EF236FB9B67B.html"
+                },
+                {
+                  "name": "Custom Policy Wizard - Destination",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/C40FD949-9E26-4EE4-9204-4D35A10B6777.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-727ec0e9-53f8-4ea5-b3d8-2235cd40fb75.html"
+            },
+            {
+              "name": "Classifying Content",
+              "children": [
+                {
+                  "name": "Patterns & Phrases",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/CABB871A-6AB7-47EC-AD6E-466DF934D234.html"
+                },
+                {
+                  "name": "Details pane",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/684464CF-AED9-471E-9976-19AF8C56BD38.html"
+                },
+                {
+                  "name": "Content classifier menu bar",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/DED20CFE-03CE-4E50-A033-FB6B92D3DDB3.html"
+                },
+                {
+                  "name": "Manually deleting fingerprinting classifiers",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7AC543F4-D38A-4ADF-89D9-5D35B28920C0.html"
+                },
+                {
+                  "name": "Database fingerprinting",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8483EB95-2B1C-4E4A-8813-FFA5E1AAAC84.html"
+                },
+                {
+                  "name": "File fingerprinting",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/3E5D4E59-4296-410A-B6AD-F5F79A60F43A.html"
+                },
+                {
+                  "name": "Scripts",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/F25B5C39-562C-4143-9909-6EC3F19BF62E.html"
+                },
+                {
+                  "name": "File properties",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/AD5457D7-77AC-457E-97A9-940D41A75990.html"
+                },
+                {
+                  "name": "File Labeling",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/DCDCB283-2095-458E-B3A1-C1E40218B2DD.html"
+                },
+                {
+                  "name": "Creating a rule from a content classifier",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/249515F5-AAB1-4F51-BA06-87F33FD5663B.html"
+                },
+                {
+                  "name": "Machine learning",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/22FA5E0D-783F-4136-8016-5FC5C6313865.html"
+                },
+                {
+                  "name": "Imported fingerprinting",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/5E148450-A21E-46A2-A773-6912257F701F.html"
+                },
+                {
+                  "name": "Database Fingerprinting Wizard - Scheduler",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6889A85C-EC6D-457F-B06A-8D45AC6D2777.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-77bccfb5-08fb-43bc-af93-dd8804c8539d.html"
+            },
+            {
+              "name": "Defining Resources",
+              "children": [
+                {
+                  "name": "Cloud resources",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/14F2E9F5-56BE-4F64-9D32-25DC26AAC3B0.html"
+                },
+                {
+                  "name": "Remediation resources",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4D7EA8E4-69C6-48BF-87B3-2796B4F70F80.html"
+                },
+                {
+                  "name": "Endpoint resources",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/51918381-7A14-4834-9D94-B5DEE78B8D14.html"
+                },
+                {
+                  "name": "User directory entries",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7CC02CD7-9500-4154-A182-5A6AE5EF24D8.html"
+                },
+                {
+                  "name": "General resources",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/A2D5B183-5CA7-4EC0-846C-55EADB9A1D02.html"
+                },
+                {
+                  "name": "Custom users",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6A534CD4-2C23-4168-8CA3-CDCB2B838169.html"
+                },
+                {
+                  "name": "Domains",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D81EEB4E-BAB4-41A8-9A97-7B5338E4BE89.html"
+                },
+                {
+                  "name": "Custom computers",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/5634842E-2AF9-431F-B5B0-1E6A1554218D.html"
+                },
+                {
+                  "name": "Networks",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/9512127B-B7BE-4E07-92C2-2797AC7F1306.html"
+                },
+                {
+                  "name": "Custom user directory groups",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B5FB1E1F-0950-4063-BAAD-2A30EC85AECD.html"
+                },
+                {
+                  "name": "Endpoint Devices",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/E4CC4156-723B-4534-A4A5-FB7C20FEAE6F.html"
+                },
+                {
+                  "name": "Endpoint Application Groups",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7D38B089-3349-48A9-B829-CAC85137BD49.html"
+                },
+                {
+                  "name": "Endpoint Applications",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/E80A6545-B2DD-439E-AB09-ED0188ABAA1D.html"
+                },
+                {
+                  "name": "URL categories",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/17114F15-13A0-406E-869E-0BE0174F8E2E.html"
+                },
+                {
+                  "name": "Business Units",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/AD7105E3-A721-400A-8FBD-0D1ED6CF5877.html"
+                },
+                {
+                  "name": "Remediation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/BE168EA6-8BC2-49C9-99CE-1B204AD7660D.html"
+                },
+                {
+                  "name": "Notifications",
+                  "children": [
+                    {
+                      "name": "Adding a new message",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/42E1A3CE-0204-4242-8DBB-C48D408035DB.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/58FCAE94-C929-4A0B-82AA-A052515F52C0.html"
+                },
+                {
+                  "name": "Endpoint Printers",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D06A2EBE-1AE7-45D2-B9B2-BD6359DB4FF6.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-a71ce621-7d4c-48e9-b870-1260c1212528.html"
+            },
+            {
+              "name": "Creating Discovery Policies",
+              "children": [
+                {
+                  "name": "Creating a discovery policy",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/222AC81C-0E1C-41C0-B0B4-324C2D682999.html"
+                },
+                {
+                  "name": "Performing Domino discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/DFE690E7-FEC3-48CE-8A7D-572294149ABB.html"
+                },
+                {
+                  "name": "Scheduling the discovery scan",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/C782C77E-CE7B-4C83-AF8A-EF297D6F242C.html"
+                },
+                {
+                  "name": "Performing file system discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/73F81C97-1E16-487F-8F23-C1DBDF80BA1E.html"
+                },
+                {
+                  "name": "Performing SharePoint discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/5E709270-DC8F-4836-B888-001FE7A95977.html"
+                },
+                {
+                  "name": "Performing Box discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/5DF337A3-61F8-4698-9F73-A03E0C5EAA98.html"
+                },
+                {
+                  "name": "Performing database discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/192404AB-23C2-4EC6-9158-7CC1E2C277C4.html"
+                },
+                {
+                  "name": "Performing Exchange discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/2D1D73F0-DE27-490A-BA22-127AAA47E7CD.html"
+                },
+                {
+                  "name": "Performing endpoint discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/734D314D-7913-4A96-A3E7-18494D224C9F.html"
+                },
+                {
+                  "name": "Performing Outlook PST discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/44F33A6A-B12C-490E-94EE-32C88B3C9895.html"
+                },
+                {
+                  "name": "Viewing discovery status",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/EF03228D-C5FE-40CB-B64F-F51854590BEC.html"
+                },
+                {
+                  "name": "Configuring discovery incidents",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/07E52F46-54A3-432F-A753-E0BA492666F8.html"
+                },
+                {
+                  "name": "Updating discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/18F30D0C-873D-475E-B1F4-CC358CA1B7F4.html"
+                },
+                {
+                  "name": "Copying or moving discovered files",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/BD9E945E-BCD6-4BE2-83B6-FE520A07A239.html"
+                },
+                {
+                  "name": "Viewing discovery results",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/C039F347-9069-4DD2-BA99-1CF80C32FCBE.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/A7983D84-E2A5-48CA-9BA0-92D385E0BF9A.html"
+            },
+            {
+              "name": "Scheduling Discovery Tasks",
+              "children": [
+                {
+                  "name": "Emailing discovery task status reports",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8596B751-B1FC-4B8C-9F6A-CDD07621746E.html"
+                },
+                {
+                  "name": "Sorting and filtering tasks",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/823A1E93-FF43-4E19-B58D-ED6894DDF338.html"
+                },
+                {
+                  "name": "Scheduling network discovery tasks",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D2EE3584-9CE4-4F4F-8E86-D02E42680C4E.html"
+                },
+                {
+                  "name": "Configuring cloud discovery scans",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7227A34E-2785-48E5-AD52-0DA72C12260B.html"
+                },
+                {
+                  "name": "Adding or editing a cloud discovery scan",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/BA9BEA3C-05FB-473E-82BA-2DFBEADE122E.html"
+                },
+                {
+                  "name": "Scheduling endpoint discovery tasks",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/E1515D29-E954-4528-88D4-F2876A153B6C.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/2C19D12D-FC24-46AB-B114-CD220ADDCAD2.html"
+            },
+            {
+              "name": "Viewing Forcepoint DLP Logs",
+              "children": [
+                {
+                  "name": "Printing and exporting logs",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4B6AE4D9-13CF-4A2B-A4D0-BF8C3FAAE4EA.html"
+                },
+                {
+                  "name": "Filtering log data",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/2452711D-BA6A-46D2-803A-C8849067EAB5.html"
+                },
+                {
+                  "name": "The Forcepoint DLP traffic log",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7CA4A9F9-BD6B-4F23-8B26-C97705FD41FC.html"
+                },
+                {
+                  "name": "The Forcepoint DLP audit log",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4A2A1968-75E6-45B3-B409-6EE4115CB493.html"
+                },
+                {
+                  "name": "The Forcepoint DLP system log",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/BF6F5020-4416-47D7-A746-0EA8BDD2873A.html"
+                },
+                {
+                  "name": "The Forcepoint DLP debug log",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/guid-b1c094ed-ab50-4f36-bdff-1cdfd1a59e99s.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/999A63BC-C9A9-4002-9D2F-45AB2B5DAE46.html"
+            },
+            {
+              "name": "General System Settings",
+              "children": [
+                {
+                  "name": "Setting reporting preferences",
+                  "children": [
+                    {
+                      "name": "Setting preferences for data loss prevention reports",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6881C46F-4168-451C-914E-8D52C41476D4.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7F6D9624-5B23-4722-B08B-08D151C585A6.html"
+                },
+                {
+                  "name": "Configuring endpoint settings",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/87FDA5DC-1612-4952-8620-9D53540825B5.html"
+                },
+                {
+                  "name": "Remediation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B9749178-B5F4-4096-B122-2D4D312B4FFF.html"
+                },
+                {
+                  "name": "Exporting incidents to a file",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B0104738-5533-457E-8812-A0CD04EEE6B3.html"
+                },
+                {
+                  "name": "Backing up the system",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B0664F00-515E-42CE-8DB9-C2ACDA114399.html"
+                },
+                {
+                  "name": "Mail servers",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/FFA213EF-5F41-49BE-94FF-E94A3491689E.html"
+                },
+                {
+                  "name": "Alerts",
+                  "children": [
+                    {
+                      "name": "Setting up email properties",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/AD969E86-434D-43A5-B786-8D28908366B1.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/50DB62A6-5741-4AC7-AD78-6973BFE27AC9.html"
+                },
+                {
+                  "name": "Analytics",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/1398090A-8741-4D10-B74F-BE5187199306.html"
+                },
+                {
+                  "name": "Services",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/FFE29C56-96EF-4FB2-A299-86D41A38535C.html"
+                },
+                {
+                  "name": "Archive storage",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D1001D5E-56DF-4800-A8F3-57DCE35D606A.html"
+                },
+                {
+                  "name": "User directory settings",
+                  "children": [
+                    {
+                      "name": "Adding or editing user directory server information",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/F6DF9A28-CEDF-4A02-815F-FEC13BE86C3D.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/9148F041-ED68-4CC0-80C9-F24C5A31C2BF.html"
+                },
+                {
+                  "name": "Updating predefined policies and classifiers",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/97F6A5FB-4253-48ED-8681-5C7FAD0664A7.html"
+                },
+                {
+                  "name": "Archiving incident partitions",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/15E1CE70-485B-41C9-BF41-5F5EE5F18DD3.html"
+                },
+                {
+                  "name": "Entering subscription settings",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/0B35B651-BA20-4652-9615-84B51F4CC4D2.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/476CFC53-0927-4DF6-A46C-7AF3F9A14C5C.html"
+            },
+            {
+              "name": "Configuring Authorization",
+              "children": [
+                {
+                  "name": "Defining administrators",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/3CB3BBCE-C2B5-470D-ACE5-C66603721E87.html"
+                },
+                {
+                  "name": "Working with roles",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/2450F236-E242-4BAB-8281-C8A470A79147.html"
+                },
+                {
+                  "name": "Customizing your own administrator account settings",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/582733D2-F00D-4CB3-9B22-8DE852DE2C14.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/60ECE6ED-3C29-4F9F-9307-63C97BFE22C8.html"
+            },
+            {
+              "name": "Managing Forcepoint DLP System Modules",
+              "children": [
+                {
+                  "name": "Adding Forcepoint DLP system modules",
+                  "children": [
+                    {
+                      "name": "Configuring the forensics repository",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7E35DD64-4A1A-4EA2-811E-5B5DAF302993.html"
+                    },
+                    {
+                      "name": "Configuring the protector",
+                      "children": [
+                        {
+                          "name": "Edit Protector: Services tab",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/B23143FC-BC81-4A5A-8A00-5B3C0DDDE8E5.html"
+                        },
+                        {
+                          "name": "Edit Protector: General tab",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/0F10F900-C2CC-4A6F-9912-5094D770B5B6.html"
+                        },
+                        {
+                          "name": "Edit Protector: Networking tab",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/25471F4F-6089-4DEB-964D-4BACD7D198F4.html"
+                        },
+                        {
+                          "name": "Edit Protector: Local Networks tab",
+                          "children": [],
+                          "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4AD4B0DB-3886-4FEC-8A42-7BBEA74685D4.html"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Configuring Forcepoint DLP system modules",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8EB9D175-39DA-444C-85C0-7CF4F7BB7D3C.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/C9A47A5E-5313-420B-B646-56A84705ED4A.html"
+                },
+                {
+                  "name": "Configuring protector services",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/7C2C8128-40EE-482B-9594-000A9C5AD09F.html"
+                },
+                {
+                  "name": "Balancing the load",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8C6CD07C-F202-46EA-9703-9D9DAE0CE612.html"
+                },
+                {
+                  "name": "Removing Forcepoint DLP modules",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6592728B-29E7-4BD0-80D6-FB1AA42C14EE.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6C4B0B1A-9FAF-412B-9710-1B86ABE363F7.html"
+            },
+            {
+              "name": "Configuring Endpoint Deployment",
+              "children": [
+                {
+                  "name": "Viewing and managing endpoint profiles",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/0EC1EBA4-3196-4B8C-B15A-B5102D09A7BA.html"
+                },
+                {
+                  "name": "Configuring encryption for removable media",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/00E1CDD2-37E8-411F-A4BF-2BC1E4B16BE6.html"
+                },
+                {
+                  "name": "Bypassing endpoint clients",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/074A2995-F10F-4061-9EEB-A8C5308D035F.html"
+                },
+                {
+                  "name": "Rearranging and deploying endpoint profiles",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/23CD4F30-ECE1-4E4A-AE58-9ADF7835A5FE.html"
+                },
+                {
+                  "name": "Selecting endpoint destination channels to monitor",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/D4D53F72-6D36-4D3A-8219-8D8F761E6685.html"
+                },
+                {
+                  "name": "Using the endpoint client software",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/55A7A219-EA88-4C38-8696-94D505F8A019.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/1F418E97-9F3D-4FE4-9F35-866C1526BB28.html"
+            },
+            {
+              "name": "Troubleshooting",
+              "children": [
+                {
+                  "name": "Discovery",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/C2C999A7-193E-4EB4-AE4B-1D6F180638C9.html"
+                },
+                {
+                  "name": "Incidents",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/370F3AC8-B7C9-4361-9953-F100A6C1BB51.html"
+                },
+                {
+                  "name": "Fingerprinting",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/BFE29456-2053-4173-88E2-015FAE8E89AD.html"
+                },
+                {
+                  "name": "Endpoint",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/093B65E4-FE44-45B9-9965-975CF0A675B4.html"
+                },
+                {
+                  "name": "Miscellaneous",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/10A24454-A9C9-47E7-BCD4-5B820CE02379.html"
+                },
+                {
+                  "name": "Online Help",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/81975446-7415-4840-993D-D1BA6377E58C.html"
+                },
+                {
+                  "name": "Linking Service",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8280472A-FA3F-40D5-B1AB-682C9D82BE7F.html"
+                },
+                {
+                  "name": "Performance",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/0CEC7A4B-5BE0-4A00-959E-43E062DF1BB8.html"
+                },
+                {
+                  "name": "Technical Support",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/DE7D6F3B-824E-477B-B896-AEB7CF3CBB07.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4A92FD79-1EE4-44A4-B202-9ED38DCA38F5.html"
+            },
+            {
+              "name": "Appendix A: How Do I",
+              "children": [
+                {
+                  "name": "Archive my incident data?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/4A7F0813-4F90-4ABF-B5F0-62197809BEED.html"
+                },
+                {
+                  "name": "Define an exception?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/8E1F4178-540C-4CDC-B6A0-C7EB44266A44.html"
+                },
+                {
+                  "name": "Filter incidents?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/725DCC1A-3A61-4D8D-A599-FB9772097341.html"
+                },
+                {
+                  "name": "Configure a DLP policy?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/A9433C34-354D-4FE1-9F6F-59D6ACEE8B50.html"
+                },
+                {
+                  "name": "Ignore sections of my document when fingerprinting?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/9A031B66-E112-489C-9D88-ACC8380819D1.html"
+                },
+                {
+                  "name": "Mitigate false positives in pattern or dictionary phrases?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/A955C416-449A-4241-AF37-F891A6225727.html"
+                },
+                {
+                  "name": "Fingerprint specific field combinations in a database table?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/CF6C00C9-3B68-4B24-9AF9-2D6E567DE191.html"
+                },
+                {
+                  "name": "Fingerprint data?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/275D426E-76E4-417D-BD95-FDA6F36B05FE.html"
+                },
+                {
+                  "name": "Move from monitor to protect?",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/33424C72-27F6-4D19-B51A-8DCBB183BC2A.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/6786E07A-DCD9-46B5-98E2-29A0D0E36F29.html"
+            }
+          ]
+        },
+        {
+          "name": "10.2.0",
+          "children": [
+            {
+              "name": "Forcepoint Security Manager Help",
+              "url": "https://help.forcepoint.com/dlp/10.2.0/fsmhelp/",
+              "children": []
+            },
+            {
+              "name": "DLP Installation Guide",
+              "url": "https://help.forcepoint.com/dlp/10.2.0/install/",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "fone_integration",
+          "children": [
+            {
+              "name": "Forcepoint DLP and Forcepoint Data Security Cloud | SSE CASB Integration Guide",
+              "url": "https://help.forcepoint.com/dlp/fone_integration/forcepoint_dlp_and_forcepoint_one_casb/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint DLP and Forcepoint Data Security Cloud | SSE SWG Integration Guide",
+              "url": "https://help.forcepoint.com/dlp/fone_integration/forcepoint_dlp_and_forcepoint_one_swg/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "10.3.0",
+          "children": [
+            {
+              "name": "Deployment Quick Reference",
+              "children": [
+                {
+                  "name": "Default ports for on-premises Forcepoint security solutions",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dlp/10.3.0/deployctr/F550DC21-DAC4-4A85-8D29-25AE78038BDC.html"
+                }
+              ]
+            },
+            {
+              "name": "Forcepoint DLP Deployment and Installation Center",
+              "url": "https://help.forcepoint.com/dlp/10.3.0/deployctr/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint Security Manager Help",
+              "url": "https://help.forcepoint.com/dlp/10.3.0/fsmhelp/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "children": [
+        {
+          "name": "Forcepoint Product Documentation Sitemap",
+          "url": "https://help.forcepoint.com/docs/index.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Data Security Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint DLP for Cloud Email Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_DLP_for_Cloud_Email_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Data Visibility Powered by GetVisibility Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Data Classification",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Remote Browser Isolation Sitemap",
+          "url": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Boldon James Classifier Enterprise Suite Sitemap",
+          "url": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Data Security Cloud | SSE Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Insights Documentation Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Insights_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint ONE Mobile Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_ONE_Mobile_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Email Security On-premises Documentation",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Email Security Cloud Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint F1E Documentation",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Advanced Malware Detection and Protection Sitemap",
+          "url": "https://help.forcepoint.com/docs/Advanced_Malware_Detection_and_Protection_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "NGFW Appliances Sitemap",
+          "url": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint V-Series and Virtual Appliances Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html",
+          "children": []
+        },
+        {
+          "name": "URL Filtering Sitemap",
+          "url": "https://help.forcepoint.com/docs/URL_Filtering_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "FlexEdge Secure SD-WAN Sitemap",
+          "url": "https://help.forcepoint.com/docs/FlexEdge_Secure_SD-WAN_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Data Loss Prevention (DLP) Sitemap",
+          "url": "https://help.forcepoint.com/docs/Data_Loss_Prevention_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Web Security Cloud Sitemap",
+          "url": "https://help.forcepoint.com/docs/Web_Security_Cloud_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Web Security Sitemap",
+          "url": "https://help.forcepoint.com/docs/Web_Security_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "Next Generation Firewall (NGFW) Sitemap",
+          "url": "https://help.forcepoint.com/docs/Next_Generation_Firewall_Documentation.html",
+          "children": []
+        },
+        {
+          "name": "bjces",
+          "children": [
+            {
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/owa/v310/Mail%20Add-In%20Website%20Release%20Note.htm",
+              "children": []
+            },
+            {
+              "name": "Release%20Note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v311/sharepoint_class_website_clients/Release%20Note.htm",
+              "children": []
+            },
+            {
+              "name": "Documentation Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/base/v10/classifier_docs/Documentation%20Release%20Note.htm",
+              "children": []
+            },
+            {
+              "name": "Box%20Classifier%20Release%20Notes.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/box/v12/Box%20Classifier%20Release%20Notes.htm",
+              "children": []
+            },
+            {
+              "name": "PowerShell%20Release%20Note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/PowerShell%20Release%20Note.htm",
+              "children": []
+            },
+            {
+              "name": "Website%20For%20Clients%20Release%20Note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/Website%20For%20Clients%20Release%20Note.htm",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Tech_Pubs",
+          "children": [
+            {
+              "name": "Forcepoint Insights - API Documentation",
+              "url": "https://help.forcepoint.com/docs/Tech_Pubs/Insights/ingapi/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "shared",
+          "children": [
+            {
+              "name": "v8.5.4 Release Notes for the Forcepoint Security Manager",
+              "url": "https://help.forcepoint.com/docs/shared/v854/release_notes/first.aspx",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "email",
+          "children": [
+            {
+              "name": "Forcepoint Email Security Cloud: 2020 Release Notes",
+              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2020/first.aspx",
+              "children": []
+            },
+            {
+              "name": "Forcepoint Email Security Cloud: 2021 Release Notes",
+              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2021/first.aspx",
+              "children": []
+            },
+            {
+              "name": "Forcepoint Email Security Cloud: 2019 Release Notes",
+              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2019/first.aspx",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Security Cloud",
+      "children": [
+        {
+          "name": "online-help",
+          "children": [
+            {
+              "name": "Forcepoint Data Security Cloud Online Help",
+              "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/index.html",
+              "children": []
+            },
+            {
+              "name": "Introduction",
+              "children": [
+                {
+                  "name": "Help and support",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-aee39f00-dc95-4835-9943-66a7027af4ad.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-9b78f6c1-f1b7-4975-bd89-609af77b3293.html"
+            },
+            {
+              "name": "Product updates",
+              "children": [
+                {
+                  "name": "Resolved and Known Issues",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-ad13284c-6691-4370-8ba8-f5058662efa5.html"
+                },
+                {
+                  "name": "What's New",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-67f88b4e-9ff3-49cc-8298-f44d754c2b04.html"
+                },
+                {
+                  "name": "Previous release updates",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-e6e72ab5-303f-48bf-958d-9ea423153c14.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-3a8d5c9e-42b7-4299-942a-d813e411e284.html"
+            },
+            {
+              "name": "Understanding Forcepoint Data Security Cloud layout",
+              "children": [
+                {
+                  "name": "Accessing the online help documentation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-1161ca9b-5a58-4a01-8e7d-6879b6c57912.html"
+                },
+                {
+                  "name": "Viewing the tenant's Reference IDs",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-7344ab66-43f1-4f6e-966d-22cb07aceae4.html"
+                },
+                {
+                  "name": "Changing the password",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-1d8a4dc9-4425-4910-aaec-9dfc46c1d348.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-4abed05a-92db-4ecb-b229-23a0755d297a.html"
+            },
+            {
+              "name": "Signing in to Forcepoint Data Security Cloud",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-0214187e-313e-42ec-8dcb-89b4cd0626ff.html"
+            },
+            {
+              "name": "Platform services",
+              "children": [
+                {
+                  "name": "Insights",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-c9a10623-db0d-4e13-8a83-3fefd7dc86fd.html"
+                },
+                {
+                  "name": "Admin",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-a4bc051b-64cd-4947-9e53-99bee552e629.html"
+                },
+                {
+                  "name": "Settings",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-ab5b7997-a819-4bc6-9065-f05379c0dc72.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-69a791d8-4380-408d-9e5c-ceb682af6e45.html"
+            },
+            {
+              "name": "Applications",
+              "children": [
+                {
+                  "name": "Remote Browser Isolation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-aa87b829-1f63-4789-a73a-9a5cb3c4ef2b.html"
+                },
+                {
+                  "name": "Web Security",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-c23dc68a-4af9-4d75-9820-518f3673a833.html"
+                },
+                {
+                  "name": "DLP",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-735ce69a-02b7-40d1-9edb-fd6cd9423252.html"
+                },
+                {
+                  "name": "Security Service Edge",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-7a1a522c-a497-4028-b9fa-5b6c20cd0b38.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-2b47b7ca-996c-4bb0-bd85-eb6a942cd384.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Forcepoint ONE Firewall",
+      "children": [
+        {
+          "name": "Online Help",
+          "children": [
+            {
+              "name": "Forcepoint ONE | Firewall Online Help",
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/index.html",
+              "children": []
+            },
+            {
+              "name": "Introduction",
+              "children": [
+                {
+                  "name": "Help and support",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-AC6679D0-090B-4502-B1BA-C93A0BDB4382.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-82995C8A-7B15-4A47-B609-2366747EFCDA.html"
+            },
+            {
+              "name": "Product Updates",
+              "children": [
+                {
+                  "name": "Known and resolved issues",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-812F25CC-8808-483C-8078-836350208D26.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-BDB62CFF-A28D-403F-A700-48F21F0D304C.html"
+            },
+            {
+              "name": "Getting Started",
+              "children": [
+                {
+                  "name": "Accessing Forcepoint ONE | Firewall",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-231627D1-4BCB-40CD-B90B-B78C0BDBB8E2.html"
+                },
+                {
+                  "name": "Accessing Forcepoint ONE | Secure Service Edge",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-0C746F66-66D2-4533-BB39-E75D2FD4D85C.html"
+                },
+                {
+                  "name": "Workflow for new users",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-860157D1-D65D-4B09-8360-9EE6A71611F6.html"
+                },
+                {
+                  "name": "Workflow for existing users",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-C7F1B0C5-BC00-48D9-9FE5-640950782F3C.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-B79EDDC8-0106-4B98-932B-AF21E155603F.html"
+            },
+            {
+              "name": "Forcepoint ONE | Firewall overview",
+              "children": [
+                {
+                  "name": "Deploy changes",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-F26BAC3C-C3C5-42F8-BA51-7A8CE0C46FC4.html"
+                },
+                {
+                  "name": "Accessing the online help documentation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-E0A858C6-227A-4E26-815F-FFCB29A63113.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-B7734BA1-C5B8-4096-AAFF-40D8C0C7D7C8.html"
+            },
+            {
+              "name": "Logs",
+              "children": [
+                {
+                  "name": "Event detail panel",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-21ED3F38-A87C-4F56-9BB7-7218789D5C5D.html"
+                },
+                {
+                  "name": "Related events",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-8CF81DC6-8DCB-402F-BE82-AD650BB5E813.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-501FCF1B-9C93-432A-B9DB-BDA7BFC2BC67.html"
+            },
+            {
+              "name": "Dashboard",
+              "children": [
+                {
+                  "name": "Dashboard filters",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-C574A53D-B2C1-4F24-9616-D9282A506835.html"
+                },
+                {
+                  "name": "Time period drop-down menu",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-F3E3D7B5-8D25-4022-AFF1-E0F3D05FAC0C.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-E44F333F-31B1-4956-B92F-B686FDF58A00.html"
+            },
+            {
+              "name": "Policy",
+              "children": [
+                {
+                  "name": "All Policies Page Overview",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-F77AD8B2-69C1-4861-91D9-77BA8ED8D336.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-0407B3FB-D5FE-4B2D-BBBC-D6C70911B7B5.html"
+            },
+            {
+              "name": "Log Export",
+              "children": [
+                {
+                  "name": "AWS Access Key and Secret Key",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-B60C4ABE-CC17-4FD1-B461-AAA78023C5CA.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-7933B396-F1EE-4A5A-8C8C-3E11D69543FE.html"
+            },
+            {
+              "name": "Objects",
+              "children": [
+                {
+                  "name": "Threat Situations",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-B153483B-2F78-46FC-AEF3-7D547FDE4DB9.html"
+                },
+                {
+                  "name": "Network & HTTP/3 Applications",
+                  "children": [
+                    {
+                      "name": "Network & HTTP/3  Applications",
+                      "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-FAC71882-B2B6-4966-A777-49E8069F3756.html",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Sites",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-AD2B4F92-4070-4719-96FC-518957292D35.html"
+                },
+                {
+                  "name": "Network Services",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-57F67475-C06B-44A5-BDB2-630F92DDC3EB.html"
+                },
+                {
+                  "name": "Domain Name lists",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-170AC213-3F8A-463D-BA8D-2D51C7A5B433.html"
+                },
+                {
+                  "name": "Destination IP Address Lists",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-E2DD8B89-95B1-46DA-9349-BE995D75B06F.html"
+                },
+                {
+                  "name": "Source IP address lists",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-9ACDBE25-730F-43C6-80EF-2F5B32905E56.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-A1D85F58-5020-4602-B921-74BE2C6EC48D.html"
+            },
+            {
+              "name": "Deploy History",
+              "children": [],
+              "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-CFF69903-AABD-4D55-859B-CD983B324A55.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DUP",
+      "children": [
+        {
+          "name": "Forcepoint  Neo",
+          "url": "https://help.forcepoint.com/dup/en-us/index.html",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "Forcepoint ONE",
+      "children": [
+        {
+          "name": "Interoperability",
+          "children": [
+            {
+              "name": "F1E-SEA Agent Co-existence Feature Enablement",
+              "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/index.html",
+              "children": []
+            },
+            {
+              "name": "Troubleshooting",
+              "children": [
+                {
+                  "name": "Known Issues and Limitations",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/guid-3e0e752d-5959-4d05-9e3f-5ade97d25b9c.html"
+                },
+                {
+                  "name": "Uninstall Agents",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/guid-458b3b2a-434b-4ab4-9685-e79272c513b0.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/guid-a6f0f8d9-6af1-4c0f-af2b-378558399a24.html"
+            },
+            {
+              "name": "Configuring Forcepoint Data Security Cloud | SSE for Agent Co-existence",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/guid-e43ba3e5-35ef-4e04-a849-9748486607d2.html"
+            },
+            {
+              "name": "Configuring Web Security for Agent Co-existence",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/guid-e36855b7-f476-466a-87df-547f21551bac.html"
+            },
+            {
+              "name": "Introduction",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/guid-25f8f560-19b8-441e-a400-97f321eed810.html"
+            },
+            {
+              "name": "Getting Started",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/Interoperability/Getting_started_guide/guid-b6f1e0e0-74f0-4808-8c5f-09d2f77a6d20.html"
+            }
+          ]
+        },
+        {
+          "name": "deploy",
+          "children": [
+            {
+              "name": "Setup traffic steering",
+              "children": [
+                {
+                  "name": "Deploying SmartEdge Agent",
+                  "children": [
+                    {
+                      "name": "Requirements for SmartEdge Agent installation",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-27ce94ab-b5a2-43c6-9e4d-9e81451abca5.html"
+                    },
+                    {
+                      "name": "Best practices for rolling SmartEdge Agents with policies",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-188a1d33-7541-44a6-bf7f-44a6cd4d2c58.html"
+                    },
+                    {
+                      "name": "Allowing domains for SmartEdge Agents",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-c8f8e0b0-5c0c-4ca4-b2af-8562d5c46b99_2.html"
+                    },
+                    {
+                      "name": "Allowing on endpoint management agents",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-8a5c9135-a142-4a3b-90e3-9ae74f771f8f.html"
+                    },
+                    {
+                      "name": "Installing SmartEdge Agent on macOS",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-83b51793-22d5-4e6d-a5d7-c1b37e10fd2f.html"
+                    },
+                    {
+                      "name": "Installing SmartEdge Agent on Windows",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-c0a0a019-c674-4a19-89a6-afda7db098da.html"
+                    },
+                    {
+                      "name": "Manually trusting certificates on macOS",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-bc7e73b0-67c3-4bc5-ba05-4d8a24def48a.html"
+                    },
+                    {
+                      "name": "SmartEdge Agent and F1A Interoperability",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-ebedd646-b431-4e70-b479-b404c8cdd00b.html"
+                    },
+                    {
+                      "name": "Deploying SmartEdge Agents via MDM to wider audience",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-57a0560a-fe16-4a46-9be9-0ff8f9b26fa2.html"
+                    }
+                  ],
+                  "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-9312b7e9-5a8d-4e27-9e25-dcac7707c30e.html"
+                },
+                {
+                  "name": "Deploying Cloud SWG",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-dd9b6daa-ecdd-46ae-b133-b75b6be6dee1.html"
+                },
+                {
+                  "name": "Configuring SWG settings",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-63ce0ceb-c570-46b5-bceb-ce035b9d6f23.html"
+                },
+                {
+                  "name": "Deploying Mobile Agent",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-a9217e36-6160-4f10-94b3-a8170ccae15b.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-e025d976-136c-4b07-824f-81f3ae0f63a0.html"
+            },
+            {
+              "name": "Forcepoint Data Security Cloud | SSE Deployment Guide",
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/index.html",
+              "children": []
+            },
+            {
+              "name": "Verify access and perform initial configuration",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-b1da357e-98fc-47ec-a03e-ae24aed2417e.html"
+            },
+            {
+              "name": "Understanding User and Groups",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-112a0245-eac3-4a18-8071-683eea124f22.html"
+            },
+            {
+              "name": "Configure common components",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-d92838ca-b1af-4eb7-a02e-b60f9eb5fc51.html"
+            },
+            {
+              "name": "Configure Zero Trust Network Access",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-823e450c-77da-4dee-a10f-c01ea396bf64.html"
+            },
+            {
+              "name": "Configure DLP",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-5d451096-ddf6-4849-96dc-07bb4bd84891.html"
+            },
+            {
+              "name": "Protect cloud applications",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-985d1df2-2962-4a01-ac10-e45d610f79d2.html"
+            },
+            {
+              "name": "Configure policies",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-95e28506-fd65-45bb-9284-cad52351e20c.html"
+            },
+            {
+              "name": "Configure applications",
+              "children": [],
+              "url": "https://help.forcepoint.com/fpone/deploy/rhtml/application/guid-e243d1a2-e538-4b4b-a53d-5477fa13d790.html"
+            }
+          ]
+        },
+        {
+          "name": "Release Notes",
+          "children": [
+            {
+              "name": "Forcepoint ONE SSE 240924 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/240924/prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE 240321 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/240321/prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE 231023 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/231023/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE 231220 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/231220/prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE Production 230516 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/230516/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE Production 230814 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/230814/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production 230112 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/230112/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production Gov Cloud 220805 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/220805/govcloud/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production 221116 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/221116/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production 220805 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/220805/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Canada Gov Cloud 220805 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/220805/canadagovcloud/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production 230329 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/230329/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production Gov Cloud 230112 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/230112/govcloud/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production 220609 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/220609/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production 220331 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/220331/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE SmartEdge Agent 2.3.0 for Windows - Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/230/windows/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint Data Security Cloud | SSE SmartEdge Agent 3.0.0 for Windows - Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/300/windows/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE SmartEdge Agent 2.1.0 for macOS - Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/210/macos/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE SmartEdge Agent 2.4.0 for Windows - Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/240/windows/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Gov Cloud 220214 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/220214/GovCloud/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SSE SmartEdge Agent 2.4.0 for macOS - Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/240/macos/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE Production 220214 Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/220214/Prod/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint ONE SmartEdge FIPS Agent 1.6.3-F for Windows - Release Notes",
+              "url": "https://help.forcepoint.com/fpone/RN/163F/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "How To",
+          "children": [
+            {
+              "name": "How to Connect Cisco ASA/FTD to Forcepoint ONE Cloud over IPsec Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/fone_hw_CiscoASA/index.html",
+              "children": []
+            },
+            {
+              "name": "How to Connect Forcepoint NGFW to Forcepoint ONE Cloud over IPsec Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/NGFW_IPsec/index.html",
+              "children": []
+            },
+            {
+              "name": "How to Connect Cisco ISR to Forcepoint ONE Cloud over IPsec Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/fone_hw_CiscoISR_IPsec/index.html",
+              "children": []
+            },
+            {
+              "name": "How to Connect Palo Alto to Forcepoint ONE Cloud over IPsec Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/PaloAlto_IPsec/index.html",
+              "children": []
+            },
+            {
+              "name": "How to Connect Cisco ISR to Forcepoint ONE Cloud over GRE Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/fone_hw_CiscoISR_GRE/index.html",
+              "children": []
+            },
+            {
+              "name": "How to Connect Juniper SRX to Forcepoint ONE Cloud over GRE Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/JuniperSRX_GRE/index.html",
+              "children": []
+            },
+            {
+              "name": "How to Connect Juniper SRX to Forcepoint ONE Cloud over IPsec Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/JuniperSRX_IPsec/index.html",
+              "children": []
+            },
+            {
+              "name": "How to Connect any Edge Device to Forcepoint ONE Cloud over IPsec Tunnel",
+              "url": "https://help.forcepoint.com/fpone/howto/General_IPsec/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "mobile",
+          "children": [
+            {
+              "name": "Forcepoint Mobile Online Help",
+              "url": "https://help.forcepoint.com/fpone/mobile/online_help/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint Mobile Acknowledgment of Third-party Software",
+              "url": "https://help.forcepoint.com/fpone/mobile/ack_third-party_legal_notices/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Endpoint",
+      "children": [
+        {
+          "name": "Forcepoint%20Agent",
+          "children": [
+            {
+              "name": "Forcepoint DSE Agent",
+              "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/index.html",
+              "children": []
+            },
+            {
+              "name": "Removing the agent",
+              "children": [
+                {
+                  "name": "Generating the release code",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-55f94be9-c730-47cc-adef-a6375b17bd81.html"
+                },
+                {
+                  "name": "Removing the agent on Windows",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-805f88c4-9880-4756-9930-5851d711e86e.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-6fe050fa-e450-4e68-858a-4f1046482de8.html"
+            },
+            {
+              "name": "Deploying the agent",
+              "children": [
+                {
+                  "name": "System requirements",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-0498cb88-a064-4c78-aedd-28a1640d8c34.html"
+                },
+                {
+                  "name": "Prerequisites",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-f4dc3752-c91b-41d5-8ff1-e5f76bfb6569.html"
+                },
+                {
+                  "name": "Windows Installation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-322d8dc8-c2ab-4d8a-9179-d56f845aa72d.html"
+                },
+                {
+                  "name": "Downloading the agent",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-7d33d97d-8ad1-4994-aa4c-2153275a66b2.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-011e6e26-ff7b-46fb-8601-dc1b1b5ff5d9.html"
+            },
+            {
+              "name": "Introduction",
+              "children": [
+                {
+                  "name": "About the Forcepoint DSE Agent",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-b37c178b-1439-4fac-9d5d-9d734a9fbb80.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-580fdfda-3c7d-40da-818f-1793ecabc760.html"
+            },
+            {
+              "name": "Troubleshooting",
+              "children": [
+                {
+                  "name": "Starting and Stopping Services",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-8169bf77-ace1-4943-8eb5-e7abd6bf2917.html"
+                },
+                {
+                  "name": "Troubleshooting Agent and Classifier Paths",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-7663a25d-42f4-4fac-9796-afd88de2f294.html"
+                },
+                {
+                  "name": "Verifying Client Information",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-c9b0ac40-b299-4d59-867a-cb51b9aa3970.html"
+                },
+                {
+                  "name": "Troubleshooting Services",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-93585681-d9cc-4e50-a698-c4c782b94715.html"
+                },
+                {
+                  "name": "Troubleshooting Processes",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-1df7640e-6ac0-468d-b374-4e84fcdc1d8c.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-e493d8b0-6cee-4ed5-84dd-1c9a73a13685.html"
+            },
+            {
+              "name": "Endpoint management",
+              "children": [
+                {
+                  "name": "Updating the Forcepoint agent",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-ea18f73f-6d51-465b-9b12-78102c9e21ac.html"
+                },
+                {
+                  "name": "Profiles",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-ed93d9fa-892d-4bcf-af19-d11839ebe3aa.html"
+                },
+                {
+                  "name": "My Endpoints",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-1e12d87b-a35c-45e1-9a4b-96daf32430d8.html"
+                },
+                {
+                  "name": "Agent Compatibility",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-fc3393e5-a376-4cc4-bfdc-d7ce86a431fd.html"
+                },
+                {
+                  "name": "Viewing the agent status",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-e43b5788-5a0d-4b05-b55a-679ab810ff50.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-673bc4c8-589c-4965-a30d-962df2c354c1.html"
+            },
+            {
+              "name": "Release Notes",
+              "children": [
+                {
+                  "name": "Known Issues",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-74b6132f-7bdf-4698-b12b-ce3a56c9a2d7.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/Forcepoint%20Agent/guid-06e8b48c-b108-421f-831b-5a6a104f1d51.html"
+            }
+          ]
+        },
+        {
+          "name": "Online Help",
+          "children": [
+            {
+              "name": "Endpoint Management",
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/index.html",
+              "children": []
+            },
+            {
+              "name": "Introduction",
+              "children": [
+                {
+                  "name": "About the agent for Forcepoint Cloud Security Gateway",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-0b76a311-62e0-4e5d-b86b-fc32a5c1af6d.html"
+                },
+                {
+                  "name": "Endpoint management",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-580fdfda-3c7d-40da-818f-1793ecabc760.html"
+                },
+                {
+                  "name": "Help and support",
+                  "children": [
+                    {
+                      "name": "support.forcepoint.com",
+                      "children": [
+                        {
+                          "name": "Help and support",
+                          "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-ea238719-90ab-4e50-8995-7ca05ebbea1c.html",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-f9e8c6c7-00f4-4238-8c49-2fe7c7e0b79f.html"
+            },
+            {
+              "name": "Installing the agent",
+              "children": [
+                {
+                  "name": "macOS installation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-66ad4c9f-be42-4ec7-8042-7b147d4c7474.html"
+                },
+                {
+                  "name": "System requirements",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-0498cb88-a064-4c78-aedd-28a1640d8c34.html"
+                },
+                {
+                  "name": "Windows Installation",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-322d8dc8-c2ab-4d8a-9179-d56f845aa72d.html"
+                },
+                {
+                  "name": "Before you begin",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-f4dc3752-c91b-41d5-8ff1-e5f76bfb6569.html"
+                },
+                {
+                  "name": "Downloading the agent",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-7d33d97d-8ad1-4994-aa4c-2153275a66b2.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-011e6e26-ff7b-46fb-8601-dc1b1b5ff5d9.html"
+            },
+            {
+              "name": "Product updates",
+              "children": [
+                {
+                  "name": "Resolved and Known Issues",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-74b6132f-7bdf-4698-b12b-ce3a56c9a2d7.html"
+                },
+                {
+                  "name": "What's New",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-b3b3ac73-8418-441a-b58d-5fa0d5837807.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-06e8b48c-b108-421f-831b-5a6a104f1d51.html"
+            },
+            {
+              "name": "Endpoint management",
+              "children": [
+                {
+                  "name": "Profiles",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-ed93d9fa-892d-4bcf-af19-d11839ebe3aa.html"
+                },
+                {
+                  "name": "My Endpoints",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-1e12d87b-a35c-45e1-9a4b-96daf32430d8.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-673bc4c8-589c-4965-a30d-962df2c354c1.html"
+            },
+            {
+              "name": "Updating the agent",
+              "children": [
+                {
+                  "name": "Updating the agent manually",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-6dee8270-36bf-4abb-9818-8861528238a0.html"
+                },
+                {
+                  "name": "Over the air updates",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-bfe866ca-78ba-495f-9fca-9d40a7b5f8e1.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-ea18f73f-6d51-465b-9b12-78102c9e21ac.html"
+            },
+            {
+              "name": "Removing the agent",
+              "children": [
+                {
+                  "name": "Removing the agent on maC",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-18e44925-61a9-4ee3-bccc-1196c5a5a014.html"
+                },
+                {
+                  "name": "Removing the agent on Windows",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-2f711dfc-501e-410e-b51f-dd727faef594.html"
+                },
+                {
+                  "name": "Generating the release code",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-55f94be9-c730-47cc-adef-a6375b17bd81.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-6fe050fa-e450-4e68-858a-4f1046482de8.html"
+            },
+            {
+              "name": "Configuring the agent",
+              "children": [
+                {
+                  "name": "Configuring the agent pac file",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-8c6c53fa-62e8-40da-a43a-d45944348ffa.html"
+                },
+                {
+                  "name": "Configuring the agent operating mode - on-prem or cloud",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-18edc45e-433a-4383-8a4a-bbe9a9eff221.html"
+                },
+                {
+                  "name": "Configuring the agent connection mode",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-ee4d996b-f20c-4de5-9e1b-cb1c0c28d545.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-72c08028-4e97-46b8-86ac-85d28c8ae3a4.html"
+            },
+            {
+              "name": "Viewing the agent status",
+              "children": [
+                {
+                  "name": "Viewing the agent status on Forcepoint Data Security Cloud | DLP portal",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-05ba4f42-beb4-44d5-a5c4-e88c8d42e00f.html"
+                },
+                {
+                  "name": "Viewing the agent status on Forcepoint Cloud Security Gatewayportal",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-b56692d0-9697-499a-950e-c54c8390c739.html"
+                }
+              ],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-e43b5788-5a0d-4b05-b55a-679ab810ff50.html"
+            },
+            {
+              "name": "Migrating from Forcepoint F1E to the Forcepoint agent",
+              "children": [
+                {
+                  "name": "Forcepoint customer             support",
+                  "children": [
+                    {
+                      "name": "Migrating from Forcepoint F1E to the Forcepoint agent",
+                      "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-8202e3ee-2df0-4cb9-8ef3-ff6dc04fb3ac.html",
+                      "children": []
+                    },
+                    {
+                      "name": "Migrate from Forcepoint F1E to the new agent",
+                      "children": [],
+                      "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-8dec6d87-82ab-490d-bdd1-d33c1be874fd.html"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Agent Compatibility",
+              "children": [],
+              "url": "https://help.forcepoint.com/endpoint/en-us/onlinehelp/guid-fc3393e5-a376-4cc4-bfdc-d7ce86a431fd.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Security",
+      "children": [
+        {
+          "name": "email",
+          "children": [
+            {
+              "name": "Forcepoint DLP for Cloud Email Legal Notices and Acknowledgments",
+              "url": "https://help.forcepoint.com/datasecurity/en-us/email/acknowledgments/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint DLP for Cloud Email Online Help",
+              "url": "https://help.forcepoint.com/datasecurity/en-us/email/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "ack_third-party_legal_notices",
+          "children": [
+            {
+              "name": "Data Security Cloud | DLP - 3rd Party Legal Notices and Acknowledgement",
+              "url": "https://help.forcepoint.com/datasecurity/en-us/ack_third-party_legal_notices/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Online Help",
+          "children": [
+            {
+              "name": "Forcepoint Data Security Cloud | DLP",
+              "url": "https://help.forcepoint.com/datasecurity/en-us/onlinehelp/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DSPM",
+      "children": [
+        {
+          "name": "Online Help",
+          "children": [
+            {
+              "name": "Forcepoint DSPM Documentation",
+              "url": "https://help.forcepoint.com/dspm/en-us/onlinehelp/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "cloud_dspm",
+          "children": [
+            {
+              "name": "Forcepoint Cloud DSPM Documentation",
+              "url": "https://help.forcepoint.com/dspm/en-us/cloud_dspm/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "fdc",
+          "children": [
+            {
+              "name": "Product updates",
+              "children": [
+                {
+                  "name": "What's new",
+                  "children": [],
+                  "url": "https://help.forcepoint.com/dspm/fdc/en-us/onlinehelp/guid-14c989c5-140b-47f6-83e4-24333cfc8ec3.html"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RBI",
+      "children": [
+        {
+          "name": "Online Help",
+          "children": [
+            {
+              "name": "Remote Browser Isolation | Help",
+              "url": "https://help.forcepoint.com/frbi/en-us/onlinehelp/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "legal_notices",
+          "children": [
+            {
+              "name": "RBI Legal Notices and Acknowledgments",
+              "url": "https://help.forcepoint.com/frbi/en-us/legal_notices/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Insights",
+      "children": [
+        {
+          "name": "userguide",
+          "children": [
+            {
+              "name": "Insights User Guide",
+              "url": "https://help.forcepoint.com/insights/en-us/userguide/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Email Security",
+      "children": [
+        {
+          "name": "on-prem",
+          "children": [
+            {
+              "name": "Forcepoint Email Security | Release Notes v8.5.7",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.7/release_notes/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security | Release Notes v8.5.5",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.5/release_notes/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security | Installation Guide v8.5.x",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_install/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security | Upgrade Guide v8.5.x",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_upgrade/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security | Installing Email Security in Microsoft Azure v8.5.x",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/azure_install/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security Gateway | Online Help",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/index.html",
+              "children": []
+            },
+            {
+              "name": "Getting Started",
+              "children": [],
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/guid-486a358f-ceb6-42a6-93fd-ba56a851ef1e.html"
+            },
+            {
+              "name": "Email Security | Secure Messaging User Help: Localized Versions",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_smd_user_help/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security | Message Encryption v8.5.x",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_encryption/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security | Security Information Event Management (SIEM): Email Logs v8.5.x",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_siem/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security Ports v8.5.x",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_ports/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security | Acknowledgment of Third-party Software v8.5.x",
+              "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/acknowledgments/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "cloud",
+          "children": [
+            {
+              "name": "Email Security Cloud 2024: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2024/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security Cloud 2025: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2025/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security Cloud 2023: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2023/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security Cloud 2022: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2022/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security Cloud | Managing Cloud Email Protection Products",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/tech_tips/",
+              "children": []
+            },
+            {
+              "name": "Email Security Cloud | Online Help",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/admin_guide/index.html",
+              "children": []
+            },
+            {
+              "name": "Email Security Cloud | Getting started with SIEM Integration",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/siem_guide/",
+              "children": []
+            },
+            {
+              "name": "Email Security Cloud | End User Guide",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/enduser_guide/",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Web Security",
+      "children": [
+        {
+          "name": "on-prem",
+          "children": [
+            {
+              "name": "Web Security, DLP, and Email Security | Security Solutions Installation Guide",
+              "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_install/index.html",
+              "children": []
+            },
+            {
+              "name": "Web Security, DLP, and Email Security | Security Solutions Upgrade Guide",
+              "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_upgrade/index.html",
+              "children": []
+            },
+            {
+              "name": "Data, Email, and Web Security | Backup and Restore FAQ",
+              "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/backup_faq/index.html",
+              "children": []
+            },
+            {
+              "name": "Data, Email, and Web Security | Moving the Management Server",
+              "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_mgmt_server/index.html",
+              "children": []
+            },
+            {
+              "name": "Data, Email, and Web Security | Moving the Reporting Databases",
+              "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_reporting_db/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "F1E",
+      "children": [
+        {
+          "name": "v25",
+          "children": [
+            {
+              "name": "Release Notes for Forcepoint F1E",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint F1E Install Guide",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_install/index.html",
+              "children": []
+            },
+            {
+              "name": "Deploying Forcepoint DLP Endpoint on Citrix virtual environments",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_xenapp/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint F1E Upgrade Guide",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_upgrade/index.html",
+              "children": []
+            },
+            {
+              "name": "Endpoint Applications",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_dlp_apps/index.html",
+              "children": []
+            },
+            {
+              "name": "Automatic Updates for Forcepoint F1E (Forcepoint DLP Endpoint)",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_auto_update/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint F1E End User Guide",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_end_user/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "v24",
+          "children": [
+            {
+              "name": "Release Notes for Forcepoint F1E",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_release_notes/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint F1E Upgrade Guide",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_upgrade/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint F1E Install Guide",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_install/index.html",
+              "children": []
+            },
+            {
+              "name": "Deploying Forcepoint DLP Endpoint on Citrix virtual environments",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_xenapp/index.html",
+              "children": []
+            },
+            {
+              "name": "Automatic Updates for Forcepoint F1E (Forcepoint DLP Endpoint)",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_auto_update/index.html",
+              "children": []
+            },
+            {
+              "name": "Endpoint Applications",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_dlp_apps/index.html",
+              "children": []
+            },
+            {
+              "name": "Forcepoint F1E End User Guide",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_end_user/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Appliances",
+      "children": [
+        {
+          "name": "2.0.1",
+          "children": [
+            {
+              "name": "Security Appliance Manager Release Notes",
+              "url": "https://help.forcepoint.com/appliance/en-us/2.0.1/fsam/release_notes/",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "2.x",
+          "children": [
+            {
+              "name": "Security Appliance Manager Installation Guide",
+              "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/install_guide/",
+              "children": []
+            },
+            {
+              "name": "Security Appliance Manager (FSAM) Administrator Help",
+              "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/admin_help/v-series-x-series-va/",
+              "children": []
+            },
+            {
+              "name": "Security Appliance Manager Troubleshooting Guide",
+              "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/troubleshooting_guide/",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "8.5.7",
+          "children": [
+            {
+              "name": "v8.5.7 Release Notes for Forcepoint Appliances",
+              "url": "https://help.forcepoint.com/appliance/en-us/8.5.7/release_notes/index.html",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "8.5.6",
+          "children": [
+            {
+              "name": "v8.5.6 Release Notes for Forcepoint Appliances",
+              "url": "https://help.forcepoint.com/appliance/en-us/8.5.6/release_notes/index.html",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
