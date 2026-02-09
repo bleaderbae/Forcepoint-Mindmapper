@@ -10,6 +10,9 @@ interface DocNode {
     content?: string;
     breadcrumbs: string[];
     parentUrl?: string;
+    nextUrl?: string;
+    prevUrl?: string;
+    relatedUrls: string[];
     lastScraped?: string;
 }
 
@@ -18,7 +21,6 @@ const BASE_DOMAIN = 'help.forcepoint.com';
 const MAX_CONCURRENCY = 5;
 const DATA_FILE = path.join(process.cwd(), 'full_site_data.json');
 
-// Persistent Cache
 let results: DocNode[] = [];
 if (fs.existsSync(DATA_FILE)) {
     try {
@@ -31,13 +33,6 @@ if (fs.existsSync(DATA_FILE)) {
 const visited = new Set<string>(results.map(r => r.url));
 const queue: { url: string; parentUrl?: string }[] = [];
 
-// Seed queue with children of already scraped pages if they aren't visited
-// This allows resuming a crawl intelligently
-results.forEach(res => {
-    // In a real full crawl, we'd need to re-parse links to find "unvisited" children
-    // For now, we'll just start from the START_URL but skip already visited pages
-});
-
 if (!visited.has(START_URL)) {
     queue.push({ url: START_URL });
 }
@@ -46,9 +41,6 @@ let processing = 0;
 
 async function processUrl(url: string, parentUrl?: string) {
     if (visited.has(url) && results.find(r => r.url === url)) {
-        // We already have this data. In an "intelligent" crawler, 
-        // we might do a HEAD request to check ETag or Last-Modified.
-        // For this POC, we'll skip if already in results.
         return;
     }
     visited.add(url);
@@ -70,9 +62,24 @@ async function processUrl(url: string, parentUrl?: string) {
 
         const content = $('article').text().replace(/\s+/g, ' ').trim();
 
+        // Semantic Flow Extraction
+        const nextHref = $('.wh_next_topic a, a[rel="next"]').first().attr('href');
+        const nextUrl = nextHref ? new URL(nextHref, url).toString() : undefined;
+
+        const prevHref = $('.wh_previous_topic a, a[rel="prev"]').first().attr('href');
+        const prevUrl = prevHref ? new URL(prevHref, url).toString() : undefined;
+
+        const relatedUrls: string[] = [];
+        $('.related-links a, .wh_related_links a').each((_, el) => {
+            const href = $(el).attr('href');
+            if (href) {
+                try {
+                    relatedUrls.push(new URL(href, url).toString());
+                } catch (e) {}
+            }
+        });
+
         const structuralLinks: string[] = [];
-        // Only follow links in the SIDE TOC to ensure we follow the documentation tree
-        // and ignore "related links" or footer noise.
         $('.wh_side_toc a').each((_, el) => {
             const href = $(el).attr('href');
             if (href && !href.startsWith('http') && !href.startsWith('#')) {
@@ -89,13 +96,20 @@ async function processUrl(url: string, parentUrl?: string) {
             url,
             title,
             breadcrumbs,
-            content: content.substring(0, 1000),
+            content: content.substring(0, 500),
             parentUrl,
+            nextUrl,
+            prevUrl,
+            relatedUrls,
             lastScraped: new Date().toISOString()
         });
 
         for (const link of structuralLinks) {
             queue.push({ url: link, parentUrl: url });
+        }
+        // Also queue nextUrl if not visited to ensure we follow the flowchart
+        if (nextUrl && !visited.has(nextUrl)) {
+            queue.push({ url: nextUrl, parentUrl: url });
         }
 
     } catch (error: any) {
@@ -114,13 +128,7 @@ process.on('SIGINT', () => {
 });
 
 async function run() {
-    // If we're starting fresh but have results, we should populate the queue
-    // from the links of existing results that haven't been visited yet.
     if (results.length > 0 && queue.length === 0) {
-        console.log("Resuming crawl from existing data...");
-        // Re-parsing all links from HTML would be slow, 
-        // but we can trust the previous crawl's logic if we saved links.
-        // For now, let's just start from the top; it will skip existing.
         queue.push({ url: START_URL });
     }
 
@@ -130,7 +138,7 @@ async function run() {
             if (item) {
                 processing++;
                 processUrl(item.url, item.parentUrl).then(() => {
-                    if (results.length % 20 === 0) save();
+                    if (results.length % 50 === 0) save();
                 }).finally(() => {
                     processing--;
                 });
