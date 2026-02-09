@@ -1,47 +1,27 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { PRODUCT_CONFIG, ProductConfig } from './product_config';
 
 interface D3Node {
     name: string;
     url?: string;
     children?: D3Node[];
     _children?: D3Node[];
-    type?: 'document' | 'legal' | 'category';
+    type?: 'document' | 'legal' | 'category' | 'variant' | 'version';
 }
-
-// Map product codes to friendly names
-const PRODUCT_MAP: Record<string, string> = {
-    'dlp': 'DLP',
-    'endpoint': 'Endpoint',
-    'fpone': 'Forcepoint ONE',
-    'fponefirewall': 'Forcepoint ONE Firewall',
-    'F1E': 'F1E',
-    'fpdsc': 'Data Security Cloud',
-    'emailsec': 'Email Security',
-    'websec': 'Web Security',
-    'appliance': 'Appliances',
-    'datasecurity': 'Data Security',
-    'dspm': 'DSPM',
-    'frbi': 'RBI',
-    'docs': 'Documentation',
-    'insights': 'Insights',
-    'dup': 'DUP',
-    'ap-data': 'AP-Data'
-};
 
 function humanize(text: string): string {
     if (!text) return '';
-    // If it looks like a version (e.g., 10.4.0, v8.5), keep it mostly as is but maybe capitalize 'v'
-    if (/^v?\d+(\.\d+)*$/.test(text)) return text;
+    if (/^v?\d+(\.\d+|x)*$/.test(text)) return text; // Versions
 
     return text
         .replace(/[-_]/g, ' ')
         .replace(/\.html$/i, '')
-        .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase to Space
+        .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase
         .replace(/\b(ack|rn|relnotes|release notes)\b/yi, 'Release Notes')
         .replace(/\b(install|installation)\b/yi, 'Installation')
         .replace(/\b(admin|administrator)\b/yi, 'Administrator')
-        .replace(/\b(guide|help)\b/yi, '') // often redundant if category is clear? No, keep guide.
+        .replace(/\b(guide|help)\b/yi, '')
         .trim()
         .replace(/\s+/g, ' ')
         .split(' ')
@@ -57,6 +37,28 @@ function getCategory(text: string): string {
     if (t.includes('troubleshoot') || t.includes('limitations') || t.includes('known issues')) return 'Troubleshooting';
     if (t.includes('legal') || t.includes('third-party') || t.includes('acknowledg')) return 'Legal & Third Party';
     return 'General';
+}
+
+function getVariant(prodCode: string, title: string, url: string): string | null {
+    const config = PRODUCT_CONFIG[prodCode];
+    if (!config) return null;
+
+    // Check variants by regex
+    if (config.variants) {
+        for (const v of config.variants) {
+            if (v.pattern.test(title) || v.pattern.test(url)) {
+                return v.name;
+            }
+        }
+    }
+
+    // Special logic for Appliances based on URL version
+    if (prodCode === 'appliance') {
+        if (/\/2\./.test(url) || /\/2\.x\//.test(url)) return 'Security Appliance Manager (FSAM)';
+        return 'Forcepoint Appliances (V-Series)';
+    }
+
+    return config.defaultVariant || 'General';
 }
 
 function run() {
@@ -81,12 +83,11 @@ function run() {
     };
 
     for (const page of data) {
-        if (!page.title) continue;
-        if (!page.url) continue;
+        if (!page.title || !page.url) continue;
 
         let current = root;
 
-        // --- Step 1: Extract Hierarchy from URL ---
+        // --- Step 1: Extract Product ---
         let urlPath = '';
         try {
             const urlObj = new URL(page.url);
@@ -96,64 +97,63 @@ function run() {
         }
 
         const segments = urlPath.split('/').filter(s => s && !s.endsWith('.html'));
+        if (segments.length === 0) continue;
 
-        // Skip first segment if empty (leading slash)
-        if (segments.length > 0) {
-            // Segment 0: Product
-            const prodCode = segments[0] || '';
-            if (!prodCode) continue;
+        const prodCode = segments[0] || '';
+        if (!prodCode) continue;
 
-            let prodName = PRODUCT_MAP[prodCode] || humanize(prodCode);
+        const config = PRODUCT_CONFIG[prodCode];
+        const prodName = config ? config.name : humanize(prodCode);
 
-            // --- Special Logic for "Appliances" ---
-            // "The 'appliances' node has 4 different branches but the branches support two different product types."
-            // Based on URL:
-            // /appliance/en-us/2.x/fsam/... -> Security Appliance Manager
-            // /appliance/en-us/8.5.x/release_notes/... -> Forcepoint Appliances (V-Series)
+        let prodNode = findChild(current, prodName);
+        if (!prodNode) {
+            prodNode = { name: prodName, children: [], type: 'category' };
+            addChild(current, prodNode);
+        }
+        current = prodNode;
 
-            if (prodCode === 'appliance') {
-                const versionSeg = segments.find(s => s.match(/^\d+(\.\d+|x)*$/)); // Find version segment
-                if (versionSeg && versionSeg.startsWith('2.')) {
-                    prodName = 'Security Appliance Manager (FSAM)';
-                } else {
-                    prodName = 'Forcepoint Appliances (V-Series)';
-                }
+        // --- Step 2: Determine Variant ---
+        // Some products like F1E or Forcepoint ONE need splitting by sub-product/variant
+        // Check if we should insert a Variant Node
+        const variantName = getVariant(prodCode, page.title, page.url);
+
+        if (variantName && variantName !== 'General') {
+            let variantNode = findChild(current, variantName);
+            if (!variantNode) {
+                variantNode = { name: variantName, children: [], type: 'variant' };
+                addChild(current, variantNode);
             }
+            current = variantNode;
+        }
 
-            let prodNode = findChild(current, prodName);
-            if (!prodNode) {
-                prodNode = { name: prodName, children: [], type: 'category' };
-                addChild(current, prodNode);
+        // --- Step 3: Version / Category ---
+        // Heuristic: Skip locale if present
+        let nextIndex = 1;
+        if (segments.length > nextIndex) {
+            const seg = segments[nextIndex];
+            if (seg && /^[a-z]{2}-[a-z]{2}$/i.test(seg)) {
+                nextIndex++; // Skip locale
             }
-            current = prodNode;
+        }
 
-            // Segment 1+: Version / Category
-            // Heuristic: Skip locale if present
-            let nextIndex = 1;
-            if (segments.length > nextIndex) {
-                const seg = segments[nextIndex];
-                if (seg && /^[a-z]{2}-[a-z]{2}$/i.test(seg)) {
-                    nextIndex++;
-                }
-            }
+        if (segments.length > nextIndex) {
+            let verSeg = segments[nextIndex];
+            if (verSeg) {
+                let verName = humanize(verSeg);
 
-            // Identify Version or major Category
-            if (segments.length > nextIndex) {
-                let verSeg = segments[nextIndex];
+                // Specific overrides
+                if (verSeg === 'RN') verName = 'Release Notes';
+                else if (verSeg === 'howto') verName = 'How To';
+                else if (verSeg === 'dlphelp') verName = 'DLP Help';
+                else if (verSeg === 'fsmhelp') verName = 'FSM Help';
+                else if (verSeg === 'deployctr') verName = 'Deployment Center';
+                else if (verSeg === 'onlinehelp') verName = 'Online Help';
 
-                // If version segment looks like a version, keep it. If not, maybe it's a category.
-                // But for deep linking, let's treat the next segment as a grouping node (Version).
-                if (verSeg) {
-                    let verName = humanize(verSeg);
-
-                    // Specific overrides
-                    if (verSeg === 'RN') verName = 'Release Notes';
-                    else if (verSeg === 'howto') verName = 'How To';
-                    else if (verSeg === 'dlphelp') verName = 'DLP Help';
-
+                // Check if this version node matches the Variant name (redundancy check)
+                if (verName !== current.name) {
                     let verNode = findChild(current, verName);
                     if (!verNode) {
-                        verNode = { name: verName, children: [], type: 'category' };
+                        verNode = { name: verName, children: [], type: 'version' };
                         addChild(current, verNode);
                     }
                     current = verNode;
@@ -161,14 +161,8 @@ function run() {
             }
         }
 
-        // --- Step 2: Merge Breadcrumbs ---
-        // Clean up breadcrumbs to remove redundancy with what we just built
-        const crumbs = (page.breadcrumbs || []).filter((b: string) => b !== 'Home');
-
-        // --- Determine Page Category (Legal vs Doc) ---
+        // --- Step 4: Category (Legal vs Doc) ---
         const category = getCategory(page.title + ' ' + page.url);
-
-        // If it's a legal notice, maybe group it under a "Legal" folder?
         if (category === 'Legal & Third Party') {
             let legalNode = findChild(current, 'Legal & Third Party');
             if (!legalNode) {
@@ -177,14 +171,18 @@ function run() {
             }
             current = legalNode;
         }
-        // We could group Installation, etc. too, but breadcrumbs usually handle that structure.
-        // Let's rely on breadcrumbs for the rest, but sanitize them.
+
+        // --- Step 5: Merge Breadcrumbs ---
+        const crumbs = (page.breadcrumbs || []).filter((b: string) => b !== 'Home');
 
         for (const crumb of crumbs) {
              let cleanCrumb = humanize(crumb);
-             // Skip redundancy
+             // Skip redundancy with ancestors
+             // This is tricky. We need to check if cleanCrumb is redundant with ANY ancestor or current path.
+             // Simple check: redundant with current node name?
              if (cleanCrumb === current.name) continue;
-             if (cleanCrumb === root.name) continue; // "Forcepoint Documentation"
+             if (cleanCrumb === prodName) continue;
+             if (variantName && cleanCrumb === variantName) continue;
 
              let child = findChild(current, cleanCrumb);
              if (!child) {
@@ -194,23 +192,20 @@ function run() {
              current = child;
         }
 
-        // --- Step 3: Add Leaf Node (The Page) ---
+        // --- Step 6: Add Leaf Node ---
         const pageTitle = humanize(page.title);
+        const type = category === 'Legal & Third Party' ? 'legal' : 'document';
+
         if (current.name === pageTitle) {
             current.url = page.url;
-            current.type = category === 'Legal & Third Party' ? 'legal' : 'document';
+            current.type = type;
         } else {
             let child = findChild(current, pageTitle);
             if (child) {
                 child.url = page.url;
-                child.type = category === 'Legal & Third Party' ? 'legal' : 'document';
+                child.type = type;
             } else {
-                child = {
-                    name: pageTitle,
-                    url: page.url,
-                    children: [],
-                    type: category === 'Legal & Third Party' ? 'legal' : 'document'
-                };
+                child = { name: pageTitle, url: page.url, children: [], type };
                 addChild(current, child);
             }
         }
