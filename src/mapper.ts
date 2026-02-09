@@ -10,7 +10,8 @@ interface DocNode {
 }
 
 function sanitize(text: string): string {
-    return text.replace(/[:()\[\]"/]/g, ' ').replace(/\s+/g, ' ').trim();
+    // Remove characters that break Mermaid syntax: [ ] ( ) | " :
+    return text.replace(/[\[\]\(\)\|":]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
 function run() {
