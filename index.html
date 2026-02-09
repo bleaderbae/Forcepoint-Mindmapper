@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forcepoint Mind Map POC</title>
     <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ 
             startOnLoad: true,
-            theme: 'base',
-            themeVariables: {
-                primaryColor: '#007bff',
-                edgeColor: '#007bff',
-                nodeBorder: '#007bff'
-            }
+            maxTextSize: 900000,
+            theme: 'default'
         });
     </script>
     <style>
@@ -27,447 +23,631 @@
     <div class="mermaid">
 mindmap
 Forcepoint Help
-  Home
-    Appendix A  How Do I
-      Appendix A  How Do I
-      Archive my incident data?
-        Archive my incident data?
-      Configure a DLP policy?
-        Configure a DLP policy?
-      Define an exception?
-        Define an exception?
-      Filter incidents?
-        Filter incidents?
-      Fingerprint data?
-        Fingerprint data?
-      Fingerprint specific field combinations in a database table?
-        Fingerprint specific field combinations in a database table?
-      Ignore sections of my document when fingerprinting?
-        Ignore sections of my document when fingerprinting?
-      Mitigate false positives in pattern or dictionary phrases?
-        Mitigate false positives in pattern or dictionary phrases?
-      Move from monitor to protect?
-        Move from monitor to protect?
-    Classifying Content
-      Classifying Content
-      Content classifier menu bar
-        Content classifier menu bar
-      Creating a rule from a content classifier
-        Creating a rule from a content classifier
-      Database Fingerprinting Wizard - Scheduler
-        Database Fingerprinting Wizard - Scheduler
-      Database fingerprinting
-        Database fingerprinting
-      Details pane
-        Details pane
-      File Labeling
-        File Labeling
-      File fingerprinting
-        File fingerprinting
-      File properties
-        File properties
-      Imported fingerprinting
-        Imported fingerprinting
-      Machine learning
-        Machine learning
-      Manually deleting fingerprinting classifiers
-        Manually deleting fingerprinting classifiers
+  Forcepoint DLP Administrator Help
+  Overview
+    Data classification
+    Forcepoint DLP appliances
+    Forcepoint DLP basics
+    Forcepoint DLP databases
+    Managing Forcepoint DLP
+    DLP in Forcepoint Web Security and Forcepoint Email Security
+    What can I protect?
+  Navigating the system
+    Main options
+      Logs
+      Policy Management
+      Status
+      Reporting
+    Settings options
+      General
+      Deployment
+      Authorization
+    Global and status icons
+    Deploy button
+  Initial Setup
+    Defining general system settings and notifications
+    Entering a subscription key
+    Configuring system modules
+    Configuring the protector
+  Viewing Status
+    Monitoring system health
+    Viewing the Dashboard
+      SSL Certificate Alerts
+      Health Alert Summary
+      Business Value
+      Data Loss Prevention Incidents
+      Discovery Incidents
+    Applying column filters
+    Viewing endpoint status
+    Viewing deployment status
+    Changing table properties
+  Viewing Incidents and Reports
+    Viewing the incident list
+      Previewing incidents
+        Forensics
+        Violations
+        Properties
+        History
+      Toolbar buttons
+      Managing incident workflow
+        Assigning incidents
+        Changing incident status
+        Locking and unlocking incidents
+        Tagging incidents
+        Changing incident severity
+        Ignoring incidents
+        Downloading incidents
+        Adding comments
+        Deleting incidents
+      Escalating incidents
+        Email incidents to another
+        Emailing incidents to the manager of the person who generated the incident
+      Managing incident reports
+        Editing table properties
+        Editing report filters
+        Applying a column filter
+        Saving reports
+        Grouping incidents
+        Deleting incidents
+        Printing or exporting incidents to PDF
+      Remediating incidents
+        Running remediation scripts on incidents
+        Releasing incidents
+          By replying to the notification message
+          From the Incident Details report
+      Tuning policies
+        Excluding source from rules
+        Disabling rules
+        Disabling policies
+    The report catalog
+      Scheduling tasks
+        Scheduling a new task
+      Editing a report
+        General tab
+        Filter tab
+        Table Properties tab
+    Discovery reports
+      Discovery dashboard
+    Data Loss Prevention reports
+      Top violated policies
+      DLP dashboard
+      User risk summary all incidents
+      User risk summary data theft risk indicators
+      Incident risk ranking
+        Toolbar
+        What factors affect risk scoring?
+          Impact
+          High-risk users
+          Risk indicators
+      Violations by severity and action
+      My cases
+      Incident trends
+      Top sources and destinations
+      Incident status
+        Top policies by status
+        Incident status by administrator
+      Incidents by geographical location
+  Policies Overview
+    Import and Export policies from Forcepoint Security Manager
+      Export Policies
+      Troubleshooting for import and export policies
+      Import Policies
+      Validate the success or failure of import and export
+    What’s in a policy?
+    Viewing policies
+      The policy toolbar
+      Editing a policy
+      Update rules of a current policy
+      Update exceptions of current rule
+      Delete policies
+      Update rules of multiple policies
+      Update exceptions of multiple rules
+      Policy levels
+        Adding or editing policy level
+        Rearranging policy levels
+        Deleting a policy level
+    Selecting items to include or exclude in a policy
+  Configuring the Email DLP Policy
+    Defining email DLP policy owners
+    Identifying email DLP trusted domains
+    Configuring outbound and inbound email DLP attributes
+  Configuring the Web DLP Policy
+    Web DLP policy configuration overview
+    Configuring web DLP policy attributes
+    Defining web DLP policy owners
+    Selecting web DLP policy destinations
+      Defining trusted domains
+      Selecting destination websites
+  Using Predefined DLP and Discovery Policies
+    Adding a predefined DLP or discovery policy
+      Finish
+      Welcome
+      Regions
+      Industries
+      Policy list
+    Changing the selected DLP or discovery policies
+    Changing policy industry or region settings
+  Creating Custom DLP Policies
+    Custom Policy Wizard - Condition
+      Viewing or editing conditions and thresholds
+        Fingerprint classifiers
+    Custom Policy Wizard - General
+    Rule Wizard - Finish
+    Custom Policy Wizard - Severity and Action
+      Configuring Accumulate matches
+      Severity and Action for Risk-Adaptive Protection users
+    Custom Policy Wizard - Destination
+      Forcepoint Web Security mode
+      Standard Forcepoint DLP options
+      Forcepoint Email Security mode
+    Custom Policy Wizard - Source
+    Selecting a content classifier
       Patterns & Phrases
-        Patterns & Phrases
-      Scripts
-        Scripts
-    Configuring Authorization
-      Configuring Authorization
-      Customizing your own administrator account settings
-        Customizing your own administrator account settings
-      Defining administrators
-        Defining administrators
-      Working with roles
-        Working with roles
-    Configuring Endpoint Deployment
-      Bypassing endpoint clients
-        Bypassing endpoint clients
-      Configuring Endpoint Deployment
-      Configuring encryption for removable media
-        Configuring encryption for removable media
-      Rearranging and deploying endpoint profiles
-        Rearranging and deploying endpoint profiles
-      Selecting endpoint destination channels to monitor
-        Selecting endpoint destination channels to monitor
-      Using the endpoint client software
-        Using the endpoint client software
-      Viewing and managing endpoint profiles
-        Viewing and managing endpoint profiles
-    Configuring the Email DLP Policy
-      Configuring outbound and inbound email DLP attributes
-        Configuring outbound and inbound email DLP attributes
-      Configuring the Email DLP Policy
-      Defining email DLP policy owners
-        Defining email DLP policy owners
-      Identifying email DLP trusted domains
-        Identifying email DLP trusted domains
-    Configuring the Web DLP Policy
-      Configuring the Web DLP Policy
-      Configuring web DLP policy attributes
-        Configuring web DLP policy attributes
-      Defining web DLP policy owners
-        Defining web DLP policy owners
-      Selecting web DLP policy destinations
-        Selecting web DLP policy destinations
-      Web DLP policy configuration overview
-        Web DLP policy configuration overview
-    Creating Custom DLP Policies
-      Creating Custom DLP Policies
-      Custom Policy Wizard - Condition
-        Custom Policy Wizard - Condition
-      Custom Policy Wizard - Destination
-        Custom Policy Wizard - Destination
-      Custom Policy Wizard - General
-        Custom Policy Wizard - General
-      Custom Policy Wizard - Severity and Action
-        Custom Policy Wizard - Severity and Action
-      Custom Policy Wizard - Source
-        Custom Policy Wizard - Source
-      Managing exceptions
-        Managing exceptions
-      Managing rules
-        Managing rules
-      Rule Wizard - Finish
-        Rule Wizard - Finish
-      Selecting a content classifier
-        Selecting a content classifier
-    Creating Discovery Policies
-      Configuring discovery incidents
-        Configuring discovery incidents
-      Copying or moving discovered files
-        Copying or moving discovered files
-      Creating Discovery Policies
-      Creating a discovery policy
-        Creating a discovery policy
-      Performing Box discovery
-        Performing Box discovery
-      Performing Domino discovery
-        Performing Domino discovery
-      Performing Exchange discovery
-        Performing Exchange discovery
-      Performing Outlook PST discovery
-        Performing Outlook PST discovery
-      Performing SharePoint discovery
-        Performing SharePoint discovery
-      Performing database discovery
+        General tab
+        Properties tab
+      Fingerprint
+        General tab
+        Properties tab
+      File Properties
+        General tab
+        Properties tab
+      Number of Email Attachments
+      Machine Learning
+      Transaction Size
+      Number of Email Destinations
+    Managing rules
+      Duplicating a Rule
+      Edit and Delete Rule
+      Adding a new Rule
+        Policy Rule Wizard – General
+        Policy Rule Wizard – Condition
+        Policy Rule Wizard – Source
+        Policy Rule Wizard – Severity & Action
+        Policy Rule Wizard – Finish
+        Policy Rule Wizard – Destination
+    Managing exceptions
+      Rearranging exceptions
+      Adding a new exception
+        Exception Wizard - General
+        Exception Wizard - Severity & Action
+        Exception Wizard - Properties
+        Exception Wizard - Finish
+      Duplicating an exception
+  Classifying Content
+    Manually deleting fingerprinting classifiers
+    Content classifier menu bar
+    Scripts
+      Editing a predefined script
+    Patterns & Phrases
+      Pattern to exclude
+      Regular expression patterns
+      Adding a dictionary classifier
+      Adding a key phrase classifier
+      List of phrases to exclude
+      Adding or editing a regular expression classifier
+    File properties
+      Adding a file-type classifier
+      Adding a file-name classifier
+      Adding a file-size classifier
+    Details pane
+      Machine learning current scan status options
+      Fingerprinting details
+      Machine learning details
+    File Labeling
+      Adding or editing a file label
+    Machine learning
+      Machine Learning Wizard - General
+      Creating a machine learning classifier
+      Machine Learning Wizard - Scanned Folders
+      Machine Learning Wizard - Credentials
+      Machine Learning Wizard - Finish
+      Machine Learning Wizard - Scheduler
+    Database Fingerprinting Wizard - Scheduler
+      Database Fingerprinting Wizard - Fingerprinting Type
+      Database Fingerprinting Wizard - Export
+      Database Fingerprinting Wizard - Finish
+    File fingerprinting
+      File System Fingerprinting Wizard - File Filtering
+      File System Fingerprinting Wizard - Scheduler
+      File System Fingerprinting Wizard - General
+      File System Fingerprinting Wizard - Root Folder
+      File System Fingerprinting Wizard - Scanned Files
+      SharePoint Fingerprinting Wizard - Scanned Documents
+      SharePoint Fingerprinting Wizard - Site Root
+      SharePoint Fingerprinting Wizard - General
+      File System Fingerprinting Wizard - Export
+      File System Fingerprinting Wizard - Finish
+      SharePoint Fingerprinting Wizard - Scheduler
+      Domino Fingerprinting Wizard - General
+      SharePoint Fingerprinting Wizard - Finish
+      SharePoint Fingerprinting Wizard - Export
+      SharePoint Fingerprinting Wizard - File Filtering
+      Domino Fingerprinting Wizard - Scheduler
+      Domino Fingerprinting Wizard - Document Filtering
+      Domino Fingerprinting Wizard - Scanned Documents
+      Domino Fingerprinting Wizard - Server
+      Domino Fingerprinting Wizard - Attachment Filtering
+      Domino Fingerprinting Wizard - Finish
+      Domino Fingerprinting Wizard - Export
+    Imported fingerprinting
+      Import Fingerprint Wizard - Properties
+      Import Fingerprint Wizard - Scheduler
+      Import Fingerprint Wizard - Import Source
+      Import Fingerprint Wizard - Finish
+    Database fingerprinting
+      How matches are counted
+      Preparing for database fingerprinting
+        Creating a validation script
+          Validating fingerprinting scans
+          Validation script mechanism
+          Sample validation script
+        Selecting the data to fingerprint
+          Avoid fingerprinting short values
+          Avoid fingerprinting uninteresting/irrelevant values
+          Avoid fingerprinting columns with repetitive values
+        Creating a Data Source Name DSN in Windows
+      Connecting to data sources
+      Supported field types
+      Creating a database fingerprint classifier
+      Database Fingerprinting Wizard - Field Selection
+        Database table or CSV file
+        Salesforce site
+      Database Fingerprinting Wizard - Data Source/Site
+        Salesforce site
+        Database table
+        CSV file
+      Database Fingerprinting Wizard - General
+    Creating a rule from a content classifier
+  Defining Resources
+    Endpoint resources
+    General resources
+    Cloud resources
+      Error handling
+    Remediation resources
+    Custom computers
+    Custom users
+    User directory entries
+    Custom user directory groups
+    Business Units
+    Networks
+    URL categories
+    Domains
+    Endpoint Devices
+    Endpoint Applications
+    Notifications
+      Adding a new message
+        On the Notification Body tab
+        On the General tab
+    Endpoint Printers
+    Remediation
+      Remediation scripts
+        Types of remediation scripts
+        Incident XML interface for use in remediation scripts
+        Adding a new remediation script
+      Action Plans
+        Adding or editing an action plan
+          Standard Forcepoint DLP options
+          Forcepoint Data Discovery options
+          Forcepoint Email Security mode
+          Forcepoint Web Security mode
+        Possible actions for an action plan
+    Endpoint Application Groups
+      Applying a column filter
+      Adding custom application groups
+  Creating Discovery Policies
+    Performing file system discovery
+    Scheduling the discovery scan
+    Performing SharePoint discovery
+    Creating a discovery policy
+      Predefined policies
+      Custom policies
+    Performing Domino discovery
+    Performing Outlook PST discovery
+    Performing Exchange discovery
+    Performing Box discovery
+    Performing database discovery
+    Updating discovery
+    Viewing discovery results
+    Performing endpoint discovery
+    Viewing discovery status
+    Configuring discovery incidents
+    Copying or moving discovered files
+      Preparing and running the remediation scripts
+        STEP 1: Configure CopyFiles and MoveFiles
+        STEP 2: Add the remediation scripts to an action plan
+        STEP 3: Add the action plan to a policy
+        STEP 4: Deploy your changes
+  Scheduling Discovery Tasks
+    Emailing discovery task status reports
+    Scheduling network discovery tasks
+      Box tasks
+        Box Discovery Task Wizard - Scanned Accounts
+        Box Discovery Task Wizard - Policies
+        Box Discovery Task Wizard - Permissions
+        Box Discovery Task Wizard - Scheduler
+        Box Discovery Task Wizard - File Filtering
+        Box Discovery Task Wizard - Advanced
+        Box Discovery Task Wizard - Finish
+      SharePoint tasks
+        SharePoint Discovery Task Wizard - Site Root
+        SharePoint Discovery Task Wizard - Scheduler
+        SharePoint Discovery Task Wizard - Advanced
+        SharePoint Discovery Task Wizard - File Filtering
+        SharePoint Discovery Task Wizard - Policies
+        SharePoint Discovery Task Wizard - Finish
+        SharePoint Discovery Task Wizard - Scanned Documents
+      File System tasks
+        File System Discovery Task Wizard - Networks
+        File System Discovery Task Wizard - Advanced
+        File System Discovery Task Wizard - File Filtering
+        File System Discovery Task Wizard - Scheduler
+        File System Discovery Task Wizard - Finish
+        File System Discovery Task Wizard - Scanned Folders
+        File System Discovery Task Wizard - Policies
+      Domino tasks
+        Domino Discovery Task Wizard - Scanned Documents
+        Domino Discovery Task Wizard - Server
+        Domino Discovery Task Wizard - General
+        Domino Discovery Task Wizard - Scheduler
+        Domino Discovery Task Wizard - Document Filtering
+        Domino Discovery Task Wizard - Policies
+        Domino Discovery Task Wizard - Attachment Filtering
+        Domino Discovery Task Wizard - Advanced
+        Domino Discovery Task Wizard - Finish
+      Outlook PST tasks
+        Outlook Discovery Task Wizard - Scheduler
+        Outlook Discovery Task Wizard - Scanned Folder
+        Outlook Task Discovery Wizard - Policies
+        Outlook Discovery Task Wizard - Advanced
+        Outlook Discovery Task Wizard - Filtering
+        Outlook Discovery Task Wizard - Finish
+      Database tasks
         Performing database discovery
-      Performing endpoint discovery
-        Performing endpoint discovery
-      Performing file system discovery
-        Performing file system discovery
-      Scheduling the discovery scan
-        Scheduling the discovery scan
-      Updating discovery
-        Updating discovery
-      Viewing discovery results
-        Viewing discovery results
-      Viewing discovery status
-        Viewing discovery status
-    Defining Resources
-      Business Units
-        Business Units
-      Cloud resources
-        Cloud resources
-      Custom computers
-        Custom computers
-      Custom user directory groups
-        Custom user directory groups
-      Custom users
-        Custom users
-      Defining Resources
-      Domains
-        Domains
-      Endpoint Application Groups
-        Endpoint Application Groups
-      Endpoint Applications
-        Endpoint Applications
-      Endpoint Devices
-        Endpoint Devices
-      Endpoint Printers
-        Endpoint Printers
-      Endpoint resources
-        Endpoint resources
-      General resources
-        General resources
-      Networks
-        Networks
-      Notifications
-        Adding a new message
-          Adding a new message
-        Notifications
-      Remediation
-        Remediation
-      Remediation resources
-        Remediation resources
-      URL categories
-        URL categories
-      User directory entries
-        User directory entries
-    General System Settings
-      Alerts
-        Alerts
-        Setting up email properties
-          Setting up email properties
-      Analytics
-        Analytics
-      Archive storage
-        Archive storage
-      Archiving incident partitions
-        Archiving incident partitions
-      Backing up the system
-        Backing up the system
-      Configuring endpoint settings
-        Configuring endpoint settings
-      Entering subscription settings
-        Entering subscription settings
-      Exporting incidents to a file
-        Exporting incidents to a file
-      General System Settings
-      Mail servers
-        Mail servers
-      Remediation
-        Remediation
-      Services
-        Services
-      Setting reporting preferences
-        Setting preferences for data loss prevention reports
-          Setting preferences for data loss prevention reports
-        Setting reporting preferences
-      Updating predefined policies and classifiers
-        Updating predefined policies and classifiers
-      User directory settings
-        Adding or editing user directory server information
-          Adding or editing user directory server information
-        User directory settings
-    Initial Setup
-      Configuring system modules
-        Configuring system modules
-      Configuring the protector
-        Configuring the protector
-      Defining general system settings and notifications
-        Defining general system settings and notifications
-      Entering a subscription key
-        Entering a subscription key
-      Initial Setup
-    Managing Forcepoint DLP System Modules
-      Adding Forcepoint DLP system modules
-        Adding Forcepoint DLP system modules
-        Configuring Forcepoint DLP system modules
-          Configuring Forcepoint DLP system modules
-        Configuring the forensics repository
-          Configuring the forensics repository
-        Configuring the protector
-          Edit Protector  General tab
-            Edit Protector  General tab
-          Edit Protector  Local Networks tab
-            Edit Protector  Local Networks tab
-          Edit Protector  Networking tab
-            Edit Protector  Networking tab
-          Edit Protector  Services tab
-            Edit Protector  Services tab
-      Balancing the load
-        Balancing the load
-      Configuring protector services
-        Configuring protector services
-      Managing Forcepoint DLP System Modules
-      Removing Forcepoint DLP modules
-        Removing Forcepoint DLP modules
-    Navigating the system
-      Deploy button
-        Deploy button
-      Global and status icons
-        Global and status icons
-      Main options
-        Logs
-          Logs
-        Main options
-        Policy Management
-          Policy Management
-        Reporting
-          Reporting
-        Status
-          Status
-      Navigating the system
-      Settings options
-        Authorization
-          Authorization
-        Deployment
-          Deployment
-        General
-          General
-        Settings options
-    Overview
-      DLP in Forcepoint Web Security and Forcepoint Email Security
-        DLP in Forcepoint Web Security and Forcepoint Email Security
-      Data classification
-        Data classification
-      Forcepoint DLP appliances
-        Forcepoint DLP appliances
-      Forcepoint DLP basics
-        Forcepoint DLP basics
-      Forcepoint DLP databases
-        Forcepoint DLP databases
-      Managing Forcepoint DLP
-        Managing Forcepoint DLP
-      Overview
-      What can I protect?
-        What can I protect?
-    Policies Overview
-      Import and Export policies from Forcepoint Security Manager
-        Import and Export policies from Forcepoint Security Manager
-      Policies Overview
-      Selecting items to include or exclude in a policy
-        Selecting items to include or exclude in a policy
-      Viewing policies
-        Delete policies
-          Delete policies
-        Editing a policy
-          Editing a policy
-        Policy levels
-          Policy levels
-        The policy toolbar
-          The policy toolbar
-        Update exceptions of current rule
-          Update exceptions of current rule
-        Update exceptions of multiple rules
-          Update exceptions of multiple rules
-        Update rules of a current policy
-          Update rules of a current policy
-        Update rules of multiple policies
-          Update rules of multiple policies
-        Viewing policies
-      What’s in a policy?
-        What’s in a policy?
-    Scheduling Discovery Tasks
-      Adding or editing a cloud discovery scan
-        Adding or editing a cloud discovery scan
-      Configuring cloud discovery scans
-        Configuring cloud discovery scans
-      Emailing discovery task status reports
-        Emailing discovery task status reports
-      Scheduling Discovery Tasks
-      Scheduling endpoint discovery tasks
-        Scheduling endpoint discovery tasks
-      Scheduling network discovery tasks
-        Scheduling network discovery tasks
-      Sorting and filtering tasks
-        Sorting and filtering tasks
-    Troubleshooting
-      Discovery
-        Discovery
-      Endpoint
-        Endpoint
-      Fingerprinting
-        Fingerprinting
-      Incidents
-        Incidents
-      Linking Service
-        Linking Service
-      Miscellaneous
-        Miscellaneous
-      Online Help
-        Online Help
-      Performance
-        Performance
-      Technical Support
-        Technical Support
-      Troubleshooting
-    Using Predefined DLP and Discovery Policies
-      Adding a predefined DLP or discovery policy
-        Adding a predefined DLP or discovery policy
-      Changing policy industry or region settings
-        Changing policy industry or region settings
-      Changing the selected DLP or discovery policies
-        Changing the selected DLP or discovery policies
-      Using Predefined DLP and Discovery Policies
-    Viewing Forcepoint DLP Logs
-      Filtering log data
-        Filtering log data
-      Printing and exporting logs
-        Printing and exporting logs
-      The Forcepoint DLP audit log
-        The Forcepoint DLP audit log
-      The Forcepoint DLP debug log
-        The Forcepoint DLP debug log
-      The Forcepoint DLP system log
-        The Forcepoint DLP system log
-      The Forcepoint DLP traffic log
-        The Forcepoint DLP traffic log
-      Viewing Forcepoint DLP Logs
-    Viewing Incidents and Reports
-      Data Loss Prevention reports
-        Data Loss Prevention reports
-        Incidents by geographical location
-          Incidents by geographical location
-      Discovery reports
-        Discovery dashboard
-          Discovery dashboard
-        Discovery reports
-      The report catalog
-        Editing a report
-          Editing a report
-          Table Properties tab
-            Table Properties tab
-        Scheduling tasks
-          Scheduling a new task
-            Scheduling a new task
-          Scheduling tasks
-        The report catalog
-      Viewing Incidents and Reports
-      Viewing the incident list
-        Escalating incidents
-          Escalating incidents
-        Managing incident reports
-          Applying a column filter
-            Applying a column filter
-          Editing table properties
-            Editing table properties
-          Managing incident reports
-        Managing incident workflow
-          Managing incident workflow
-        Previewing incidents
-          Previewing incidents
-        Remediating incidents
-          Remediating incidents
-        Toolbar buttons
-          Toolbar buttons
-        Tuning policies
-          Tuning policies
-        Viewing the incident list
-    Viewing Status
-      Applying column filters
-        Applying column filters
+        Database Discovery Task Wizard - General
+        Database Discovery Task Wizard - Data Source Name
+        Database Discovery Task Wizard - Scheduler
+        Database Discovery Task Wizard - Table Filtering
+        Database Discovery Task Wizard - Policies
+        Database Discovery Task Wizard - Advanced
+        Database Discovery Task Wizard - Finish
+      Exchange tasks
+        Exchange Discovery Task Wizard - Exchange Servers online
+        Exchange Discovery Task Wizard - Scheduler
+        Exchange Discovery Task Wizard - Mailboxes
+        Exchange Discovery Task Wizard - Exchange Servers local
+        Exchange Discovery Task Wizard - Policies
+        Exchange Discovery Task Wizard - Advanced
+        Exchange Discovery Task Wizard - Filtering
+        Exchange Discovery Task Wizard - Finish
+    Sorting and filtering tasks
+      Buttons and controls
+      Details pane
+      Manually deleting discovery tasks
+    Configuring cloud discovery scans
+    Adding or editing a cloud discovery scan
+    Scheduling endpoint discovery tasks
+      Endpoint Discovery Task Wizard - Scheduler
+      Endpoint Discovery Task Wizard - Endpoints
+      Endpoint Discovery Task Wizard - Policies
+      Endpoint Discovery Task Wizard - Finish
+      Endpoint Discovery Task Wizard - Advanced
+      Endpoint Discovery Task Wizard - File Filtering
+  Viewing Forcepoint DLP Logs
+    Filtering log data
+    Printing and exporting logs
+    The Forcepoint DLP traffic log
       Changing table properties
-        Changing table properties
-      Monitoring system health
-        Monitoring system health
-      Viewing Status
-      Viewing deployment status
-        Viewing deployment status
-      Viewing endpoint status
-        Viewing endpoint status
-      Viewing the Dashboard
-        Business Value
-          Business Value
-        Data Loss Prevention Incidents
-          Data Loss Prevention Incidents
-        Discovery Incidents
-          Discovery Incidents
-        Health Alert Summary
-          Health Alert Summary
-        SSL Certificate Alerts
-          SSL Certificate Alerts
-        Viewing the Dashboard
-  Uncategorized
-    DLP Installation Guide
-    Forcepoint DLP Administrator Help
-    Forcepoint Security Manager Help
+    The Forcepoint DLP debug log
+    The Forcepoint DLP audit log
+      Retention of audit logs
+    The Forcepoint DLP system log
+  General System Settings
+    Configuring endpoint settings
+      Endpoint settings: the Email Domains tab
+      Endpoint settings: the Detection tab
+        Improved Detection for Web File Uploads
+        Optical Media
+      Endpoint settings: the Advanced tab
+      Endpoint settings: the Disk Space tab
+    Backing up the system
+      Backup folder contents
+      Monitoring backups
+      Restoring the system
+      Scheduling backups
+    Exporting incidents to a file
+    Setting reporting preferences
+      Setting general reporting preferences
+      Setting preferences for Incident Risk Ranking reports
+      Setting preferences for data loss prevention reports
+    Services
+      Linking Service and mapping URL categories
+        Importing URL categories from Forcepoint Web Security
+        Using Linking Service
+      Configuring DLP Cloud Applications
+      Configuring Data Protection Service
+        Configuring Connection
+          Error handling
+        Enabling Custom Actions
+        Configuring Optical Character Recognition OCR over Cloud Channels
+          Languages Supported for Optical Character Recognition OCR
+      Decryption and File Labeling
+        Configuring Microsoft Information Protection
+          Configuring Microsoft Admin Credentials
+          Configuring Label Import
+          Configuring MIP Decryption
+          Configuring File Labeling
+        Configuring Boldon James classifier
+      Risk-Adaptive Protection
+        Risk-Adaptive DLP with Forcepoint Dynamic User Protection
+        Risk-Adaptive Protection with Forcepoint Behavioral Analytics
+          Configuring Risk-Adaptive Protection to use Forcepoint Behavioral Analytics
+    Archive storage
+      Disk space calculation
+    Mail servers
+    Remediation
+      Incident risk ranking cases
+    Alerts
+      Setting up email properties
+    Analytics
+      Adding a high-risk resource
+    Updating predefined policies and classifiers
+      Determining the policy version you have
+      Viewing your update history
+      Installing policy updates
+      Restoring policies to a previous version
+    Entering subscription settings
+      Subscription alerts
+      Entering a subscription key
+      Forcepoint DLP license types
+    User directory settings
+      Adding or editing user directory server information
+        Using a CSV file
+        Using Active Directory or Domino
+        Using Microsoft Entra ID
+      Rearranging user directory servers
+      Importing user entries from a CSV file
+        CSV file formatting
+          Groups file format
+          Computers file format
+          Users file format
+      Importing users
+    Archiving incident partitions
+      Archiving a partition
+      Remote SQL Server machines
+      Restoring a partition
+      Deleting a partition
+      Archive threshold
+  Configuring Authorization
+    Defining administrators
+      Viewing administrators
+      Editing administrators
+        Select Incidents
+        Select Business Units
+        Select Policies
+    Customizing your own administrator account settings
+    Working with roles
+      Adding a new role
+        Customized role permissions
+  Managing Forcepoint DLP System Modules
+    Configuring protector services
+      Protector: Configuring HTTP
+        Protector HTTP service: Traffic Filter tab
+        Protector HTTP service: HTTP Filter tab
+        Protector HTTP service: Advanced tab
+      Protector: Configuring SMTP
+        Protector SMTP service: Mail Transfer Agent MTA tab
+        Protector SMTP service: Encryption & Bypass tab
+        Protector SMTP service: Traffic Filter tab
+        Protector SMTP service: SMTP Filter tab
+      Protector: Configuring plain text
+        Protector plain text service: Traffic Filter tab
+        Protector plain text service: Advanced tab
+      Protector: Configuring FTP
+        Protector FTP service: Traffic Filter tab
+    Adding Forcepoint DLP system modules
+      Configuring Forcepoint DLP system modules
+      Configuring the Forcepoint DLP management server
+      Configuring a supplemental Forcepoint DLP server
+      Configuring the fingerprint repository
+        Secondary Fingerprint Repository
+        Primary Fingerprint Repository
+      Configuring the endpoint server
+      Configuring the crawler
+      Configuring the policy engine
+      Configuring ICAP
+        Edit ICAP: General tab
+        Edit ICAP: HTTP tab
+        Edit ICAP: FTP tab
+      Configuring the OCR
+        Re-Configuring OCR after upgrading Email Security Gateway / Protector / Web Content
+               Gateway to versions using Policy Engine 10.4
+          Re-Configuring OCR after upgrading Email Security Gateway / Protector / Web Content Gateway to versions using Policy Engine 10.4
+        Configuring OCR on Email Security Gateway / Protector / Web Content Gateway with Policy
+               Engine 10.4
+          Configuring OCR on Email Security Gateway / Protector / Web Content Gateway with Policy Engine 10.4
+          Languages included with Forcepoint DLP no language pack required
+        Configuring OCR on Email Security Gateway / Protector / Web Content Gateway with Policy
+               Engine 10.3 and older
+          Configuring OCR on Email Security Gateway / Protector / Web Content Gateway with Policy Engine 10.3 and older
+          Adding or editing an OCR server
+      Configuring the protector
+        Edit Protector: General tab
+        Edit Protector: Networking tab
+          Interface configuration in SPAN/Mirror Port mode
+        Edit Protector: Local Networks tab
+        Edit Protector: Services tab
+      Configuring the forensics repository
+      Configuring the Forcepoint Email Security module
+      Configuring the Web Content Gateway module
+        Edit Content Gateway: General tab
+        Edit Content Gateway: HTTP/HTTPS tab
+        Edit Content Gateway: FTP tab
+      Configuring the integration agent
+      Configuring Forcepoint DLP Email Gateway
+      Configuring the analytics engine
+    Removing Forcepoint DLP modules
+    Balancing the load
+      Defining load balancing distribution
+  Configuring Endpoint Deployment
+    Viewing and managing endpoint profiles
+      Endpoint profile: Servers tab
+      Endpoint profile: Properties tab
+      Adding an endpoint profile
+      Endpoint profile: Encryption tab
+      Endpoint profile: Custom Configuration tab
+    Selecting endpoint destination channels to monitor
+    Rearranging and deploying endpoint profiles
+    Bypassing endpoint clients
+    Configuring encryption for removable media
+      Backing up encryption keys
+      Restoring encryption keys
+    Using the endpoint client software
+      Updating the endpoint client
+  Troubleshooting
+    Discovery
+    Fingerprinting
+      File has no fingerprint
+      Validation script timeout
+      No connectivity to fingerprint database
+      Other fingerprinting errors
+    Endpoint
+      Endpoint system icon does not display on the client computer
+      Endpoint Status page does not show user name
+      Failed to deploy endpoint configuration
+    Performance
+    Incidents
+      Incident export lacks Discovery incidents
+      Traffic log shows audited events, but no incident is created
+      NLP policy isn’t being triggered, and events are undetected
+      Cannot clear ignored incidents from the Discovery Dashboard
+    Miscellaneous
+      Failed user directory import
+      Wrong default email address displays
+      Error 400, bad request
+      Invalid Monitoring Policy XML File
+    Linking Service
+      Linking Service stops responding
+      System alerts that Linking Service is not accessible
+      Buttons in Forcepoint Security Manager tray return error
+    Online Help
+    Technical Support
+  Appendix A: How Do I
+    Archive my incident data?
+    Define an exception?
+    Configure a DLP policy?
+      To add a predefined policy
+      To create a quick policy
+      To create a custom policy
+    Fingerprint data?
+    Filter incidents?
+      Editing report filters
+      Applying column filters
+    Ignore sections of my document when fingerprinting?
+    Fingerprint specific field combinations in a database table?
+    Mitigate false positives in pattern or dictionary phrases?
+    Move from monitor to protect?
+      Action plans
 
-    </div>
+</div>
 </body>
 </html>
