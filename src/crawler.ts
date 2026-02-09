@@ -2,73 +2,124 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import * as fs from 'fs';
 import * as path from 'path';
+import { URL } from 'url';
 
 interface DocNode {
-    title: string;
     url: string;
-    children: DocNode[];
+    title: string;
+    content?: string;
+    breadcrumbs?: string[];
+    links: string[];
 }
 
-const BASE_URL = 'https://help.forcepoint.com';
-const START_URL = 'https://help.forcepoint.com/docs/Tech_Pubs/index.html';
+const START_URL = 'https://help.forcepoint.com/dlp/10.4.0/dlphelp/index.html';
+const BASE_DOMAIN = 'help.forcepoint.com';
+const MAX_CONCURRENCY = 5;
+const MAX_PAGES = 10000; // Safety limit for "full" crawl
 
-async function crawl(url: string, depth: number = 0, maxDepth: number = 1): Promise<DocNode | null> {
-    if (depth > maxDepth) return null;
+const visited = new Set<string>();
+const queue: string[] = [START_URL];
+const results: DocNode[] = [];
 
-    console.log(`Crawling: ${url} (Depth: ${depth})`);
+let processing = 0;
+
+async function processUrl(url: string) {
+    if (visited.has(url)) return;
+    visited.add(url);
+
     try {
-        const response = await axios.get(url, { 
-            timeout: 10000,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-        });
+        console.log(`[Queue: ${queue.length}] Crawling: ${url}`);
+        const response = await axios.get(url, { timeout: 10000 });
         const $ = cheerio.load(response.data);
-        
-        const title = $('title').text().trim() || url;
-        const node: DocNode = { title, url, children: [] };
 
-        // Specific selector for the cards/links on the index page
+        // Extract Title
+        const title = $('h1.title').first().text().trim() || $('title').text().trim();
+
+        // Extract Breadcrumbs
+        const breadcrumbs: string[] = [];
+        $('.wh_breadcrumb a').each((_, el) => {
+            breadcrumbs.push($(el).text().trim());
+        });
+
+        // Extract Content (simplified)
+        const content = $('.wh_topic_content, .body, article').text().replace(/\s+/g, ' ').trim();
+
+        // Extract Links
         const links: string[] = [];
-        $('a').each((_, el) => {
+        $('a[href]').each((_, el) => {
             const href = $(el).attr('href');
-            if (href) {
+            if (href && !href.startsWith('javascript:') && !href.startsWith('#') && !href.startsWith('mailto:')) {
                 try {
                     const absoluteUrl = new URL(href, url).toString();
-                    // Filter for docs paths to avoid legal/cookie links
-                    if (absoluteUrl.includes('/docs/Tech_Pubs/') || absoluteUrl.includes('/online-help/')) {
-                        if (absoluteUrl.startsWith(BASE_URL) && !links.includes(absoluteUrl) && absoluteUrl !== url) {
-                            links.push(absoluteUrl);
-                        }
+                    // Stay within domain
+                    if (new URL(absoluteUrl).hostname === BASE_DOMAIN) {
+                         // Optional: Filter to stay within specific product/version if desired
+                         // For now, full site or subtree
+                         if (!visited.has(absoluteUrl)) {
+                             links.push(absoluteUrl);
+                         }
                     }
-                } catch (e) {}
+                } catch (e) {
+                    // ignore invalid URLs
+                }
             }
         });
 
-        console.log(`Found ${links.length} links on ${url}`);
+        results.push({
+            url,
+            title,
+            breadcrumbs,
+            content: content.substring(0, 500) + '...', // Truncate for summary
+            links
+        });
 
-        if (depth < maxDepth) {
-            // Limit links for the brainstorm
-            const linksToCrawl = links.slice(0, 10);
-            for (const link of linksToCrawl) {
-                const child = await crawl(link, depth + 1, maxDepth);
-                if (child) node.children.push(child);
+        // Add new links to queue
+        for (const link of links) {
+            if (!visited.has(link) && !queue.includes(link)) {
+                queue.push(link);
             }
         }
 
-        return node;
     } catch (error: any) {
-        console.error(`Failed to crawl ${url}:`, error.message);
-        return null;
+        console.error(`Failed ${url}: ${error.message}`);
     }
 }
 
+function save() {
+    console.log(`Saving ${results.length} pages to full_site_data.json...`);
+    fs.writeFileSync(path.join(process.cwd(), 'full_site_data.json'), JSON.stringify(results, null, 2));
+}
+
+process.on('SIGINT', () => {
+    console.log('\nCaught interrupt signal, saving data...');
+    save();
+    process.exit();
+});
+
 async function run() {
-    const root = await crawl(START_URL);
-    if (root) {
-        fs.writeFileSync(path.join(process.cwd(), 'docs-structure.json'), JSON.stringify(root, null, 2));
-        console.log('Crawl complete. Data saved to docs-structure.json');
+    console.log(`Starting crawl of ${START_URL}`);
+    
+    let pagesProcessed = 0;
+
+    while ((queue.length > 0 || processing > 0) && visited.size < MAX_PAGES) {
+        if (queue.length > 0 && processing < MAX_CONCURRENCY) {
+            const url = queue.shift();
+            if (url) {
+                processing++;
+                processUrl(url).then(() => {
+                    pagesProcessed++;
+                    if (pagesProcessed % 20 === 0) save();
+                }).finally(() => {
+                    processing--;
+                });
+            }
+        } else {
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
     }
+
+    save();
+    console.log(`Crawl complete. Visited ${visited.size} pages. Saved to full_site_data.json`);
 }
 
 run();

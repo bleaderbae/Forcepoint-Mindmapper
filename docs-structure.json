@@ -1,0 +1,21 @@
+{
+  "name": "Forcepoint Documentation",
+  "children": [
+    {
+      "name": "Forcepoint Technical Documentation",
+      "url": "https://help.forcepoint.com/docs/Tech_Pubs/index.html",
+      "children": [
+        {
+          "name": "Forcepoint 3rd Party Libraries",
+          "url": "https://help.forcepoint.com/docs/Tech_Pubs/3rd_Party_Guides/3rd_Party_Guides.html",
+          "children": []
+        },
+        {
+          "name": "Forcepoint Product Documentation Sitemap",
+          "url": "https://help.forcepoint.com/docs/index.html",
+          "children": []
+        }
+      ]
+    }
+  ]
+}
