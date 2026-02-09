@@ -161,13 +161,30 @@ async function processUrl(url: string, parentUrl?: string) {
     }
 }
 
-function save() {
-    console.log(`Saving ${results.length} pages...`);
-    fs.writeFileSync(DATA_FILE, JSON.stringify(results, null, 2));
+let savePromise: Promise<void> | null = null;
+function save(): Promise<void> {
+    if (savePromise) return savePromise;
+
+    savePromise = (async () => {
+        try {
+            console.log(`Saving ${results.length} pages...`);
+            await fs.promises.writeFile(DATA_FILE, JSON.stringify(results, null, 2));
+        } catch (err) {
+            console.error(`Failed to save data: ${err}`);
+        } finally {
+            savePromise = null;
+        }
+    })();
+
+    return savePromise;
 }
 
-process.on('SIGINT', () => {
-    save();
+process.on('SIGINT', async () => {
+    console.log('\nInterrupted, saving progress...');
+    // If a save is already in progress, wait for it and then do one final save
+    // to ensure any data added after the first save started is captured.
+    await save();
+    await save();
     process.exit();
 });
 
@@ -186,8 +203,8 @@ async function run() {
             const item = queue.shift();
             if (item) {
                 processing++;
-                processUrl(item.url, item.parentUrl).then(() => {
-                    if (results.length % 100 === 0) save();
+                processUrl(item.url, item.parentUrl).then(async () => {
+                    if (results.length % 100 === 0) await save();
                 }).finally(() => {
                     processing--;
                 });
@@ -197,7 +214,7 @@ async function run() {
             if (visited.size >= MAX_PAGES && processing === 0 && queue.length === 0) break;
         }
     }
-    save();
+    await save();
     console.log(`Crawl finished. Total pages: ${results.length}`);
 }
 
