@@ -9,9 +9,9 @@ interface DocNode {
     title: string;
     content?: string;
     breadcrumbs: string[];
-    parentUrl?: string;
-    nextUrl?: string;
-    prevUrl?: string;
+    parentUrl?: string | undefined;
+    nextUrl?: string | undefined;
+    prevUrl?: string | undefined;
     relatedUrls: string[];
     lastScraped?: string;
 }
