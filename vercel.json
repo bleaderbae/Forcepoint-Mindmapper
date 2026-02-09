@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "pages": [
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "github": {
     "silent": true

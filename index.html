@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forcepoint Documentation Mind Map</title>
     <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+<<<<<<< HEAD
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ maxTextSize: 1000000, 
+            startOnLoad: true,
+            maxTextSize: 900000,
+            theme: 'default'
+=======
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ maxTextSize: 1000000, maxTextSize: 1000000, 
             startOnLoad: true,
             theme: 'base',
             themeVariables: {
@@ -22,6 +29,7 @@
                 titleColor: '#1d252c',
                 edgeColor: '#007565'
             }
+>>>>>>> main
         });
     </script>
     <style>
@@ -82,6 +90,1192 @@
     </style>
 </head>
 <body>
+<<<<<<< HEAD
+    <h1>Forcepoint Documentation Mind Map (POC)</h1>
+    <div class="mermaid">
+graph TD
+  page0["Forcepoint DLP Administrator Help"]
+  page1["Overview"]
+  page2["Data classification"]
+  page3["Managing Forcepoint DLP"]
+  page4["Forcepoint DLP databases"]
+  page5["Forcepoint DLP basics"]
+  page6["Forcepoint DLP appliances"]
+  page7["What can I protect?"]
+  page8["DLP in Forcepoint Web Security and Forcepoint Email Security"]
+  page9["Main options"]
+  page10["Deploy button"]
+  page11["Settings options"]
+  page12["Global and status icons"]
+  page13["Navigating the system"]
+  page14["Configuring the protector"]
+  page15["Configuring system modules"]
+  page16["Defining general system settings and notifications"]
+  page17["Entering a subscription key"]
+  page18["Initial Setup"]
+  page19["Changing table properties"]
+  page20["Viewing endpoint status"]
+  page21["Viewing the Dashboard"]
+  page22["Monitoring system health"]
+  page23["Viewing Status"]
+  page24["Viewing the incident list"]
+  page25["The report catalog"]
+  page26["Viewing deployment status"]
+  page27["Viewing Incidents and Reports"]
+  page28["Applying column filters"]
+  page29["Viewing policies"]
+  page30["What’s in a policy?"]
+  page31["Policies Overview"]
+  page32["Discovery reports"]
+  page33["Data Loss Prevention reports"]
+  page34["Defining email DLP policy owners"]
+  page35["Configuring outbound and inbound email DLP attributes"]
+  page36["Configuring the Email DLP Policy"]
+  page37["Selecting items to include or exclude in a policy"]
+  page38["Import and Export policies from Forcepoint Security Manager"]
+  page39["Configuring the Web DLP Policy"]
+  page40["Selecting web DLP policy destinations"]
+  page41["Configuring web DLP policy attributes"]
+  page42["Web DLP policy configuration overview"]
+  page43["Identifying email DLP trusted domains"]
+  page44["Changing the selected DLP or discovery policies"]
+  page45["Adding a predefined DLP or discovery policy"]
+  page46["Using Predefined DLP and Discovery Policies"]
+  page47["Changing policy industry or region settings"]
+  page48["Defining web DLP policy owners"]
+  page49["Custom Policy Wizard - Source"]
+  page50["Custom Policy Wizard - General"]
+  page51["Custom Policy Wizard - Severity and Action"]
+  page52["Custom Policy Wizard - Condition"]
+  page53["Creating Custom DLP Policies"]
+  page54["Managing exceptions"]
+  page55["Selecting a content classifier"]
+  page56["Rule Wizard - Finish"]
+  page57["Managing rules"]
+  page58["Custom Policy Wizard - Destination"]
+  page59["Patterns & Phrases"]
+  page60["Details pane"]
+  page61["Content classifier menu bar"]
+  page62["Manually deleting fingerprinting classifiers"]
+  page63["Classifying Content"]
+  page64["Database fingerprinting"]
+  page65["File fingerprinting"]
+  page66["Scripts"]
+  page67["File properties"]
+  page68["File Labeling"]
+  page69["Creating a rule from a content classifier"]
+  page70["Machine learning"]
+  page71["Imported fingerprinting"]
+  page72["Defining Resources"]
+  page73["Database Fingerprinting Wizard - Scheduler"]
+  page74["Cloud resources"]
+  page75["Remediation resources"]
+  page76["Endpoint resources"]
+  page77["User directory entries"]
+  page78["General resources"]
+  page79["Custom users"]
+  page80["Domains"]
+  page81["Custom computers"]
+  page82["Networks"]
+  page83["Custom user directory groups"]
+  page84["Endpoint Devices"]
+  page85["Endpoint Application Groups"]
+  page86["Endpoint Applications"]
+  page87["URL categories"]
+  page88["Business Units"]
+  page89["Remediation"]
+  page90["Notifications"]
+  page91["Creating Discovery Policies"]
+  page92["Endpoint Printers"]
+  page93["Creating a discovery policy"]
+  page94["Performing Domino discovery"]
+  page95["Scheduling the discovery scan"]
+  page96["Performing file system discovery"]
+  page97["Performing SharePoint discovery"]
+  page98["Performing Box discovery"]
+  page99["Performing database discovery"]
+  page100["Performing Exchange discovery"]
+  page101["Performing endpoint discovery"]
+  page102["Performing Outlook PST discovery"]
+  page103["Viewing discovery status"]
+  page104["Configuring discovery incidents"]
+  page105["Updating discovery"]
+  page106["Copying or moving discovered files"]
+  page107["Viewing discovery results"]
+  page108["Scheduling Discovery Tasks"]
+  page109["Emailing discovery task status reports"]
+  page110["Sorting and filtering tasks"]
+  page111["Scheduling network discovery tasks"]
+  page112["Configuring cloud discovery scans"]
+  page113["Adding or editing a cloud discovery scan"]
+  page114["Printing and exporting logs"]
+  page115["Viewing Forcepoint DLP Logs"]
+  page116["Scheduling endpoint discovery tasks"]
+  page117["Filtering log data"]
+  page118["The Forcepoint DLP traffic log"]
+  page119["The Forcepoint DLP audit log"]
+  page120["General System Settings"]
+  page121["The Forcepoint DLP system log"]
+  page122["The Forcepoint DLP debug log"]
+  page123["Setting reporting preferences"]
+  page124["Configuring endpoint settings"]
+  page125["Remediation"]
+  page126["Exporting incidents to a file"]
+  page127["Backing up the system"]
+  page128["Mail servers"]
+  page129["Alerts"]
+  page130["Analytics"]
+  page131["Services"]
+  page132["Archive storage"]
+  page133["User directory settings"]
+  page134["Updating predefined policies and classifiers"]
+  page135["Configuring Authorization"]
+  page136["Archiving incident partitions"]
+  page137["Entering subscription settings"]
+  page138["Defining administrators"]
+  page139["Managing Forcepoint DLP System Modules"]
+  page140["Working with roles"]
+  page141["Adding Forcepoint DLP system modules"]
+  page142["Customizing your own administrator account settings"]
+  page143["Configuring protector services"]
+  page144["Configuring Endpoint Deployment"]
+  page145["Viewing and managing endpoint profiles"]
+  page146["Balancing the load"]
+  page147["Removing Forcepoint DLP modules"]
+  page148["Configuring encryption for removable media"]
+  page149["Bypassing endpoint clients"]
+  page150["Rearranging and deploying endpoint profiles"]
+  page151["Selecting endpoint destination channels to monitor"]
+  page152["Using the endpoint client software"]
+  page153["Troubleshooting"]
+  page154["Discovery"]
+  page155["Incidents"]
+  page156["Fingerprinting"]
+  page157["Endpoint"]
+  page158["Miscellaneous"]
+  page159["Online Help"]
+  page160["Linking Service"]
+  page161["Performance"]
+  page162["Technical Support"]
+  page163["Appendix A How Do I"]
+  page164["Archive my incident data?"]
+  page165["Define an exception?"]
+  page166["Filter incidents?"]
+  page167["Configure a DLP policy?"]
+  page168["Ignore sections of my document when fingerprinting?"]
+  page169["Mitigate false positives in pattern or dictionary phrases?"]
+  page170["Fingerprint specific field combinations in a database table?"]
+  page171["Fingerprint data?"]
+  page172["Move from monitor to protect?"]
+  page173["Configuring the forensics repository"]
+  page174["Reporting"]
+  page175["Status"]
+  page176["Forcepoint Security Manager Help"]
+  page177["Policy Management"]
+  page178["Logs"]
+  page179["General"]
+  page180["Deployment"]
+  page181["Edit Protector Services tab"]
+  page182["Authorization"]
+  page183["Edit Protector General tab"]
+  page184["Edit Protector Networking tab"]
+  page185["Configuring Forcepoint DLP system modules"]
+  page186["Edit Protector Local Networks tab"]
+  page187["DLP Installation Guide"]
+  page188["Setting up email properties"]
+  page189["Adding a new message"]
+  page190["Adding or editing user directory server information"]
+  page191["Health Alert Summary"]
+  page192["SSL Certificate Alerts"]
+  page193["Discovery Incidents"]
+  page194["Business Value"]
+  page195["Data Loss Prevention Incidents"]
+  page196["Toolbar buttons"]
+  page197["Scheduling a new task"]
+  page198["Remediating incidents"]
+  page199["Managing incident workflow"]
+  page200["Previewing incidents"]
+  page201["Managing incident reports"]
+  page202["Escalating incidents"]
+  page203["Editing table properties"]
+  page204["Applying a column filter"]
+  page205["Tuning policies"]
+  page206["Editing a report"]
+  page207["Table Properties tab"]
+  page208["The policy toolbar"]
+  page209["Scheduling tasks"]
+  page210["Setting preferences for data loss prevention reports"]
+  page211["Update rules of a current policy"]
+  page212["Editing a policy"]
+  page213["Update rules of multiple policies"]
+  page214["Update exceptions of multiple rules"]
+  page215["Update exceptions of current rule"]
+  page216["Policy levels"]
+  page217["Delete policies"]
+  page218["Incidents by geographical location"]
+  page219["Discovery dashboard"]
+  page220["Forcepoint Product Documentation Sitemap"]
+  page221["Forcepoint Data Security Cloud Online Help"]
+  page220 -.-> page221
+  page222["Forcepoint ONE Firewall Online Help"]
+  page220 -.-> page222
+  page223["Forcepoint Neo"]
+  page220 -.-> page223
+  page224["Forcepoint Data Security Sitemap"]
+  page220 -.-> page224
+  page225["Forcepoint DLP for Cloud Email Sitemap"]
+  page220 -.-> page225
+  page226["Forcepoint Data Visibility Powered by GetVisibility Sitemap"]
+  page220 -.-> page226
+  page227["Forcepoint Data Classification"]
+  page220 -.-> page227
+  page228["Remote Browser Isolation Sitemap"]
+  page220 -.-> page228
+  page229["Boldon James Classifier Enterprise Suite Sitemap"]
+  page220 -.-> page229
+  page230["Forcepoint Data Security Cloud SSE Sitemap"]
+  page220 -.-> page230
+  page231["F1E-SEA Agent Co-existence Feature Enablement"]
+  page220 -.-> page231
+  page232["Forcepoint Insights Documentation Sitemap"]
+  page220 -.-> page232
+  page233["Forcepoint DSE Agent"]
+  page220 -.-> page233
+  page234["Forcepoint ONE Mobile Sitemap"]
+  page220 -.-> page234
+  page235["Endpoint Management"]
+  page220 -.-> page235
+  page236["Deploying SmartEdge Agent"]
+  page220 -.-> page236
+  page237["Forcepoint Email Security On-premises Documentation"]
+  page220 -.-> page237
+  page238["Forcepoint Email Security Cloud Sitemap"]
+  page220 -.-> page238
+  page246["Forcepoint F1E Documentation"]
+  page220 -.-> page246
+  page240["Advanced Malware Detection and Protection Sitemap"]
+  page220 -.-> page240
+  page241["NGFW Appliances Sitemap"]
+  page220 -.-> page241
+  page244["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page220 -.-> page244
+  page243["URL Filtering Sitemap"]
+  page220 -.-> page243
+  page244["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page220 -.-> page244
+  page245["FlexEdge Secure SD-WAN Sitemap"]
+  page220 -.-> page245
+  page246["Forcepoint F1E Documentation"]
+  page220 -.-> page246
+  page247["Data Loss Prevention DLP Sitemap"]
+  page220 -.-> page247
+  page248["Web Security Cloud Sitemap"]
+  page220 -.-> page248
+  page249["Web Security Sitemap"]
+  page220 -.-> page249
+  page250["Next Generation Firewall NGFW Sitemap"]
+  page220 -.-> page250
+  page251["Help and support"]
+  page221 -.-> page251
+  page252["Introduction"]
+  page221 -.-> page252
+  page253["Product updates"]
+  page221 -.-> page253
+  page254["Understanding Forcepoint Data Security Cloud layout"]
+  page221 -.-> page254
+  page255["Accessing the online help documentation"]
+  page221 -.-> page255
+  page256["Resolved and Known Issues"]
+  page221 -.-> page256
+  page257["Signing in to Forcepoint Data Security Cloud"]
+  page221 -.-> page257
+  page258["What's New"]
+  page221 -.-> page258
+  page259["Previous release updates"]
+  page221 -.-> page259
+  page260["Viewing the tenant's Reference IDs"]
+  page221 -.-> page260
+  page261["Platform services"]
+  page221 -.-> page261
+  page262["Changing the password"]
+  page221 -.-> page262
+  page263["Insights"]
+  page221 -.-> page263
+  page264["Applications"]
+  page221 -.-> page264
+  page265["Remote Browser Isolation"]
+  page221 -.-> page265
+  page266["Admin"]
+  page221 -.-> page266
+  page267["Web Security"]
+  page221 -.-> page267
+  page268["Settings"]
+  page221 -.-> page268
+  page269["Introduction"]
+  page222 -.-> page269
+  page270["DLP"]
+  page221 -.-> page270
+  page271["Security Service Edge"]
+  page221 -.-> page271
+  page272["Known and resolved issues"]
+  page222 -.-> page272
+  page273["Getting Started"]
+  page222 -.-> page273
+  page274["Forcepoint ONE Firewall overview"]
+  page222 -.-> page274
+  page275["Product Updates"]
+  page222 -.-> page275
+  page276["Deploy changes"]
+  page222 -.-> page276
+  page277["Accessing the online help documentation"]
+  page222 -.-> page277
+  page278["Help and support"]
+  page222 -.-> page278
+  page279["Accessing Forcepoint ONE Firewall"]
+  page222 -.-> page279
+  page280["Accessing Forcepoint ONE Secure Service Edge"]
+  page222 -.-> page280
+  page281["Workflow for new users"]
+  page222 -.-> page281
+  page282["Event detail panel"]
+  page222 -.-> page282
+  page283["Logs"]
+  page222 -.-> page283
+  page284["Related events"]
+  page222 -.-> page284
+  page285["Dashboard"]
+  page222 -.-> page285
+  page286["Dashboard filters"]
+  page222 -.-> page286
+  page287["Time period drop-down menu"]
+  page222 -.-> page287
+  page288["Workflow for existing users"]
+  page222 -.-> page288
+  page289["Policy"]
+  page222 -.-> page289
+  page290["AWS Access Key and Secret Key"]
+  page222 -.-> page290
+  page291["Log Export"]
+  page222 -.-> page291
+  page292["Threat Situations"]
+  page222 -.-> page292
+  page293["Network & HTTP/3 Applications"]
+  page222 -.-> page293
+  page294["Deploy History"]
+  page222 -.-> page294
+  page295["Objects"]
+  page222 -.-> page295
+  page296["Sites"]
+  page222 -.-> page296
+  page297["Network Services"]
+  page222 -.-> page297
+  page298["All Policies Page Overview"]
+  page222 -.-> page298
+  page299["Domain Name lists"]
+  page222 -.-> page299
+  page300["Destination IP Address Lists"]
+  page222 -.-> page300
+  page301["Source IP address lists"]
+  page222 -.-> page301
+  page302["Forcepoint DLP for Cloud Email Legal Notices and Acknowledgments"]
+  page225 -.-> page302
+  page303["Forcepoint DLP for Cloud Email Online Help"]
+  page225 -.-> page303
+  page304["Data Security Cloud DLP - 3rd Party Legal Notices and Acknowledgement"]
+  page224 -.-> page304
+  page305["Forcepoint Data Security Cloud DLP"]
+  page224 -.-> page305
+  page306["Forcepoint DSPM Documentation"]
+  page226 -.-> page306
+  page307["Forcepoint Cloud DSPM Documentation"]
+  page226 -.-> page307
+  page308[""]
+  page226 -.-> page308
+  page309[""]
+  page226 -.-> page309
+  page310[""]
+  page226 -.-> page310
+  page311[""]
+  page224 -.-> page311
+  page312[""]
+  page226 -.-> page312
+  page313[""]
+  page226 -.-> page313
+  page314[""]
+  page227 -.-> page314
+  page315[""]
+  page226 -.-> page315
+  page316[""]
+  page227 -.-> page316
+  page317[""]
+  page227 -.-> page317
+  page318[""]
+  page227 -.-> page318
+  page319[""]
+  page227 -.-> page319
+  page320[""]
+  page227 -.-> page320
+  page321[""]
+  page227 -.-> page321
+  page322[""]
+  page227 -.-> page322
+  page323["Remote Browser Isolation Help"]
+  page228 -.-> page323
+  page324[""]
+  page228 -.-> page324
+  page325["What's new"]
+  page227 -.-> page325
+  page326[""]
+  page227 -.-> page326
+  page327["RBI Legal Notices and Acknowledgments"]
+  page228 -.-> page327
+  page328[""]
+  page228 -.-> page328
+  page329[""]
+  page228 -.-> page329
+  page330[""]
+  page228 -.-> page330
+  page331[""]
+  page228 -.-> page331
+  page332[""]
+  page228 -.-> page332
+  page333[""]
+  page228 -.-> page333
+  page334[""]
+  page228 -.-> page334
+  page335[""]
+  page228 -.-> page335
+  page336[""]
+  page228 -.-> page336
+  page337[""]
+  page228 -.-> page337
+  page338[""]
+  page228 -.-> page338
+  page339[""]
+  page228 -.-> page339
+  page340[""]
+  page228 -.-> page340
+  page341[""]
+  page228 -.-> page341
+  page342["Boldon James Release Note"]
+  page229 -.-> page342
+  page343["Boldon James Release Note"]
+  page229 -.-> page343
+  page344["Boldon James Release Note"]
+  page229 -.-> page344
+  page345["Boldon James Release Note"]
+  page229 -.-> page345
+  page346[""]
+  page229 -.-> page346
+  page347["Boldon James Release Note"]
+  page229 -.-> page347
+  page348["Boldon James Release Note"]
+  page229 -.-> page348
+  page349[""]
+  page229 -.-> page349
+  page350["Boldon James Release Note"]
+  page229 -.-> page350
+  page351["Documentation Release Note"]
+  page229 -.-> page351
+  page352["Boldon James Release Note"]
+  page229 -.-> page352
+  page353[""]
+  page229 -.-> page353
+  page354[""]
+  page229 -.-> page354
+  page355[""]
+  page229 -.-> page355
+  page356[""]
+  page229 -.-> page356
+  page357[""]
+  page229 -.-> page357
+  page358[""]
+  page229 -.-> page358
+  page359[""]
+  page229 -.-> page359
+  page360["Error 404 — Page not found"]
+  page229 -.-> page360
+  page361[""]
+  page229 -.-> page361
+  page362[""]
+  page229 -.-> page362
+  page363[""]
+  page229 -.-> page363
+  page364[""]
+  page229 -.-> page364
+  page365[""]
+  page229 -.-> page365
+  page366[""]
+  page229 -.-> page366
+  page367[""]
+  page229 -.-> page367
+  page368[""]
+  page229 -.-> page368
+  page369[""]
+  page229 -.-> page369
+  page370[""]
+  page229 -.-> page370
+  page371[""]
+  page229 -.-> page371
+  page372[""]
+  page229 -.-> page372
+  page373["Error 404 — Page not found"]
+  page229 -.-> page373
+  page374[""]
+  page229 -.-> page374
+  page375[""]
+  page229 -.-> page375
+  page376[""]
+  page229 -.-> page376
+  page377["Boldon James Release Note"]
+  page229 -.-> page377
+  page378["Boldon James Release Note"]
+  page229 -.-> page378
+  page379[""]
+  page229 -.-> page379
+  page380["Boldon James Release Note"]
+  page229 -.-> page380
+  page381[""]
+  page229 -.-> page381
+  page382["Boldon James Release Note"]
+  page229 -.-> page382
+  page383[""]
+  page229 -.-> page383
+  page384[""]
+  page229 -.-> page384
+  page385[""]
+  page229 -.-> page385
+  page386[""]
+  page229 -.-> page386
+  page387[""]
+  page229 -.-> page387
+  page388["Boldon James Release Note"]
+  page229 -.-> page388
+  page389[""]
+  page229 -.-> page389
+  page390[""]
+  page229 -.-> page390
+  page391["Boldon James Release Note"]
+  page229 -.-> page391
+  page392["Boldon James Release Note"]
+  page229 -.-> page392
+  page393[""]
+  page229 -.-> page393
+  page394[""]
+  page229 -.-> page394
+  page395["Boldon James Release Note"]
+  page229 -.-> page395
+  page396["Boldon James Release Note"]
+  page229 -.-> page396
+  page397["Boldon James Release Note"]
+  page229 -.-> page397
+  page398[""]
+  page229 -.-> page398
+  page399["Boldon James Release Note"]
+  page229 -.-> page399
+  page400["Boldon James Release Note"]
+  page229 -.-> page400
+  page401["Boldon James Release Note"]
+  page229 -.-> page401
+  page402["Boldon James Release Note"]
+  page229 -.-> page402
+  page403["Boldon James Release Note"]
+  page229 -.-> page403
+  page404["Boldon James Release Note"]
+  page229 -.-> page404
+  page405[""]
+  page229 -.-> page405
+  page406["Boldon James Release Note"]
+  page229 -.-> page406
+  page407["Boldon James Release Note"]
+  page229 -.-> page407
+  page408[""]
+  page229 -.-> page408
+  page409[""]
+  page229 -.-> page409
+  page410["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page410
+  page411["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page411
+  page412["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page412
+  page413["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page413
+  page414[""]
+  page229 -.-> page414
+  page415[""]
+  page229 -.-> page415
+  page416["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page416
+  page417["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page417
+  page418["Forcepoint Data Security Cloud SSE Deployment Guide"]
+  page230 -.-> page418
+  page419["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page419
+  page420["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page420
+  page421["Forcepoint Data Security Cloud SSE Sitemap"]
+  page230 -.-> page421
+  page422["Forcepoint ONE SSE 240924 Release Notes"]
+  page230 -.-> page422
+  page423["Forcepoint ONE SSE 240321 Release Notes"]
+  page230 -.-> page423
+  page424["Forcepoint ONE SSE 231023 Release Notes"]
+  page230 -.-> page424
+  page425["Forcepoint ONE SSE 231220 Release Notes"]
+  page230 -.-> page425
+  page426["Forcepoint ONE SSE Production 230516 Release Notes"]
+  page230 -.-> page426
+  page427["Forcepoint ONE SSE Production 230814 Release Notes"]
+  page230 -.-> page427
+  page428["Forcepoint ONE Production 230112 Release Notes"]
+  page230 -.-> page428
+  page429["Forcepoint ONE Production Gov Cloud 220805 Release Notes"]
+  page230 -.-> page429
+  page430["Forcepoint ONE Production 221116 Release Notes"]
+  page230 -.-> page430
+  page431["Forcepoint ONE Production 220805 Release Notes"]
+  page230 -.-> page431
+  page432["Forcepoint ONE Canada Gov Cloud 220805 Release Notes"]
+  page230 -.-> page432
+  page433["Forcepoint ONE Production 230329 Release Notes"]
+  page230 -.-> page433
+  page434["Forcepoint ONE Production Gov Cloud 230112 Release Notes"]
+  page230 -.-> page434
+  page435["Forcepoint ONE Production 220609 Release Notes"]
+  page230 -.-> page435
+  page436["Forcepoint ONE Production 220331 Release Notes"]
+  page230 -.-> page436
+  page437["Forcepoint ONE SSE SmartEdge Agent 2.3.0 for Windows - Release Notes"]
+  page230 -.-> page437
+  page438["Forcepoint Data Security Cloud SSE SmartEdge Agent 3.0.0 for Windows - Release Notes"]
+  page230 -.-> page438
+  page439["Forcepoint ONE SSE SmartEdge Agent 2.1.0 for macOS - Release Notes"]
+  page230 -.-> page439
+  page440["Forcepoint ONE SSE SmartEdge Agent 2.4.0 for Windows - Release Notes"]
+  page230 -.-> page440
+  page441["Forcepoint ONE Gov Cloud 220214 Release Notes"]
+  page230 -.-> page441
+  page442["Forcepoint ONE SSE SmartEdge Agent 2.4.0 for macOS - Release Notes"]
+  page230 -.-> page442
+  page443["Forcepoint ONE Production 220214 Release Notes"]
+  page230 -.-> page443
+  page444[""]
+  page229 -.-> page444
+  page445["Forcepoint ONE SmartEdge FIPS Agent 1.6.3-F for Windows - Release Notes"]
+  page230 -.-> page445
+  page446["Forcepoint DLP and Forcepoint Data Security Cloud SSE CASB Integration Guide"]
+  page230 -.-> page446
+  page447["How to Connect Cisco ASA/FTD to Forcepoint ONE Cloud over IPsec Tunnel"]
+  page230 -.-> page447
+  page448["How to Connect Forcepoint NGFW to Forcepoint ONE Cloud over IPsec Tunnel"]
+  page230 -.-> page448
+  page449["How to Connect Cisco ISR to Forcepoint ONE Cloud over IPsec Tunnel"]
+  page230 -.-> page449
+  page450["How to Connect Palo Alto to Forcepoint ONE Cloud over IPsec Tunnel"]
+  page230 -.-> page450
+  page451["How to Connect Cisco ISR to Forcepoint ONE Cloud over GRE Tunnel"]
+  page230 -.-> page451
+  page452["How to Connect Juniper SRX to Forcepoint ONE Cloud over GRE Tunnel"]
+  page230 -.-> page452
+  page453["Forcepoint DLP and Forcepoint Data Security Cloud SSE SWG Integration Guide"]
+  page230 -.-> page453
+  page454["How to Connect Juniper SRX to Forcepoint ONE Cloud over IPsec Tunnel"]
+  page230 -.-> page454
+  page455["Insights User Guide"]
+  page232 -.-> page455
+  page456["Known Issues and Limitations"]
+  page231 -.-> page456
+  page457["Configuring Forcepoint Data Security Cloud SSE for Agent Co-existence"]
+  page231 -.-> page457
+  page458["Troubleshooting"]
+  page231 -.-> page458
+  page459["Configuring Web Security for Agent Co-existence"]
+  page231 -.-> page459
+  page460["Uninstall Agents"]
+  page231 -.-> page460
+  page461["Introduction"]
+  page231 -.-> page461
+  page462["How to Connect any Edge Device to Forcepoint ONE Cloud over IPsec Tunnel"]
+  page230 -.-> page462
+  page463["Getting Started"]
+  page231 -.-> page463
+  page464["Forcepoint Insights - API Documentation"]
+  page232 -.-> page464
+  page465["Removing the agent"]
+  page233 -.-> page465
+  page466["Generating the release code"]
+  page233 -.-> page466
+  page467["System requirements"]
+  page233 -.-> page467
+  page468["Prerequisites"]
+  page233 -.-> page468
+  page469["About the Forcepoint DSE Agent"]
+  page233 -.-> page469
+  page470["Introduction"]
+  page233 -.-> page470
+  page471["Windows Installation"]
+  page233 -.-> page471
+  page472["Deploying the agent"]
+  page233 -.-> page472
+  page473["Downloading the agent"]
+  page233 -.-> page473
+  page474["Removing the agent on Windows"]
+  page233 -.-> page474
+  page475["Starting and Stopping Services"]
+  page233 -.-> page475
+  page476["Endpoint management"]
+  page233 -.-> page476
+  page477["Troubleshooting"]
+  page233 -.-> page477
+  page478["Troubleshooting Agent and Classifier Paths"]
+  page233 -.-> page478
+  page479["Updating the Forcepoint agent"]
+  page233 -.-> page479
+  page480["Profiles"]
+  page233 -.-> page480
+  page481["My Endpoints"]
+  page233 -.-> page481
+  page482["Agent Compatibility"]
+  page233 -.-> page482
+  page483["Viewing the agent status"]
+  page233 -.-> page483
+  page484["Verifying Client Information"]
+  page233 -.-> page484
+  page485["Introduction"]
+  page235 -.-> page485
+  page486["About the agent for Forcepoint Cloud Security Gateway"]
+  page235 -.-> page486
+  page487["Troubleshooting Services"]
+  page233 -.-> page487
+  page488["Known Issues"]
+  page233 -.-> page488
+  page489["Forcepoint Mobile Online Help"]
+  page234 -.-> page489
+  page490["Endpoint management"]
+  page235 -.-> page490
+  page491["Forcepoint Mobile Acknowledgment of Third-party Software"]
+  page234 -.-> page491
+  page492["Release Notes"]
+  page233 -.-> page492
+  page493["Troubleshooting Processes"]
+  page233 -.-> page493
+  page494["Help and support"]
+  page235 -.-> page494
+  page495["Installing the agent"]
+  page235 -.-> page495
+  page496["Resolved and Known Issues"]
+  page235 -.-> page496
+  page497["macOS installation"]
+  page235 -.-> page497
+  page498["System requirements"]
+  page235 -.-> page498
+  page499["Product updates"]
+  page235 -.-> page499
+  page500["What's New"]
+  page235 -.-> page500
+  page501["Windows Installation"]
+  page235 -.-> page501
+  page502["Before you begin"]
+  page235 -.-> page502
+  page503["Downloading the agent"]
+  page235 -.-> page503
+  page504["Endpoint management"]
+  page235 -.-> page504
+  page505["Updating the agent"]
+  page235 -.-> page505
+  page506["Profiles"]
+  page235 -.-> page506
+  page507["Removing the agent on maC"]
+  page235 -.-> page507
+  page508["Removing the agent on Windows"]
+  page235 -.-> page508
+  page509["My Endpoints"]
+  page235 -.-> page509
+  page510["Generating the release code"]
+  page235 -.-> page510
+  page511["Removing the agent"]
+  page235 -.-> page511
+  page512["Updating the agent manually"]
+  page235 -.-> page512
+  page513["Over the air updates"]
+  page235 -.-> page513
+  page514["Configuring the agent"]
+  page235 -.-> page514
+  page515["Viewing the agent status"]
+  page235 -.-> page515
+  page516["Viewing the agent status on Forcepoint Data Security Cloud DLP portal"]
+  page235 -.-> page516
+  page517["Migrating from Forcepoint F1E to the Forcepoint agent"]
+  page235 -.-> page517
+  page518["Configuring the agent pac file"]
+  page235 -.-> page518
+  page519["Configuring the agent operating mode - on-prem or cloud"]
+  page235 -.-> page519
+  page520["Viewing the agent status on Forcepoint Cloud Security Gatewayportal"]
+  page235 -.-> page520
+  page521["Configuring the agent connection mode"]
+  page235 -.-> page521
+  page522["Agent Compatibility"]
+  page235 -.-> page522
+  page523["Migrate from Forcepoint F1E to the new agent"]
+  page235 -.-> page523
+  page524["Requirements for SmartEdge Agent installation"]
+  page236 -.-> page524
+  page525["Best practices for rolling SmartEdge Agents with policies"]
+  page236 -.-> page525
+  page526["Verify access and perform initial configuration"]
+  page236 -.-> page526
+  page527["Setup traffic steering"]
+  page236 -.-> page527
+  page528["Allowing domains for SmartEdge Agents"]
+  page236 -.-> page528
+  page529["Understanding User and Groups"]
+  page236 -.-> page529
+  page530["Allowing on endpoint management agents"]
+  page236 -.-> page530
+  page531["Configure common components"]
+  page236 -.-> page531
+  page532["Installing SmartEdge Agent on macOS"]
+  page236 -.-> page532
+  page533["Installing SmartEdge Agent on Windows"]
+  page236 -.-> page533
+  page534["Configure Zero Trust Network Access"]
+  page236 -.-> page534
+  page535["Deploying Cloud SWG"]
+  page236 -.-> page535
+  page536["Configure DLP"]
+  page236 -.-> page536
+  page537["Manually trusting certificates on macOS"]
+  page236 -.-> page537
+  page538["SmartEdge Agent and F1A Interoperability"]
+  page236 -.-> page538
+  page539["Configuring SWG settings"]
+  page236 -.-> page539
+  page540["Deploying SmartEdge Agents via MDM to wider audience"]
+  page236 -.-> page540
+  page541["Deploying Mobile Agent"]
+  page236 -.-> page541
+  page542["Protect cloud applications"]
+  page236 -.-> page542
+  page543["Configure policies"]
+  page236 -.-> page543
+  page544["Forcepoint Email Security Release Notes v8.5.7"]
+  page237 -.-> page544
+  page545["Email Security Release Notes v8.5.5"]
+  page237 -.-> page545
+  page546["Configure applications"]
+  page236 -.-> page546
+  page547["v8.5.4 Release Notes for the Forcepoint Security Manager"]
+  page237 -.-> page547
+  page548["Email Security Installation Guide v8.5.x"]
+  page237 -.-> page548
+  page549[""]
+  page237 -.-> page549
+  page550[""]
+  page237 -.-> page550
+  page551[""]
+  page237 -.-> page551
+  page552["Web Security, DLP, and Email Security Security Solutions Installation Guide"]
+  page237 -.-> page552
+  page553["Email Security Upgrade Guide v8.5.x"]
+  page237 -.-> page553
+  page554["Default ports for on-premises Forcepoint security solutions"]
+  page237 -.-> page554
+  page555[""]
+  page237 -.-> page555
+  page556[""]
+  page237 -.-> page556
+  page558["Forcepoint DLP Deployment and Installation Center"]
+  page237 -.-> page558
+  page558["Forcepoint DLP Deployment and Installation Center"]
+  page237 -.-> page558
+  page559["Web Security, DLP, and Email Security Security Solutions Upgrade Guide"]
+  page237 -.-> page559
+  page560["Email Security Installing Email Security in Microsoft Azure v8.5.x"]
+  page237 -.-> page560
+  page561[""]
+  page237 -.-> page561
+  page562[""]
+  page237 -.-> page562
+  page563["Email Security Gateway Online Help"]
+  page237 -.-> page563
+  page564["Forcepoint Security Manager Help"]
+  page237 -.-> page564
+  page566[""]
+  page237 -.-> page566
+  page566[""]
+  page237 -.-> page566
+  page567["Getting Started"]
+  page237 -.-> page567
+  page568[""]
+  page237 -.-> page568
+  page569[""]
+  page237 -.-> page569
+  page570[""]
+  page237 -.-> page570
+  page573[""]
+  page237 -.-> page573
+  page572[""]
+  page237 -.-> page572
+  page573[""]
+  page237 -.-> page573
+  page574["Data, Email, and Web Security Backup and Restore FAQ"]
+  page237 -.-> page574
+  page575["Email Security Secure Messaging User Help Localized Versions"]
+  page237 -.-> page575
+  page576[""]
+  page237 -.-> page576
+  page577[""]
+  page237 -.-> page577
+  page578[""]
+  page237 -.-> page578
+  page579["Email Security Message Encryption v8.5.x"]
+  page237 -.-> page579
+  page580["Data, Email, and Web Security Moving the Management Server"]
+  page237 -.-> page580
+  page581["Data, Email, and Web Security Moving the Reporting Databases"]
+  page237 -.-> page581
+  page582[""]
+  page237 -.-> page582
+  page583[""]
+  page237 -.-> page583
+  page584["Email Security Security Information Event Management SIEM Email Logs v8.5.x"]
+  page237 -.-> page584
+  page585["Email Security Ports v8.5.x"]
+  page237 -.-> page585
+  page586[""]
+  page237 -.-> page586
+  page587["Email Security Acknowledgment of Third-party Software v8.5.x"]
+  page237 -.-> page587
+  page592[""]
+  page237 -.-> page592
+  page589["Email Security Cloud 2024 Release Notes"]
+  page238 -.-> page589
+  page590[""]
+  page238 -.-> page590
+  page591["Email Security Cloud 2025 Release Notes"]
+  page238 -.-> page591
+  page592[""]
+  page237 -.-> page592
+  page593["Email Security Cloud 2023 Release Notes"]
+  page238 -.-> page593
+  page594[""]
+  page238 -.-> page594
+  page595[""]
+  page238 -.-> page595
+  page596[""]
+  page237 -.-> page596
+  page597[""]
+  page237 -.-> page597
+  page598["Email Security Cloud 2022 Release Notes"]
+  page238 -.-> page598
+  page599["Forcepoint Email Security Cloud 2020 Release Notes"]
+  page238 -.-> page599
+  page600["Forcepoint Email Security Cloud 2021 Release Notes"]
+  page238 -.-> page600
+  page601[""]
+  page237 -.-> page601
+  page602[""]
+  page238 -.-> page602
+  page607["Email Security Cloud Managing Cloud Email Protection Products"]
+  page238 -.-> page607
+  page608[""]
+  page238 -.-> page608
+  page605["Forcepoint Email Security Cloud 2019 Release Notes"]
+  page238 -.-> page605
+  page606["Email Security Cloud Online Help"]
+  page238 -.-> page606
+  page607["Email Security Cloud Managing Cloud Email Protection Products"]
+  page238 -.-> page607
+  page608[""]
+  page238 -.-> page608
+  page609["Email Security Cloud Getting started with SIEM Integration"]
+  page238 -.-> page609
+  page610[""]
+  page238 -.-> page610
+  page611["Email Security Cloud End User Guide"]
+  page238 -.-> page611
+  page612["Release Notes for Forcepoint F1E"]
+  page246 -.-> page612
+  page613[""]
+  page246 -.-> page613
+  page614[""]
+  page246 -.-> page614
+  page615[""]
+  page246 -.-> page615
+  page616[""]
+  page238 -.-> page616
+  page617[""]
+  page246 -.-> page617
+  page618[""]
+  page238 -.-> page618
+  page619[""]
+  page246 -.-> page619
+  page620[""]
+  page246 -.-> page620
+  page621[""]
+  page246 -.-> page621
+  page622[""]
+  page246 -.-> page622
+  page623[""]
+  page246 -.-> page623
+  page624[""]
+  page246 -.-> page624
+  page625["Forcepoint F1E Install Guide"]
+  page246 -.-> page625
+  page626["Deploying Forcepoint DLP Endpoint on Citrix virtual environments"]
+  page246 -.-> page626
+  page627[""]
+  page246 -.-> page627
+  page628["Forcepoint F1E Upgrade Guide"]
+  page246 -.-> page628
+  page629["Endpoint Applications"]
+  page246 -.-> page629
+  page630["Automatic Updates for Forcepoint F1E Forcepoint DLP Endpoint"]
+  page246 -.-> page630
+  page631[""]
+  page246 -.-> page631
+  page632["Release Notes for Forcepoint F1E"]
+  page246 -.-> page632
+  page633["Forcepoint F1E End User Guide"]
+  page246 -.-> page633
+  page634[""]
+  page246 -.-> page634
+  page635[""]
+  page246 -.-> page635
+  page636[""]
+  page246 -.-> page636
+  page637[""]
+  page246 -.-> page637
+  page638["Forcepoint F1E Upgrade Guide"]
+  page246 -.-> page638
+  page639["Forcepoint F1E Install Guide"]
+  page246 -.-> page639
+  page640[""]
+  page246 -.-> page640
+  page641[""]
+  page246 -.-> page641
+  page642["Deploying Forcepoint DLP Endpoint on Citrix virtual environments"]
+  page246 -.-> page642
+  page643[""]
+  page246 -.-> page643
+  page644["Automatic Updates for Forcepoint F1E Forcepoint DLP Endpoint"]
+  page246 -.-> page644
+  page645["Endpoint Applications"]
+  page246 -.-> page645
+  page646[""]
+  page246 -.-> page646
+  page647["Forcepoint F1E End User Guide"]
+  page246 -.-> page647
+  page648[""]
+  page246 -.-> page648
+  page649[""]
+  page246 -.-> page649
+  page650[""]
+  page241 -.-> page650
+  page651[""]
+  page241 -.-> page651
+  page652[""]
+  page241 -.-> page652
+  page653[""]
+  page241 -.-> page653
+  page654[""]
+  page241 -.-> page654
+  page655[""]
+  page246 -.-> page655
+  page656[""]
+  page241 -.-> page656
+  page657[""]
+  page241 -.-> page657
+  page663[""]
+  page241 -.-> page663
+  page662[""]
+  page241 -.-> page662
+  page660[""]
+  page241 -.-> page660
+  page661[""]
+  page241 -.-> page661
+  page662[""]
+  page241 -.-> page662
+  page663[""]
+  page241 -.-> page663
+  page664[""]
+  page241 -.-> page664
+  page665["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page665
+  page666[""]
+  page241 -.-> page666
+  page667[""]
+  page241 -.-> page667
+  page668["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page668
+  page669["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page669
+  page670["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page670
+  page671["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page671
+  page672[""]
+  page241 -.-> page672
+  page673[""]
+  page246 -.-> page673
+  page674["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page674
+  page675[""]
+  page241 -.-> page675
+  page676[""]
+  page241 -.-> page676
+  page677["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page677
+  page678["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page678
+  page679["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page679
+  page680[""]
+  page244 -.-> page680
+  page681["Security Appliance Manager Release Notes"]
+  page244 -.-> page681
+  page682["Security Appliance Manager Installation Guide"]
+  page244 -.-> page682
+  page683["Forcepoint V-Series and Virtual Appliances Sitemap"]
+  page244 -.-> page683
+  page684[""]
+  page241 -.-> page684
+  page685[""]
+  page244 -.-> page685
+  page686[""]
+  page244 -.-> page686
+  page687["Security Appliance Manager FSAM Administrator Help"]
+  page244 -.-> page687
+  page688["Security Appliance Manager Troubleshooting Guide"]
+  page244 -.-> page688
+  page693[""]
+  page244 -.-> page693
+  page690[""]
+  page244 -.-> page690
+  page691[""]
+  page244 -.-> page691
+  page692[""]
+  page244 -.-> page692
+  page693[""]
+  page244 -.-> page693
+  page694["v8.5.7 Release Notes for Forcepoint Appliances"]
+  page244 -.-> page694
+  page695["v8.5.6 Release Notes for Forcepoint Appliances"]
+  page244 -.-> page695
+  page696[""]
+  page244 -.-> page696
+  page697[""]
+  page244 -.-> page697
+  page698[""]
+  page246 -.-> page698
+  page699[""]
+  page244 -.-> page699
+
+</div>
+=======
     <header>
         <h1>Forcepoint Documentation Mind Map</h1>
         <a href="https://help.forcepoint.com" class="btn">View Original Docs</a>
@@ -1273,5 +2467,6 @@ graph TD
 </div>
         </div>
     </div>
+>>>>>>> main
 </body>
 </html>
