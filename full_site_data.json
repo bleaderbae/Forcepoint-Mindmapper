@@ -6499,15 +6499,6 @@
     "lastScraped": "2026-02-09T18:13:45.073Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/index.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:45.108Z"
-  },
-  {
     "url": "https://help.forcepoint.com/docs/FlexEdge_Secure_SD-WAN_Documentation.html",
     "title": "FlexEdge Secure SD-WAN Sitemap",
     "breadcrumbs": [],
@@ -6515,15 +6506,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/index.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:13:45.135Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "title": "Forcepoint F1E Documentation",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/index.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:45.143Z"
   },
   {
     "url": "https://help.forcepoint.com/docs/Data_Loss_Prevention_Documentation.html",
@@ -7301,141 +7283,6 @@
     "lastScraped": "2026-02-09T18:13:46.682Z"
   },
   {
-    "url": "https://help.forcepoint.com/dspm/en-us/rn/gv_dspm_rn_v3.204.1_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:46.998Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/dspm/en-us/rn/gv_dspm_rn_v3.209.0_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:47.197Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/dspm/en-us/rn/gv_dspm_rn_v3.222.1_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:47.256Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/datasecurity/en-us/ack_third-party_legal_notices/fods_3plna_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:47.414Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/dspm/en-us/rn/gv_dspm_rn_v3.231.0_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:47.571Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/dspm/en-us/rn/gv_dspm_rn_v3.189.0_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:47.642Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v3/gv_fdc_agent_3.1.0_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:48.007Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/dspm/en-us/rn/gv_dspm_rn_v3.200.0_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:48.204Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v3/gv_fdc_agent_3.2.0_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:48.433Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v3/gv_fdc_agent_3.3.2_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:48.593Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v4/gv_fdc_agent_4.6.x_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:48.797Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v3/gv_fdc_agent_3.4.0_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:49.041Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v3/gv_fdc_agent_3.5.x_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:49.251Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v4/gv_fdc_agent_4.1.x_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:49.433Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v3/gv_fdc_agent_3.3.0_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:49.610Z"
-  },
-  {
     "url": "https://help.forcepoint.com/frbi/en-us/onlinehelp/index.html",
     "title": "Remote Browser Isolation | Help",
     "breadcrumbs": [],
@@ -7443,15 +7290,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:13:49.614Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/frbi/en-us/legal_notices/rbi_lna_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:49.654Z"
   },
   {
     "url": "https://help.forcepoint.com/dspm/fdc/en-us/onlinehelp/guid-14c989c5-140b-47f6-83e4-24333cfc8ec3.html",
@@ -7466,15 +7304,6 @@
     "lastScraped": "2026-02-09T18:13:49.658Z"
   },
   {
-    "url": "https://help.forcepoint.com/getvisibility/gv/fdc/rn/agent-v4/gv_fdc_agent_4.7.x_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:49.868Z"
-  },
-  {
     "url": "https://help.forcepoint.com/frbi/en-us/legal_notices/index.html",
     "title": "RBI Legal Notices and Acknowledgments",
     "breadcrumbs": [],
@@ -7482,132 +7311,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:13:49.885Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/legal_notices/rbi_legal_notices_and_acknowledgments_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:50.025Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2303/rbi_2303_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:50.849Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2207/rbi_2207_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:51.115Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2210/rbi_2210_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:51.383Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2205/rbi_2205_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:51.627Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2203/rbi_2203_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:51.850Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2201/rbi_2201_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:52.002Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2208/rbi_2208_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:52.201Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2305/rbi_2305_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:52.799Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2206/rbi_2206_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:53.178Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/cloud/csg/Ericom_Shield-Forcepoint_Cloud_Security_Gateway_July_2020.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:53.363Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v60/rbi_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:53.556Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/v10/dlp/Ericom_Shield-Forcepoint_DLP_Integration_Guide_July_2020.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:53.596Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/rbi/on-prem/v2211/rbi_2211_dg_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:54.273Z"
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/base/v319/classifier_admin_server/Release%20Note.htm",
@@ -7647,7 +7350,7 @@
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/base/v131/classifier_api/Release%20Note.htm",
-    "title": "",
+    "title": "Release%20Note.htm",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
@@ -7674,7 +7377,7 @@
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/base/v135/classifier_support_tool/Release%20Note.htm",
-    "title": "",
+    "title": "Release%20Note.htm",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
@@ -7709,222 +7412,6 @@
     "lastScraped": "2026-02-09T18:13:54.609Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Classifier%20Planning%20Considerations%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.199Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Classifier%20Administration%20Server%20Getting%20Started%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.237Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Getting%20Started%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.391Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Administration%20Server%20Installation%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.461Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Classifier%20Administration%20PowerShell%20Getting%20Started%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.559Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Administration%20Transition%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.710Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Classifier%20Registry%20Keys%20Reference%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.841Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Sharepoint%20Classifier%20Deployment%20Guide.pdf",
-    "title": "Error 404 — Page not found",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:55.843Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Mobile%20Classifier%20Service%20Installation%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:56.006Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Notes%20Classifier%20Installation%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:56.573Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Management%20Agent%20User%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:56.644Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/v390/classifier_mgmt_agent/Management%20Agent%20Supplement.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:56.742Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/sharepoint/Power%20Classifier%20for%20SharePoint%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:56.938Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Evaluation%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:57.610Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Mac%20Classifier%20User%20Guide%20Supplement.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:57.730Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/File%20Classifier%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:57.874Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Classifier%20Administration%20Server%20User%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:58.535Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/File%20Classifier%20User%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:58.624Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Power%20Classifier%20for%20SharePoint%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:58.810Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Power%20Classifier%20for%20Files%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:58.996Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Classifier%20Mail%20and%20Office%20Add-in%20Guide.pdf",
-    "title": "Error 404 — Page not found",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:59.010Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Frequently%20Asked%20Questions.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:59.065Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Classifier%20Reporting%20Server%20User%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:59.362Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Suite%20Overview.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:59.393Z"
-  },
-  {
     "url": "https://help.forcepoint.com/docs/bjces/classifier/v212/reporting_console/Release%20Note.htm",
     "title": "Boldon James Release Note",
     "breadcrumbs": [],
@@ -7943,15 +7430,6 @@
     "lastScraped": "2026-02-09T18:13:59.428Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/SharePoint%20Classifier%20Overview.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:59.785Z"
-  },
-  {
     "url": "https://help.forcepoint.com/docs/bjces/classifier/v21/reporting_intell_pack/Release%20Note.htm",
     "title": "Boldon James Release Note",
     "breadcrumbs": [],
@@ -7959,15 +7437,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:13:59.957Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/classifier/v212/reporting_console/Classifier%20Reporting%20Console%20User%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:00.149Z"
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/mac/v3127/mac_classifier/ReleaseNote.htm",
@@ -7979,51 +7448,6 @@
     "lastScraped": "2026-02-09T18:14:00.163Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/bjces/classifier/v213/reporting_services/Classifier%20Reporting%20Getting%20Started%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:00.193Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/classifier/v213/reporting_services/Classifier%20Reporting%20Database%20Performance%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:00.337Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/classifier/v213/reporting_services/Classifier%20Reporting%20System%20User%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:00.403Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Administration%20Server%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:04.230Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/mac/v10/mac_api/Classifier%20API%20for%20Mac.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:04.417Z"
-  },
-  {
     "url": "https://help.forcepoint.com/docs/bjces/mac/v10/mac_api/Release%20Note.htm",
     "title": "Boldon James Release Note",
     "breadcrumbs": [],
@@ -8031,24 +7455,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:04.420Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/classifier/v213/reporting_services/Classifier%20Reporting%20Database%20Schema%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:04.701Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/classifier/v213/reporting_services/Classifier%20Reporting%20Event%20Forwarding%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:04.884Z"
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/notes/v387/notes/Release%20Note.htm",
@@ -8070,21 +7476,12 @@
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/box/v12/Box%20Classifier%20Release%20Notes.htm",
-    "title": "",
+    "title": "Box%20Classifier%20Release%20Notes.htm",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:04.904Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/box/v12/Box%20Classifier%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:05.249Z"
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/cad/AutoCAD%20Release%20Note.htm",
@@ -8112,15 +7509,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:05.263Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/base/all/classifier_docs/Administration%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:10.248Z"
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/exchange/Exchange%20Classifier%202013%20Release%20Note.htm",
@@ -8177,15 +7565,6 @@
     "lastScraped": "2026-02-09T18:14:10.310Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/bjces/exchange/Exchange%20Classifier%20Administration%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:10.960Z"
-  },
-  {
     "url": "https://help.forcepoint.com/docs/bjces/owa/v312/Classifier%20Mail%20Add-In%20Manifest%20Release%20Note.htm",
     "title": "Boldon James Release Note",
     "breadcrumbs": [],
@@ -8205,7 +7584,7 @@
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/PowerShell%20Release%20Note.htm",
-    "title": "",
+    "title": "PowerShell%20Release%20Note.htm",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
@@ -8214,7 +7593,7 @@
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v311/sharepoint_class_config_sweeper/Release%20Note.htm",
-    "title": "",
+    "title": "Release%20Note.htm",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
@@ -8222,7 +7601,7 @@
     "lastScraped": "2026-02-09T18:14:11.694Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#Deployment",
+    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html",
     "title": "Forcepoint Data Security Cloud | SSE Sitemap",
     "breadcrumbs": [],
     "content": "",
@@ -8231,35 +7610,8 @@
     "lastScraped": "2026-02-09T18:14:11.701Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#ReleaseNotes",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.706Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#KBA",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.744Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#Howto",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.750Z"
-  },
-  {
     "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v311/sharepoint_class_website_clients/Release%20Note.htm",
-    "title": "",
+    "title": "Release%20Note.htm",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
@@ -8268,30 +7620,12 @@
   },
   {
     "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/Website%20For%20Clients%20Release%20Note.htm",
-    "title": "",
+    "title": "Website%20For%20Clients%20Release%20Note.htm",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:11.768Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#IntegrationGuides",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.798Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#Cloud",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.870Z"
   },
   {
     "url": "https://help.forcepoint.com/fpone/deploy/rhtml/index.html",
@@ -8301,33 +7635,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:11.893Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#macOS",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.966Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#Windows",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.972Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html#SmartEdgeAgent",
-    "title": "Forcepoint Data Security Cloud | SSE Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:11.981Z"
   },
   {
     "url": "https://help.forcepoint.com/fpone/RN/240924/prod/index.html",
@@ -8526,15 +7833,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Cloud_SSE_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:12.392Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/bjces/sharepoint/SharePoint%20Classifier%20Guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:12.655Z"
   },
   {
     "url": "https://help.forcepoint.com/fpone/RN/163F/index.html",
@@ -9950,33 +9248,6 @@
     "lastScraped": "2026-02-09T18:14:15.092Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.5/release_notes/es_855_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.146Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.7/release_notes/es_857_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.161Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/email/v854/email_release_notes/ESG854_ReleaseNotes.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.186Z"
-  },
-  {
     "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_install/index.html",
     "title": "Web Security, DLP, and Email Security | Security Solutions Installation Guide",
     "breadcrumbs": [],
@@ -10012,24 +9283,6 @@
     "lastScraped": "2026-02-09T18:14:15.199Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_install/es_85x_install_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.400Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_upgrade/ws-dlp-es_ug_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.439Z"
-  },
-  {
     "url": "https://help.forcepoint.com/dlp/10.3.0/deployctr/index.html",
     "title": "Forcepoint DLP Deployment and Installation Center",
     "breadcrumbs": [],
@@ -10037,15 +9290,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:15.454Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/dlp/10.3.0/deployctr/index.html",
-    "title": "Forcepoint DLP Deployment and Installation Center",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.476Z"
   },
   {
     "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_upgrade/index.html",
@@ -10066,24 +9310,6 @@
     "lastScraped": "2026-02-09T18:14:15.484Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_upgrade/es_85x_ug_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.710Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_install/ws-dlp-es_ig_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.774Z"
-  },
-  {
     "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/index.html",
     "title": "Email Security Gateway | Online Help",
     "breadcrumbs": [],
@@ -10100,24 +9326,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:15.785Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_log_server_config/es_85x_elscuh_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.916Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_log_server_config/es_85x_elscuh_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:15.931Z"
   },
   {
     "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/guid-486a358f-ceb6-42a6-93fd-ba56a851ef1e.html",
@@ -10146,60 +9354,6 @@
     "lastScraped": "2026-02-09T18:14:15.941Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/azure_quickstart/azure_setup_guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:16.324Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/esg_85x_ah_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:17.309Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/azure_install/es_85x_ifpes-mazure_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:17.721Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/pem_help/es_85x_pem-uh_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:17.745Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_smd_user_help/es_smuh-lv_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:17.754Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/pem_help/es_85x_pem-uh_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:17.879Z"
-  },
-  {
     "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/backup_faq/index.html",
     "title": "Data, Email, and Web Security | Backup and Restore FAQ",
     "breadcrumbs": [],
@@ -10216,33 +9370,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:17.886Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/backup_faq/ws-dlp-es_85x_brfaq_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:17.912Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/dlp/10.3.0/fsmhelp/fsmhelp.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:18.507Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_mgmt_server/ws-dlp-es_85x_mms_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:18.530Z"
   },
   {
     "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_encryption/index.html",
@@ -10272,24 +9399,6 @@
     "lastScraped": "2026-02-09T18:14:18.666Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_encryption/es_85x_me-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:18.695Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_reporting_db/ws-dlp-es_85x_mrdb_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:18.857Z"
-  },
-  {
     "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_siem/index.html",
     "title": "Email Security | Security Information Event Management (SIEM): Email Logs v8.5.x",
     "breadcrumbs": [],
@@ -10308,15 +9417,6 @@
     "lastScraped": "2026-02-09T18:14:18.881Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_ports/es_85x_ports_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:18.895Z"
-  },
-  {
     "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/acknowledgments/index.html",
     "title": "Email Security | Acknowledgment of Third-party Software v8.5.x",
     "breadcrumbs": [],
@@ -10324,15 +9424,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:18.898Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/dba_paper/ws-dlp-es_85x_afdb_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.053Z"
   },
   {
     "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2024/index.html",
@@ -10344,15 +9435,6 @@
     "lastScraped": "2026-02-09T18:14:19.064Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2023/esc_2023_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.090Z"
-  },
-  {
     "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2025/index.html",
     "title": "Email Security Cloud 2025: Release Notes",
     "breadcrumbs": [],
@@ -10362,15 +9444,6 @@
     "lastScraped": "2026-02-09T18:14:19.092Z"
   },
   {
-    "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/dba_paper/ws-dlp-es_85x_afdb_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.243Z"
-  },
-  {
     "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2023/index.html",
     "title": "Email Security Cloud 2023: Release Notes",
     "breadcrumbs": [],
@@ -10378,42 +9451,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:19.251Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2025/esc_2025_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.259Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2024/esc_2024_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.269Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_siem/es_85x_siem-el_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.286Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/acknowledgments/es_85x_acknowledge_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.354Z"
   },
   {
     "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2022/index.html",
@@ -10443,24 +9480,6 @@
     "lastScraped": "2026-02-09T18:14:19.417Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/appliance/v85/cli_guide/appl_cli_guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.643Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2022/esc_2022_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.655Z"
-  },
-  {
     "url": "https://help.forcepoint.com/emailsec/en-us/cloud/tech_tips/",
     "title": "Email Security Cloud | Managing Cloud Email Protection Products",
     "breadcrumbs": [],
@@ -10468,15 +9487,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:19.671Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/tech_tips/esc_mfpesc_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.687Z"
   },
   {
     "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2019/first.aspx",
@@ -10497,24 +9507,6 @@
     "lastScraped": "2026-02-09T18:14:19.701Z"
   },
   {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/tech_tips/",
-    "title": "Email Security Cloud | Managing Cloud Email Protection Products",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.812Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/tech_tips/esc_mfpesc_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.826Z"
-  },
-  {
     "url": "https://help.forcepoint.com/emailsec/en-us/cloud/siem_guide/",
     "title": "Email Security Cloud | Getting started with SIEM Integration",
     "breadcrumbs": [],
@@ -10522,15 +9514,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:19.828Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/siem_guide/esc_gs-siemi_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:19.901Z"
   },
   {
     "url": "https://help.forcepoint.com/emailsec/en-us/cloud/enduser_guide/",
@@ -10551,114 +9534,6 @@
     "lastScraped": "2026-02-09T18:14:20.033Z"
   },
   {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_11.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.105Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_07.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.192Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_08.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.215Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/enduser_guide/esc_eug_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.342Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_09.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.367Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/emailsec/en-us/cloud/admin_guide/esc_csgph_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.891Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_03.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.955Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_04.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:20.987Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_05.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.012Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_09_5741.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.037Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_06.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.057Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/release_notes_25_02.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.078Z"
-  },
-  {
     "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_install/index.html",
     "title": "Forcepoint F1E Install Guide",
     "breadcrumbs": [],
@@ -10675,15 +9550,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:21.206Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_xenapp/ep_xenapp.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.230Z"
   },
   {
     "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_upgrade/index.html",
@@ -10713,15 +9579,6 @@
     "lastScraped": "2026-02-09T18:14:21.309Z"
   },
   {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_auto_update/auto_update.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.409Z"
-  },
-  {
     "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_release_notes/index.html",
     "title": "Release Notes for Forcepoint F1E",
     "breadcrumbs": [],
@@ -10738,42 +9595,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:21.418Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_release_notes/release_notes_24_11.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.443Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_dlp_apps/dlp_apps.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.528Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_release_notes/release_notes_24_07.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.543Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_upgrade/ep_upgrade.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.591Z"
   },
   {
     "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_upgrade/index.html",
@@ -10794,24 +9615,6 @@
     "lastScraped": "2026-02-09T18:14:21.625Z"
   },
   {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_upgrade/ep_upgrade.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.723Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_release_notes/release_notes_24_04.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.760Z"
-  },
-  {
     "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_xenapp/index.html",
     "title": "Deploying Forcepoint DLP Endpoint on Citrix virtual environments",
     "breadcrumbs": [],
@@ -10819,15 +9622,6 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:21.764Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_xenapp/ep_xenapp.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:21.827Z"
   },
   {
     "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_auto_update/index.html",
@@ -10848,15 +9642,6 @@
     "lastScraped": "2026-02-09T18:14:21.945Z"
   },
   {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_auto_update/auto_update.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:22.009Z"
-  },
-  {
     "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_end_user/index.html",
     "title": "Forcepoint F1E End User Guide",
     "breadcrumbs": [],
@@ -10866,301 +9651,13 @@
     "lastScraped": "2026-02-09T18:14:22.057Z"
   },
   {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_end_user/ep_end_user.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:22.663Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_dlp_apps/dlp_apps.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:22.688Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_desktop_60_rev_1_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:22.732Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_desktop_60_rev_0_d_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:22.844Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_desktop_120_rev_0_i_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:22.899Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_desktop_120_rev_1_b_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:23.046Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_desktop_61_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:23.072Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_end_user/ep_end_user.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:23.694Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_desktop_130_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:23.809Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_1U_2201_2205_2210_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:23.998Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_6x_qs_701-0003I00_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.013Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/forcepoint_product_safety_regulatory_compliance_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.055Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_desktop_350_c_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.152Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_1U_1200_b_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.185Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/forcepoint_product_safety_regulatory_compliance_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.281Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_6x_qs_701-0003I00_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.293Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_1U_2300_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.420Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#FSAM",
+    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html",
     "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
     "breadcrumbs": [],
     "content": "",
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:24.469Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_smc-app_b_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.490Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_qs_smc_701-0067C00_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.509Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#v20",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.588Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#ova85",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.694Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#v20k",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.714Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#ova",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.731Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_smc-app-1000-g2_b_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:24.784Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_install/ep_install.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.260Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#v20k85",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.273Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_2U_3505_3510_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.446Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_smc-app-1000-g5_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.553Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#v10k85",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.567Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#v5k",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.579Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#v10k",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.591Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/appliance/en-us/2.0.1/fsam/release_notes/fsam_2.0.1_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.714Z"
   },
   {
     "url": "https://help.forcepoint.com/appliance/en-us/2.0.1/fsam/release_notes/",
@@ -11181,42 +9678,6 @@
     "lastScraped": "2026-02-09T18:14:26.753Z"
   },
   {
-    "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html#v5k85",
-    "title": "Forcepoint V-Series and Virtual Appliances Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:26.770Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/ngfw/hw/ngfw_hg_2U_3401_3405_3410_c_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.345Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/appliance/fsam/v2.0.1/fsam_release_notes/appl_mgr_release_notes.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.512Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/admin_help/v-series-x-series-va/fsam_20x_ah_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.590Z"
-  },
-  {
     "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/admin_help/v-series-x-series-va/",
     "title": "Security Appliance Manager (FSAM) Administrator Help",
     "breadcrumbs": [],
@@ -11235,51 +9696,6 @@
     "lastScraped": "2026-02-09T18:14:27.747Z"
   },
   {
-    "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/troubleshooting_guide/fsam_2x_tg_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.767Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/appliance/fsam/v2.0/fsam_help/fsam_2_0_help.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.823Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/install_guide/fsam_2x_ig_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.840Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/appliance/fsam/v2.0/fsam_install/fsam_install.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.870Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/troubleshooting_guide/fsam_2x_tg_a_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:27.888Z"
-  },
-  {
     "url": "https://help.forcepoint.com/appliance/en-us/8.5.7/release_notes/index.html",
     "title": "v8.5.7 Release Notes for Forcepoint Appliances",
     "breadcrumbs": [],
@@ -11296,41 +9712,5 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:28.035Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/appliance/en-us/8.5.6/release_notes/fa_8.5.6_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:28.046Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/appliance/en-us/8.5.7/release_notes/fa_8.5.7_rn_en-us.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:28.186Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_install/ep_install.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:29.620Z"
-  },
-  {
-    "url": "https://help.forcepoint.com/docs/appliance/v85/upgrade_guide/v_x_va_upgrade_guide.pdf",
-    "title": "",
-    "breadcrumbs": [],
-    "content": "",
-    "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:14:29.771Z"
   }
 ]

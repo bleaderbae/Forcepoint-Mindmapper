@@ -1,3 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forcepoint Documentation Mind Map (Static)</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ maxTextSize: 1000000,
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00af9a',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#007565',
+                lineColor: '#00af9a',
+                secondaryColor: '#f5f6f6',
+                tertiaryColor: '#1d252c',
+                mainBkg: '#fff',
+                nodeBorder: '#00af9a',
+                clusterBkg: '#f5f6f6',
+                titleColor: '#1d252c',
+                edgeColor: '#007565'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --fp-green: #00af9a;
+            --fp-dark-green: #007565;
+            --fp-navy: #1d252c;
+            --fp-gray: #636569;
+            --fp-light: #f5f6f6;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fp-light);
+            margin: 0;
+            padding: 0;
+            color: var(--fp-navy);
+        }
+        header {
+            background-color: var(--fp-navy);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        header h1 { margin: 0; font-size: 1.5rem; }
+        .container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: auto;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        .btn {
+            background-color: var(--fp-green);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: var(--fp-dark-green);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Forcepoint Documentation Mind Map (Static)</h1>
+        <div>
+            <a href="index.html" class="btn" style="margin-right: 10px; background-color: var(--fp-gray);">Interactive View</a>
+            <a href="https://help.forcepoint.com" class="btn">View Original Docs</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="card">
+            <div class="mermaid">
 graph TD
   page0["Forcepoint DLP Administrator Help"]
   page1["Overview"]
@@ -818,3 +912,9 @@ graph TD
   page242 -.-> page517
   page242 -.-> page518
   page242 -.-> page519
+
+</div>
+        </div>
+    </div>
+</body>
+</html>
