@@ -75,6 +75,16 @@ describe('humanize', () => {
         { input: '  extra   spaces  ', expected: 'Extra Spaces' },
         { input: 'administration_guide', expected: 'Administration' }, // Preserving old test case logic
         { input: 'hello-world_test', expected: 'Hello World Test' }, // Preserving old test case logic
+
+        // New Coverage
+        { input: 'hello--world', expected: 'Hello World' }, // Consecutive separators
+        { input: '-hello-', expected: 'Hello' }, // Leading/trailing separators
+        { input: 'admin.html', expected: 'Administrator' }, // Keyword + HTML extension
+        { input: 'user_guide', expected: 'User' }, // Keyword removal 'guide'
+        { input: 'help_center', expected: 'Center' }, // Keyword removal 'help'
+        { input: 'httpClient', expected: 'Http Client' }, // CamelCase splitting
+        { input: 'v1.2.3.4', expected: 'v1.2.3.4' }, // Complex version pattern
+        { input: 'test.doc', expected: 'Test.doc' }, // Non-HTML extension preservation
     ];
 
     testCases.forEach(({ input, expected }) => {
