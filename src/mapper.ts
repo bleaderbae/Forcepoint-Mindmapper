@@ -9,6 +9,9 @@ interface DocNode {
 function sanitize(text: any): string {
     if (!text || typeof text !== 'string') return 'Untitled';
     return text.replace(/[\[\]\(\)\|":;]/g, ' ')
+               .replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
                .replace(/[\r\n]+/g, ' ')
                .replace(/\s+/g, ' ')
                .trim();

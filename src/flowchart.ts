@@ -10,7 +10,12 @@ interface DocNode {
 }
 
 function sanitize(text: string): string {
-    return text.replace(/[:()\[\]]/g, ' ').replace(/"/g, "'").trim();
+    return text.replace(/[:()\[\]]/g, ' ')
+               .replace(/"/g, "'")
+               .replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .trim();
 }
 
 function run() {
