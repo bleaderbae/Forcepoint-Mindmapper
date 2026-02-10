@@ -36,8 +36,40 @@ if (fs.existsSync(DATA_FILE)) {
 const visited = new Set<string>(results.map(r => normalizeUrl(r.url)));
 const queue: { url: string; parentUrl?: string }[] = [];
 
-if (!visited.has(normalizeUrl(START_URL))) {
-    queue.push({ url: START_URL });
+// Parse command line arguments for targeted run
+const args = process.argv.slice(2);
+let targetUrl: string | undefined;
+
+for (let i = 0; i < args.length; i++) {
+    if ((args[i] === '--url' || args[i] === '-u') && args[i + 1]) {
+        targetUrl = args[i + 1];
+        break;
+    }
+}
+
+if (targetUrl) {
+    const normalizedTarget = normalizeUrl(targetUrl);
+    console.log(`Targeted run for: ${normalizedTarget}`);
+
+    // Remove from visited so it gets re-crawled
+    if (visited.has(normalizedTarget)) {
+        visited.delete(normalizedTarget);
+        console.log(`Removed ${normalizedTarget} from visited set to force update.`);
+    }
+
+    // Remove existing entry from results to update it
+    const initialCount = results.length;
+    results = results.filter(r => normalizeUrl(r.url) !== normalizedTarget);
+    if (results.length < initialCount) {
+        console.log(`Removed existing data for ${normalizedTarget} to refresh content.`);
+    }
+
+    queue.push({ url: targetUrl });
+} else {
+    // Default behavior: start from global sitemap if not visited
+    if (!visited.has(normalizeUrl(START_URL))) {
+        queue.push({ url: START_URL });
+    }
 }
 
 let processing = 0;
