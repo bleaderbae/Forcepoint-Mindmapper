@@ -11,7 +11,7 @@
               "name": "10.4.0",
               "children": [
                 {
-                  "name": "Forcepoint DLP Administrator Help",
+                  "name": "Forcepoint DLP Administrator",
                   "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/index.html",
                   "children": [],
                   "type": "document"
@@ -1255,7 +1255,7 @@
                       "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/10A24454-A9C9-47E7-BCD4-5B820CE02379.html"
                     },
                     {
-                      "name": "Online Help",
+                      "name": "Online",
                       "children": [],
                       "type": "document",
                       "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/81975446-7415-4840-993D-D1BA6377E58C.html"
@@ -1350,13 +1350,13 @@
               "name": "10.2.0",
               "children": [
                 {
-                  "name": "Forcepoint Security Manager Help",
+                  "name": "Forcepoint Security Manager",
                   "url": "https://help.forcepoint.com/dlp/10.2.0/fsmhelp/",
                   "children": [],
                   "type": "document"
                 },
                 {
-                  "name": "DLP Installation Guide",
+                  "name": "DLP Installation",
                   "url": "https://help.forcepoint.com/dlp/10.2.0/install/",
                   "children": [],
                   "type": "document"
@@ -1386,7 +1386,7 @@
                   "type": "document"
                 },
                 {
-                  "name": "Forcepoint Security Manager Help",
+                  "name": "Forcepoint Security Manager",
                   "url": "https://help.forcepoint.com/dlp/10.3.0/fsmhelp/index.html",
                   "children": [],
                   "type": "document"
@@ -1440,13 +1440,13 @@
               "name": "Fone Integration",
               "children": [
                 {
-                  "name": "Forcepoint DLP And Forcepoint Data Security Cloud | SSE CASB Integration Guide",
+                  "name": "Forcepoint DLP And Forcepoint Data Security Cloud | SSE CASB Integration",
                   "url": "https://help.forcepoint.com/dlp/fone_integration/forcepoint_dlp_and_forcepoint_one_casb/index.html",
                   "children": [],
                   "type": "document"
                 },
                 {
-                  "name": "Forcepoint DLP And Forcepoint Data Security Cloud | SSE SWG Integration Guide",
+                  "name": "Forcepoint DLP And Forcepoint Data Security Cloud | SSE SWG Integration",
                   "url": "https://help.forcepoint.com/dlp/fone_integration/forcepoint_dlp_and_forcepoint_one_swg/index.html",
                   "children": [],
                   "type": "document"
@@ -1692,10 +1692,10 @@
       "name": "Data Security Cloud",
       "children": [
         {
-          "name": "Online Help",
+          "name": "Online",
           "children": [
             {
-              "name": "Forcepoint Data Security Cloud Online Help",
+              "name": "Forcepoint Data Security Cloud Online",
               "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/index.html",
               "children": [],
               "type": "document"
@@ -1742,7 +1742,7 @@
               "name": "Understanding Forcepoint Data Security Cloud Layout",
               "children": [
                 {
-                  "name": "Accessing The Online Help Documentation",
+                  "name": "Accessing The Online Documentation",
                   "children": [],
                   "type": "document",
                   "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/guid-1161ca9b-5a58-4a01-8e7d-6879b6c57912.html"
@@ -1838,7 +1838,7 @@
           "name": "Online Help",
           "children": [
             {
-              "name": "Forcepoint ONE | Firewall Online Help",
+              "name": "Forcepoint ONE | Firewall Online",
               "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/index.html",
               "children": [],
               "type": "document"
@@ -1910,7 +1910,7 @@
                   "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-F26BAC3C-C3C5-42F8-BA51-7A8CE0C46FC4.html"
                 },
                 {
-                  "name": "Accessing The Online Help Documentation",
+                  "name": "Accessing The Online Documentation",
                   "children": [],
                   "type": "document",
                   "url": "https://help.forcepoint.com/fponefirewall/en-us/onlinehelp/GUID-E0A858C6-227A-4E26-815F-FFCB29A63113.html"
@@ -2237,7 +2237,7 @@
               "name": "Deploy",
               "children": [
                 {
-                  "name": "Forcepoint Data Security Cloud | SSE Deployment Guide",
+                  "name": "Forcepoint Data Security Cloud | SSE Deployment",
                   "url": "https://help.forcepoint.com/fpone/deploy/rhtml/index.html",
                   "children": [],
                   "type": "document"
@@ -2564,7 +2564,7 @@
           "name": "Mobile",
           "children": [
             {
-              "name": "Forcepoint Mobile Online Help",
+              "name": "Forcepoint Mobile Online",
               "url": "https://help.forcepoint.com/fpone/mobile/online_help/index.html",
               "children": [],
               "type": "document"
@@ -3028,7 +3028,7 @@
               "type": "category"
             },
             {
-              "name": "Forcepoint DLP For Cloud Email Online Help",
+              "name": "Forcepoint DLP For Cloud Email Online",
               "url": "https://help.forcepoint.com/datasecurity/en-us/email/index.html",
               "children": [],
               "type": "document"
@@ -3124,7 +3124,7 @@
           "name": "Online Help",
           "children": [
             {
-              "name": "Remote Browser Isolation | Help",
+              "name": "Remote Browser Isolation |",
               "url": "https://help.forcepoint.com/frbi/en-us/onlinehelp/index.html",
               "children": [],
               "type": "document"
@@ -3160,7 +3160,7 @@
           "name": "Userguide",
           "children": [
             {
-              "name": "Insights User Guide",
+              "name": "Insights User",
               "url": "https://help.forcepoint.com/insights/en-us/userguide/index.html",
               "children": [],
               "type": "document"
@@ -3193,13 +3193,13 @@
                   "type": "document"
                 },
                 {
-                  "name": "Email Security | Installation Guide V8.5.x",
+                  "name": "Email Security | Installation V8.5.x",
                   "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_install/index.html",
                   "children": [],
                   "type": "document"
                 },
                 {
-                  "name": "Email Security | Upgrade Guide V8.5.x",
+                  "name": "Email Security | Upgrade V8.5.x",
                   "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_upgrade/index.html",
                   "children": [],
                   "type": "document"
@@ -3211,7 +3211,7 @@
                   "type": "document"
                 },
                 {
-                  "name": "Email Security Gateway | Online Help",
+                  "name": "Email Security Gateway | Online",
                   "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/index.html",
                   "children": [],
                   "type": "document"
@@ -3223,7 +3223,7 @@
                   "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/guid-486a358f-ceb6-42a6-93fd-ba56a851ef1e.html"
                 },
                 {
-                  "name": "Email Security | Secure Messaging User Help: Localized Versions",
+                  "name": "Email Security | Secure Messaging User : Localized Versions",
                   "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_smd_user_help/index.html",
                   "children": [],
                   "type": "document"
@@ -3298,7 +3298,7 @@
               "type": "document"
             },
             {
-              "name": "Email Security Cloud | Online Help",
+              "name": "Email Security Cloud | Online",
               "url": "https://help.forcepoint.com/emailsec/en-us/cloud/admin_guide/index.html",
               "children": [],
               "type": "document"
@@ -3310,7 +3310,7 @@
               "type": "document"
             },
             {
-              "name": "Email Security Cloud | End User Guide",
+              "name": "Email Security Cloud | End User",
               "url": "https://help.forcepoint.com/emailsec/en-us/cloud/enduser_guide/",
               "children": [],
               "type": "document"
@@ -3331,13 +3331,13 @@
               "name": "On Prem",
               "children": [
                 {
-                  "name": "Web Security, DLP, And Email Security | Security Solutions Installation Guide",
+                  "name": "Web Security, DLP, And Email Security | Security Solutions Installation",
                   "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_install/index.html",
                   "children": [],
                   "type": "document"
                 },
                 {
-                  "name": "Web Security, DLP, And Email Security | Security Solutions Upgrade Guide",
+                  "name": "Web Security, DLP, And Email Security | Security Solutions Upgrade",
                   "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_upgrade/index.html",
                   "children": [],
                   "type": "document"
@@ -3382,7 +3382,7 @@
               "type": "document"
             },
             {
-              "name": "Forcepoint F1E Install Guide",
+              "name": "Forcepoint F1E Installation",
               "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_install/index.html",
               "children": [],
               "type": "document"
@@ -3394,7 +3394,7 @@
               "type": "document"
             },
             {
-              "name": "Forcepoint F1E Upgrade Guide",
+              "name": "Forcepoint F1E Upgrade",
               "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_upgrade/index.html",
               "children": [],
               "type": "document"
@@ -3412,7 +3412,7 @@
               "type": "document"
             },
             {
-              "name": "Forcepoint F1E End User Guide",
+              "name": "Forcepoint F1E End User",
               "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_end_user/index.html",
               "children": [],
               "type": "document"
@@ -3430,13 +3430,13 @@
               "type": "document"
             },
             {
-              "name": "Forcepoint F1E Upgrade Guide",
+              "name": "Forcepoint F1E Upgrade",
               "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_upgrade/index.html",
               "children": [],
               "type": "document"
             },
             {
-              "name": "Forcepoint F1E Install Guide",
+              "name": "Forcepoint F1E Installation",
               "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_install/index.html",
               "children": [],
               "type": "document"
@@ -3460,7 +3460,7 @@
               "type": "document"
             },
             {
-              "name": "Forcepoint F1E End User Guide",
+              "name": "Forcepoint F1E End User",
               "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_end_user/index.html",
               "children": [],
               "type": "document"
@@ -3493,19 +3493,19 @@
               "name": "2.x",
               "children": [
                 {
-                  "name": "Security Appliance Manager Installation Guide",
+                  "name": "Security Appliance Manager Installation",
                   "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/install_guide/",
                   "children": [],
                   "type": "document"
                 },
                 {
-                  "name": "Security Appliance Manager (FSAM) Administrator Help",
+                  "name": "Security Appliance Manager (FSAM) Administrator",
                   "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/admin_help/v-series-x-series-va/",
                   "children": [],
                   "type": "document"
                 },
                 {
-                  "name": "Security Appliance Manager Troubleshooting Guide",
+                  "name": "Security Appliance Manager Troubleshooting",
                   "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/troubleshooting_guide/",
                   "children": [],
                   "type": "document"
