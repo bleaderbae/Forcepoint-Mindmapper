@@ -95,4 +95,67 @@ describe('buildTree', () => {
         const uncat = root.children.get('Uncategorized')!;
         assert.strictEqual(uncat.children.has('Page 1'), true);
     });
+
+    test('should skip empty breadcrumb parts after sanitization', () => {
+        const data: DocNode[] = [{
+            url: 'http://example.com/p1',
+            title: 'Page 1',
+            breadcrumbs: ['Section A', '()', 'Section B']
+        }];
+        const root = buildTree(data);
+
+        const sectionA = root.children.get('Section A');
+        assert.ok(sectionA, 'Section A should exist');
+        assert.strictEqual(sectionA.children.has('()'), false, 'Should not have empty part as child');
+
+        const sectionB = sectionA.children.get('Section B');
+        assert.ok(sectionB, 'Section B should be child of Section A');
+        assert.ok(sectionB.children.has('Page 1'), 'Page 1 should be child of Section B');
+    });
+
+    test('should skip node if title becomes empty after sanitization', () => {
+        const data: DocNode[] = [{
+            url: 'http://example.com/p1',
+            title: '()',
+            breadcrumbs: ['Section A']
+        }];
+        const root = buildTree(data);
+
+        const sectionA = root.children.get('Section A');
+        assert.ok(sectionA, 'Section A should exist');
+        assert.strictEqual(sectionA.children.size, 0, 'Section A should have no children');
+    });
+
+    test('should handle undefined breadcrumbs by using Uncategorized', () => {
+        const data: DocNode[] = [{
+            url: 'http://example.com/p1',
+            title: 'Page 1',
+            breadcrumbs: undefined
+        }];
+        const root = buildTree(data);
+
+        assert.ok(root.children.has('Uncategorized'), 'Should use Uncategorized fallback');
+        const uncat = root.children.get('Uncategorized')!;
+        assert.ok(uncat.children.has('Page 1'), 'Page 1 should be in Uncategorized');
+    });
+
+    test('should deduplicate identical titles under same parent', () => {
+        const data: DocNode[] = [
+            {
+                url: 'http://example.com/p1',
+                title: 'Page 1',
+                breadcrumbs: ['Section A']
+            },
+            {
+                url: 'http://example.com/p2', // Different URL
+                title: 'Page 1',           // Same Title
+                breadcrumbs: ['Section A']
+            }
+        ];
+        const root = buildTree(data);
+
+        const sectionA = root.children.get('Section A')!;
+        assert.strictEqual(sectionA.children.size, 1, 'Should have only 1 child');
+        assert.ok(sectionA.children.has('Page 1'), 'Should have Page 1');
+    });
 });
