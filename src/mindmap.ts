@@ -1,18 +1,19 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
-interface DocNode {
+export interface DocNode {
     url: string;
     title: string;
     breadcrumbs?: string[];
 }
 
-interface TreeNode {
+export interface TreeNode {
     name: string;
     children: Map<string, TreeNode>;
 }
 
-function buildTree(data: DocNode[]): TreeNode {
+export function buildTree(data: DocNode[]): TreeNode {
     const root: TreeNode = { name: 'Forcepoint Help', children: new Map() };
 
     for (const page of data) {
@@ -42,7 +43,7 @@ function buildTree(data: DocNode[]): TreeNode {
     return root;
 }
 
-function generateMermaid(node: TreeNode, depth: number = 0): string {
+export function generateMermaid(node: TreeNode, depth: number = 0): string {
     const indent = '  '.repeat(depth);
     let result = `${indent}${node.name}\n`;
     
@@ -70,4 +71,6 @@ function run() {
     console.log('Mermaid mindmap saved to mindmap.mmd');
 }
 
-run();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    run();
+}
