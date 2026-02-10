@@ -1,7 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
-interface DocNode {
+export interface DocNode {
     url: string;
     title: string;
     breadcrumbs: string[];
@@ -9,10 +10,11 @@ interface DocNode {
     prevUrl?: string;
 }
 
-interface TreeNode {
+export interface TreeNode {
     title: string;
     url?: string;
     children: TreeNode[];
+    childrenMap?: Map<string, TreeNode>;
     nextUrl?: string | undefined; // Derived from the page associated with this node
 }
 
@@ -27,8 +29,8 @@ function sanitize(text: string): string {
                .trim();
 }
 
-function buildTree(data: DocNode[]): TreeNode {
-    const root: TreeNode = { title: 'Forcepoint Help', children: [] };
+export function buildTree(data: DocNode[]): TreeNode {
+    const root: TreeNode = { title: 'Forcepoint Help', children: [], childrenMap: new Map() };
 
     // Map URL to DocNode for quick lookup
     const urlToDoc = new Map<string, DocNode>();
@@ -36,10 +38,16 @@ function buildTree(data: DocNode[]): TreeNode {
 
     // Helper to find or create a child node
     const findOrCreateChild = (parent: TreeNode, title: string): TreeNode => {
-        let child = parent.children.find(c => c.title === title);
+        if (!parent.childrenMap) {
+            parent.childrenMap = new Map();
+            parent.children.forEach(c => parent.childrenMap!.set(c.title, c));
+        }
+
+        let child = parent.childrenMap.get(title);
         if (!child) {
-            child = { title, children: [] };
+            child = { title, children: [], childrenMap: new Map() };
             parent.children.push(child);
+            parent.childrenMap.set(title, child);
         }
         return child;
     };
@@ -61,10 +69,16 @@ function buildTree(data: DocNode[]): TreeNode {
             current.url = doc.url;
             current.nextUrl = doc.nextUrl;
         } else {
-            let docNode = current.children.find(c => c.title === doc.title);
+            if (!current.childrenMap) {
+                current.childrenMap = new Map();
+                current.children.forEach(c => current.childrenMap!.set(c.title, c));
+            }
+
+            let docNode = current.childrenMap.get(doc.title);
             if (!docNode) {
-                docNode = { title: doc.title, children: [] };
+                docNode = { title: doc.title, children: [], childrenMap: new Map() };
                 current.children.push(docNode);
+                current.childrenMap.set(doc.title, docNode);
             }
 
             // Update node with doc info
@@ -76,7 +90,7 @@ function buildTree(data: DocNode[]): TreeNode {
     return root;
 }
 
-function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
+export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
     if (!node.children || node.children.length === 0) return;
 
     // Create a map of title -> node for quick lookup
@@ -145,7 +159,7 @@ function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
     node.children.forEach(c => sortChildren(c, urlToDoc));
 }
 
-function generateMermaid(node: TreeNode, depth: number = 0): string {
+export function generateMermaid(node: TreeNode, depth: number = 0): string {
     const indent = '  '.repeat(depth);
     let output = `${indent}${sanitize(node.title)}\n`;
 
@@ -176,4 +190,6 @@ function main() {
     console.log(`Generated mindmap to ${OUTPUT_FILE}`);
 }
 
-main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    main();
+}
