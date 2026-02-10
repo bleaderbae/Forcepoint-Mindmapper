@@ -1461,234 +1461,6 @@
       "type": "category"
     },
     {
-      "name": "Documentation",
-      "children": [
-        {
-          "name": "Forcepoint Product Documentation Sitemap",
-          "url": "https://help.forcepoint.com/docs/index.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Data Security Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint DLP For Cloud Email Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_DLP_for_Cloud_Email_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Data Visibility Powered By Get Visibility Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Data Classification",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Remote Browser Isolation Sitemap",
-          "url": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Boldon James Classifier Enterprise Suite Sitemap",
-          "url": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Data Security Cloud | SSE Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Insights Documentation Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Insights_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint ONE Mobile Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_ONE_Mobile_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Email Security On Premises Documentation",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Email Security Cloud Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint F1E Documentation",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Advanced Malware Detection And Protection Sitemap",
-          "url": "https://help.forcepoint.com/docs/Advanced_Malware_Detection_and_Protection_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "NGFW Appliances Sitemap",
-          "url": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint V Series And Virtual Appliances Sitemap",
-          "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "URL Filtering Sitemap",
-          "url": "https://help.forcepoint.com/docs/URL_Filtering_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Flex Edge Secure SD WAN Sitemap",
-          "url": "https://help.forcepoint.com/docs/FlexEdge_Secure_SD-WAN_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Data Loss Prevention (DLP) Sitemap",
-          "url": "https://help.forcepoint.com/docs/Data_Loss_Prevention_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Web Security Cloud Sitemap",
-          "url": "https://help.forcepoint.com/docs/Web_Security_Cloud_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Web Security Sitemap",
-          "url": "https://help.forcepoint.com/docs/Web_Security_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Next Generation Firewall (NGFW) Sitemap",
-          "url": "https://help.forcepoint.com/docs/Next_Generation_Firewall_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Bjces",
-          "children": [
-            {
-              "name": "Boldon James Release Note",
-              "url": "https://help.forcepoint.com/docs/bjces/owa/v310/Mail%20Add-In%20Website%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Release%20Note.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v311/sharepoint_class_website_clients/Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Documentation Release Note",
-              "url": "https://help.forcepoint.com/docs/bjces/base/v10/classifier_docs/Documentation%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Box%20Classifier%20Release%20Notes.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/box/v12/Box%20Classifier%20Release%20Notes.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Power Shell%20Release%20Note.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/PowerShell%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Website%20For%20Clients%20Release%20Note.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/Website%20For%20Clients%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "version"
-        },
-        {
-          "name": "Tech Pubs",
-          "children": [
-            {
-              "name": "Forcepoint Insights API Documentation",
-              "url": "https://help.forcepoint.com/docs/Tech_Pubs/Insights/ingapi/index.html",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "version"
-        },
-        {
-          "name": "Shared",
-          "children": [
-            {
-              "name": "V8.5.4 Release Notes For The Forcepoint Security Manager",
-              "url": "https://help.forcepoint.com/docs/shared/v854/release_notes/first.aspx",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "version"
-        },
-        {
-          "name": "Email",
-          "children": [
-            {
-              "name": "Forcepoint Email Security Cloud: 2020 Release Notes",
-              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2020/first.aspx",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint Email Security Cloud: 2021 Release Notes",
-              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2021/first.aspx",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint Email Security Cloud: 2019 Release Notes",
-              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2019/first.aspx",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "version"
-        }
-      ],
-      "type": "category"
-    },
-    {
       "name": "Data Security Cloud",
       "children": [
         {
@@ -2050,6 +1822,234 @@
         {
           "name": "Forcepoint Neo",
           "url": "https://help.forcepoint.com/dup/en-us/index.html",
+          "children": [],
+          "type": "document"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "name": "Documentation",
+      "children": [
+        {
+          "name": "Forcepoint Data Security Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint DLP For Cloud Email Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_DLP_for_Cloud_Email_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint Data Visibility Powered By Get Visibility Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint Data Classification",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Classification_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Remote Browser Isolation Sitemap",
+          "url": "https://help.forcepoint.com/docs/Remote_Browser_Isolation_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Boldon James Classifier Enterprise Suite Sitemap",
+          "url": "https://help.forcepoint.com/docs/Boldon_James_Classifier_Enterprise_Suite_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint Data Security Cloud | SSE Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint Insights Documentation Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Insights_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint ONE Mobile Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_ONE_Mobile_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint Email Security On Premises Documentation",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint Email Security Cloud Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint F1E Documentation",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Advanced Malware Detection And Protection Sitemap",
+          "url": "https://help.forcepoint.com/docs/Advanced_Malware_Detection_and_Protection_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "NGFW Appliances Sitemap",
+          "url": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Forcepoint V Series And Virtual Appliances Sitemap",
+          "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "URL Filtering Sitemap",
+          "url": "https://help.forcepoint.com/docs/URL_Filtering_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Flex Edge Secure SD WAN Sitemap",
+          "url": "https://help.forcepoint.com/docs/FlexEdge_Secure_SD-WAN_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Data Loss Prevention (DLP) Sitemap",
+          "url": "https://help.forcepoint.com/docs/Data_Loss_Prevention_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Web Security Cloud Sitemap",
+          "url": "https://help.forcepoint.com/docs/Web_Security_Cloud_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Web Security Sitemap",
+          "url": "https://help.forcepoint.com/docs/Web_Security_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Next Generation Firewall (NGFW) Sitemap",
+          "url": "https://help.forcepoint.com/docs/Next_Generation_Firewall_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "Bjces",
+          "children": [
+            {
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/owa/v310/Mail%20Add-In%20Website%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Release%20Note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v311/sharepoint_class_website_clients/Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Documentation Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/base/v10/classifier_docs/Documentation%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Box%20Classifier%20Release%20Notes.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/box/v12/Box%20Classifier%20Release%20Notes.htm",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Power Shell%20Release%20Note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/PowerShell%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Website%20For%20Clients%20Release%20Note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/Website%20For%20Clients%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Tech Pubs",
+          "children": [
+            {
+              "name": "Forcepoint Insights API Documentation",
+              "url": "https://help.forcepoint.com/docs/Tech_Pubs/Insights/ingapi/index.html",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Shared",
+          "children": [
+            {
+              "name": "V8.5.4 Release Notes For The Forcepoint Security Manager",
+              "url": "https://help.forcepoint.com/docs/shared/v854/release_notes/first.aspx",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Email",
+          "children": [
+            {
+              "name": "Forcepoint Email Security Cloud: 2020 Release Notes",
+              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2020/first.aspx",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint Email Security Cloud: 2021 Release Notes",
+              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2021/first.aspx",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint Email Security Cloud: 2019 Release Notes",
+              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2019/first.aspx",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Forcepoint Product Documentation Sitemap",
+          "url": "https://help.forcepoint.com/docs/index.html",
           "children": [],
           "type": "document"
         }
