@@ -34,6 +34,8 @@ if (fs.existsSync(DATA_FILE)) {
 }
 
 const visited = new Set<string>(results.map(r => normalizeUrl(r.url)));
+// Track queued URLs to prevent duplicates in the queue
+const queued = new Set<string>(visited);
 const queue: { url: string; parentUrl?: string }[] = [];
 
 // Parse command line arguments for targeted run
@@ -54,6 +56,7 @@ if (targetUrl) {
     // Remove from visited so it gets re-crawled
     if (visited.has(normalizedTarget)) {
         visited.delete(normalizedTarget);
+        queued.delete(normalizedTarget);
         console.log(`Removed ${normalizedTarget} from visited set to force update.`);
     }
 
@@ -65,10 +68,13 @@ if (targetUrl) {
     }
 
     queue.push({ url: targetUrl });
+    queued.add(normalizedTarget);
 } else {
-    // Default behavior: start from global sitemap if not visited
-    if (!visited.has(normalizeUrl(START_URL))) {
+    // Default behavior: start from global sitemap if not visited/queued
+    const startNorm = normalizeUrl(START_URL);
+    if (!queued.has(startNorm)) {
         queue.push({ url: START_URL });
+        queued.add(startNorm);
     }
 }
 
@@ -154,7 +160,9 @@ async function processUrl(url: string, parentUrl?: string) {
                 try {
                     const absoluteUrl = new URL(href, url).toString();
                     const normAbsUrl = normalizeUrl(absoluteUrl);
-                    if (new URL(absoluteUrl).hostname === BASE_DOMAIN && !visited.has(normAbsUrl)) {
+                    // Use queued set to prevent duplicate queue items
+                    if (new URL(absoluteUrl).hostname === BASE_DOMAIN && !queued.has(normAbsUrl)) {
+                        queued.add(normAbsUrl);
                         links.push(absoluteUrl); // push original URL to queue, let processUrl normalize
                     }
                 } catch (e) {}
@@ -216,7 +224,11 @@ async function run() {
         // Actually, if we just rely on visited set, we are good.
         // But queue is empty.
         // We could restart crawl from START_URL to find new links, but visited set prevents re-crawling known pages.
-        queue.push({ url: START_URL });
+        const startNorm = normalizeUrl(START_URL);
+        if (!queued.has(startNorm)) {
+            queue.push({ url: START_URL });
+            queued.add(startNorm);
+        }
     }
 
     while (queue.length > 0 || processing > 0) {
@@ -225,7 +237,8 @@ async function run() {
             if (item) {
                 processing++;
                 processUrl(item.url, item.parentUrl).then(async () => {
-                    if (results.length % 100 === 0) await save();
+                    // Save every 500 pages instead of 100 to reduce I/O and serialization overhead
+                    if (results.length % 500 === 0) await save();
                 }).finally(() => {
                     processing--;
                 });
