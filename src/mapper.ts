@@ -1,22 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-
-// Using any to avoid TS headaches with legacy data
-interface DocNode {
-    [key: string]: any;
-}
-
-export function sanitize(text: any): string {
-    if (!text || typeof text !== 'string') return 'Untitled';
-    return text.replace(/[\(\)\[\]\{\}"'#;:|]/g, ' ')
-               .replace(/&/g, '&amp;')
-               .replace(/</g, '&lt;')
-               .replace(/>/g, '&gt;')
-               .replace(/[\r\n]+/g, ' ')
-               .replace(/\s+/g, ' ')
-               .trim();
-}
+import { sanitize } from './utils/string_utils.ts';
+import type { DocNode } from './types.ts';
 
 function run() {
     const dataPath = path.join(process.cwd(), 'full_site_data.json');

@@ -5,7 +5,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-strip-types --test tests/*.test.ts"
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "crawl": "node --experimental-strip-types src/crawler.ts",
+    "clean": "node --experimental-strip-types src/clean_data.ts",
+    "gen-mindmap": "node --experimental-strip-types src/generate_mindmap.ts",
+    "gen-flowchart": "node --experimental-strip-types src/mapper.ts",
+    "gen-d3": "node --experimental-strip-types src/generate_d3_data.ts",
+    "render": "node --experimental-strip-types src/render_poc.ts",
+    "pipeline": "npm run crawl && npm run clean && npm run gen-mindmap && npm run gen-flowchart && npm run gen-d3 && npm run render"
   },
   "keywords": [],
   "author": "",

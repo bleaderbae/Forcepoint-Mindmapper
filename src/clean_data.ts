@@ -1,13 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
-// Relaxed interface
-interface DocNode {
-    url?: string;
-    title?: string;
-    breadcrumbs?: string[];
-    [key: string]: any;
-}
+import { normalizeUrl } from './utils/url_utils.ts';
+import type { DocNode } from './types.ts';
 
 const DATA_FILE = path.join(process.cwd(), 'full_site_data.json');
 
@@ -17,22 +11,18 @@ function run() {
         process.exit(1);
     }
 
-    const rawData: any[] = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
+    const rawData: DocNode[] = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
     console.log(`Original data size: ${rawData.length} nodes.`);
 
     const nonHtmlRegex = /\.(pdf|png|jpg|jpeg|gif|css|js|json|xml|txt|zip|tar|gz|bmp|ico)$/i;
 
-    // Filter and normalize
     const uniqueMap = new Map<string, DocNode>();
 
-    // Iterate over raw data
     for (const node of rawData) {
-        if (!node.url || typeof node.url !== 'string') continue;
+        if (!node.url) continue;
         if (nonHtmlRegex.test(node.url)) continue;
 
-        let url = node.url.split('#')[0];
-        url = url.split('?')[0];
-
+        const url = normalizeUrl(node.url);
         const cleanedNode: DocNode = { ...node, url };
 
         if (uniqueMap.has(url)) {
@@ -52,7 +42,6 @@ function run() {
     let filteredData = Array.from(uniqueMap.values());
     console.log(`After deduplication: ${filteredData.length} nodes.`);
 
-    // Fix Empty Titles
     for (const node of filteredData) {
         let title = node.title ? node.title.trim() : '';
 
@@ -83,11 +72,9 @@ function run() {
         node.title = title || 'Untitled Page';
     }
 
-    // Filter empty titles
     filteredData = filteredData.filter(node => node.title && node.title.trim().length > 0);
     console.log(`Final count: ${filteredData.length} nodes.`);
 
-    // Save
     fs.writeFileSync(DATA_FILE, JSON.stringify(filteredData, null, 2));
     console.log(`Cleaned data saved to ${DATA_FILE}`);
 }

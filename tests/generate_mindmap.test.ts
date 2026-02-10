@@ -1,7 +1,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
 import { buildTree, sortChildren } from '../src/generate_mindmap.ts';
-import type { DocNode, TreeNode } from '../src/generate_mindmap.ts';
+import type { DocNode, TreeNode } from '../src/types.ts';
 
 describe('buildTree (generate_mindmap)', () => {
     test('should return root for empty data', () => {
