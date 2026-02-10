@@ -83,6 +83,23 @@ let processing = 0;
 async function processUrl(url: string, parentUrl?: string) {
     const normalizedUrl = normalizeUrl(url);
     if (visited.has(normalizedUrl)) return;
+
+    // Security: Strict Scope Validation
+    try {
+        const urlObj = new URL(normalizedUrl);
+        if (urlObj.hostname !== BASE_DOMAIN) {
+            console.log(`Skipping off-domain URL: ${normalizedUrl}`);
+            return;
+        }
+        if (!['http:', 'https:'].includes(urlObj.protocol)) {
+            console.log(`Skipping unsafe protocol: ${normalizedUrl}`);
+            return;
+        }
+    } catch (e) {
+        console.error(`Skipping invalid URL: ${url}`);
+        return;
+    }
+
     visited.add(normalizedUrl);
 
     // Skip obviously non-HTML extensions
