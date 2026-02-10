@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+import * as fs from 'fs';
+import * as path from 'path';
+
+function run() {
+    const dataPath = path.join(process.cwd(), 'd3-data.json');
+    if (!fs.existsSync(dataPath)) {
+        console.error('d3-data.json not found. Run npm run gen-d3 first.');
+        return;
+    }
+
+    const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -558,4 +568,10 @@
         init();
     </script>
 </body>
-</html>
+</html>`;
+
+    fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
+    console.log('Gemini-style Canvas index.html generated.');
+}
+
+run();
