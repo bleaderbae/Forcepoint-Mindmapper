@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { buildTree } from '../src/generate_mindmap.ts';
 import type { DocNode } from '../src/generate_mindmap.ts';
 
-describe('buildTree', () => {
+describe('buildTree (Legacy Logic)', () => {
     test('should return root for empty data', () => {
         const data: DocNode[] = [];
         const result = buildTree(data);
@@ -88,7 +88,7 @@ describe('buildTree', () => {
         assert.strictEqual(sectionA.childrenMap!.has('Page 2'), true);
     });
 
-    test('should use Uncategorized if breadcrumbs empty', () => {
+    test('should handle undefined or empty breadcrumbs', () => {
          const data: DocNode[] = [
             {
                 url: 'http://example.com/p1',

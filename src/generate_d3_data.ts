@@ -2,7 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { PRODUCT_CONFIG } from './product_config.ts';
-import type { ProductConfig } from './product_config.ts';
+import type { DocNode } from './types.ts';
+import { humanize, getCategory } from './utils/string_utils.ts';
+import { getVariant } from './utils/product_utils.ts';
 
 interface D3Node {
     name: string;
@@ -11,64 +13,6 @@ interface D3Node {
     childrenMap?: Map<string, D3Node>;
     _children?: D3Node[];
     type?: 'document' | 'legal' | 'category' | 'variant' | 'version';
-}
-
-export function humanize(text: string): string {
-    if (!text) return '';
-    if (/^v?\d+(\.\d+|x)*$/.test(text)) return text; // Versions
-
-    return text
-        .replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/[\(\)\[\]\{\}"'#;]/g, '') 
-        .replace(/[-_]/g, ' ')
-        .replace(/\.html$/i, '')
-        .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase
-        .replace(/\b(ack|rn|relnotes|release notes)\b/gi, 'Release Notes')
-        .replace(/\b(install|installation)\b/gi, 'Installation')
-        .replace(/\b(admin|administrator)\b/gi, 'Administrator')
-        .replace(/\b(guide|help|online help|documentation|sitemap)\b/gi, '')
-        .trim()
-        .replace(/\s+/g, ' ')
-        .split(' ')
-        .map(w => {
-            if (w.length > 1 && w === w.toUpperCase()) return w;
-            return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
-        })
-        .join(' ');
-}
-
-export function getCategory(text: string): string {
-    const t = text.toLowerCase();
-    if (t.includes('install') || t.includes('deploy')) return 'Installation & Deployment';
-    if (t.includes('admin') || t.includes('manage') || t.includes('config')) return 'Administration';
-    if (t.includes('release') || t.includes('rn') || t.includes('relnotes')) return 'Release Notes';
-    if (t.includes('troubleshoot') || t.includes('limitations') || t.includes('known issues')) return 'Troubleshooting';
-    if (t.includes('legal') || t.includes('third-party') || t.includes('acknowledg')) return 'Legal & Third Party';
-    return 'General';
-}
-
-export function getVariant(prodCode: string, title: string, url: string): string | null {
-    const config = PRODUCT_CONFIG[prodCode];
-    if (!config) return null;
-
-    // Check variants by regex
-    if (config.variants) {
-        for (const v of config.variants) {
-            if (v.pattern.test(title) || v.pattern.test(url)) {
-                return v.name;
-            }
-        }
-    }
-
-    // Special logic for Appliances based on URL version
-    if (prodCode === 'appliance') {
-        if (/\/2\./.test(url) || /\/2\.x\//.test(url)) return 'Security Appliance Manager (FSAM)';
-        return 'Forcepoint Appliances (V-Series)';
-    }
-
-    return config.defaultVariant || 'General';
 }
 
 function run() {

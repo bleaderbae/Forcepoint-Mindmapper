@@ -1,6 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import { sanitize } from '../src/mapper.ts';
+import { sanitize } from '../src/utils/string_utils.ts';
 
 describe('sanitize', () => {
     test('should return "Untitled" for empty or null input', () => {

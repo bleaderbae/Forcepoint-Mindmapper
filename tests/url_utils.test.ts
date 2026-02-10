@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert';
-import { normalizeUrl } from '../src/url_utils.ts';
+import { normalizeUrl } from '../src/utils/url_utils.ts';
 
 describe('normalizeUrl', () => {
     test('should normalize a standard URL', () => {

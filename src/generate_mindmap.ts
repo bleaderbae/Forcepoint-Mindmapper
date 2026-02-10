@@ -1,33 +1,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-
-export interface DocNode {
-    url: string;
-    title: string;
-    breadcrumbs: string[];
-    nextUrl?: string;
-    prevUrl?: string;
-}
-
-export interface TreeNode {
-    title: string;
-    url?: string;
-    children: TreeNode[];
-    childrenMap?: Map<string, TreeNode>;
-    nextUrl?: string | undefined; // Derived from the page associated with this node
-}
+import type { DocNode, TreeNode } from './types.ts';
+import { sanitize } from './utils/string_utils.ts';
 
 const DATA_FILE = path.join(process.cwd(), 'full_site_data.json');
 const OUTPUT_FILE = path.join(process.cwd(), 'mindmap.mmd');
-
-function sanitize(text: string): string {
-    return text.replace(/[\(\)\[\]\{\}"'#;]/g, '')
-               .replace(/&/g, '&amp;')
-               .replace(/</g, '&lt;')
-               .replace(/>/g, '&gt;')
-               .trim();
-}
 
 export function buildTree(data: DocNode[]): TreeNode {
     const root: TreeNode = { title: 'Forcepoint Help', children: [], childrenMap: new Map() };
@@ -57,15 +35,16 @@ export function buildTree(data: DocNode[]): TreeNode {
 
         // Traverse breadcrumbs
         for (const crumb of doc.breadcrumbs) {
-            if (crumb === 'Home') continue; // Skip Home as it's root
-            current = findOrCreateChild(current, crumb);
+            const cleanCrumb = sanitize(crumb);
+            if (cleanCrumb === 'Home' || !cleanCrumb || cleanCrumb === 'Untitled') continue; // Skip Home as it's root
+            current = findOrCreateChild(current, cleanCrumb);
         }
 
-        // Add the document itself as a child of the last breadcrumb
-        // But check if it already exists (sometimes breadcrumbs include the page itself or it was created as a parent for someone else)
+        const cleanTitle = sanitize(doc.title);
+        if (cleanTitle === 'Untitled') return; // Skip if no title
 
         // If current node title matches doc title (e.g. self-referencing breadcrumb), update current node directly
-        if (current.title === doc.title) {
+        if (current.title === cleanTitle) {
             current.url = doc.url;
             current.nextUrl = doc.nextUrl;
         } else {
@@ -74,11 +53,11 @@ export function buildTree(data: DocNode[]): TreeNode {
                 current.children.forEach(c => current.childrenMap!.set(c.title, c));
             }
 
-            let docNode = current.childrenMap.get(doc.title);
+            let docNode = current.childrenMap.get(cleanTitle);
             if (!docNode) {
-                docNode = { title: doc.title, children: [], childrenMap: new Map() };
+                docNode = { title: cleanTitle, children: [], childrenMap: new Map() };
                 current.children.push(docNode);
-                current.childrenMap.set(doc.title, docNode);
+                current.childrenMap.set(cleanTitle, docNode);
             }
 
             // Update node with doc info
@@ -93,40 +72,30 @@ export function buildTree(data: DocNode[]): TreeNode {
 export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
     if (!node.children || node.children.length === 0) return;
 
-    // Create a map of title -> node for quick lookup
-    const titleToNode = new Map<string, TreeNode>();
+    // Create a map of URL -> node for accurate lookup
+    const urlToNode = new Map<string, TreeNode>();
     node.children.forEach(c => {
-        if (!titleToNode.has(c.title)) {
-            titleToNode.set(c.title, c);
+        if (c.url) {
+            urlToNode.set(c.url, c);
         }
     });
 
-    // Identify the start of the chain(s)
-    // A node is a start if no other node in the siblings points to it via nextUrl
-    // Note: nextUrl points to a URL. We need to map URL to title/node.
-
     // Build a graph of next pointers among siblings
-    const nextMap = new Map<string, string>(); // title -> nextTitle
-    const prevMap = new Map<string, string>(); // nextTitle -> title
+    const nextMap = new Map<TreeNode, TreeNode>(); // node -> nextNode
+    const prevMap = new Map<TreeNode, TreeNode>(); // nextNode -> node
 
     node.children.forEach(child => {
         if (child.url && child.nextUrl) {
-            const nextDoc = urlToDoc.get(child.nextUrl);
-            if (nextDoc) {
-                // Check if nextDoc is a sibling
-                // Note: titles might not be unique globally, but we hope they are unique among siblings.
-                // If nextDoc is in the children list, add edge.
-                const sibling = titleToNode.get(nextDoc.title); // heuristic matching by title
-                if (sibling) {
-                    nextMap.set(child.title, sibling.title);
-                    prevMap.set(sibling.title, child.title);
-                }
+            const sibling = urlToNode.get(child.nextUrl);
+            if (sibling && sibling !== child) {
+                nextMap.set(child, sibling);
+                prevMap.set(sibling, child);
             }
         }
     });
 
-    // Find nodes that are not anyone's 'next' (potential starts)
-    const starts = node.children.filter(c => !prevMap.has(c.title));
+    // Find nodes that are not anyone's 'next' (potential starts of chains)
+    const starts = node.children.filter(c => !prevMap.has(c));
 
     // Sort logic:
     // Follow the chain from each start node.
@@ -141,11 +110,8 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
         visited.add(n);
         sorted.push(n);
 
-        const nextTitle = nextMap.get(n.title);
-        if (nextTitle) {
-            const nextNode = titleToNode.get(nextTitle);
-            if (nextNode) traverse(nextNode);
-        }
+        const nextNode = nextMap.get(n);
+        if (nextNode) traverse(nextNode);
     };
 
     starts.forEach(start => traverse(start));
@@ -153,7 +119,7 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
     // Add any unvisited nodes (disconnected components or cycles)
     node.children.forEach(c => {
         if (!visited.has(c)) {
-            sorted.push(c);
+            traverse(c);
         }
     });
 

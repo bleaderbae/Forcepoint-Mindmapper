@@ -1,6 +1,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import { getCategory, humanize, getVariant } from '../src/generate_d3_data.ts';
+import { getCategory, humanize } from '../src/utils/string_utils.ts';
+import { getVariant } from '../src/utils/product_utils.ts';
 
 describe('getCategory', () => {
     test('should categorize installation & deployment', () => {
