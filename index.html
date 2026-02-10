@@ -162,6 +162,8 @@
             font-size: 13px;
             font-weight: 500;
             pointer-events: none;
+            fill: var(--fp-navy) !important;
+            fill-opacity: 1 !important;
         }
 
         .node.highlight rect {
@@ -404,20 +406,20 @@
                 .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
                 .on("click", (event, d) => {
-                    // Selection logic
-                    if (selectedNode === d) {
-                        // Toggle if already selected
+                    // Always select and update sidebar
+                    selectNode(d);
+
+                    // Toggle expansion if children exist
+                    if (d.children || d._children) {
                         if (d.children) {
                             d._children = d.children;
                             d.children = null;
-                        } else if (d._children) {
+                        } else {
                             d.children = d._children;
                             d._children = null;
                         }
-                    } else {
-                        selectNode(d);
+                        update(d);
                     }
-                    update(d);
                 });
 
             nodeEnter.append("rect")
@@ -429,7 +431,10 @@
             nodeEnter.append("text")
                 .attr("dy", ".35em")
                 .attr("x", 16)
-                .text(d => d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name)
+                .text(d => {
+                    const name = d.data.name || "Untitled";
+                    return name.length > 30 ? name.substring(0, 27) + "..." : name;
+                })
                 .style("fill-opacity", 0);
 
             const nodeUpdate = nodeEnter.merge(node);
@@ -504,10 +509,10 @@
             const linkContainer = document.getElementById('sidebar-link-container');
 
             sidebar.classList.add('open');
-            title.textContent = d.data.name;
-            
+            title.textContent = d.data.name || "Untitled";
+
             // Build path
-            const path = d.ancestors().reverse().map(a => a.data.name).join(" › ");
+            const path = d.ancestors().reverse().map(a => a.data.name || "Untitled").join(" › ");
             pathEl.textContent = path;
 
             // Tag
