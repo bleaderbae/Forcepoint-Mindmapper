@@ -32,7 +32,10 @@ export function humanize(text: string): string {
         .trim()
         .replace(/\s+/g, ' ')
         .split(' ')
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+        .map(w => {
+            if (w.length > 1 && w === w.toUpperCase()) return w;
+            return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+        })
         .join(' ');
 }
 
