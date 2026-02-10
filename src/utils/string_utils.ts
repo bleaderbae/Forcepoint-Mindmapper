@@ -22,7 +22,7 @@ export function humanize(text: string): string {
     if (!text) return '';
     if (/^v?\d+(\.\d+|x)*$/.test(text)) return text; // Versions
 
-    return text
+    let result = text
         .replace(/&amp;/g, '&')
         .replace(/&lt;/g, '<')
         .replace(/&gt;/g, '>')
@@ -32,9 +32,16 @@ export function humanize(text: string): string {
         .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase
         .replace(/\b(ack|rn|relnotes|release notes)\b/gi, 'Release Notes')
         .replace(/\b(install|installation)\b/gi, 'Installation')
-        .replace(/\b(admin|administrator)\b/gi, 'Administrator')
-        .replace(/\b(guide|help|online help|documentation|sitemap)\b/gi, '')
-        .trim()
+        .replace(/\b(admin|administrator)\b/gi, 'Administrator');
+
+    const beforeGeneric = result;
+    result = result.replace(/\b(guide|help|online help|documentation|sitemap)\b/gi, '').trim();
+
+    if (!result) {
+        result = beforeGeneric.trim();
+    }
+
+    return result
         .replace(/\s+/g, ' ')
         .split(' ')
         .map(w => {

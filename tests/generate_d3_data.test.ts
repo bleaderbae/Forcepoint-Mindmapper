@@ -64,8 +64,8 @@ describe('humanize', () => {
         { input: 'rn', expected: 'Release Notes' },
         { input: 'ack', expected: 'Release Notes' },
         { input: 'relnotes', expected: 'Release Notes' },
-        { input: 'guide', expected: '' },
-        { input: 'help', expected: '' },
+        { input: 'guide', expected: 'Guide' },
+        { input: 'help', expected: 'Help' },
 
         // Complex Combinations
         { input: 'admin-guide', expected: 'Administrator' },

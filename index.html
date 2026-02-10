@@ -162,6 +162,8 @@
             font-size: 13px;
             font-weight: 500;
             pointer-events: none;
+            fill: var(--fp-navy) !important;
+            fill-opacity: 1 !important;
         }
 
         .node.highlight rect {
@@ -347,13 +349,9 @@
             root.x0 = height / 2;
             root.y0 = 0;
 
-            // Initial state: Expand level 0 and 1
+            // Initial state: Expand level 0 (Root), collapse all level 1 nodes
             if (root.children) {
-                root.children.forEach(d => {
-                    if (d.children) {
-                        d.children.forEach(collapse);
-                    }
-                });
+                root.children.forEach(collapse);
             }
 
             update(root);
@@ -402,22 +400,30 @@
 
             const nodeEnter = node.enter().append("g")
                 .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
-                .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
+                .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => {
-                    // Selection logic
-                    if (selectedNode === d) {
-                        // Toggle if already selected
+                    // Always select and update sidebar
+                    selectNode(d);
+
+                    // Toggle expansion if children exist
+                    if (d.children || d._children) {
                         if (d.children) {
                             d._children = d.children;
                             d.children = null;
-                        } else if (d._children) {
+                        } else {
+                            // Close siblings (Accordion behavior)
+                            if (d.parent && d.parent.children) {
+                                d.parent.children.forEach(sibling => {
+                                    if (sibling !== d && sibling.children) {
+                                        collapse(sibling);
+                                    }
+                                });
+                            }
                             d.children = d._children;
                             d._children = null;
                         }
-                    } else {
-                        selectNode(d);
+                        update(d);
                     }
-                    update(d);
                 });
 
             nodeEnter.append("rect")
@@ -429,7 +435,10 @@
             nodeEnter.append("text")
                 .attr("dy", ".35em")
                 .attr("x", 16)
-                .text(d => d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name)
+                .text(d => {
+                    const name = d.data.name || "Untitled";
+                    return name.length > 30 ? name.substring(0, 27) + "..." : name;
+                })
                 .style("fill-opacity", 0);
 
             const nodeUpdate = nodeEnter.merge(node);
@@ -442,7 +451,7 @@
             nodeUpdate.select("text").style("fill-opacity", 1);
 
             const nodeExit = node.exit().transition().duration(duration)
-                .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
+                .attr("transform", d => "translate(" + (source.y ?? 0) + "," + (source.x ?? 0) + ")")
                 .remove();
 
             nodeExit.select("rect").style("fill-opacity", 0);
@@ -454,7 +463,7 @@
             const linkEnter = link.enter().insert("path", "g")
                 .attr("class", "link")
                 .attr("d", d => {
-                    const o = { x: source.x0, y: source.y0 + config.nodeWidth / 2 };
+                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth / 2 };
                     return diagonal(o, o);
                 });
 
@@ -469,7 +478,7 @@
 
             const linkExit = link.exit().transition().duration(duration)
                 .attr("d", d => {
-                    const o = { x: source.x, y: source.y + config.nodeWidth / 2 };
+                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth / 2 };
                     return diagonal(o, o);
                 })
                 .remove();
@@ -504,10 +513,10 @@
             const linkContainer = document.getElementById('sidebar-link-container');
 
             sidebar.classList.add('open');
-            title.textContent = d.data.name;
-            
+            title.textContent = d.data.name || "Untitled";
+
             // Build path
-            const path = d.ancestors().reverse().map(a => a.data.name).join(" › ");
+            const path = d.ancestors().reverse().map(a => a.data.name || "Untitled").join(" › ");
             pathEl.textContent = path;
 
             // Tag
