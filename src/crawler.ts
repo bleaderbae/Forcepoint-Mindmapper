@@ -81,6 +81,23 @@ async function fetchWithRetry(url: string, retries = MAX_RETRIES): Promise<any> 
 async function processUrl(url: string, parentUrl?: string) {
     const normalizedUrl = normalizeUrl(url);
     if (visited.has(normalizedUrl)) return;
+
+    // Security: Strict Scope Validation
+    try {
+        const urlObj = new URL(normalizedUrl);
+        if (urlObj.hostname !== BASE_DOMAIN) {
+            console.log(`Skipping off-domain URL: ${normalizedUrl}`);
+            return;
+        }
+        if (!['http:', 'https:'].includes(urlObj.protocol)) {
+            console.log(`Skipping unsafe protocol: ${normalizedUrl}`);
+            return;
+        }
+    } catch (e) {
+        console.error(`Skipping invalid URL: ${url}`);
+        return;
+    }
+
     visited.add(normalizedUrl);
 
     if (url.match(/\.(pdf|png|jpg|jpeg|gif|css|js|json|xml|zip|tar|gz)$/i)) {
