@@ -35,15 +35,16 @@ export function buildTree(data: DocNode[]): TreeNode {
 
         // Traverse breadcrumbs
         for (const crumb of doc.breadcrumbs) {
-            if (crumb === 'Home') continue; // Skip Home as it's root
-            current = findOrCreateChild(current, crumb);
+            const cleanCrumb = sanitize(crumb);
+            if (cleanCrumb === 'Home' || !cleanCrumb || cleanCrumb === 'Untitled') continue; // Skip Home as it's root
+            current = findOrCreateChild(current, cleanCrumb);
         }
 
-        // Add the document itself as a child of the last breadcrumb
-        // But check if it already exists (sometimes breadcrumbs include the page itself or it was created as a parent for someone else)
+        const cleanTitle = sanitize(doc.title);
+        if (cleanTitle === 'Untitled') return; // Skip if no title
 
         // If current node title matches doc title (e.g. self-referencing breadcrumb), update current node directly
-        if (current.title === doc.title) {
+        if (current.title === cleanTitle) {
             current.url = doc.url;
             current.nextUrl = doc.nextUrl;
         } else {
@@ -52,11 +53,11 @@ export function buildTree(data: DocNode[]): TreeNode {
                 current.children.forEach(c => current.childrenMap!.set(c.title, c));
             }
 
-            let docNode = current.childrenMap.get(doc.title);
+            let docNode = current.childrenMap.get(cleanTitle);
             if (!docNode) {
-                docNode = { title: doc.title, children: [], childrenMap: new Map() };
+                docNode = { title: cleanTitle, children: [], childrenMap: new Map() };
                 current.children.push(docNode);
-                current.childrenMap.set(doc.title, docNode);
+                current.childrenMap.set(cleanTitle, docNode);
             }
 
             // Update node with doc info
