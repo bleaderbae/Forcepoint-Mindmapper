@@ -402,55 +402,77 @@ function run() {
         }
 
         function update(source) {
-            const nodes = treeLayout(root).descendants();
-            const links = nodes.slice(1);
+            // Recalculate tree layout
+            const treeData = treeLayout(root);
+            const nodes = treeData.descendants();
+            const links = treeData.links();
 
+            // Normalize for fixed-depth
             nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
 
+            // --- Nodes section ---
             const node = nodeGroup.selectAll("g.node")
                 .data(nodes, d => d.id || (d.id = ++i));
 
+            // Enter any new nodes at the parent's previous position
             const nodeEnter = node.enter().append("g")
                 .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
-                .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
+                .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => {
-                    // Selection logic
-                    if (selectedNode === d) {
-                        // Toggle if already selected
+                    selectNode(d);
+                    if (d.children || d._children) {
                         if (d.children) {
                             d._children = d.children;
                             d.children = null;
-                        } else if (d._children) {
+                        } else {
+                            // Close siblings (Accordion behavior)
+                            if (d.parent && d.parent.children) {
+                                d.parent.children.forEach(sibling => {
+                                    if (sibling !== d && sibling.children) {
+                                        collapse(sibling);
+                                    }
+                                });
+                            }
                             d.children = d._children;
                             d._children = null;
                         }
-                    } else {
-                        selectNode(d);
+                        update(d);
                     }
-                    update(d);
                 });
 
             nodeEnter.append("rect")
                 .attr("width", config.nodeWidth)
                 .attr("height", config.nodeHeight)
                 .attr("y", -config.nodeHeight / 2)
+                .attr("rx", 8)
+                .attr("ry", 8)
                 .style("fill-opacity", 0);
 
             nodeEnter.append("text")
                 .attr("dy", ".35em")
                 .attr("x", 16)
-                .text(d => d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name)
+                .text(d => {
+                    const name = d.data.name || "Untitled";
+                    return name.length > 30 ? name.substring(0, 27) + "..." : name;
+                })
                 .style("fill-opacity", 0);
 
+            // Update
             const nodeUpdate = nodeEnter.merge(node);
 
+            nodeUpdate.classed("node--selected", d => d === selectedNode);
+
+            // Transition nodes to their new position
             nodeUpdate.transition().duration(duration)
-                .attr("transform", d => "translate(" + d.y + "," + d.x + ")")
-                .classed("node--selected", d => d === selectedNode);
+                .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
-            nodeUpdate.select("rect").style("fill-opacity", 1);
-            nodeUpdate.select("text").style("fill-opacity", 1);
+            nodeUpdate.select("rect")
+                .style("fill-opacity", 1);
 
+            nodeUpdate.select("text")
+                .style("fill-opacity", 1);
+
+            // Exit nodes
             const nodeExit = node.exit().transition().duration(duration)
                 .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
                 .remove();
@@ -458,32 +480,36 @@ function run() {
             nodeExit.select("rect").style("fill-opacity", 0);
             nodeExit.select("text").style("fill-opacity", 0);
 
+            // --- Links section ---
             const link = linkGroup.selectAll("path.link")
-                .data(links, d => d.id);
+                .data(links, d => d.target.id);
 
+            // Enter any new links at the parent's previous position
             const linkEnter = link.enter().insert("path", "g")
                 .attr("class", "link")
                 .attr("d", d => {
-                    const o = { x: source.x0, y: source.y0 + config.nodeWidth / 2 };
+                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth / 2 };
                     return diagonal(o, o);
                 });
 
+            // Transition links to their new position
             const linkUpdate = linkEnter.merge(link);
-
             linkUpdate.transition().duration(duration)
                 .attr("d", d => {
-                    const s = { x: d.parent.x, y: d.parent.y + config.nodeWidth };
-                    const t = { x: d.x, y: d.y };
+                    const s = { x: d.source.x, y: d.source.y + config.nodeWidth };
+                    const t = { x: d.target.x, y: d.target.y };
                     return diagonal(s, t);
                 });
 
+            // Transition exiting links to the parent's new position
             const linkExit = link.exit().transition().duration(duration)
                 .attr("d", d => {
-                    const o = { x: source.x, y: source.y + config.nodeWidth / 2 };
+                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth / 2 };
                     return diagonal(o, o);
                 })
                 .remove();
 
+            // Stash the old positions for transition
             nodes.forEach(d => {
                 d.x0 = d.x;
                 d.y0 = d.y;
