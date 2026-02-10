@@ -42,4 +42,11 @@ describe('sanitize', () => {
         // 4. trim -> "Title Draft v1.0"
         assert.strictEqual(sanitize(input), 'Title Draft v1.0');
     });
+
+    test('should escape HTML entities', () => {
+        assert.strictEqual(sanitize('A & B'), 'A &amp; B');
+        assert.strictEqual(sanitize('A < B'), 'A &lt; B');
+        assert.strictEqual(sanitize('A > B'), 'A &gt; B');
+        assert.strictEqual(sanitize('A & B < C > D'), 'A &amp; B &lt; C &gt; D');
+    });
 });
