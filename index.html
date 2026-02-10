@@ -414,7 +414,7 @@
                             // Close siblings (Accordion behavior)
                             if (d.parent && d.parent.children) {
                                 d.parent.children.forEach(sibling => {
-                                    if (sibling !== d) {
+                                    if (sibling !== d && sibling.children) {
                                         collapse(sibling);
                                     }
                                 });
