@@ -23,11 +23,31 @@ function run() {
             --fp-navy: #1d252c;
             --fp-gray: #636569;
             --fp-light: #f5f6f6;
+            
+            --bg-color: var(--fp-light);
+            --header-bg: var(--fp-navy);
+            --card-bg: #ffffff;
+            --text-primary: var(--fp-navy);
+            --text-secondary: var(--fp-gray);
+            --border-color: #e2e8f0;
             --node-bg: #ffffff;
             --edge-color: #cbd5e0;
+            --grid-color: #d1d1d1;
             --sidebar-width: 350px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --header-bg: #020617;
+            --card-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --node-bg: #1e293b;
+            --edge-color: #475569;
+            --grid-color: #334155;
         }
 
         * { box-sizing: border-box; }
@@ -37,8 +57,9 @@ function run() {
             padding: 0;
             overflow: hidden;
             font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--fp-light);
-            color: var(--fp-navy);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
@@ -47,7 +68,7 @@ function run() {
             left: 0;
             right: 0;
             height: 64px;
-            background-color: var(--fp-navy);
+            background-color: var(--header-bg);
             color: white;
             display: flex;
             align-items: center;
@@ -92,6 +113,25 @@ function run() {
             box-shadow: 0 0 0 3px rgba(0, 175, 154, 0.3);
         }
 
+        .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
         #main-container {
             display: flex;
             width: 100vw;
@@ -104,7 +144,7 @@ function run() {
             height: 100%;
             cursor: grab;
             background-image: 
-                radial-gradient(circle, #d1d1d1 1.5px, transparent 1.5px);
+                radial-gradient(circle, var(--grid-color) 1.5px, transparent 1.5px);
             background-size: 48px 48px;
             position: relative;
         }
@@ -116,14 +156,14 @@ function run() {
         #sidebar {
             width: var(--sidebar-width);
             height: 100%;
-            background: white;
-            border-left: 1px solid #e2e8f0;
+            background: var(--card-bg);
+            border-left: 1px solid var(--border-color);
             padding: 24px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             transform: translateX(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
             position: relative;
             z-index: 500;
             box-shadow: -4px 0 12px rgba(0,0,0,0.05);
@@ -145,16 +185,16 @@ function run() {
             border: none;
             font-size: 24px;
             cursor: pointer;
-            color: var(--fp-gray);
+            color: var(--text-secondary);
         }
 
         .node rect {
             fill: var(--node-bg);
-            stroke: #e2e8f0;
+            stroke: var(--border-color);
             stroke-width: 1px;
             rx: 8;
             ry: 8;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease, fill 0.3s ease, stroke 0.3s ease;
         }
 
         .node--selected rect {
@@ -172,6 +212,8 @@ function run() {
             font-size: 13px;
             font-weight: 500;
             pointer-events: none;
+            fill: var(--text-primary);
+            transition: fill 0.3s ease;
         }
 
         .node.highlight rect {
@@ -184,7 +226,7 @@ function run() {
             fill: none;
             stroke: var(--edge-color);
             stroke-width: 2px;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease, stroke 0.3s ease;
         }
 
         .controls {
@@ -197,8 +239,8 @@ function run() {
         }
 
         .btn {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             width: 44px;
             height: 44px;
             border-radius: 10px;
@@ -208,12 +250,12 @@ function run() {
             cursor: pointer;
             box-shadow: var(--shadow);
             font-size: 20px;
-            color: var(--fp-navy);
+            color: var(--text-primary);
             transition: all 0.2s;
         }
 
         .btn:hover {
-            background: #f8fafc;
+            background: var(--bg-color);
             border-color: var(--fp-green);
             color: var(--fp-green);
             transform: translateY(-2px);
@@ -234,9 +276,15 @@ function run() {
         .tag-document { background: #f0fff4; color: #2f855a; }
         .tag-legal { background: #fff5f5; color: #c53030; }
 
+        .dark-mode .tag-category { background: #2d3748; color: #cbd5e0; }
+        .dark-mode .tag-version { background: #2c5282; color: #bee3f8; }
+        .dark-mode .tag-variant { background: #44337a; color: #e9d8fd; }
+        .dark-mode .tag-document { background: #22543d; color: #c6f6d5; }
+        .dark-mode .tag-legal { background: #742a2a; color: #fed7d7; }
+
         .crumb-path {
             font-size: 12px;
-            color: var(--fp-gray);
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
@@ -271,11 +319,12 @@ function run() {
             bottom: 32px;
             right: 32px;
             font-size: 12px;
-            color: var(--fp-gray);
-            background: rgba(255,255,255,0.8);
+            color: var(--text-secondary);
+            background: var(--card-bg);
             padding: 8px 12px;
             border-radius: 6px;
             pointer-events: none;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -286,6 +335,9 @@ function run() {
             <div id="search-container">
                 <input type="text" id="search-input" placeholder="Search docs (Press / to focus)">
             </div>
+            <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+                🌓
+            </button>
         </div>
     </header>
 
@@ -307,7 +359,7 @@ function run() {
             <h2 class="sidebar-title" id="sidebar-title">Node Title</h2>
             <div class="crumb-path" id="sidebar-path"></div>
             <div id="sidebar-content">
-                <p style="color:var(--fp-gray);">Select a node to view details.</p>
+                <p style="color:var(--text-secondary);">Select a node to view details.</p>
             </div>
             <div id="sidebar-link-container"></div>
         </div>
@@ -328,6 +380,25 @@ function run() {
         const duration = 600;
 
         const treeLayout = d3.tree().nodeSize([70, config.levelWidth]);
+
+        // Theme management
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        });
+
+        initTheme();
 
         async function init() {
             const data = await d3.json('d3-data.json?v=' + new Date().getTime());
@@ -597,7 +668,7 @@ function run() {
 </html>`;
 
     fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
-    console.log('Gemini-style Canvas index.html generated.');
+    console.log('Gemini-style Canvas with Dark Mode index.html generated.');
 }
 
 run();
