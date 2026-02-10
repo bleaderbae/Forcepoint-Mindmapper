@@ -95,7 +95,11 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
 
     // Create a map of title -> node for quick lookup
     const titleToNode = new Map<string, TreeNode>();
-    node.children.forEach(c => titleToNode.set(c.title, c));
+    node.children.forEach(c => {
+        if (!titleToNode.has(c.title)) {
+            titleToNode.set(c.title, c);
+        }
+    });
 
     // Identify the start of the chain(s)
     // A node is a start if no other node in the siblings points to it via nextUrl
@@ -112,7 +116,7 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
                 // Check if nextDoc is a sibling
                 // Note: titles might not be unique globally, but we hope they are unique among siblings.
                 // If nextDoc is in the children list, add edge.
-                const sibling = node.children.find(c => c.title === nextDoc.title); // heuristic matching by title
+                const sibling = titleToNode.get(nextDoc.title); // heuristic matching by title
                 if (sibling) {
                     nextMap.set(child.title, sibling.title);
                     prevMap.set(sibling.title, child.title);
@@ -130,11 +134,11 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
     // If cycles, visited set prevents infinite loops.
 
     const sorted: TreeNode[] = [];
-    const visited = new Set<string>();
+    const visited = new Set<TreeNode>();
 
     const traverse = (n: TreeNode) => {
-        if (visited.has(n.title)) return;
-        visited.add(n.title);
+        if (visited.has(n)) return;
+        visited.add(n);
         sorted.push(n);
 
         const nextTitle = nextMap.get(n.title);
@@ -148,7 +152,7 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
 
     // Add any unvisited nodes (disconnected components or cycles)
     node.children.forEach(c => {
-        if (!visited.has(c.title)) {
+        if (!visited.has(c)) {
             sorted.push(c);
         }
     });
