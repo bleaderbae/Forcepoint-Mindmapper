@@ -53,6 +53,7 @@
             height: calc(100vh - 70px); /* Adjust based on header height */
             background: white;
             cursor: grab;
+            position: relative;
         }
         #viz-container:active {
             cursor: grabbing;
@@ -110,6 +111,39 @@
             display: flex;
             gap: 10px;
         }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: var(--fp-navy);
+            font-weight: bold;
+            z-index: 100;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e0e0;
+            border-top: 4px solid var(--fp-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Focus Styles */
+        .btn:focus-visible {
+            outline: 2px solid var(--fp-navy);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
@@ -120,7 +154,12 @@
         </div>
     </header>
 
-    <div id="viz-container"></div>
+    <div id="viz-container" aria-live="polite">
+        <div class="loading-overlay">
+            <div class="spinner"></div>
+            <div>Loading mind map...</div>
+        </div>
+    </div>
     <div class="tooltip" id="tooltip"></div>
 
     <div class="controls">
@@ -145,6 +184,9 @@
 
         // Load data
         d3.json("d3-data.json").then(data => {
+            // Remove loading indicator
+            d3.select(".loading-overlay").remove();
+
             root = d3.hierarchy(data);
             root.x0 = height / 2;
             root.y0 = 0;
@@ -187,7 +229,14 @@
             update(root);
         }).catch(err => {
             console.error("Error loading data:", err);
-            document.getElementById('viz-container').innerHTML = `<p style="padding:2rem; color:red;">Error loading mind map data. Please insure d3-data.json exists.</p>`;
+            const container = document.getElementById('viz-container');
+            container.innerHTML = `
+                <div class="loading-overlay" style="color: var(--fp-gray);">
+                    <div style="font-size: 2rem; margin-bottom: 0;">⚠️</div>
+                    <div>Error loading mind map data.</div>
+                    <div style="font-weight: normal; font-size: 0.9rem; color: #d32f2f;">Please ensure d3-data.json exists.</div>
+                </div>
+            `;
         });
 
         function update(source) {
