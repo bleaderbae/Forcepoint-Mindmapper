@@ -8,6 +8,7 @@ interface D3Node {
     name: string;
     url?: string;
     children?: D3Node[];
+    childrenMap?: Map<string, D3Node>;
     _children?: D3Node[];
     type?: 'document' | 'legal' | 'category' | 'variant' | 'version';
 }
@@ -76,12 +77,24 @@ function run() {
     const root: D3Node = { name: "Forcepoint Documentation", children: [], type: 'category' };
 
     const findChild = (parent: D3Node, name: string): D3Node | undefined => {
+        if (parent.childrenMap) {
+            return parent.childrenMap.get(name);
+        }
         return parent.children?.find(c => c.name === name);
     };
 
     const addChild = (parent: D3Node, child: D3Node) => {
         if (!parent.children) parent.children = [];
         parent.children.push(child);
+
+        if (!parent.childrenMap) {
+            Object.defineProperty(parent, 'childrenMap', {
+                value: new Map<string, D3Node>(),
+                enumerable: false,
+                writable: true
+            });
+        }
+        parent.childrenMap!.set(child.name, child);
     };
 
     for (const page of data) {
