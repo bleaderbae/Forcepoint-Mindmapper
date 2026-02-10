@@ -39,33 +39,48 @@ describe('getCategory', () => {
 });
 
 describe('humanize', () => {
-    test('should handle empty strings', () => {
-        assert.strictEqual(humanize(''), '');
-    });
+    const testCases = [
+        // Basic Transformations
+        { input: '', expected: '' },
+        { input: 'hello-world', expected: 'Hello World' },
+        { input: 'hello_world', expected: 'Hello World' },
+        { input: 'test.html', expected: 'Test' },
+        { input: 'camelCase', expected: 'Camel Case' },
+        { input: 'PascalCase', expected: 'Pascal Case' },
+        { input: 'UPPERCASE', expected: 'UPPERCASE' },
+        { input: 'MixedCASE', expected: 'Mixed CASE' },
 
-    test('should handle versions', () => {
-        assert.strictEqual(humanize('v1.0'), 'v1.0');
-        assert.strictEqual(humanize('8.9.x'), '8.9.x');
-    });
+        // Versions (Preserved)
+        { input: 'v1.0', expected: 'v1.0' },
+        { input: '8.9.x', expected: '8.9.x' },
+        { input: '2023', expected: '2023' },
 
-    test('should clean hyphens and underscores', () => {
-        assert.strictEqual(humanize('hello-world_test'), 'Hello World Test');
-    });
+        // Keyword Replacements
+        { input: 'admin', expected: 'Administrator' },
+        { input: 'administrator', expected: 'Administrator' },
+        { input: 'install', expected: 'Installation' },
+        { input: 'installation', expected: 'Installation' },
+        { input: 'rn', expected: 'Release Notes' },
+        { input: 'ack', expected: 'Release Notes' },
+        { input: 'relnotes', expected: 'Release Notes' },
+        { input: 'guide', expected: '' },
+        { input: 'help', expected: '' },
 
-    test('should handle camelCase', () => {
-        assert.strictEqual(humanize('mySmallApp'), 'My Small App');
-    });
+        // Complex Combinations
+        { input: 'admin-guide', expected: 'Administrator' },
+        { input: 'install_guide.html', expected: 'Installation' },
+        { input: 'rn-v1.0', expected: 'Release Notes V1.0' },
+        { input: 'my_admin_guide', expected: 'My Administrator' },
+        { input: 'deployment_guide', expected: 'Deployment' },
+        { input: '  extra   spaces  ', expected: 'Extra Spaces' },
+        { input: 'administration_guide', expected: 'Administration' }, // Preserving old test case logic
+        { input: 'hello-world_test', expected: 'Hello World Test' }, // Preserving old test case logic
+    ];
 
-    test('should replace specific keywords', () => {
-        assert.strictEqual(humanize('install_guide'), 'Installation');
-        assert.strictEqual(humanize('relnotes_v1'), 'Release Notes V1');
-    });
-
-    test('should remove guide/help', () => {
-        // "administration_guide" -> "Administration Guide" -> "Administrator " -> "Administrator"
-        // Wait, "guide" is replaced by "" then trimmed.
-        // humanize replaces "admin" with "Administrator"
-        assert.strictEqual(humanize('administration_guide'), 'Administration');
+    testCases.forEach(({ input, expected }) => {
+        test(`should transform "${input}" to "${expected}"`, () => {
+            assert.strictEqual(humanize(input), expected);
+        });
     });
 });
 
