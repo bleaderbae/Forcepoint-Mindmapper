@@ -1255,10 +1255,10 @@
                       "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/10A24454-A9C9-47E7-BCD4-5B820CE02379.html"
                     },
                     {
-                      "name": "",
-                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/81975446-7415-4840-993D-D1BA6377E58C.html",
+                      "name": "Online Help",
                       "children": [],
-                      "type": "document"
+                      "type": "document",
+                      "url": "https://help.forcepoint.com/dlp/10.4.0/dlphelp/81975446-7415-4840-993D-D1BA6377E58C.html"
                     },
                     {
                       "name": "Linking Service",
@@ -1488,7 +1488,7 @@
       "name": "Data Security Cloud",
       "children": [
         {
-          "name": "",
+          "name": "Online Help",
           "children": [
             {
               "name": "Forcepoint Data Security Cloud",
