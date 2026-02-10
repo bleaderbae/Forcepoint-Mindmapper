@@ -162,8 +162,6 @@
             font-size: 13px;
             font-weight: 500;
             pointer-events: none;
-            fill: var(--fp-navy) !important;
-            fill-opacity: 1 !important;
         }
 
         .node.highlight rect {
@@ -349,9 +347,13 @@
             root.x0 = height / 2;
             root.y0 = 0;
 
-            // Initial state: Expand level 0 (Root), collapse all level 1 nodes
+            // Initial state: Expand level 0 and 1
             if (root.children) {
-                root.children.forEach(collapse);
+                root.children.forEach(d => {
+                    if (d.children) {
+                        d.children.forEach(collapse);
+                    }
+                });
             }
 
             update(root);
@@ -390,22 +392,24 @@
         }
 
         function update(source) {
-            const nodes = treeLayout(root).descendants();
-            const links = nodes.slice(1);
+            // Recalculate tree layout
+            const treeData = treeLayout(root);
+            const nodes = treeData.descendants();
+            const links = treeData.links();
 
+            // Normalize for fixed-depth
             nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
 
+            // --- Nodes section ---
             const node = nodeGroup.selectAll("g.node")
                 .data(nodes, d => d.id || (d.id = ++i));
 
+            // Enter any new nodes at the parent's previous position
             const nodeEnter = node.enter().append("g")
                 .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => {
-                    // Always select and update sidebar
                     selectNode(d);
-
-                    // Toggle expansion if children exist
                     if (d.children || d._children) {
                         if (d.children) {
                             d._children = d.children;
@@ -430,6 +434,8 @@
                 .attr("width", config.nodeWidth)
                 .attr("height", config.nodeHeight)
                 .attr("y", -config.nodeHeight / 2)
+                .attr("rx", 8)
+                .attr("ry", 8)
                 .style("fill-opacity", 0);
 
             nodeEnter.append("text")
@@ -441,25 +447,34 @@
                 })
                 .style("fill-opacity", 0);
 
+            // Update
             const nodeUpdate = nodeEnter.merge(node);
 
+            nodeUpdate.classed("node--selected", d => d === selectedNode);
+
+            // Transition nodes to their new position
             nodeUpdate.transition().duration(duration)
-                .attr("transform", d => "translate(" + d.y + "," + d.x + ")")
-                .classed("node--selected", d => d === selectedNode);
+                .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
-            nodeUpdate.select("rect").style("fill-opacity", 1);
-            nodeUpdate.select("text").style("fill-opacity", 1);
+            nodeUpdate.select("rect")
+                .style("fill-opacity", 1);
 
+            nodeUpdate.select("text")
+                .style("fill-opacity", 1);
+
+            // Exit nodes
             const nodeExit = node.exit().transition().duration(duration)
-                .attr("transform", d => "translate(" + (source.y ?? 0) + "," + (source.x ?? 0) + ")")
+                .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
                 .remove();
 
             nodeExit.select("rect").style("fill-opacity", 0);
             nodeExit.select("text").style("fill-opacity", 0);
 
+            // --- Links section ---
             const link = linkGroup.selectAll("path.link")
-                .data(links, d => d.id);
+                .data(links, d => d.target.id);
 
+            // Enter any new links at the parent's previous position
             const linkEnter = link.enter().insert("path", "g")
                 .attr("class", "link")
                 .attr("d", d => {
@@ -467,15 +482,16 @@
                     return diagonal(o, o);
                 });
 
+            // Transition links to their new position
             const linkUpdate = linkEnter.merge(link);
-
             linkUpdate.transition().duration(duration)
                 .attr("d", d => {
-                    const s = { x: d.parent.x, y: d.parent.y + config.nodeWidth };
-                    const t = { x: d.x, y: d.y };
+                    const s = { x: d.source.x, y: d.source.y + config.nodeWidth };
+                    const t = { x: d.target.x, y: d.target.y };
                     return diagonal(s, t);
                 });
 
+            // Transition exiting links to the parent's new position
             const linkExit = link.exit().transition().duration(duration)
                 .attr("d", d => {
                     const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth / 2 };
@@ -483,6 +499,7 @@
                 })
                 .remove();
 
+            // Stash the old positions for transition
             nodes.forEach(d => {
                 d.x0 = d.x;
                 d.y0 = d.y;
@@ -513,10 +530,10 @@
             const linkContainer = document.getElementById('sidebar-link-container');
 
             sidebar.classList.add('open');
-            title.textContent = d.data.name || "Untitled";
-
+            title.textContent = d.data.name;
+            
             // Build path
-            const path = d.ancestors().reverse().map(a => a.data.name || "Untitled").join(" › ");
+            const path = d.ancestors().reverse().map(a => a.data.name).join(" › ");
             pathEl.textContent = path;
 
             // Tag
