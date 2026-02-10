@@ -6270,14 +6270,6 @@
     "links": []
   },
   {
-    "url": "https://help.forcepoint.com/docs/index.html",
-    "title": "Forcepoint Product Documentation Sitemap",
-    "breadcrumbs": [],
-    "content": "",
-    "relatedUrls": [],
-    "lastScraped": "2026-02-09T18:13:43.914Z"
-  },
-  {
     "url": "https://help.forcepoint.com/fpdsc/en-us/online-help/index.html",
     "title": "Forcepoint Data Security Cloud Online Help",
     "breadcrumbs": [],
@@ -9712,5 +9704,13 @@
     "parentUrl": "https://help.forcepoint.com/docs/Forcepoint_V-Series_and_Virtual_Appliances_Documentation.html",
     "relatedUrls": [],
     "lastScraped": "2026-02-09T18:14:28.035Z"
+  },
+  {
+    "url": "https://help.forcepoint.com/docs/index.html",
+    "title": "Forcepoint Product Documentation Sitemap",
+    "breadcrumbs": [],
+    "content": "",
+    "relatedUrls": [],
+    "lastScraped": "2026-02-10T02:38:49.100Z"
   }
 ]
