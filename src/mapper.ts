@@ -1,12 +1,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
 // Using any to avoid TS headaches with legacy data
 interface DocNode {
     [key: string]: any;
 }
 
-function sanitize(text: any): string {
+export function sanitize(text: any): string {
     if (!text || typeof text !== 'string') return 'Untitled';
     return text.replace(/[\[\]\(\)\|":;]/g, ' ')
                .replace(/&/g, '&amp;')
@@ -110,4 +111,6 @@ function run() {
     }
 }
 
-run();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    run();
+}
