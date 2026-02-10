@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { PRODUCT_CONFIG, ProductConfig } from './product_config';
+import { fileURLToPath } from 'url';
+import { PRODUCT_CONFIG } from './product_config.ts';
+import type { ProductConfig } from './product_config.ts';
 
 interface D3Node {
     name: string;
@@ -10,7 +12,7 @@ interface D3Node {
     type?: 'document' | 'legal' | 'category' | 'variant' | 'version';
 }
 
-function humanize(text: string): string {
+export function humanize(text: string): string {
     if (!text) return '';
     if (/^v?\d+(\.\d+|x)*$/.test(text)) return text; // Versions
 
@@ -18,10 +20,10 @@ function humanize(text: string): string {
         .replace(/[-_]/g, ' ')
         .replace(/\.html$/i, '')
         .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase
-        .replace(/\b(ack|rn|relnotes|release notes)\b/yi, 'Release Notes')
-        .replace(/\b(install|installation)\b/yi, 'Installation')
-        .replace(/\b(admin|administrator)\b/yi, 'Administrator')
-        .replace(/\b(guide|help)\b/yi, '')
+        .replace(/\b(ack|rn|relnotes|release notes)\b/gi, 'Release Notes')
+        .replace(/\b(install|installation)\b/gi, 'Installation')
+        .replace(/\b(admin|administrator)\b/gi, 'Administrator')
+        .replace(/\b(guide|help)\b/gi, '')
         .trim()
         .replace(/\s+/g, ' ')
         .split(' ')
@@ -29,7 +31,7 @@ function humanize(text: string): string {
         .join(' ');
 }
 
-function getCategory(text: string): string {
+export function getCategory(text: string): string {
     const t = text.toLowerCase();
     if (t.includes('install') || t.includes('deploy')) return 'Installation & Deployment';
     if (t.includes('admin') || t.includes('manage') || t.includes('config')) return 'Administration';
@@ -39,7 +41,7 @@ function getCategory(text: string): string {
     return 'General';
 }
 
-function getVariant(prodCode: string, title: string, url: string): string | null {
+export function getVariant(prodCode: string, title: string, url: string): string | null {
     const config = PRODUCT_CONFIG[prodCode];
     if (!config) return null;
 
@@ -216,4 +218,6 @@ function run() {
     console.log(`D3 data saved to ${outputPath}`);
 }
 
-run();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    run();
+}
