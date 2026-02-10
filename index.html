@@ -267,8 +267,13 @@
                      const tooltip = d3.select("#tooltip");
                      if (d.data.url) {
                          tooltip.style("opacity", 1)
-                                .html(`${d.data.name}<br/><span style="color:#ccc;font-size:10px">${d.data.url}</span>`)
-                                .style("left", (event.pageX + 10) + "px")
+                                .text(""); // Clear
+                         tooltip.append("div").text(d.data.name);
+                         tooltip.append("div")
+                                .style("color", "#ccc")
+                                .style("font-size", "10px")
+                                .text(d.data.url);
+                         tooltip.style("left", (event.pageX + 10) + "px")
                                 .style("top", (event.pageY - 28) + "px");
                      }
                 })

@@ -20,7 +20,11 @@ const DATA_FILE = path.join(process.cwd(), 'full_site_data.json');
 const OUTPUT_FILE = path.join(process.cwd(), 'mindmap.mmd');
 
 function sanitize(text: string): string {
-    return text.replace(/[\(\)\[\]\{\}"'#;]/g, '').trim();
+    return text.replace(/[\(\)\[\]\{\}"'#;]/g, '')
+               .replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .trim();
 }
 
 function buildTree(data: DocNode[]): TreeNode {
