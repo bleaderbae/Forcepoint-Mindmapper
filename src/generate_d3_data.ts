@@ -25,7 +25,7 @@ function run() {
     const data: any[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
     console.log(`Processing ${data.length} nodes for D3...`);
 
-    const root: D3Node = { name: "Forcepoint Documentation", children: [], type: 'category' };
+    const root: D3Node = { name: "Forcepoint", children: [], type: 'category' };
 
     const findChild = (parent: D3Node, name: string): D3Node | undefined => {
         if (parent.childrenMap) {
@@ -68,8 +68,50 @@ function run() {
         const prodCode = segments[0] || '';
         if (!prodCode) continue;
 
-        const config = PRODUCT_CONFIG[prodCode];
-        const prodName = config ? config.name : humanize(prodCode);
+        let finalProdCode = prodCode;
+        let nextIndex = 1;
+
+        if (prodCode === 'docs') {
+            if (segments.length > 1) {
+                // Use the next segment as the product code (e.g. /docs/bjces/ -> bjces)
+                finalProdCode = segments[1];
+                
+                // Map common sub-folders to proper products
+                if (finalProdCode === 'Tech_Pubs' || finalProdCode === 'shared' || finalProdCode === 'product-docs') {
+                    finalProdCode = 'general';
+                } else if (finalProdCode === 'email') {
+                    finalProdCode = 'emailsec';
+                } else if (finalProdCode === 'web') {
+                    finalProdCode = 'websec';
+                }
+                
+                nextIndex = 2; // Skip 'docs' and the product code segment
+            } else {
+                // Root docs pages need keyword matching
+                const combined = (page.title + ' ' + page.url).toLowerCase();
+                if (combined.includes('dlp') || combined.includes('data security')) finalProdCode = 'dlp';
+                else if (combined.includes('f1e')) finalProdCode = 'F1E';
+                else if (combined.includes('one') || combined.includes('sse')) finalProdCode = 'fpone';
+                else if (combined.includes('email')) finalProdCode = 'emailsec';
+                else if (combined.includes('web')) finalProdCode = 'websec';
+                else if (combined.includes('appliance')) finalProdCode = 'appliance';
+                else if (combined.includes('insights')) finalProdCode = 'insights';
+                else if (combined.includes('dspm')) finalProdCode = 'dspm';
+                else if (combined.includes('rbi')) finalProdCode = 'frbi';
+                else if (combined.includes('ngfw') || combined.includes('firewall')) finalProdCode = 'ngfw';
+                else if (combined.includes('endpoint')) finalProdCode = 'endpoint';
+                else finalProdCode = 'general';
+                nextIndex = 1;
+            }
+        }
+
+        const config = PRODUCT_CONFIG[finalProdCode];
+        let prodName = config ? config.name : humanize(finalProdCode);
+
+        // Safety: never use "Docs" or "Documentation" as a top-level product name
+        if (prodName.toLowerCase() === 'docs' || prodName.toLowerCase() === 'documentation') {
+            prodName = 'Forcepoint General';
+        }
 
         let prodNode = findChild(current, prodName);
         if (!prodNode) {
@@ -81,7 +123,7 @@ function run() {
         // --- Step 2: Determine Variant ---
         // Some products like F1E or Forcepoint ONE need splitting by sub-product/variant
         // Check if we should insert a Variant Node
-        const variantName = getVariant(prodCode, page.title, page.url);
+        const variantName = getVariant(finalProdCode, page.title, page.url);
 
         if (variantName && variantName !== 'General') {
             let variantNode = findChild(current, variantName);
@@ -94,7 +136,6 @@ function run() {
 
         // --- Step 3: Version / Category ---
         // Heuristic: Skip locale if present
-        let nextIndex = 1;
         if (segments.length > nextIndex) {
             const seg = segments[nextIndex];
             if (seg && /^[a-z]{2}-[a-z]{2}$/i.test(seg)) {

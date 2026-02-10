@@ -1,5 +1,5 @@
 {
-  "name": "Forcepoint Documentation",
+  "name": "Forcepoint",
   "children": [
     {
       "name": "DLP",
@@ -1365,6 +1365,18 @@
               "type": "version"
             },
             {
+              "name": "Forcepoint Data Security",
+              "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Data Loss Prevention DLP",
+              "url": "https://help.forcepoint.com/docs/Data_Loss_Prevention_Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
               "name": "10.3.0",
               "children": [
                 {
@@ -1435,6 +1447,18 @@
                 }
               ],
               "type": "version"
+            },
+            {
+              "name": "Forcepoint DLP For Cloud Email",
+              "url": "https://help.forcepoint.com/docs/Forcepoint_DLP_for_Cloud_Email_Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint Data Security Cloud | SSE",
+              "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html",
+              "children": [],
+              "type": "document"
             },
             {
               "name": "Fone Integration",
@@ -1829,20 +1853,8 @@
       "type": "category"
     },
     {
-      "name": "Documentation",
+      "name": "Forcepoint General",
       "children": [
-        {
-          "name": "Forcepoint Data Security",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint DLP For Cloud Email",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_DLP_for_Cloud_Email_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
         {
           "name": "Forcepoint Data Visibility Powered By Get Visibility",
           "url": "https://help.forcepoint.com/docs/Forcepoint_Data_Security_Posture_Management_Documentation.html",
@@ -1868,56 +1880,8 @@
           "type": "document"
         },
         {
-          "name": "Forcepoint Data Security Cloud | SSE",
-          "url": "https://help.forcepoint.com/docs/Forcepoint%20ONE%20(FONE)%20SSE%20Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Insights",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Insights_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint ONE Mobile",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_ONE_Mobile_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Email Security On Premises",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint Email Security Cloud",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint F1E",
-          "url": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
           "name": "Advanced Malware Detection And Protection",
           "url": "https://help.forcepoint.com/docs/Advanced_Malware_Detection_and_Protection_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "NGFW Appliances",
-          "url": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Forcepoint V Series And Virtual Appliances",
-          "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html",
           "children": [],
           "type": "document"
         },
@@ -1934,73 +1898,7 @@
           "type": "document"
         },
         {
-          "name": "Data Loss Prevention DLP",
-          "url": "https://help.forcepoint.com/docs/Data_Loss_Prevention_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Web Security Cloud",
-          "url": "https://help.forcepoint.com/docs/Web_Security_Cloud_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Web Security",
-          "url": "https://help.forcepoint.com/docs/Web_Security_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Next Generation Firewall NGFW",
-          "url": "https://help.forcepoint.com/docs/Next_Generation_Firewall_Documentation.html",
-          "children": [],
-          "type": "document"
-        },
-        {
-          "name": "Bjces",
-          "children": [
-            {
-              "name": "Boldon James Release Note",
-              "url": "https://help.forcepoint.com/docs/bjces/owa/v310/Mail%20Add-In%20Website%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Release%20note.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v311/sharepoint_class_website_clients/Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Release Note",
-              "url": "https://help.forcepoint.com/docs/bjces/base/v10/classifier_docs/Documentation%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Box%20classifier%20release%20notes.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/box/v12/Box%20Classifier%20Release%20Notes.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Power Shell%20release%20note.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/PowerShell%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Website%20for%20clients%20release%20note.htm",
-              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/Website%20For%20Clients%20Release%20Note.htm",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "version"
-        },
-        {
-          "name": "Tech Pubs",
+          "name": "Insights",
           "children": [
             {
               "name": "Forcepoint Insights API",
@@ -2012,35 +1910,11 @@
           "type": "version"
         },
         {
-          "name": "Shared",
+          "name": "v854",
           "children": [
             {
               "name": "V8.5.4 Release Notes For The Forcepoint Security Manager",
               "url": "https://help.forcepoint.com/docs/shared/v854/release_notes/first.aspx",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "version"
-        },
-        {
-          "name": "Email",
-          "children": [
-            {
-              "name": "Forcepoint Email Security Cloud: 2020 Release Notes",
-              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2020/first.aspx",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint Email Security Cloud: 2021 Release Notes",
-              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2021/first.aspx",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint Email Security Cloud: 2019 Release Notes",
-              "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2019/first.aspx",
               "children": [],
               "type": "document"
             }
@@ -2107,6 +1981,54 @@
             }
           ],
           "type": "version"
+        },
+        {
+          "name": "Mobile",
+          "children": [
+            {
+              "name": "Forcepoint ONE Mobile",
+              "url": "https://help.forcepoint.com/docs/Forcepoint_ONE_Mobile_Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint Mobile",
+              "url": "https://help.forcepoint.com/fpone/mobile/online_help/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Legal & Third Party",
+              "children": [
+                {
+                  "name": "Forcepoint Mobile Acknowledgment Of Third Party Software",
+                  "url": "https://help.forcepoint.com/fpone/mobile/ack_third-party_legal_notices/index.html",
+                  "children": [],
+                  "type": "legal"
+                }
+              ],
+              "type": "category"
+            },
+            {
+              "name": "Deploy",
+              "children": [
+                {
+                  "name": "Setup Traffic Steering",
+                  "children": [
+                    {
+                      "name": "Deploying Mobile Agent",
+                      "children": [],
+                      "type": "document",
+                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-a9217e36-6160-4f10-94b3-a8170ccae15b.html"
+                    }
+                  ],
+                  "type": "category"
+                }
+              ],
+              "type": "version"
+            }
+          ],
+          "type": "variant"
         },
         {
           "name": "Deploy",
@@ -2559,48 +2481,30 @@
             }
           ],
           "type": "version"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "name": "Insights",
+      "children": [
+        {
+          "name": "Forcepoint Insights",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_Insights_Documentation.html",
+          "children": [],
+          "type": "document"
         },
         {
-          "name": "Mobile",
+          "name": "Userguide",
           "children": [
             {
-              "name": "Forcepoint Mobile",
-              "url": "https://help.forcepoint.com/fpone/mobile/online_help/index.html",
+              "name": "Insights User",
+              "url": "https://help.forcepoint.com/insights/en-us/userguide/index.html",
               "children": [],
               "type": "document"
-            },
-            {
-              "name": "Legal & Third Party",
-              "children": [
-                {
-                  "name": "Forcepoint Mobile Acknowledgment Of Third Party Software",
-                  "url": "https://help.forcepoint.com/fpone/mobile/ack_third-party_legal_notices/index.html",
-                  "children": [],
-                  "type": "legal"
-                }
-              ],
-              "type": "category"
-            },
-            {
-              "name": "Deploy",
-              "children": [
-                {
-                  "name": "Setup Traffic Steering",
-                  "children": [
-                    {
-                      "name": "Deploying Mobile Agent",
-                      "children": [],
-                      "type": "document",
-                      "url": "https://help.forcepoint.com/fpone/deploy/rhtml/guid-a9217e36-6160-4f10-94b3-a8170ccae15b.html"
-                    }
-                  ],
-                  "type": "category"
-                }
-              ],
-              "type": "version"
             }
           ],
-          "type": "variant"
+          "type": "version"
         }
       ],
       "type": "category"
@@ -3010,6 +2914,463 @@
       "type": "category"
     },
     {
+      "name": "Email Security",
+      "children": [
+        {
+          "name": "On-prem",
+          "children": [
+            {
+              "name": "Forcepoint Email Security On Premises",
+              "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "On Prem",
+              "children": [
+                {
+                  "name": "Forcepoint Email Security | Release Notes V8.5.7",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.7/release_notes/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security | Release Notes V8.5.5",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.5/release_notes/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security | Installation V8.5.x",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_install/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security | Upgrade V8.5.x",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_upgrade/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security | Installing Email Security In Microsoft Azure V8.5.x",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/azure_install/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security Gateway |",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Getting Started",
+                  "children": [],
+                  "type": "document",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/guid-486a358f-ceb6-42a6-93fd-ba56a851ef1e.html"
+                },
+                {
+                  "name": "Email Security | Secure Messaging User : Localized Versions",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_smd_user_help/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security | Message Encryption V8.5.x",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_encryption/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security | Security Information Event Management SIEM: Email Logs V8.5.x",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_siem/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Email Security Ports V8.5.x",
+                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_ports/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Legal & Third Party",
+                  "children": [
+                    {
+                      "name": "Email Security | Acknowledgment Of Third Party Software V8.5.x",
+                      "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/acknowledgments/index.html",
+                      "children": [],
+                      "type": "legal"
+                    }
+                  ],
+                  "type": "category"
+                }
+              ],
+              "type": "version"
+            }
+          ],
+          "type": "variant"
+        },
+        {
+          "name": "Cloud",
+          "children": [
+            {
+              "name": "Forcepoint Email Security Cloud",
+              "url": "https://help.forcepoint.com/docs/Forcepoint_Email_Security_Cloud_Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Email Security Cloud 2024: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2024/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Email Security Cloud 2025: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2025/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Email Security Cloud 2023: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2023/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Email Security Cloud 2022: Release Notes",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2022/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Hosted",
+              "children": [
+                {
+                  "name": "Forcepoint Email Security Cloud: 2020 Release Notes",
+                  "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2020/first.aspx",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Forcepoint Email Security Cloud: 2021 Release Notes",
+                  "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2021/first.aspx",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Forcepoint Email Security Cloud: 2019 Release Notes",
+                  "url": "https://help.forcepoint.com/docs/email/hosted/release_notes/2019/first.aspx",
+                  "children": [],
+                  "type": "document"
+                }
+              ],
+              "type": "version"
+            },
+            {
+              "name": "Email Security Cloud | Managing Cloud Email Protection Products",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/tech_tips/",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Email Security Cloud |",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/admin_guide/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Email Security Cloud | Getting Started With SIEM Integration",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/siem_guide/",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Email Security Cloud | End User",
+              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/enduser_guide/",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "variant"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "name": "F1E",
+      "children": [
+        {
+          "name": "Forcepoint F1E",
+          "url": "https://help.forcepoint.com/docs/Forcepoint_F1E_Documentation.html",
+          "children": [],
+          "type": "document"
+        },
+        {
+          "name": "v25",
+          "children": [
+            {
+              "name": "Release Notes For Forcepoint F1E",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint F1E Installation",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_install/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Deploying Forcepoint DLP Endpoint On Citrix Virtual Environments",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_xenapp/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint F1E Upgrade",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_upgrade/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Endpoint Applications",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_dlp_apps/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Automatic Updates For Forcepoint F1E Forcepoint DLP Endpoint",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_auto_update/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint F1E End User",
+              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_end_user/index.html",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "v24",
+          "children": [
+            {
+              "name": "Release Notes For Forcepoint F1E",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_release_notes/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint F1E Upgrade",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_upgrade/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint F1E Installation",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_install/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Deploying Forcepoint DLP Endpoint On Citrix Virtual Environments",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_xenapp/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Automatic Updates For Forcepoint F1E Forcepoint DLP Endpoint",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_auto_update/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Endpoint Applications",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_dlp_apps/index.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint F1E End User",
+              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_end_user/index.html",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "name": "Appliances",
+      "children": [
+        {
+          "name": "Forcepoint Appliances (V-Series)",
+          "children": [
+            {
+              "name": "NGFW Appliances",
+              "url": "https://help.forcepoint.com/docs/NGFW_Appliances_Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Forcepoint V Series And Virtual Appliances",
+              "url": "https://help.forcepoint.com/docs/Forcepoint%20V-Series%20and%20Virtual%20Appliances%20Documentation.html",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "8.5.7",
+              "children": [
+                {
+                  "name": "V8.5.7 Release Notes For Forcepoint Appliances",
+                  "url": "https://help.forcepoint.com/appliance/en-us/8.5.7/release_notes/index.html",
+                  "children": [],
+                  "type": "document"
+                }
+              ],
+              "type": "version"
+            },
+            {
+              "name": "8.5.6",
+              "children": [
+                {
+                  "name": "V8.5.6 Release Notes For Forcepoint Appliances",
+                  "url": "https://help.forcepoint.com/appliance/en-us/8.5.6/release_notes/index.html",
+                  "children": [],
+                  "type": "document"
+                }
+              ],
+              "type": "version"
+            }
+          ],
+          "type": "variant"
+        },
+        {
+          "name": "Security Appliance Manager (FSAM)",
+          "children": [
+            {
+              "name": "2.0.1",
+              "children": [
+                {
+                  "name": "Security Appliance Manager Release Notes",
+                  "url": "https://help.forcepoint.com/appliance/en-us/2.0.1/fsam/release_notes/",
+                  "children": [],
+                  "type": "document"
+                }
+              ],
+              "type": "version"
+            },
+            {
+              "name": "2.x",
+              "children": [
+                {
+                  "name": "Security Appliance Manager Installation",
+                  "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/install_guide/",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Security Appliance Manager FSAM Administrator",
+                  "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/admin_help/v-series-x-series-va/",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Security Appliance Manager Troubleshooting",
+                  "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/troubleshooting_guide/",
+                  "children": [],
+                  "type": "document"
+                }
+              ],
+              "type": "version"
+            }
+          ],
+          "type": "variant"
+        }
+      ],
+      "type": "category"
+    },
+    {
+      "name": "Web Security",
+      "children": [
+        {
+          "name": "Cloud",
+          "children": [
+            {
+              "name": "Web Security Cloud",
+              "url": "https://help.forcepoint.com/docs/Web_Security_Cloud_Documentation.html",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "variant"
+        },
+        {
+          "name": "On-prem",
+          "children": [
+            {
+              "name": "On Prem",
+              "children": [
+                {
+                  "name": "Web Security, DLP, And Email Security | Security Solutions Installation",
+                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_install/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Web Security, DLP, And Email Security | Security Solutions Upgrade",
+                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_upgrade/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Data, Email, And Web Security | Backup And Restore FAQ",
+                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/backup_faq/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Data, Email, And Web Security | Moving The Management Server",
+                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_mgmt_server/index.html",
+                  "children": [],
+                  "type": "document"
+                },
+                {
+                  "name": "Data, Email, And Web Security | Moving The Reporting Databases",
+                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_reporting_db/index.html",
+                  "children": [],
+                  "type": "document"
+                }
+              ],
+              "type": "version"
+            }
+          ],
+          "type": "variant"
+        }
+      ],
+      "type": "document",
+      "url": "https://help.forcepoint.com/docs/Web_Security_Documentation.html"
+    },
+    {
+      "name": "Next Generation Firewall (NGFW)",
+      "children": [
+        {
+          "name": "Next Generation Firewall NGFW",
+          "url": "https://help.forcepoint.com/docs/Next_Generation_Firewall_Documentation.html",
+          "children": [],
+          "type": "document"
+        }
+      ],
+      "type": "category"
+    },
+    {
       "name": "Data Security",
       "children": [
         {
@@ -3154,266 +3515,26 @@
       "type": "category"
     },
     {
-      "name": "Insights",
+      "name": "Boldon James",
       "children": [
         {
-          "name": "Userguide",
+          "name": "Base",
           "children": [
             {
-              "name": "Insights User",
-              "url": "https://help.forcepoint.com/insights/en-us/userguide/index.html",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "version"
-        }
-      ],
-      "type": "category"
-    },
-    {
-      "name": "Email Security",
-      "children": [
-        {
-          "name": "On-prem",
-          "children": [
-            {
-              "name": "On Prem",
-              "children": [
-                {
-                  "name": "Forcepoint Email Security | Release Notes V8.5.7",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.7/release_notes/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security | Release Notes V8.5.5",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.5/release_notes/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security | Installation V8.5.x",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_install/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security | Upgrade V8.5.x",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_upgrade/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security | Installing Email Security In Microsoft Azure V8.5.x",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/azure_install/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security Gateway |",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Getting Started",
-                  "children": [],
-                  "type": "document",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/admin_guide/guid-486a358f-ceb6-42a6-93fd-ba56a851ef1e.html"
-                },
-                {
-                  "name": "Email Security | Secure Messaging User : Localized Versions",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_smd_user_help/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security | Message Encryption V8.5.x",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_encryption/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security | Security Information Event Management SIEM: Email Logs V8.5.x",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_siem/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Email Security Ports V8.5.x",
-                  "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/email_ports/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Legal & Third Party",
-                  "children": [
-                    {
-                      "name": "Email Security | Acknowledgment Of Third Party Software V8.5.x",
-                      "url": "https://help.forcepoint.com/emailsec/en-us/on-prem/8.5.x/acknowledgments/index.html",
-                      "children": [],
-                      "type": "legal"
-                    }
-                  ],
-                  "type": "category"
-                }
-              ],
-              "type": "version"
-            }
-          ],
-          "type": "variant"
-        },
-        {
-          "name": "Cloud",
-          "children": [
-            {
-              "name": "Email Security Cloud 2024: Release Notes",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2024/index.html",
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/base/v115/system_info/Release%20Note.htm",
               "children": [],
               "type": "document"
             },
             {
-              "name": "Email Security Cloud 2025: Release Notes",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2025/index.html",
+              "name": "Release%20note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/base/v135/classifier_support_tool/Release%20Note.htm",
               "children": [],
               "type": "document"
             },
             {
-              "name": "Email Security Cloud 2023: Release Notes",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2023/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Email Security Cloud 2022: Release Notes",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/release_notes/2022/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Email Security Cloud | Managing Cloud Email Protection Products",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/tech_tips/",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Email Security Cloud |",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/admin_guide/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Email Security Cloud | Getting Started With SIEM Integration",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/siem_guide/",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Email Security Cloud | End User",
-              "url": "https://help.forcepoint.com/emailsec/en-us/cloud/enduser_guide/",
-              "children": [],
-              "type": "document"
-            }
-          ],
-          "type": "variant"
-        }
-      ],
-      "type": "category"
-    },
-    {
-      "name": "Web Security",
-      "children": [
-        {
-          "name": "On-prem",
-          "children": [
-            {
-              "name": "On Prem",
-              "children": [
-                {
-                  "name": "Web Security, DLP, And Email Security | Security Solutions Installation",
-                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_install/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Web Security, DLP, And Email Security | Security Solutions Upgrade",
-                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/security_solutions_upgrade/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Data, Email, And Web Security | Backup And Restore FAQ",
-                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/backup_faq/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Data, Email, And Web Security | Moving The Management Server",
-                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_mgmt_server/index.html",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Data, Email, And Web Security | Moving The Reporting Databases",
-                  "url": "https://help.forcepoint.com/websec/en-us/on-prem/85/move_reporting_db/index.html",
-                  "children": [],
-                  "type": "document"
-                }
-              ],
-              "type": "version"
-            }
-          ],
-          "type": "variant"
-        }
-      ],
-      "type": "category"
-    },
-    {
-      "name": "F1E",
-      "children": [
-        {
-          "name": "v25",
-          "children": [
-            {
-              "name": "Release Notes For Forcepoint F1E",
-              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_release_notes/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint F1E Installation",
-              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_install/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Deploying Forcepoint DLP Endpoint On Citrix Virtual Environments",
-              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_xenapp/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint F1E Upgrade",
-              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_upgrade/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Endpoint Applications",
-              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_dlp_apps/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Automatic Updates For Forcepoint F1E Forcepoint DLP Endpoint",
-              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_auto_update/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint F1E End User",
-              "url": "https://help.forcepoint.com/F1E/en-us/v25/ep_end_user/index.html",
+              "name": "Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/base/v10/classifier_docs/Documentation%20Release%20Note.htm",
               "children": [],
               "type": "document"
             }
@@ -3421,130 +3542,124 @@
           "type": "version"
         },
         {
-          "name": "v24",
+          "name": "Classifier",
           "children": [
             {
-              "name": "Release Notes For Forcepoint F1E",
-              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_release_notes/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint F1E Upgrade",
-              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_upgrade/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint F1E Installation",
-              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_install/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Deploying Forcepoint DLP Endpoint On Citrix Virtual Environments",
-              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_xenapp/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Automatic Updates For Forcepoint F1E Forcepoint DLP Endpoint",
-              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_auto_update/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Endpoint Applications",
-              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_dlp_apps/index.html",
-              "children": [],
-              "type": "document"
-            },
-            {
-              "name": "Forcepoint F1E End User",
-              "url": "https://help.forcepoint.com/F1E/en-us/v24/ep_end_user/index.html",
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/classifier/v21/reporting_intell_pack/Release%20Note.htm",
               "children": [],
               "type": "document"
             }
           ],
           "type": "version"
-        }
-      ],
-      "type": "category"
-    },
-    {
-      "name": "Appliances",
-      "children": [
-        {
-          "name": "Security Appliance Manager (FSAM)",
-          "children": [
-            {
-              "name": "2.0.1",
-              "children": [
-                {
-                  "name": "Security Appliance Manager Release Notes",
-                  "url": "https://help.forcepoint.com/appliance/en-us/2.0.1/fsam/release_notes/",
-                  "children": [],
-                  "type": "document"
-                }
-              ],
-              "type": "version"
-            },
-            {
-              "name": "2.x",
-              "children": [
-                {
-                  "name": "Security Appliance Manager Installation",
-                  "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/install_guide/",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Security Appliance Manager FSAM Administrator",
-                  "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/admin_help/v-series-x-series-va/",
-                  "children": [],
-                  "type": "document"
-                },
-                {
-                  "name": "Security Appliance Manager Troubleshooting",
-                  "url": "https://help.forcepoint.com/appliance/en-us/2.x/fsam/troubleshooting_guide/",
-                  "children": [],
-                  "type": "document"
-                }
-              ],
-              "type": "version"
-            }
-          ],
-          "type": "variant"
         },
         {
-          "name": "Forcepoint Appliances (V-Series)",
+          "name": "Mac",
           "children": [
             {
-              "name": "8.5.7",
-              "children": [
-                {
-                  "name": "V8.5.7 Release Notes For Forcepoint Appliances",
-                  "url": "https://help.forcepoint.com/appliance/en-us/8.5.7/release_notes/index.html",
-                  "children": [],
-                  "type": "document"
-                }
-              ],
-              "type": "version"
-            },
-            {
-              "name": "8.5.6",
-              "children": [
-                {
-                  "name": "V8.5.6 Release Notes For Forcepoint Appliances",
-                  "url": "https://help.forcepoint.com/appliance/en-us/8.5.6/release_notes/index.html",
-                  "children": [],
-                  "type": "document"
-                }
-              ],
-              "type": "version"
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/mac/v10/mac_api/Release%20Note.htm",
+              "children": [],
+              "type": "document"
             }
           ],
-          "type": "variant"
+          "type": "version"
+        },
+        {
+          "name": "Notes",
+          "children": [
+            {
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/notes/v387/notes/Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Power",
+          "children": [
+            {
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/power/v314/power/Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Box",
+          "children": [
+            {
+              "name": "Box%20classifier%20release%20notes.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/box/v12/Box%20Classifier%20Release%20Notes.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Cad",
+          "children": [
+            {
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/cad/DraftSight%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Exchange",
+          "children": [
+            {
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/exchange/Exchange%20Classifier%202016%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Owa",
+          "children": [
+            {
+              "name": "Boldon James Release Note",
+              "url": "https://help.forcepoint.com/docs/bjces/owa/v310/Mail%20Add-In%20Website%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
+        },
+        {
+          "name": "Sharepoint",
+          "children": [
+            {
+              "name": "Power Shell%20release%20note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/PowerShell%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Release%20note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v311/sharepoint_class_website_clients/Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            },
+            {
+              "name": "Website%20for%20clients%20release%20note.htm",
+              "url": "https://help.forcepoint.com/docs/bjces/sharepoint/v3105/Website%20For%20Clients%20Release%20Note.htm",
+              "children": [],
+              "type": "document"
+            }
+          ],
+          "type": "version"
         }
       ],
       "type": "category"

@@ -94,8 +94,8 @@ export const PRODUCT_CONFIG: Record<string, ProductConfig> = {
         variants: [],
         defaultVariant: 'General'
     },
-    'docs': {
-        name: 'Documentation',
+    'ngfw': {
+        name: 'Next Generation Firewall (NGFW)',
         variants: [],
         defaultVariant: 'General'
     },
@@ -111,6 +111,16 @@ export const PRODUCT_CONFIG: Record<string, ProductConfig> = {
     },
     'ap-data': {
         name: 'AP-Data',
+        variants: [],
+        defaultVariant: 'General'
+    },
+    'bjces': {
+        name: 'Boldon James',
+        variants: [],
+        defaultVariant: 'General'
+    },
+    'general': {
+        name: 'Forcepoint General',
         variants: [],
         defaultVariant: 'General'
     }
