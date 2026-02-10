@@ -9,9 +9,9 @@
 4.  **Generate Mermaid**: Run `npx ts-node src/mapper.ts` to generate `flowchart.mmd` and update `mermaid.html`.
 
 ## Visualization
-*   **Interactive (Primary)**: `index.html` uses D3.js to render a collapsible tree from `d3-data.json`.
-*   **Static (Fallback)**: `mermaid.html` uses Mermaid.js to render the graph defined in `flowchart.mmd`.
+*   **Interactive (Primary)**: `index.html` uses D3.js to render a collapsible, searchable tree from `d3-data.json`. This view handles scale better and supports deep navigation.
+*   **Static (Deprecated)**: `mermaid.html` is a legacy fallback using Mermaid.js. It is often too large to render for the full documentation set.
 
 ## Deployment
 *   The site is deployed via Vercel as a static site.
-*   Ensure `index.html`, `mermaid.html`, and `d3-data.json` are committed.
+*   Ensure `index.html` and `d3-data.json` are committed. `mermaid.html` is optional.

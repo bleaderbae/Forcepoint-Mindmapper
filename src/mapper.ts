@@ -9,7 +9,7 @@ interface DocNode {
 
 export function sanitize(text: any): string {
     if (!text || typeof text !== 'string') return 'Untitled';
-    return text.replace(/[\[\]\(\)\|":;]/g, ' ')
+    return text.replace(/[\(\)\[\]\{\}"'#;:]/g, ' ')
                .replace(/&/g, '&amp;')
                .replace(/</g, '&lt;')
                .replace(/>/g, '&gt;')

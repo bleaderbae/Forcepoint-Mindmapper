@@ -18,17 +18,21 @@ export function humanize(text: string): string {
     if (/^v?\d+(\.\d+|x)*$/.test(text)) return text; // Versions
 
     return text
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/[\(\)\[\]\{\}"'#;]/g, '') 
         .replace(/[-_]/g, ' ')
         .replace(/\.html$/i, '')
         .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase
         .replace(/\b(ack|rn|relnotes|release notes)\b/gi, 'Release Notes')
         .replace(/\b(install|installation)\b/gi, 'Installation')
         .replace(/\b(admin|administrator)\b/gi, 'Administrator')
-        .replace(/\b(guide|help)\b/gi, '')
+        .replace(/\b(guide|help|online help|documentation|sitemap)\b/gi, '')
         .trim()
         .replace(/\s+/g, ' ')
         .split(' ')
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
         .join(' ');
 }
 
@@ -188,16 +192,24 @@ function run() {
         }
 
         // --- Step 5: Merge Breadcrumbs ---
-        const crumbs = (page.breadcrumbs || []).filter((b: string) => b !== 'Home');
+        const crumbs = (page.breadcrumbs || []).filter((b: string) => {
+            const lower = b.toLowerCase();
+            return lower !== 'home' && 
+                   lower !== 'documentation' && 
+                   lower !== 'product documentation' &&
+                   lower !== 'sitemap';
+        });
 
         for (const crumb of crumbs) {
              let cleanCrumb = humanize(crumb);
+             if (!cleanCrumb) continue;
+
              // Skip redundancy with ancestors
-             // This is tricky. We need to check if cleanCrumb is redundant with ANY ancestor or current path.
-             // Simple check: redundant with current node name?
-             if (cleanCrumb === current.name) continue;
-             if (cleanCrumb === prodName) continue;
-             if (variantName && cleanCrumb === variantName) continue;
+             if (cleanCrumb === current.name || 
+                 cleanCrumb === prodName || 
+                 (variantName && cleanCrumb === variantName)) {
+                 continue;
+             }
 
              let child = findChild(current, cleanCrumb);
              if (!child) {

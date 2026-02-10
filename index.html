@@ -116,7 +116,6 @@
     <header>
         <h1>Forcepoint Documentation Mind Map</h1>
         <div>
-            <a href="mermaid.html" class="btn" style="margin-right: 10px; background-color: var(--fp-gray);">Static View</a>
             <a href="https://help.forcepoint.com" class="btn" target="_blank">View Original Docs</a>
         </div>
     </header>
@@ -135,8 +134,8 @@
         const width = window.innerWidth;
         const height = window.innerHeight - 70;
         const margin = {top: 20, right: 120, bottom: 20, left: 120};
-        const dx = 20; // vertical spacing
-        const dy = 200; // horizontal spacing
+        const dx = 30; // vertical spacing (increased for readability)
+        const dy = 250; // horizontal spacing (increased for longer titles)
 
         let root;
         let svg;
@@ -147,13 +146,18 @@
         // Load data
         d3.json("d3-data.json").then(data => {
             root = d3.hierarchy(data);
+            root.x0 = height / 2;
+            root.y0 = 0;
 
-            // Collapse all initially except root's immediate children
+            // Collapse all initially except root
             root.descendants().forEach((d, i) => {
                 d.id = i;
-                if (d.depth > 1) d._children = d.children; // preserve children
-                // if (d.depth > 1) d.children = null; // hide children initially?
-                // Let's verify collapse logic below
+                if (d.depth > 0) {
+                    if (d.children) {
+                        d._children = d.children;
+                        d.children = null;
+                    }
+                }
             });
 
             // Initialize Tree Layout
@@ -350,18 +354,14 @@
 
         function collapseAll() {
             if(!root) return;
-            root.each(d => {
-                if (d.children) {
+            root.descendants().forEach(d => {
+                if (d.depth > 0 && d.children) {
                     d._children = d.children;
                     d.children = null;
                 }
             });
-            // Keep root expanded?
-            if(root._children) {
-                root.children = root._children;
-                root._children = null;
-            }
             update(root);
+            resetZoom();
         }
 
         function resetZoom() {
