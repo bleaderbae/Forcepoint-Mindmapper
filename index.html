@@ -8,49 +8,95 @@
     <style>
         :root {
             --fp-green: #00af9a;
-            --fp-dark-green: #007565;
+            --fp-dark-green: #008575; /* WCAG Compliant for text on white */
             --fp-navy: #1d252c;
             --fp-gray: #636569;
             --fp-light: #f5f6f6;
+            --fp-accent-blue: #00bce4;
+            --fp-error: #eb0000; /* WCAG Compliant red */
         }
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
             background-color: var(--fp-light); 
             margin: 0; 
             padding: 0;
             color: var(--fp-navy);
-            overflow: hidden; /* Hide scrollbars, we use zoom/pan */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
         header {
             background-color: var(--fp-navy);
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 10;
-            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 100;
         }
-        header h1 { margin: 0; font-size: 1.5rem; }
+        header h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
+        
+        .main-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar for Categories */
+        #sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            overflow-y: auto;
+            z-index: 50;
+        }
+        #sidebar h2 { font-size: 0.9rem; text-transform: uppercase; color: var(--fp-gray); letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .sidebar-item {
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sidebar-item:hover { background: var(--fp-light); }
+        .sidebar-item.active { background: var(--fp-light); font-weight: 600; color: var(--fp-dark-green); }
+
         .btn {
-            background-color: var(--fp-green);
+            background-color: var(--fp-navy); /* Switched to navy for better contrast with white text */
             color: white;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.2);
             padding: 0.5rem 1rem;
-            border-radius: 2px;
-            font-weight: bold;
+            border-radius: 4px;
+            font-weight: 500;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.2s;
-            font-size: 0.9rem;
+            transition: all 0.2s;
+            font-size: 0.85rem;
         }
         .btn:hover {
-            background-color: var(--fp-dark-green);
+            background-color: #2c3a47;
+            border-color: var(--fp-accent-blue);
         }
+        .btn-primary {
+            background-color: var(--fp-green);
+            color: var(--fp-navy); /* Dark text on green for contrast */
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #00caaf;
+        }
+
         #viz-container {
-            width: 100vw;
-            height: calc(100vh - 70px); /* Adjust based on header height */
+            flex: 1;
             background: white;
             cursor: grab;
             position: relative;
@@ -63,53 +109,65 @@
         .node circle {
             fill: #fff;
             stroke: var(--fp-green);
-            stroke-width: 2px;
+            stroke-width: 2.5px;
             cursor: pointer;
+            transition: r 0.2s;
         }
-        .node circle:hover {
-            fill: var(--fp-green);
-            stroke: var(--fp-dark-green);
+        .node:hover circle {
+            r: 8;
+            stroke: var(--fp-accent-blue);
         }
         .node text {
-            font: 12px sans-serif;
+            font-size: 13px;
             fill: var(--fp-navy);
             cursor: pointer;
+            transition: font-weight 0.2s;
         }
-        .node text:hover {
-            font-weight: bold;
-            text-decoration: underline;
+        .node:hover text {
+            fill: var(--fp-dark-green);
+            font-weight: 600;
         }
         .link {
             fill: none;
-            stroke: #ccc;
-            stroke-width: 1.5px;
+            stroke: #e0e0e0;
+            stroke-width: 2px;
+            transition: stroke 0.2s;
+        }
+        .link.active {
+            stroke: var(--fp-accent-blue);
+            stroke-width: 3px;
         }
 
-        /* Tooltip */
+        /* Tooltip - Reimagined as a Card */
         .tooltip {
             position: absolute;
-            text-align: center;
-            padding: 8px;
-            font: 12px sans-serif;
-            background: var(--fp-navy);
-            color: #fff;
-            border-radius: 4px;
+            padding: 12px 16px;
+            font-size: 13px;
+            background: white;
+            color: var(--fp-navy);
+            border-radius: 8px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.2s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 1px solid #e0e0e0;
+            max-width: 250px;
+            z-index: 1000;
         }
+        .tooltip-title { font-weight: 700; margin-bottom: 4px; color: var(--fp-navy); }
+        .tooltip-url { font-size: 11px; color: var(--fp-gray); word-break: break-all; }
 
         /* Controls */
         .controls {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.9);
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            bottom: 24px;
+            right: 24px;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            border: 1px solid #eee;
         }
 
         /* Loading Overlay */
@@ -147,25 +205,34 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Forcepoint Documentation Mind Map</h1>
-        <div>
-            <a href="https://help.forcepoint.com" class="btn" target="_blank">View Original Docs</a>
-        </div>
+    <header role="banner">
+        <h1>Forcepoint Documentation Navigator</h1>
+        <nav>
+            <a href="https://help.forcepoint.com" class="btn" target="_blank">View Official Docs</a>
+        </nav>
     </header>
 
-    <div id="viz-container" aria-live="polite">
-        <div class="loading-overlay">
-            <div class="spinner"></div>
-            <div>Loading mind map...</div>
-        </div>
-    </div>
-    <div class="tooltip" id="tooltip"></div>
+    <div class="main-layout">
+        <aside id="sidebar" aria-label="Product Categories">
+            <h2>Products</h2>
+            <div id="category-list">
+                <!-- Categories will be populated dynamically -->
+            </div>
+        </aside>
 
-    <div class="controls">
-        <button class="btn" onclick="expandAll()">Expand All</button>
-        <button class="btn" onclick="collapseAll()">Collapse All</button>
-        <button class="btn" onclick="resetZoom()">Reset Zoom</button>
+        <main id="viz-container" role="main">
+            <div class="loading-overlay">
+                <div class="spinner"></div>
+                <div>Loading documentation map...</div>
+            </div>
+            <div class="tooltip" id="tooltip"></div>
+            
+            <div class="controls" role="group" aria-label="Map Controls">
+                <button class="btn" onclick="expandAll()" aria-label="Expand all nodes">Expand All</button>
+                <button class="btn" onclick="collapseAll()" aria-label="Collapse all nodes">Collapse All</button>
+                <button class="btn" onclick="resetZoom()" aria-label="Reset zoom and center">Reset</button>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -173,8 +240,8 @@
         const width = window.innerWidth;
         const height = window.innerHeight - 70;
         const margin = {top: 20, right: 120, bottom: 20, left: 120};
-        const dx = 30; // vertical spacing (increased for readability)
-        const dy = 250; // horizontal spacing (increased for longer titles)
+        const dx = 35; // vertical spacing
+        const dy = 280; // horizontal spacing
 
         let root;
         let svg;
@@ -190,6 +257,9 @@
             root = d3.hierarchy(data);
             root.x0 = height / 2;
             root.y0 = 0;
+
+            // Populate Sidebar
+            populateSidebar(root.children);
 
             // Collapse all initially except root
             root.descendants().forEach((d, i) => {
@@ -207,14 +277,12 @@
 
             // Create SVG
             svg = d3.select("#viz-container").append("svg")
-                .attr("width", width)
-                .attr("height", height)
+                .attr("width", "100%")
+                .attr("height", "100%")
                 .attr("viewBox", [0, 0, width, height]);
 
             g = svg.append("g")
-                .attr("font-family", "sans-serif")
-                .attr("font-size", 12)
-                .attr("transform", `translate(${margin.left},${height/2})`); // Start centered vertically
+                .attr("transform", `translate(${margin.left},${height/2})`);
 
             // Zoom behavior
             zoom = d3.zoom()
@@ -223,48 +291,80 @@
                     g.attr("transform", event.transform);
                 });
 
-            svg.call(zoom)
-               .call(zoom.transform, d3.zoomIdentity.translate(margin.left, height/2).scale(1));
+            svg.call(zoom);
+            resetZoom();
 
             update(root);
         }).catch(err => {
             console.error("Error loading data:", err);
             const container = document.getElementById('viz-container');
             container.innerHTML = `
-                <div class="loading-overlay" style="color: var(--fp-gray);">
+                <div class="loading-overlay" style="color: var(--fp-navy);">
                     <div style="font-size: 2rem; margin-bottom: 0;">⚠️</div>
                     <div>Error loading mind map data.</div>
-                    <div style="font-weight: normal; font-size: 0.9rem; color: #d32f2f;">Please ensure d3-data.json exists.</div>
+                    <div style="font-weight: normal; font-size: 0.9rem; color: var(--fp-error);">Please ensure d3-data.json exists.</div>
                 </div>
             `;
         });
+
+        function populateSidebar(products) {
+            const list = d3.select("#category-list");
+            products.sort((a, b) => a.data.name.localeCompare(b.data.name))
+                .forEach(p => {
+                    list.append("div")
+                        .attr("class", "sidebar-item")
+                        .text(p.data.name)
+                        .on("click", () => {
+                            jumpToNode(p);
+                        });
+                });
+        }
+
+        function jumpToNode(d) {
+            // Expand parents
+            let current = d;
+            while (current.parent) {
+                if (current.parent._children) {
+                    current.parent.children = current.parent._children;
+                    current.parent._children = null;
+                }
+                current = current.parent;
+            }
+            
+            // Expand the target node itself
+            if (d._children) {
+                d.children = d._children;
+                d._children = null;
+            }
+
+            update(d);
+
+            // Zoom and center
+            const transform = d3.zoomIdentity
+                .translate(margin.left, height / 2 - d.x)
+                .scale(1);
+            
+            svg.transition().duration(750).call(zoom.transform, transform);
+            
+            // Highlight sidebar item
+            d3.selectAll(".sidebar-item").classed("active", false);
+            d3.selectAll(".sidebar-item").filter(function() {
+                return d3.select(this).text() === d.data.name;
+            }).classed("active", true);
+        }
 
         function update(source) {
             const duration = 250;
             const nodes = root.descendants().reverse();
             const links = root.links();
 
-            // Compute the new tree layout.
             tree(root);
 
-            let left = root;
-            let right = root;
-            root.eachBefore(node => {
-                if (node.x < left.x) left = node;
-                if (node.x > right.x) right = node;
-            });
+            const transition = svg.transition().duration(duration);
 
-            const height = right.x - left.x + margin.top + margin.bottom;
-
-            const transition = svg.transition()
-                .duration(duration)
-                .tween("resize", window.ResizeObserver ? null : () => () => svg.dispatch("toggle"));
-
-            // Update the nodes…
             const node = g.selectAll("g.node")
                 .data(nodes, d => d.id);
 
-            // Enter any new nodes at the parent's previous position.
             const nodeEnter = node.enter().append("g")
                 .attr("class", "node")
                 .attr("transform", d => `translate(${source.y0},${source.x0})`)
@@ -281,11 +381,11 @@
 
             nodeEnter.append("circle")
                 .attr("r", 5)
-                .style("fill", d => d._children ? "#00af9a" : "#fff");
+                .style("fill", d => d._children ? "var(--fp-green)" : "#fff");
 
             nodeEnter.append("text")
                 .attr("dy", "0.31em")
-                .attr("x", d => d.children || d._children ? -8 : 8)
+                .attr("x", d => d.children || d._children ? -10 : 10)
                 .attr("text-anchor", d => d.children || d._children ? "end" : "start")
                 .text(d => d.data.name)
                 .clone(true).lower()
@@ -293,68 +393,38 @@
                 .attr("stroke-width", 3)
                 .attr("stroke", "white");
 
-            // Add click to open URL if leaf node (or ctrl+click)
             nodeEnter.select("text")
                 .on("click", (event, d) => {
                     if (d.data.url) {
-                        // If holding Ctrl/Cmd, open link
-                        // Or if it's a leaf node.
-                        // But clicking text should probably navigate?
-                        // But we also need click to expand/collapse.
-                        // Let's make circle toggle expand, text navigate.
                         event.stopPropagation();
-                        if(d.data.url) window.open(d.data.url, '_blank');
-                    } else {
-                        // Toggle expand if no URL
-                        if (d.children) {
-                            d._children = d.children;
-                            d.children = null;
-                        } else {
-                            d.children = d._children;
-                            d._children = null;
-                        }
-                        update(d);
+                        window.open(d.data.url, '_blank');
                     }
                 })
                 .on("mouseover", (event, d) => {
                      const tooltip = d3.select("#tooltip");
-                     if (d.data.url) {
-                         tooltip.style("opacity", 1)
-                                .text(""); // Clear
-                         tooltip.append("div").text(d.data.name);
-                         tooltip.append("div")
-                                .style("color", "#ccc")
-                                .style("font-size", "10px")
-                                .text(d.data.url);
-                         tooltip.style("left", (event.pageX + 10) + "px")
-                                .style("top", (event.pageY - 28) + "px");
-                     }
+                     tooltip.style("opacity", 1)
+                            .html(`<div class="tooltip-title">${d.data.name}</div>
+                                   ${d.data.url ? `<div class="tooltip-url">${d.data.url}</div>` : ""}`);
+                     
+                     tooltip.style("left", (event.pageX + 15) + "px")
+                            .style("top", (event.pageY - 10) + "px");
                 })
                 .on("mouseout", () => {
                      d3.select("#tooltip").style("opacity", 0);
                 });
 
-
-            // Transition nodes to their new position.
             const nodeUpdate = node.merge(nodeEnter).transition(transition)
-                .attr("transform", d => `translate(${d.y},${d.x})`)
-                .attr("fill-opacity", 1)
-                .attr("stroke-opacity", 1);
+                .attr("transform", d => `translate(${d.y},${d.x})`);
 
             nodeUpdate.select("circle")
-                .style("fill", d => d._children ? "#00af9a" : "#fff");
+                .style("fill", d => d._children ? "var(--fp-green)" : "#fff");
 
-            // Transition exiting nodes to the parent's new position.
             const nodeExit = node.exit().transition(transition).remove()
-                .attr("transform", d => `translate(${source.y},${source.x})`)
-                .attr("fill-opacity", 0)
-                .attr("stroke-opacity", 0);
+                .attr("transform", d => `translate(${source.y},${source.x})`);
 
-            // Update the links…
             const link = g.selectAll("path.link")
                 .data(links, d => d.target.id);
 
-            // Enter any new links at the parent's previous position.
             const linkEnter = link.enter().insert("path", "g")
                 .attr("class", "link")
                 .attr("d", d => {
@@ -362,18 +432,15 @@
                     return diagonal({source: o, target: o});
                 });
 
-            // Transition links to their new position.
             link.merge(linkEnter).transition(transition)
                 .attr("d", diagonal);
 
-            // Transition exiting links to the parent's new position.
             link.exit().transition(transition).remove()
                 .attr("d", d => {
                     const o = {x: source.x, y: source.y};
                     return diagonal({source: o, target: o});
                 });
 
-            // Stash the old positions for transition.
             root.eachBefore(d => {
                 d.x0 = d.x;
                 d.y0 = d.y;
@@ -387,7 +454,6 @@
                      ${d.target.y},${d.target.x}`;
         }
 
-        // Control functions
         function expandAll() {
             if(!root) return;
             root.each(d => {
@@ -397,8 +463,6 @@
                 }
             });
             update(root);
-            // Re-center
-            // svg.call(zoom.transform, d3.zoomIdentity.translate(margin.left, height/2).scale(0.5));
         }
 
         function collapseAll() {
@@ -414,12 +478,8 @@
         }
 
         function resetZoom() {
-             svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(margin.left, height/2).scale(1));
+             svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(margin.left, height/2).scale(0.8));
         }
-
-        // Initialize source position for root
-        // Done inside d3.json callback after root is created.
-
     </script>
 </body>
 </html>
