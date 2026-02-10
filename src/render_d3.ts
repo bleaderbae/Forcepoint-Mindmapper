@@ -15,7 +15,7 @@ function run() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forcepoint Mind Map Canvas</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --fp-green: #00af9a;
@@ -33,7 +33,6 @@ function run() {
             --node-bg: #ffffff;
             --edge-color: #cbd5e0;
             --grid-color: #d1d1d1;
-            --sidebar-width: 350px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -90,10 +89,6 @@ function run() {
             gap: 16px;
         }
 
-        #search-container {
-            position: relative;
-        }
-
         #search-input {
             padding: 8px 16px;
             border-radius: 8px;
@@ -132,16 +127,9 @@ function run() {
             background: rgba(255,255,255,0.2);
         }
 
-        #main-container {
-            display: flex;
+        #canvas-container {
             width: 100vw;
             height: 100vh;
-            padding-top: 64px;
-        }
-
-        #canvas-container {
-            flex-grow: 1;
-            height: 100%;
             cursor: grab;
             background-image: 
                 radial-gradient(circle, var(--grid-color) 1.5px, transparent 1.5px);
@@ -153,64 +141,28 @@ function run() {
             cursor: grabbing;
         }
 
-        #sidebar {
-            width: var(--sidebar-width);
-            height: 100%;
-            background: var(--card-bg);
-            border-left: 1px solid var(--border-color);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transform: translateX(100%);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            position: relative;
-            z-index: 500;
-            box-shadow: -4px 0 12px rgba(0,0,0,0.05);
-            overflow-y: auto;
-        }
-
-        #sidebar.open {
-            transform: translateX(0);
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
-
         .node rect {
             fill: var(--node-bg);
             stroke: var(--border-color);
-            stroke-width: 1px;
-            rx: 8;
-            ry: 8;
-            transition: all 0.2s ease, fill 0.3s ease, stroke 0.3s ease;
+            stroke-width: 1.5px;
+            rx: 12;
+            ry: 12;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .node--selected rect {
             stroke: var(--fp-green) !important;
             stroke-width: 3px !important;
-            filter: drop-shadow(0 0 8px rgba(0, 175, 154, 0.2));
+            filter: drop-shadow(0 8px 24px rgba(0, 175, 154, 0.2));
         }
 
         .node--internal rect {
             stroke: var(--fp-green);
-            stroke-width: 1.5px;
         }
 
         .node text {
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             pointer-events: none;
             fill: var(--text-primary);
             transition: fill 0.3s ease;
@@ -225,8 +177,8 @@ function run() {
         .link {
             fill: none;
             stroke: var(--edge-color);
-            stroke-width: 2px;
-            transition: all 0.2s ease, stroke 0.3s ease;
+            stroke-width: 2.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .controls {
@@ -243,7 +195,7 @@ function run() {
             border: 1px solid var(--border-color);
             width: 44px;
             height: 44px;
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -261,14 +213,35 @@ function run() {
             transform: translateY(-2px);
         }
 
+        /* Inline Detail Components */
+        .node-details {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: var(--text-primary);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .detail-title {
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
         .type-tag {
             display: inline-block;
-            padding: 4px 8px;
+            padding: 3px 8px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 9px;
             text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            width: fit-content;
         }
         .tag-category { background: #edf2f7; color: #4a5568; }
         .tag-version { background: #ebf8ff; color: #2b6cb0; }
@@ -282,36 +255,26 @@ function run() {
         .dark-mode .tag-document { background: #22543d; color: #c6f6d5; }
         .dark-mode .tag-legal { background: #742a2a; color: #fed7d7; }
 
-        .crumb-path {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .sidebar-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        .external-link {
-            display: inline-flex;
+        .external-link-btn {
+            display: flex;
             align-items: center;
             gap: 8px;
             background-color: var(--fp-green);
             color: white;
-            padding: 12px 20px;
+            padding: 8px 16px;
             border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: background 0.2s;
-            margin-top: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            transition: background 0.2s, transform 0.1s;
+            width: fit-content;
+            margin-top: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .external-link:hover {
+        .external-link-btn:hover {
             background-color: var(--fp-dark-green);
+            transform: translateY(-1px);
         }
 
         .help-text {
@@ -321,10 +284,12 @@ function run() {
             font-size: 12px;
             color: var(--text-secondary);
             background: var(--card-bg);
-            padding: 8px 12px;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
             pointer-events: none;
-            opacity: 0.8;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -341,35 +306,21 @@ function run() {
         </div>
     </header>
 
-    <div id="main-container">
-        <div id="canvas-container">
-            <div class="controls">
-                <button class="btn" title="Zoom In" onclick="zoomIn()">+</button>
-                <button class="btn" title="Zoom Out" onclick="zoomOut()">-</button>
-                <button class="btn" title="Reset View" onclick="resetZoom()">⟲</button>
-            </div>
-            <div class="help-text">Click to toggle or select • Drag to pan • Scroll to zoom</div>
+    <div id="canvas-container">
+        <div class="controls">
+            <button class="btn" title="Zoom In" onclick="zoomIn()">+</button>
+            <button class="btn" title="Zoom Out" onclick="zoomOut()">-</button>
+            <button class="btn" title="Reset View" onclick="resetZoom()">⟲</button>
         </div>
-        
-        <div id="sidebar">
-            <div class="sidebar-header">
-                <div id="sidebar-tag-container"></div>
-                <button class="close-btn" onclick="closeSidebar()">&times;</button>
-            </div>
-            <h2 class="sidebar-title" id="sidebar-title">Node Title</h2>
-            <div class="crumb-path" id="sidebar-path"></div>
-            <div id="sidebar-content">
-                <p style="color:var(--text-secondary);">Select a node to view details.</p>
-            </div>
-            <div id="sidebar-link-container"></div>
-        </div>
+        <div class="help-text">Click node to expand details and sub-items • Drag to pan</div>
     </div>
 
     <script>
         const config = {
-            nodeWidth: 240,
-            nodeHeight: 48,
-            levelWidth: 340
+            nodeWidth: 260,
+            nodeHeight: 52,
+            expandedHeight: 140,
+            levelWidth: 380
         };
 
         let root;
@@ -379,7 +330,7 @@ function run() {
         let selectedNode = null;
         const duration = 600;
 
-        const treeLayout = d3.tree().nodeSize([70, config.levelWidth]);
+        const treeLayout = d3.tree().nodeSize([160, config.levelWidth]);
 
         // Theme management
         const themeToggle = document.getElementById('theme-toggle');
@@ -417,7 +368,7 @@ function run() {
             nodeGroup = g.append("g").attr("class", "nodes");
 
             zoom = d3.zoom()
-                .scaleExtent([0.1, 3])
+                .scaleExtent([0.05, 3])
                 .on("zoom", (event) => {
                     g.attr("transform", event.transform);
                 });
@@ -446,9 +397,6 @@ function run() {
                     e.preventDefault();
                     document.getElementById('search-input').focus();
                 }
-                if (e.key === 'Escape') {
-                    closeSidebar();
-                }
             });
 
             // Search
@@ -473,62 +421,65 @@ function run() {
         }
 
         function update(source) {
-            // Recalculate tree layout
             const treeData = treeLayout(root);
             const nodes = treeData.descendants();
             const links = treeData.links();
 
-            // Normalize for fixed-depth
             nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
 
-            // --- Nodes section ---
             const node = nodeGroup.selectAll("g.node")
                 .data(nodes, d => d.id || (d.id = ++i));
 
-            // Enter any new nodes at the parent's previous position
             const nodeEnter = node.enter().append("g")
                 .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => {
-                    selectNode(d);
+                    // Always Select
+                    selectedNode = d;
+
+                    // Toggle expansion
                     if (d.children || d._children) {
                         if (d.children) {
                             d._children = d.children;
                             d.children = null;
                         } else {
-                            // Close siblings (Accordion behavior)
+                            // Accordion behavior: collapse siblings
                             if (d.parent && d.parent.children) {
                                 d.parent.children.forEach(sibling => {
-                                    if (sibling !== d && sibling.children) {
-                                        collapse(sibling);
-                                    }
+                                    if (sibling !== d && sibling.children) collapse(sibling);
                                 });
                             }
                             d.children = d._children;
                             d._children = null;
                         }
-                        update(d);
                     }
+                    update(d);
                 });
 
+            // The card rectangle
             nodeEnter.append("rect")
                 .attr("width", config.nodeWidth)
                 .attr("height", config.nodeHeight)
                 .attr("y", -config.nodeHeight / 2)
-                .attr("rx", 8)
-                .attr("ry", 8)
                 .style("fill-opacity", 0);
 
+            // Simple text for collapsed state
             nodeEnter.append("text")
+                .attr("class", "node-label")
                 .attr("dy", ".35em")
                 .attr("x", 16)
-                .text(d => {
-                    const name = d.data.name || "Untitled";
-                    return name.length > 30 ? name.substring(0, 27) + "..." : name;
-                })
+                .text(d => d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name)
                 .style("fill-opacity", 0);
 
-            // Update
+            // Foreign object for rich details
+            const details = nodeEnter.append("foreignObject")
+                .attr("class", "details-container")
+                .attr("width", config.nodeWidth)
+                .attr("height", config.expandedHeight)
+                .attr("y", -config.expandedHeight / 2)
+                .style("opacity", 0)
+                .style("pointer-events", "none");
+
             const nodeUpdate = nodeEnter.merge(node);
 
             nodeUpdate.classed("node--selected", d => d === selectedNode);
@@ -537,13 +488,47 @@ function run() {
             nodeUpdate.transition().duration(duration)
                 .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
+            // Update Rect dimensions
             nodeUpdate.select("rect")
+                .transition().duration(duration)
+                .attr("height", d => d === selectedNode ? config.expandedHeight : config.nodeHeight)
+                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2)
                 .style("fill-opacity", 1);
 
-            nodeUpdate.select("text")
-                .style("fill-opacity", 1);
+            // Hide/Show labels vs details
+            nodeUpdate.select(".node-label")
+                .transition().duration(duration)
+                .style("opacity", d => d === selectedNode ? 0 : 1)
+                .style("fill-opacity", d => d === selectedNode ? 0 : 1);
 
-            // Exit nodes
+            nodeUpdate.select(".details-container")
+                .transition().duration(duration)
+                .style("opacity", d => d === selectedNode ? 1 : 0)
+                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2);
+
+            // Inject HTML and manage pointer events
+            nodeUpdate.each(function(d) {
+                const g = d3.select(this);
+                const fo = g.select(".details-container");
+
+                if (d === selectedNode) {
+                    fo.style("pointer-events", "auto");
+                    const safeName = d.data.name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+                    const safeType = (d.data.type || 'category').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+                    const safeUrl = d.data.url ? d.data.url.replace(/"/g, "&quot;") : '';
+
+                    fo.html(\`
+                        <div class="node-details" xmlns="http://www.w3.org/1999/xhtml">
+                            <div class="type-tag tag-\${safeType}">\${safeType}</div>
+                            <div class="detail-title">\${safeName}</div>
+                            \${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Documentation ↗</a>\` : ''}
+                        </div>
+                    \`);
+                } else {
+                    fo.style("pointer-events", "none");
+                }
+            });
+
             const nodeExit = node.exit().transition().duration(duration)
                 .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
                 .remove();
@@ -555,15 +540,13 @@ function run() {
             const link = linkGroup.selectAll("path.link")
                 .data(links, d => d.target.id);
 
-            // Enter any new links at the parent's previous position
             const linkEnter = link.enter().insert("path", "g")
                 .attr("class", "link")
                 .attr("d", d => {
-                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth / 2 };
+                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth };
                     return diagonal(o, o);
                 });
 
-            // Transition links to their new position
             const linkUpdate = linkEnter.merge(link);
             linkUpdate.transition().duration(duration)
                 .attr("d", d => {
@@ -572,15 +555,13 @@ function run() {
                     return diagonal(s, t);
                 });
 
-            // Transition exiting links to the parent's new position
             const linkExit = link.exit().transition().duration(duration)
                 .attr("d", d => {
-                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth / 2 };
+                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth };
                     return diagonal(o, o);
                 })
                 .remove();
 
-            // Stash the old positions for transition
             nodes.forEach(d => {
                 d.x0 = d.x;
                 d.y0 = d.y;
@@ -594,54 +575,6 @@ function run() {
                    " " + d.y + "," + d.x;
         }
 
-        function selectNode(d) {
-            selectedNode = d;
-            showSidebar(d);
-            
-            // Highlight path
-            nodeGroup.selectAll(".node").classed("node--selected", n => n === d);
-        }
-
-        function showSidebar(d) {
-            const sidebar = document.getElementById('sidebar');
-            const title = document.getElementById('sidebar-title');
-            const pathEl = document.getElementById('sidebar-path');
-            const tagContainer = document.getElementById('sidebar-tag-container');
-            const content = document.getElementById('sidebar-content');
-            const linkContainer = document.getElementById('sidebar-link-container');
-
-            sidebar.classList.add('open');
-            title.textContent = d.data.name;
-            
-            // Build path
-            const path = d.ancestors().reverse().map(a => a.data.name).join(" › ");
-            pathEl.textContent = path;
-
-            // Tag
-            tagContainer.innerHTML = "<div class='type-tag tag-" + (d.data.type || 'category') + "'>" + (d.data.type || 'category') + "</div>";
-
-            // Content
-            content.innerHTML = "<p><strong>Type:</strong> " + (d.data.type || 'General Category') + "</p>";
-            if (d._children) {
-                content.innerHTML += "<p>This section contains <strong>" + d._children.length + "</strong> sub-items. Click the node to expand.</p>";
-            } else if (d.children) {
-                content.innerHTML += "<p>This section is currently expanded showing <strong>" + d.children.length + "</strong> sub-items.</p>";
-            }
-
-            // Link
-            if (d.data.url) {
-                linkContainer.innerHTML = "<a href='" + d.data.url + "' target='_blank' class='external-link'>View Original Documentation ↗</a>";
-            } else {
-                linkContainer.innerHTML = "";
-            }
-        }
-
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            selectedNode = null;
-            nodeGroup.selectAll(".node").classed("node--selected", false);
-        }
-
         function zoomIn() { svg.transition().call(zoom.scaleBy, 1.4); }
         function zoomOut() { svg.transition().call(zoom.scaleBy, 0.7); }
         function resetZoom() {
@@ -651,7 +584,7 @@ function run() {
             
             svg.transition().duration(750).call(
                 zoom.transform,
-                d3.zoomIdentity.translate(60, height / 2).scale(0.85)
+                d3.zoomIdentity.translate(60, height / 2).scale(0.7)
             );
         }
 
@@ -668,7 +601,7 @@ function run() {
 </html>`;
 
     fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
-    console.log('Gemini-style Canvas with Dark Mode index.html generated.');
+    console.log('Canvas with Inline Details index.html generated.');
 }
 
 run();
