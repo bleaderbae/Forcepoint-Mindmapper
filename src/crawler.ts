@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio';
 import * as fs from 'fs';
 import * as path from 'path';
 import { URL } from 'url';
+import { normalizeUrl } from './url_utils.ts';
 
 interface DocNode {
     url: string;
@@ -29,18 +30,6 @@ if (fs.existsSync(DATA_FILE)) {
         results = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
     } catch (e) {
         results = [];
-    }
-}
-
-// Normalize URL: remove fragment and query params (unless needed)
-function normalizeUrl(urlStr: string): string {
-    try {
-        const u = new URL(urlStr);
-        u.hash = '';
-        u.search = ''; // Assuming query params are not needed for unique content identification
-        return u.toString();
-    } catch (e) {
-        return urlStr;
     }
 }
 
