@@ -19,544 +19,138 @@ function run() {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fp-green: #00af9a;
-            --fp-dark-green: #007565;
-            --fp-navy: #1d252c;
-            --fp-gray: #636569;
-            --fp-light: #f5f6f6;
-            
-            --bg-color: var(--fp-light);
-            --header-bg: var(--fp-navy);
-            --card-bg: #ffffff;
-            --text-primary: var(--fp-navy);
-            --text-secondary: var(--fp-gray);
-            --border-color: #e2e8f0;
-            --node-bg: #ffffff;
-            --edge-color: #cbd5e0;
-            --grid-color: #d1d1d1;
-            --sidebar-width: 320px;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --fp-green: #00af9a; --fp-dark-green: #007565; --fp-navy: #1d252c;
+            --fp-gray: #636569; --fp-light: #f5f6f6;
+            --bg-color: var(--fp-light); --header-bg: var(--fp-navy);
+            --card-bg: #ffffff; --text-primary: var(--fp-navy);
+            --text-secondary: var(--fp-gray); --border-color: #e2e8f0;
+            --node-bg: #ffffff; --edge-color: #cbd5e0;
+            --grid-color: #d1d1d1; --sidebar-width: 320px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         body.dark-mode {
-            --bg-color: #0f172a;
-            --header-bg: #020617;
-            --card-bg: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-            --node-bg: #1e293b;
-            --edge-color: #475569;
+            --bg-color: #0f172a; --header-bg: #020617;
+            --card-bg: #1e293b; --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8; --border-color: #334155;
+            --node-bg: #1e293b; --edge-color: #475569;
             --grid-color: #334155;
         }
 
         * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; overflow: hidden; font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; height: 100vh; }
 
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex;
-            height: 100vh;
-        }
+        header { position: absolute; top: 0; left: 0; right: 0; height: 64px; background-color: var(--header-bg); color: white; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        header h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
 
-        header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 64px;
-            background-color: var(--header-bg);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
+        #global-finder { width: var(--sidebar-width); background: var(--card-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 950; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin-top: 64px; height: calc(100vh - 64px); }
+        #global-finder.collapsed { transform: translateX(-100%); position: absolute; }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
+        .finder-header { padding: 16px; background: var(--fp-green); color: white; font-weight: 800; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        .finder-scroll { flex: 1; overflow-y: auto; padding: 8px 0; }
 
-        /* Finder Sidebar */
-        #global-finder {
-            width: var(--sidebar-width);
-            background: var(--card-bg);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            z-index: 950;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
-            margin-top: 64px;
-            height: calc(100vh - 64px);
-        }
+        .finder-node { display: flex; flex-direction: column; }
+        .finder-row { display: flex; align-items: center; padding: 8px 16px; cursor: pointer; font-size: 13px; transition: background 0.2s; border-radius: 4px; margin: 0 8px; color: var(--text-primary); }
+        .finder-row:hover { background: var(--fp-light); }
+        .dark-mode .finder-row:hover { background: rgba(255,255,255,0.05); }
+        .finder-row--active { background: rgba(0, 175, 154, 0.1) !important; color: var(--fp-green) !important; font-weight: 600; }
+        
+        .finder-children { display: none; padding-left: 12px; border-left: 1px solid var(--border-color); margin-left: 22px; }
+        .finder-node.expanded > .finder-children { display: block; }
+        
+        .toggle-icon { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; opacity: 0.5; margin-right: 4px; }
+        .finder-node.expanded > .finder-row .toggle-icon { transform: rotate(90deg); }
+        .leaf-dot { width: 6px; height: 6px; background: var(--fp-green); border-radius: 50%; margin-right: 14px; margin-left: 5px; opacity: 0.4; }
 
-        #global-finder.collapsed {
-            transform: translateX(-100%);
-            position: absolute;
-        }
+        .sidebar-toggle { position: absolute; top: 80px; left: var(--sidebar-width); background: var(--fp-green); color: white; border: none; width: 24px; height: 48px; border-radius: 0 8px 8px 0; cursor: pointer; z-index: 960; display: flex; align-items: center; justify-content: center; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        #global-finder.collapsed + .sidebar-toggle { left: 0; }
 
-        .finder-header {
-            padding: 16px;
-            border-bottom: 1px solid var(--border-color);
-            font-weight: 700;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-primary);
-        }
+        #main-content { flex: 1; position: relative; overflow: hidden; }
+        #canvas-container { width: 100%; height: 100%; cursor: grab; background-image: radial-gradient(circle, var(--grid-color) 1.5px, transparent 1.5px); background-size: 48px 48px; }
 
-        .finder-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding: 8px 0;
-        }
-
-        .finder-item {
-            padding: 6px 16px;
-            cursor: pointer;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.2s, color 0.2s;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: var(--text-primary);
-        }
-
-        .finder-item:hover {
-            background: var(--fp-light);
-            color: var(--fp-green);
-        }
-
-        .dark-mode .finder-item:hover {
-            background: rgba(255,255,255,0.05);
-        }
-
-        .finder-item--platform { font-weight: 700; color: var(--fp-green); border-bottom: 1px solid var(--border-color); margin-top: 8px; }
-        .finder-item--version { color: var(--text-secondary); font-style: italic; font-size: 11px; }
-        .finder-item--indent-1 { padding-left: 32px; }
-        .finder-item--indent-2 { padding-left: 48px; }
-        .finder-item--indent-3 { padding-left: 64px; }
-        .finder-item--indent-4 { padding-left: 80px; }
-
-        .sidebar-toggle {
-            position: absolute;
-            top: 80px;
-            left: var(--sidebar-width);
-            background: var(--fp-green);
-            color: white;
-            border: none;
-            width: 24px;
-            height: 48px;
-            border-radius: 0 8px 8px 0;
-            cursor: pointer;
-            z-index: 960;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        }
-
-        #global-finder.collapsed + .sidebar-toggle {
-            left: 0;
-        }
-
-        /* Layout adjustment for main container */
-        #main-content {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        #breadcrumb-navigator {
-            position: absolute;
-            top: 80px;
-            left: 40px;
-            z-index: 900;
-            background: var(--card-bg);
-            padding: 8px 16px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: var(--text-secondary);
-            max-width: 60vw;
-            overflow-x: auto;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, background-color 0.3s ease;
-        }
-
-        #breadcrumb-navigator.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .breadcrumb-item {
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb-item:hover {
-            color: var(--fp-green);
-            text-decoration: underline;
-        }
-
-        .breadcrumb-separator {
-            color: var(--border-color);
-        }
-
-        #search-input {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            width: 250px;
-            outline: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 14px;
-        }
-
-        #search-input:focus {
-            background: white;
-            color: var(--fp-navy);
-            width: 400px;
-            box-shadow: 0 0 0 3px rgba(0, 175, 154, 0.3);
-        }
-
-        .theme-toggle {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: all 0.2s;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        #canvas-container {
-            width: 100%;
-            height: 100%;
-            cursor: grab;
-            background-image: 
-                radial-gradient(circle, var(--grid-color) 1.5px, transparent 1.5px);
-            background-size: 48px 48px;
-            position: relative;
-        }
-
-        #canvas-container:active {
-            cursor: grabbing;
-        }
-
-        .node rect {
-            fill: var(--node-bg);
-            stroke: var(--border-color);
-            stroke-width: 1.5px;
-            rx: 12;
-            ry: 12;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), fill 0.3s ease, stroke 0.3s ease;
-        }
-
-        .node--selected rect {
-            stroke: var(--fp-green) !important;
-            stroke-width: 3px !important;
-            filter: drop-shadow(0 8px 24px rgba(0, 175, 154, 0.2));
-        }
-
-        .node text {
-            font-size: 13px;
-            font-weight: 600;
-            pointer-events: none;
-            fill: var(--text-primary);
-            transition: fill 0.3s ease;
-        }
-
-        .link {
-            fill: none;
-            stroke: var(--edge-color);
-            stroke-width: 2.5px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s ease;
-        }
-
+        .node rect { fill: var(--node-bg); stroke: var(--border-color); stroke-width: 1.5px; rx: 12; ry: 12; transition: all 0.3s ease; }
+        .node--selected rect { stroke: var(--fp-green) !important; stroke-width: 3px !important; }
+        .node text { font-size: 13px; font-weight: 600; pointer-events: none; fill: var(--text-primary); transition: fill 0.3s ease; }
+        .link { fill: none; stroke: var(--edge-color); stroke-width: 2.5px; transition: all 0.3s ease; }
         .node--compressed { opacity: 0.4; }
 
-        /* Directory Scroller (Inline) */
-        .directory-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            overflow: hidden;
-        }
-        .directory-header {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--fp-green);
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .directory-list {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 4px;
-            margin: 0;
-            list-style: none;
-        }
-        .directory-item {
-            padding: 6px 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 12px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: var(--text-primary);
-        }
-        .directory-item:hover {
-            background: var(--bg-color);
-            color: var(--fp-green);
-        }
+        #breadcrumb-navigator { position: absolute; top: 80px; left: 40px; z-index: 900; background: var(--card-bg); padding: 8px 16px; border-radius: 8px; box-shadow: var(--shadow); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        #breadcrumb-navigator.visible { opacity: 1; pointer-events: auto; }
+        .breadcrumb-item { cursor: pointer; color: var(--text-primary); }
+        .breadcrumb-item:hover { color: var(--fp-green); text-decoration: underline; }
 
-        .controls {
-            position: absolute;
-            bottom: 32px;
-            left: 32px;
-            display: flex;
-            gap: 12px;
-            z-index: 100;
-        }
+        /* Rich Knowledge Card Styling */
+        .node-details { padding: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-primary); width: 100%; height: 100%; overflow: hidden; background: transparent; }
+        .detail-title { font-weight: 700; font-size: 15px; line-height: 1.2; color: var(--text-primary); margin-bottom: 2px; }
+        .node-summary { font-size: 12px; line-height: 1.5; color: var(--text-secondary); flex: 1; overflow-y: auto; scrollbar-width: thin; padding-right: 4px; margin-bottom: 8px; }
+        .node-summary::-webkit-scrollbar { width: 3px; }
+        .node-summary::-webkit-scrollbar-thumb { background: var(--fp-green); }
 
-        .btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            font-size: 20px;
-            color: var(--text-primary);
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease;
-        }
+        .type-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; width: fit-content; }
+        .tag-document { background: #f0fff4; color: #2f855a; }
+        .tag-platform { background: var(--fp-navy); color: white; }
+        .dark-mode .tag-document { background: #22543d; color: #c6f6d5; }
 
-        #ghost-tooltip {
-            position: absolute;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            border-radius: 8px;
-            padding: 12px;
-            pointer-events: none;
-            opacity: 0;
-            z-index: 950;
-            max-width: 300px;
-            font-size: 12px;
-            color: var(--text-primary);
-            transition: opacity 0.2s ease, background-color 0.3s ease;
-        }
+        .external-link-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background-color: var(--fp-green); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px; transition: all 0.2s; width: 100%; box-shadow: 0 4px 10px rgba(0, 175, 154, 0.2); margin-top: auto; }
+        .external-link-btn:hover { background-color: var(--fp-dark-green); transform: translateY(-2px); }
 
-        #loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            transition: opacity 0.5s ease-out;
-        }
+        .controls { position: absolute; bottom: 32px; left: 32px; display: flex; gap: 12px; z-index: 100; }
+        .btn { background: var(--card-bg); border: 1px solid var(--border-color); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow); font-size: 20px; color: var(--text-primary); transition: all 0.2s; }
 
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--border-color);
-            border-top: 4px solid var(--fp-green);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 16px;
-        }
-
+        #loading-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; transition: opacity 0.5s ease-out; }
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--border-color); border-top: 4px solid var(--fp-green); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 16px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div id="loading-overlay">
-        <div class="spinner"></div>
-        <div style="font-weight: 500; color: var(--text-secondary);">Initializing Global Finder...</div>
-    </div>
-    
-    <header>
-        <h1>Forcepoint Documentation</h1>
-        <div class="header-actions">
-            <div id="search-container">
-                <input type="text" id="search-input" placeholder="Search docs (Press / to focus)">
-            </div>
-            <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">🌓</button>
-        </div>
-    </header>
-
-    <aside id="global-finder">
-        <div class="finder-header">
-            <span>DOCUMENTATION FINDER</span>
-            <span style="font-size: 10px; opacity: 0.6;">v1.0</span>
-        </div>
-        <div class="finder-scroll" id="finder-list">
-            <!-- Populated by script -->
-        </div>
-    </aside>
+    <div id="loading-overlay"><div class="spinner"></div><div style="font-weight: 500;">Building Knowledge Base...</div></div>
+    <header><h1>Forcepoint Documentation</h1><div class="header-actions"><input type="text" id="search-input" placeholder="Search..."><button class="theme-toggle" id="theme-toggle">🌓</button></div></header>
+    <aside id="global-finder"><div class="finder-header">Documentation Explorer</div><div class="finder-scroll" id="finder-list"></div></aside>
     <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()">‹</button>
-
-    <main id="main-content">
-        <div id="breadcrumb-navigator"></div>
-        <div id="ghost-tooltip"></div>
-        <div id="canvas-container">
-            <div class="controls">
-                <button class="btn" title="Zoom In" onclick="zoomIn()">+</button>
-                <button class="btn" title="Zoom Out" onclick="zoomOut()">-</button>
-                <button class="btn" title="Reset View" onclick="resetZoom()">⟲</button>
-            </div>
-        </div>
-    </main>
+    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()">+</button><button class="btn" onclick="zoomOut()">-</button><button class="btn" onclick="resetZoom()">⟲</button></div></div></main>
 
     <script>
-        const config = {
-            nodeWidth: 280,
-            nodeHeight: 52,
-            expandedHeight: 160,
-            directoryHeight: 320,
-            levelWidth: 400,
-            directoryThreshold: 12
-        };
-
-        let root;
-        let svg, g, linkGroup, nodeGroup;
-        let zoom;
-        let i = 0;
-        let selectedNode = null;
+        const config = { nodeWidth: 320, nodeHeight: 52, expandedHeight: 280, directoryHeight: 360, levelWidth: 450, directoryThreshold: 12 };
+        let root, svg, g, linkGroup, nodeGroup, zoom, i = 0, selectedNode = null;
         const duration = 600;
 
-        // Theme management
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-mode');
-            }
-        }
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-            localStorage.setItem('theme', theme);
-        });
-
-        initTheme();
-
         function toggleSidebar() {
-            const finder = document.getElementById('global-finder');
-            const toggle = document.getElementById('finder-toggle');
-            const isCollapsed = finder.classList.toggle('collapsed');
-            toggle.innerText = isCollapsed ? '›' : '‹';
-            
+            const isCollapsed = document.getElementById('global-finder').classList.toggle('collapsed');
+            document.getElementById('finder-toggle').innerText = isCollapsed ? '›' : '‹';
             setTimeout(() => {
-                const container = d3.select("#canvas-container");
-                const width = container.node().clientWidth;
-                const height = container.node().clientHeight;
-                svg.attr("width", width).attr("height", height);
+                const w = document.getElementById('canvas-container').clientWidth;
+                const h = document.getElementById('canvas-container').clientHeight;
+                svg.attr("width", w).attr("height", h);
             }, 300);
         }
 
         async function init() {
             let data;
-            try {
-                data = await d3.json('d3-data.json?v=' + new Date().getTime());
-            } catch (error) {
-                console.error(error);
-                return;
-            }
-            
+            try { data = await d3.json('d3-data.json?v=' + new Date().getTime()); } catch (error) { return; }
             const container = d3.select("#canvas-container");
             svg = container.append("svg").attr("width", "100%").attr("height", "100%").style("overflow", "visible");
-            g = svg.append("g");
-            linkGroup = g.append("g").attr("class", "links");
-            nodeGroup = g.append("g").attr("class", "nodes");
-
+            g = svg.append("g"); linkGroup = g.append("g").attr("class", "links"); nodeGroup = g.append("g").attr("class", "nodes");
             zoom = d3.zoom().scaleExtent([0.05, 3]).on("zoom", (event) => g.attr("transform", event.transform));
             svg.call(zoom);
 
             root = d3.hierarchy(data, d => d.children);
+            root.sort((a, b) => {
+                if (a.data.name === 'ONE') return -1;
+                if (b.data.name === 'ONE') return 1;
+                return a.data.name.localeCompare(b.data.name);
+            });
+
             root.eachAfter(d => {
+                d.id = ++i;
                 d.value = d.children ? d.children.reduce((sum, c) => sum + c.value, 0) : 1;
                 if (d.children && d.children.length > config.directoryThreshold) d.data.isDirectory = true;
             });
 
-            root.x0 = container.node().clientHeight / 2;
-            root.y0 = 0;
-
-            const finderList = document.getElementById('finder-list');
-            root.descendants().forEach(d => {
-                if (d.depth === 0) return;
-                const item = document.createElement('div');
-                item.className = \`finder-item finder-item--indent-\${Math.min(d.depth, 4)}\`;
-                if (d.data.type === 'platform') item.classList.add('finder-item--platform');
-                if (d.data.type === 'version') item.classList.add('finder-item--version');
-                
-                const icon = d.data.url ? '📄 ' : (d.children || d._children ? '📁 ' : '○ ');
-                item.innerText = icon + d.data.name;
-                item.onclick = () => window.focusNodeById(d.id);
-                finderList.appendChild(item);
-            });
+            renderFinderRecursive(root, document.getElementById('finder-list'));
 
             if (root.children) root.children.forEach(d => { if (d.children) d.children.forEach(collapse); });
-
-            update(root);
-            resetZoom();
-
+            update(root); resetZoom();
             document.getElementById('loading-overlay').style.opacity = '0';
             setTimeout(() => document.getElementById('loading-overlay').remove(), 500);
 
@@ -568,46 +162,74 @@ function run() {
             });
         }
 
-        function collapse(d) {
-            if (d.children) {
-                d._children = d.children;
-                d._children.forEach(collapse);
-                d.children = null;
+        function renderFinderRecursive(d, container) {
+            if (d.depth === 0) { d.children.forEach(c => renderFinderRecursive(c, container)); return; }
+            const nodeDiv = document.createElement('div');
+            nodeDiv.className = 'finder-node'; nodeDiv.dataset.id = d.id;
+            const row = document.createElement('div'); row.className = 'finder-row';
+            const hasChildren = d.children || d._children;
+            if (hasChildren) {
+                row.innerHTML = \`<span class="toggle-icon">▶</span> 📁 \${d.data.name}\`;
+                row.onclick = (e) => { e.stopPropagation(); nodeDiv.classList.toggle('expanded'); window.focusNodeById(d.id); };
+            } else {
+                row.innerHTML = \`<span class="leaf-dot"></span> 📄 \${d.data.name}\`;
+                row.onclick = (e) => { e.stopPropagation(); window.focusNodeById(d.id); };
             }
+            nodeDiv.appendChild(row);
+            if (hasChildren) {
+                const childContainer = document.createElement('div'); childContainer.className = 'finder-children';
+                (d.children || d._children).forEach(c => renderFinderRecursive(c, childContainer));
+                nodeDiv.appendChild(childContainer);
+            }
+            container.appendChild(nodeDiv);
         }
+
+        function collapse(d) { if (d.children) { d._children = d.children; d._children.forEach(collapse); d.children = null; } }
 
         window.focusNodeById = (id) => {
             const target = root.descendants().find(d => String(d.id) === String(id));
             if (!target) return;
 
+            // Accordion Logic: Resolve the expansion path and collapse others
             const ancestors = target.ancestors();
-            for (let i = ancestors.length - 1; i > 0; i--) {
-                const parent = ancestors[i];
-                if (parent._children) {
-                    parent.children = parent._children;
-                    parent._children = null;
-                    update(parent);
+            for (let i = ancestors.length - 1; i >= 0; i--) {
+                const nodeOnPath = ancestors[i];
+                const parent = ancestors[i+1] || root;
+                
+                if (parent.children) {
+                    parent.children.forEach(sibling => {
+                        if (sibling !== nodeOnPath) collapse(sibling);
+                    });
                 }
+
+                if (nodeOnPath._children) {
+                    nodeOnPath.children = nodeOnPath._children;
+                    nodeOnPath._children = null;
+                }
+                
+                const sidebarNode = document.querySelector(\`.finder-node[data-id="\${nodeOnPath.id}"]\`);
+                if (sidebarNode) sidebarNode.classList.add('expanded');
             }
 
             selectNode(target);
             update(target);
             
-            const container = d3.select("#canvas-container");
-            const w = container.node().clientWidth;
-            const h = container.node().clientHeight;
-            let scale = target.data.type === 'document' ? 1.2 : 0.8;
+            document.querySelectorAll('.finder-row').forEach(el => el.classList.remove('finder-row--active'));
+            const activeRow = document.querySelector(\`.finder-node[data-id="\${id}"] > .finder-row\`);
+            if (activeRow) {
+                activeRow.classList.add('finder-row--active');
+                activeRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
 
-            svg.transition().duration(750).call(
-                zoom.transform,
-                d3.zoomIdentity.translate(w/3, h/2).scale(scale).translate(-target.y, -target.x)
-            );
+            const w = document.getElementById('canvas-container').clientWidth;
+            const h = document.getElementById('canvas-container').clientHeight;
+            let scale = target.data.type === 'document' ? 1.2 : 0.8;
+            svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(w/3, h/2).scale(scale).translate(-target.y, -target.x));
         };
 
         function calculateDynamicTree() {
             const layout = d3.tree().nodeSize([160, config.levelWidth]);
-            const treeData = layout(root);
-            const nodes = treeData.descendants();
+            const treeData = layout(root); const nodes = treeData.descendants();
             if (selectedNode) {
                 const activePath = new Set(selectedNode.ancestors());
                 nodes.sort((a,b) => a.x - b.x);
@@ -621,19 +243,17 @@ function run() {
 
         function update(source) {
             const treeData = calculateDynamicTree();
-            const nodes = treeData.descendants();
-            const links = treeData.links();
+            const nodes = treeData.descendants(); const links = treeData.links();
             nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
-
-            const node = nodeGroup.selectAll("g.node").data(nodes, d => d.id || (d.id = ++i));
+            const node = nodeGroup.selectAll("g.node").data(nodes, d => d.id);
             const nodeEnter = node.enter().append("g")
                 .attr("class", d => "node node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => window.focusNodeById(d.id));
 
             nodeEnter.append("rect").attr("width", config.nodeWidth).attr("height", config.nodeHeight).attr("y", -config.nodeHeight/2);
-            nodeEnter.append("text").attr("class", "node-label").attr("dy", ".35em").attr("x", 16).text(d => d.data.name.length > 32 ? d.data.name.substring(0, 29) + "..." : d.data.name);
-            nodeEnter.append("foreignObject").attr("class", "details-container").attr("width", config.nodeWidth).attr("y", -config.expandedHeight/2);
+            nodeEnter.append("text").attr("class", "node-label").attr("dy", ".35em").attr("x", 16).text(d => d.data.name.length > 35 ? d.data.name.substring(0, 32) + "..." : d.data.name);
+            nodeEnter.append("foreignObject").attr("class", "details-container").attr("width", config.nodeWidth).attr("y", -config.expandedHeight/2).style("opacity", 0).style("pointer-events", "none");
 
             const nodeUpdate = nodeEnter.merge(node);
             const activePath = selectedNode ? new Set(selectedNode.ancestors()) : new Set();
@@ -644,42 +264,45 @@ function run() {
             nodeUpdate.select("rect").transition().duration(duration).attr("height", d => d === selectedNode ? (d.data.isDirectory ? config.directoryHeight : config.expandedHeight) : config.nodeHeight)
                 .attr("y", d => { const h = d === selectedNode ? (d.data.isDirectory ? config.directoryHeight : config.expandedHeight) : config.nodeHeight; return -h/2; });
 
+            nodeUpdate.select(".node-label").transition().duration(duration).style("opacity", d => d === selectedNode ? 0 : 1);
+
             nodeUpdate.each(function(d) {
-                if (d !== selectedNode) return;
                 const fo = d3.select(this).select(".details-container");
-                fo.style("pointer-events", "auto");
-                const safeName = d.data.name.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
-                const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
-                
-                if (d.data.isDirectory) {
-                    const items = (d.children || d._children || []).map(c => \`<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('\${c.id}')">\${c.data.name}</li>\`).join("");
-                    fo.html(\`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>\${(d.children||d._children).length} items</span></div><div class="detail-title">\${safeName}</div><ul class="directory-list">\${items}</ul></div>\`);
+                if (d === selectedNode) {
+                    fo.style("pointer-events", "auto").transition().duration(duration).style("opacity", 1);
+                    const safeName = d.data.name.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+                    const safeSummary = (d.data.summary || "No summary content found for this document.").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+                    const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
+                    
+                    if (d.data.isDirectory) {
+                        const items = (d.children || d._children || []).map(c => \`<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('\${c.id}')">\${c.data.name}</li>\`).join("");
+                        fo.html(\`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>\${(d.children||d._children).length} items</span></div><div class="detail-title">\${safeName}</div><ul class="directory-list">\${items}</ul></div>\`);
+                    } else {
+                        fo.html(\`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-\${d.data.type}">\${d.data.type}</div><div class="detail-title">\${safeName}</div><div class="node-summary">\${safeSummary}</div>\${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>\` : ''}</div>\`);
+                    }
                 } else {
-                    fo.html(\`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-\${d.data.type}">\${d.data.type}</div><div class="detail-title">\${safeName}</div>\${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">Documentation ↗</a>\` : ''}</div>\`);
+                    fo.style("pointer-events", "none").transition().duration(duration).style("opacity", 0);
                 }
             });
 
             node.exit().transition().duration(duration).attr("transform", d => "translate(" + source.y + "," + source.x + ")").remove();
-
             const link = linkGroup.selectAll("path.link").data(links, d => d.target.id);
             link.enter().insert("path", "g").attr("class", "link").attr("d", d => { const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth }; return diagonal(o, o); })
                 .merge(link).transition().duration(duration).attr("d", d => diagonal({ x: d.source.x, y: d.source.y + config.nodeWidth }, { x: d.target.x, y: d.target.y }))
                 .attr("stroke-width", d => Math.max(2, Math.log(d.target.value || 1) * 1.5) + "px")
                 .style("opacity", d => activePath.has(d.target) || activePath.has(d.source) ? 1 : 0.2);
             link.exit().remove();
-
             nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
         }
 
         function diagonal(s, d) { return "M" + s.y + "," + s.x + "C" + (s.y + d.y) / 2 + "," + s.x + " " + (s.y + d.y) / 2 + "," + d.x + " " + d.y + "," + d.x; }
 
         function selectNode(d) {
-            selectedNode = d;
-            const nav = d3.select("#breadcrumb-navigator");
+            selectedNode = d; const nav = d3.select("#breadcrumb-navigator");
             if (!d) return nav.classed("visible", false);
             nav.classed("visible", true).html("");
             d.ancestors().reverse().forEach((a, i) => {
-                if (i > 0) nav.append("span").attr("class", "breadcrumb-separator").text("›");
+                if (i > 0) nav.append("span").text("›").style("opacity", 0.5).style("margin", "0 4px");
                 nav.append("span").attr("class", "breadcrumb-item").text(a.data.name).on("click", (e) => { e.stopPropagation(); window.focusNodeById(a.id); });
             });
         }
@@ -691,13 +314,17 @@ function run() {
             svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(60, h/2).scale(0.7)); 
         }
 
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
         init();
     </script>
 </body>
 </html>`;
 
     fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
-    console.log('Global Finder Sidebar index.html generated.');
 }
 
 run();
