@@ -164,6 +164,69 @@ describe('buildTree', () => {
         // The last one (p2) should have overwritten the first one's URL
         assert.strictEqual(page1.url, 'http://example.com/p2');
     });
+
+    test('should sanitize HTML entities in breadcrumbs', () => {
+        const data: DocNode[] = [{
+            url: 'http://example.com/p',
+            title: 'Page',
+            breadcrumbs: ['A & B', 'C < D', 'E > F']
+        }];
+        const root = buildTree(data);
+
+        // Sanitize should convert & to &amp;, < to &lt;, > to &gt;
+        const ab = 'A &amp; B';
+        const cd = 'C &lt; D';
+        const ef = 'E &gt; F';
+
+        assert.ok(root.childrenMap?.has(ab), `Should have sanitized "A & B" to "${ab}"`);
+        const nodeAB = root.childrenMap?.get(ab)!;
+
+        assert.ok(nodeAB.childrenMap?.has(cd), `Should have sanitized "C < D" to "${cd}"`);
+        const nodeCD = nodeAB.childrenMap?.get(cd)!;
+
+        assert.ok(nodeCD.childrenMap?.has(ef), `Should have sanitized "E > F" to "${ef}"`);
+    });
+
+    test('should ignore empty strings in breadcrumbs', () => {
+        const data: DocNode[] = [{
+            url: 'http://example.com/p',
+            title: 'Page',
+            breadcrumbs: ['Section A', '', 'Section B', '   ', 'Section C']
+        }];
+        const root = buildTree(data);
+
+        const sectionA = root.childrenMap?.get('Section A')!;
+        // Empty strings should be skipped, so Section A's child should be Section B
+        assert.ok(sectionA.childrenMap?.has('Section B'));
+
+        const sectionB = sectionA.childrenMap?.get('Section B')!;
+        // Whitespace string should be skipped, so Section B's child should be Section C
+        assert.ok(sectionB.childrenMap?.has('Section C'));
+    });
+
+    test('should handle deep nesting', () => {
+        const breadcrumbs: string[] = [];
+        for (let i = 1; i <= 10; i++) {
+            breadcrumbs.push(`Level ${i}`);
+        }
+
+        const data: DocNode[] = [{
+            url: 'http://example.com/deep',
+            title: 'Deep Page',
+            breadcrumbs: breadcrumbs
+        }];
+
+        const root = buildTree(data);
+
+        let current = root;
+        for (let i = 1; i <= 10; i++) {
+            const levelName = `Level ${i}`;
+            assert.ok(current.childrenMap?.has(levelName), `Should have ${levelName}`);
+            current = current.childrenMap?.get(levelName)!;
+        }
+
+        assert.ok(current.childrenMap?.has('Deep Page'));
+    });
 });
 
 describe('sortChildren', () => {
@@ -258,5 +321,33 @@ describe('sortChildren', () => {
 
         assert.strictEqual(parent.children[0].title, 'Node 1');
         assert.strictEqual(parent.children[1].title, 'Node 2');
+    });
+
+    test('should handle 3-node cycle in sortChildren', () => {
+        const urlToDoc = new Map<string, DocNode>();
+
+        const a: TreeNode = { title: 'A', url: 'url-a', nextUrl: 'url-b', children: [] };
+        const b: TreeNode = { title: 'B', url: 'url-b', nextUrl: 'url-c', children: [] };
+        const c: TreeNode = { title: 'C', url: 'url-c', nextUrl: 'url-a', children: [] };
+
+        urlToDoc.set('url-a', { title: 'A', url: 'url-a', breadcrumbs: [] });
+        urlToDoc.set('url-b', { title: 'B', url: 'url-b', breadcrumbs: [] });
+        urlToDoc.set('url-c', { title: 'C', url: 'url-c', breadcrumbs: [] });
+
+        const parent: TreeNode = {
+            title: 'Parent',
+            children: [a, b, c],
+            childrenMap: new Map()
+        };
+
+        // This should not infinite loop
+        sortChildren(parent, urlToDoc);
+
+        assert.strictEqual(parent.children.length, 3);
+        // Order is arbitrary for a perfect cycle, but all nodes should be present
+        const titles = parent.children.map(n => n.title);
+        assert.ok(titles.includes('A'));
+        assert.ok(titles.includes('B'));
+        assert.ok(titles.includes('C'));
     });
 });
