@@ -1,4 +1,16 @@
 /**
+ * Escapes HTML special characters to prevent XSS.
+ */
+export function escapeHtml(unsafe: string): string {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+/**
  * Sanitizes text for use in Mermaid diagrams and other visual formats.
  * Removes special characters that might break Mermaid syntax.
  */

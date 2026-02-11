@@ -1,6 +1,23 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import { sanitize } from '../src/utils/string_utils.ts';
+import { sanitize, escapeHtml } from '../src/utils/string_utils.ts';
+
+describe('escapeHtml', () => {
+    test('should escape HTML special characters', () => {
+        assert.strictEqual(escapeHtml('<script>'), '&lt;script&gt;');
+        assert.strictEqual(escapeHtml('A & B'), 'A &amp; B');
+        assert.strictEqual(escapeHtml('"quoted"'), '&quot;quoted&quot;');
+        assert.strictEqual(escapeHtml("'single'"), '&#039;single&#039;');
+    });
+
+    test('should return original string if no special characters', () => {
+        assert.strictEqual(escapeHtml('Hello World'), 'Hello World');
+    });
+
+    test('should handle mixed content', () => {
+        assert.strictEqual(escapeHtml('User <script> & "Other"'), 'User &lt;script&gt; &amp; &quot;Other&quot;');
+    });
+});
 
 describe('sanitize', () => {
     test('should return "Untitled" for empty or null input', () => {
