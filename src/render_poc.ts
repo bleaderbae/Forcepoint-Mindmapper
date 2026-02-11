@@ -1,3 +1,10 @@
+/**
+ * Proof of Concept (POC) renderer using Mermaid.js.
+ *
+ * NOTE: The main application renderer is `src/render_d3.ts`.
+ * This script is for experimental/demonstration purposes only.
+ */
+
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
