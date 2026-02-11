@@ -112,7 +112,7 @@ function run() {
 
     <script>
         const config = { nodeWidth: 320, nodeHeight: 52, expandedHeight: 280, directoryHeight: 360, levelWidth: 450, directoryThreshold: 12 };
-        let root, svg, g, linkGroup, nodeGroup, zoom, i = 0, selectedNode = null;
+        let root, allNodes, svg, g, linkGroup, nodeGroup, zoom, i = 0, selectedNode = null;
         const duration = 600;
 
         function toggleSidebar() {
@@ -126,8 +126,15 @@ function run() {
         }
 
         async function init() {
-            let data;
-            try { data = await d3.json('d3-data.json?v=' + new Date().getTime()); } catch (error) { return; }
+            let data, summariesData;
+            try {
+                [data, summariesData] = await Promise.all([
+                    d3.json('d3-data.json?v=' + new Date().getTime()),
+                    d3.json('summaries.json?v=' + new Date().getTime())
+                ]);
+            } catch (error) { console.error(error); return; }
+            window.summaries = summariesData;
+
             const container = d3.select("#canvas-container");
             svg = container.append("svg").attr("width", "100%").attr("height", "100%").style("overflow", "visible");
             g = svg.append("g"); linkGroup = g.append("g").attr("class", "links"); nodeGroup = g.append("g").attr("class", "nodes");
@@ -149,6 +156,8 @@ function run() {
 
             renderFinderRecursive(root, document.getElementById('finder-list'));
 
+            allNodes = root.descendants();
+
             if (root.children) root.children.forEach(d => { if (d.children) d.children.forEach(collapse); });
             update(root); resetZoom();
             document.getElementById('loading-overlay').style.opacity = '0';
@@ -157,7 +166,7 @@ function run() {
             d3.select("#search-input").on("input", function() {
                 const term = this.value.toLowerCase();
                 if (!term) return;
-                const match = root.descendants().find(d => d.data.name.toLowerCase().includes(term));
+                const match = allNodes.find(d => d.data.name.toLowerCase().includes(term));
                 if (match) window.focusNodeById(match.id);
             });
         }
@@ -187,7 +196,7 @@ function run() {
         function collapse(d) { if (d.children) { d._children = d.children; d._children.forEach(collapse); d.children = null; } }
 
         window.focusNodeById = (id) => {
-            const target = root.descendants().find(d => String(d.id) === String(id));
+            const target = allNodes.find(d => String(d.id) === String(id));
             if (!target) return;
 
             // Accordion Logic: Resolve the expansion path and collapse others
@@ -269,9 +278,15 @@ function run() {
             nodeUpdate.each(function(d) {
                 const fo = d3.select(this).select(".details-container");
                 if (d === selectedNode) {
+                    const h = d.data.isDirectory ? config.directoryHeight : config.expandedHeight;
+                    fo.attr("height", h).attr("y", -h/2);
                     fo.style("pointer-events", "auto").transition().duration(duration).style("opacity", 1);
                     const safeName = d.data.name.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
-                    const safeSummary = (d.data.summary || "No summary content found for this document.").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+
+                    const summaryData = window.summaries && d.data.url ? window.summaries[d.data.url] : null;
+                    const summaryText = summaryData ? summaryData.summary : "No summary content found for this document.";
+                    const safeSummary = summaryText.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+
                     const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
                     
                     if (d.data.isDirectory) {

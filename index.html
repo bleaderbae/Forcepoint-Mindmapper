@@ -64,24 +64,6 @@
         .node text { font-size: 13px; font-weight: 600; pointer-events: none; fill: var(--text-primary); transition: fill 0.3s ease; }
         .link { fill: none; stroke: var(--edge-color); stroke-width: 2.5px; transition: all 0.3s ease; }
         .node--compressed { opacity: 0.4; }
-        .node--eol rect { fill: #f1f5f9; stroke: #cbd5e0; opacity: 0.6; }
-        .node--eol text { fill: #94a3b8; }
-        .dark-mode .node--eol rect { fill: #1e293b; stroke: #334155; }
-
-        /* LOD Styles */
-        .zoom-far .node-label, .zoom-far .details-container { display: none !important; }
-        .zoom-far .node rect { stroke-width: 4px; rx: 20; ry: 20; }
-        .zoom-mid .details-container { display: none !important; }
-
-        /* Search Heatmap Styles */
-        .node--match rect { stroke: #ffeb3b !important; stroke-width: 4px !important; filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.6)); }
-        .node--match-ancestor rect { stroke: rgba(255, 235, 59, 0.4) !important; stroke-width: 2px !important; }
-        .link--match { stroke: #ffeb3b !important; stroke-opacity: 1 !important; stroke-width: 4px !important; }
-
-        /* Minimap Styles */
-        #minimap-container { position: absolute; bottom: 32px; right: 32px; width: 200px; height: 150px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: var(--shadow-lg); overflow: hidden; z-index: 100; pointer-events: none; }
-        #minimap-svg { width: 100%; height: 100%; }
-        #minimap-viewport { fill: rgba(0, 175, 154, 0.1); stroke: var(--fp-green); stroke-width: 1px; }
 
         #breadcrumb-navigator { position: absolute; top: 80px; left: 40px; z-index: 900; background: var(--card-bg); padding: 8px 16px; border-radius: 8px; box-shadow: var(--shadow); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         #breadcrumb-navigator.visible { opacity: 1; pointer-events: auto; }
@@ -95,18 +77,10 @@
         .node-summary::-webkit-scrollbar { width: 3px; }
         .node-summary::-webkit-scrollbar-thumb { background: var(--fp-green); }
 
-        .related-links-container { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); }
-        .related-links-title { font-size: 10px; font-weight: 800; color: var(--fp-green); text-transform: uppercase; margin-bottom: 6px; }
-        .related-link-item { display: block; font-size: 11px; color: var(--text-primary); text-decoration: none; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .related-link-item:hover { color: var(--fp-green); text-decoration: underline; }
-
         .type-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; width: fit-content; }
         .tag-document { background: #f0fff4; color: #2f855a; }
         .tag-platform { background: var(--fp-navy); color: white; }
-        .tag-status-current { background: #e6fffa; color: #008673; border: 1px solid #b2f5ea; }
-        .tag-status-eol { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
         .dark-mode .tag-document { background: #22543d; color: #c6f6d5; }
-        .dark-mode .tag-status-eol { background: #742a2a; color: #fed7d7; }
 
         .external-link-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background-color: var(--fp-green); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px; transition: all 0.2s; width: 100%; box-shadow: 0 4px 10px rgba(0, 175, 154, 0.2); margin-top: auto; }
         .external-link-btn:hover { background-color: var(--fp-dark-green); transform: translateY(-2px); }
@@ -124,19 +98,11 @@
     <header><h1>Forcepoint Documentation</h1><div class="header-actions"><input type="text" id="search-input" placeholder="Search..."><button class="theme-toggle" id="theme-toggle">🌓</button></div></header>
     <aside id="global-finder"><div class="finder-header">Documentation Explorer</div><div class="finder-scroll" id="finder-list"></div></aside>
     <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()">‹</button>
-    <main id="main-content">
-        <div id="breadcrumb-navigator"></div>
-        <div id="canvas-container">
-            <div id="minimap-container"><svg id="minimap-svg"><g id="minimap-content"></g><rect id="minimap-viewport"></rect></svg></div>
-            <div class="controls"><button class="btn" onclick="zoomIn()">+</button><button class="btn" onclick="zoomOut()">-</button><button class="btn" onclick="resetZoom()">⟲</button></div>
-        </div>
-    </main>
+    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()">+</button><button class="btn" onclick="zoomOut()">-</button><button class="btn" onclick="resetZoom()">⟲</button></div></div></main>
 
     <script>
         const config = { nodeWidth: 320, nodeHeight: 52, expandedHeight: 280, directoryHeight: 360, levelWidth: 450, directoryThreshold: 12 };
-        let root, svg, g, linkGroup, nodeGroup, zoom, i = 0, selectedNode = null;
-        let minimapSvg, minimapG, minimapViewport, minimapScale;
-        let summariesLookup = null;
+        let root, allNodes, svg, g, linkGroup, nodeGroup, zoom, i = 0, selectedNode = null;
         const duration = 600;
 
         function toggleSidebar() {
@@ -146,46 +112,23 @@
                 const w = document.getElementById('canvas-container').clientWidth;
                 const h = document.getElementById('canvas-container').clientHeight;
                 svg.attr("width", w).attr("height", h);
-                checkVisibility();
             }, 300);
         }
 
         async function init() {
-            let data;
+            let data, summariesData;
             try { 
-                // Load structure first
-                data = await d3.json('d3-data.json?v=' + new Date().getTime()); 
-                // Lazy load summaries in background
-                d3.json('summaries.json').then(res => {
-                    summariesLookup = res;
-                    if (selectedNode) update(selectedNode); // Refresh if something is already selected
-                });
-            } catch (error) { return; }
-            
+                [data, summariesData] = await Promise.all([
+                    d3.json('d3-data.json?v=' + new Date().getTime()),
+                    d3.json('summaries.json?v=' + new Date().getTime())
+                ]);
+            } catch (error) { console.error(error); return; }
+            window.summaries = summariesData;
+
             const container = d3.select("#canvas-container");
             svg = container.append("svg").attr("width", "100%").attr("height", "100%").style("overflow", "visible");
             g = svg.append("g"); linkGroup = g.append("g").attr("class", "links"); nodeGroup = g.append("g").attr("class", "nodes");
-            
-            // Minimap Init
-            minimapSvg = d3.select("#minimap-svg");
-            minimapG = d3.select("#minimap-content");
-            minimapViewport = d3.select("#minimap-viewport");
-
-            zoom = d3.zoom().scaleExtent([0.02, 3]).on("zoom", (event) => {
-                g.attr("transform", event.transform);
-                
-                // 1. Semantic Zooming (LOD)
-                const scale = event.transform.k;
-                g.classed("zoom-far", scale < 0.15);
-                g.classed("zoom-mid", scale >= 0.15 && scale < 0.5);
-                g.classed("zoom-close", scale >= 0.5);
-
-                // 2. Viewport Culling
-                checkVisibility();
-
-                // 3. Minimap Sync
-                updateMinimapViewport(event.transform);
-            });
+            zoom = d3.zoom().scaleExtent([0.05, 3]).on("zoom", (event) => g.attr("transform", event.transform));
             svg.call(zoom);
 
             root = d3.hierarchy(data, d => d.children);
@@ -203,6 +146,8 @@
 
             renderFinderRecursive(root, document.getElementById('finder-list'));
 
+            allNodes = root.descendants();
+
             if (root.children) root.children.forEach(d => { if (d.children) d.children.forEach(collapse); });
             update(root); resetZoom();
             document.getElementById('loading-overlay').style.opacity = '0';
@@ -210,76 +155,10 @@
 
             d3.select("#search-input").on("input", function() {
                 const term = this.value.toLowerCase();
-                
-                // Heatmap logic
-                root.descendants().forEach(d => {
-                    d.data.isMatch = term && d.data.name.toLowerCase().includes(term);
-                    d.data.hasMatchChild = false;
-                });
-
-                if (term) {
-                    root.descendants().filter(d => d.data.isMatch).forEach(d => {
-                        d.ancestors().forEach(a => a.data.hasMatchChild = true);
-                    });
-                    
-                    const firstMatch = root.descendants().find(d => d.data.isMatch);
-                    if (firstMatch) window.focusNodeById(firstMatch.id);
-                }
-                update(root);
+                if (!term) return;
+                const match = allNodes.find(d => d.data.name.toLowerCase().includes(term));
+                if (match) window.focusNodeById(match.id);
             });
-        }
-
-        function checkVisibility() {
-            const transform = d3.zoomTransform(svg.node());
-            const width = document.getElementById('canvas-container').clientWidth;
-            const height = document.getElementById('canvas-container').clientHeight;
-            
-            nodeGroup.selectAll("g.node").each(function(d) {
-                const x = d.y * transform.k + transform.x;
-                const y = d.x * transform.k + transform.y;
-                const isVisible = x > -config.nodeWidth * transform.k && x < width + config.nodeWidth * transform.k &&
-                                  y > -config.expandedHeight * transform.k && y < height + config.expandedHeight * transform.k;
-                d3.select(this).style("display", isVisible ? null : "none");
-            });
-        }
-
-        function updateMinimapNodes() {
-            if (!root) return;
-            const nodes = root.descendants();
-            const miniNodes = minimapG.selectAll("rect").data(nodes, d => d.id);
-            
-            miniNodes.enter().append("rect")
-                .attr("width", config.nodeWidth).attr("height", config.nodeHeight)
-                .attr("rx", 4).attr("ry", 4)
-                .merge(miniNodes)
-                .attr("x", d => d.y).attr("y", d => d.x - config.nodeHeight/2)
-                .attr("fill", d => d.data.isMatch ? "#ffeb3b" : (d.data.type === 'platform' ? 'var(--fp-navy)' : 'var(--fp-green)'))
-                .attr("opacity", d => d.data.isMatch || d.data.hasMatchChild ? 1 : 0.4);
-            
-            miniNodes.exit().remove();
-        }
-
-        function updateMinimapViewport(transform) {
-            const width = document.getElementById('canvas-container').clientWidth;
-            const height = document.getElementById('canvas-container').clientHeight;
-            const mw = 200, mh = 150;
-            
-            const treeW = (treeBounds.maxX - treeBounds.minX) + config.nodeWidth;
-            const treeH = (treeBounds.maxY - treeBounds.minY) + config.nodeHeight;
-            
-            minimapScale = Math.min(mw / treeW, mh / treeH) * 0.9;
-            const offsetX = (mw - treeW * minimapScale) / 2 - treeBounds.minX * minimapScale;
-            const offsetY = (mh - treeH * minimapScale) / 2 - treeBounds.minY * minimapScale;
-            
-            minimapG.attr("transform", `translate(${offsetX}, ${offsetY}) scale(${minimapScale})`);
-            
-            // Sync Viewport Rect
-            const vx = (-transform.x / transform.k) * minimapScale + offsetX;
-            const vy = (-transform.y / transform.k) * minimapScale + offsetY;
-            const vw = (width / transform.k) * minimapScale;
-            const vh = (height / transform.k) * minimapScale;
-            
-            minimapViewport.attr("x", vx).attr("y", vy).attr("width", vw).attr("height", vh);
         }
 
         function renderFinderRecursive(d, container) {
@@ -307,7 +186,7 @@
         function collapse(d) { if (d.children) { d._children = d.children; d._children.forEach(collapse); d.children = null; } }
 
         window.focusNodeById = (id) => {
-            const target = root.descendants().find(d => String(d.id) === String(id));
+            const target = allNodes.find(d => String(d.id) === String(id));
             if (!target) return;
 
             // Accordion Logic: Resolve the expansion path and collapse others
@@ -361,23 +240,13 @@
             return treeData;
         }
 
-        let treeBounds = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
-
         function update(source) {
             const treeData = calculateDynamicTree();
-            const nodes = treeData.descendants();
-            const links = treeData.links();
+            const nodes = treeData.descendants(); const links = treeData.links();
             nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
-            
-            // Pre-calculate bounds for minimap
-            treeBounds.minX = d3.min(nodes, d => d.y) || 0;
-            treeBounds.maxX = d3.max(nodes, d => d.y) || 0;
-            treeBounds.minY = d3.min(nodes, d => d.x) || 0;
-            treeBounds.maxY = d3.max(nodes, d => d.x) || 0;
-            
             const node = nodeGroup.selectAll("g.node").data(nodes, d => d.id);
             const nodeEnter = node.enter().append("g")
-                .attr("class", d => "node node--" + (d.data.type || 'category') + (d.data.status === 'eol' ? ' node--eol' : ''))
+                .attr("class", d => "node node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => window.focusNodeById(d.id));
 
@@ -388,9 +257,7 @@
             const nodeUpdate = nodeEnter.merge(node);
             const activePath = selectedNode ? new Set(selectedNode.ancestors()) : new Set();
             nodeUpdate.classed("node--selected", d => d === selectedNode)
-                      .classed("node--compressed", d => selectedNode && !activePath.has(d) && !(d.parent && activePath.has(d.parent)))
-                      .classed("node--match", d => d.data.isMatch)
-                      .classed("node--match-ancestor", d => d.data.hasMatchChild);
+                      .classed("node--compressed", d => selectedNode && !activePath.has(d) && !(d.parent && activePath.has(d.parent)));
 
             nodeUpdate.transition().duration(duration).attr("transform", d => "translate(" + d.y + "," + d.x + ")");
             nodeUpdate.select("rect").transition().duration(duration).attr("height", d => d === selectedNode ? (d.data.isDirectory ? config.directoryHeight : config.expandedHeight) : config.nodeHeight)
@@ -401,23 +268,22 @@
             nodeUpdate.each(function(d) {
                 const fo = d3.select(this).select(".details-container");
                 if (d === selectedNode) {
+                    const h = d.data.isDirectory ? config.directoryHeight : config.expandedHeight;
+                    fo.attr("height", h).attr("y", -h/2);
                     fo.style("pointer-events", "auto").transition().duration(duration).style("opacity", 1);
                     const safeName = d.data.name.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+
+                    const summaryData = window.summaries && d.data.url ? window.summaries[d.data.url] : null;
+                    const summaryText = summaryData ? summaryData.summary : "No summary content found for this document.";
+                    const safeSummary = summaryText.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+
                     const safeUrl = (d.data.url && /^https?:\/\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
                     
                     if (d.data.isDirectory) {
                         const items = (d.children || d._children || []).map(c => `<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('${c.id}')">${c.data.name}</li>`).join("");
                         fo.html(`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>${(d.children||d._children).length} items</span></div><div class="detail-title">${safeName}</div><ul class="directory-list">${items}</ul></div>`);
                     } else {
-                        const info = summariesLookup ? summariesLookup[d.data.url] : null;
-                        const summaryText = info ? (info.summary || "No summary found.") : "Fetching intelligence...";
-                        const safeSummary = summaryText.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
-                        
-                        const statusBadge = d.data.status ? `<div class="type-tag tag-status-${d.data.status}">${d.data.status}</div>` : '';
-                        const related = (info && info.relatedLinks || []).slice(0, 3).map(l => `<a href="${l.url}" class="related-link-item" target="_blank">🔗 ${l.title}</a>`).join('');
-                        const relatedHtml = related ? `<div class="related-links-container"><div class="related-links-title">Related Documentation</div>${related}</div>` : '';
-                        
-                        fo.html(`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div style="display:flex; gap:8px;">${statusBadge}<div class="type-tag tag-${d.data.type}">${d.data.type}</div></div><div class="detail-title">${safeName}</div><div class="node-summary">${safeSummary}</div>${relatedHtml}${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>` : ''}</div>`);
+                        fo.html(`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-${d.data.type}">${d.data.type}</div><div class="detail-title">${safeName}</div><div class="node-summary">${safeSummary}</div>${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>` : ''}</div>`);
                     }
                 } else {
                     fo.style("pointer-events", "none").transition().duration(duration).style("opacity", 0);
@@ -425,28 +291,13 @@
             });
 
             node.exit().transition().duration(duration).attr("transform", d => "translate(" + source.y + "," + source.x + ")").remove();
-            
             const link = linkGroup.selectAll("path.link").data(links, d => d.target.id);
-            const linkEnter = link.enter().insert("path", "g")
-                .attr("class", "link")
-                .attr("d", d => { 
-                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth }; 
-                    return diagonal(o, o); 
-                });
-
-            const linkUpdate = linkEnter.merge(link);
-            
-            linkUpdate.classed("link--match", d => d.target.data.isMatch || d.target.data.hasMatchChild);
-
-            linkUpdate.transition().duration(duration)
-                .attr("d", d => diagonal({ x: d.source.x, y: d.source.y + config.nodeWidth }, { x: d.target.x, y: d.target.y }))
+            link.enter().insert("path", "g").attr("class", "link").attr("d", d => { const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth }; return diagonal(o, o); })
+                .merge(link).transition().duration(duration).attr("d", d => diagonal({ x: d.source.x, y: d.source.y + config.nodeWidth }, { x: d.target.x, y: d.target.y }))
                 .attr("stroke-width", d => Math.max(2, Math.log(d.target.value || 1) * 1.5) + "px")
-                .style("opacity", d => (activePath.has(d.target) || activePath.has(d.source)) ? 1 : (d.target.data.hasMatchChild || d.target.data.isMatch ? 0.8 : 0.15));
-
+                .style("opacity", d => activePath.has(d.target) || activePath.has(d.source) ? 1 : 0.2);
             link.exit().remove();
             nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
-            updateMinimapNodes();
-            setTimeout(checkVisibility, duration + 50);
         }
 
         function diagonal(s, d) { return "M" + s.y + "," + s.x + "C" + (s.y + d.y) / 2 + "," + s.x + " " + (s.y + d.y) / 2 + "," + d.x + " " + d.y + "," + d.x; }
