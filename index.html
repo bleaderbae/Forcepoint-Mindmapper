@@ -425,12 +425,23 @@
             });
 
             node.exit().transition().duration(duration).attr("transform", d => "translate(" + source.y + "," + source.x + ")").remove();
+            
             const link = linkGroup.selectAll("path.link").data(links, d => d.target.id);
-            link.enter().insert("path", "g").attr("class", "link").attr("d", d => { const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth }; return diagonal(o, o); })
-                .merge(link).transition().duration(duration).attr("d", d => diagonal({ x: d.source.x, y: d.source.y + config.nodeWidth }, { x: d.target.x, y: d.target.y }))
+            const linkEnter = link.enter().insert("path", "g")
+                .attr("class", "link")
+                .attr("d", d => { 
+                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth }; 
+                    return diagonal(o, o); 
+                });
+
+            const linkUpdate = linkEnter.merge(link);
+            
+            linkUpdate.classed("link--match", d => d.target.data.isMatch || d.target.data.hasMatchChild);
+
+            linkUpdate.transition().duration(duration)
+                .attr("d", d => diagonal({ x: d.source.x, y: d.source.y + config.nodeWidth }, { x: d.target.x, y: d.target.y }))
                 .attr("stroke-width", d => Math.max(2, Math.log(d.target.value || 1) * 1.5) + "px")
-                .style("opacity", d => (activePath.has(d.target) || activePath.has(d.source)) ? 1 : (d.target.data.hasMatchChild || d.target.data.isMatch ? 0.8 : 0.15))
-                .classed("link--match", d => d.target.data.isMatch || d.target.data.hasMatchChild);
+                .style("opacity", d => (activePath.has(d.target) || activePath.has(d.source)) ? 1 : (d.target.data.hasMatchChild || d.target.data.isMatch ? 0.8 : 0.15));
 
             link.exit().remove();
             nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
