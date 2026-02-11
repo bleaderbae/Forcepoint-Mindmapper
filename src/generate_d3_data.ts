@@ -7,6 +7,7 @@ import { humanize, getCategory } from './utils/string_utils.ts';
 export interface D3Node {
     name: string;
     url?: string;
+    summary?: string;
     children?: D3Node[];
     childrenMap?: Map<string, D3Node>;
     _children?: D3Node[];
@@ -15,7 +16,6 @@ export interface D3Node {
     id?: number;
 }
 
-// Comprehensive Mapping for Product Families
 const PRODUCT_FAMILY_MAP: Record<string, string> = {
     'dlp': 'DLP',
     'fpone': 'ONE',
@@ -24,7 +24,7 @@ const PRODUCT_FAMILY_MAP: Record<string, string> = {
     'fponesse': 'ONE',
     'frbi': 'ONE',
     'getvisibility': 'ONE',
-    'fpdsc': 'ONE', // Data Security Cloud is part of the ONE SSE platform
+    'fpdsc': 'ONE',
     'emailsec': 'Email Security',
     'websec': 'Web Security',
     'f1e': 'F1E',
@@ -33,11 +33,9 @@ const PRODUCT_FAMILY_MAP: Record<string, string> = {
     'dspm': 'DSPM',
     'insights': 'Insights',
     'dup': 'DUP',
-    'datasecurity': 'Data Security'
-};
-
-export const findChild = (parent: D3Node, name: string): D3Node | undefined => {
-    return parent.childrenMap?.get(name);
+    'datasecurity': 'Data Security',
+    'bjces': 'Boldon James',
+    'boldon james': 'Boldon James'
 };
 
 export const addChild = (parent: D3Node, child: D3Node) => {
@@ -50,19 +48,20 @@ export const addChild = (parent: D3Node, child: D3Node) => {
         });
     }
 
-    // Normalization: Strip brand name and parent name to keep canvas clean
-    let cleanName = child.name.replace(/^Forcepoint\s+/i, "").trim();
-    if (parent.name !== "Forcepoint" && cleanName.startsWith(parent.name + " ")) {
-        cleanName = cleanName.replace(new RegExp(`^${parent.name}\\s+`, 'i'), "").trim();
+    let cleanName = child.name.replace(/^Forcepoint\s+/i, "").replace(/^[|>: ]+/, "").trim();
+    if (parent.name !== "Forcepoint") {
+        const pLow = parent.name.toLowerCase();
+        if (cleanName.toLowerCase().startsWith(pLow)) {
+            const next = cleanName.substring(pLow.length).replace(/^[|>: ]+/, "").trim();
+            if (next && next.length > 2) cleanName = next;
+        }
     }
     child.name = cleanName || child.name;
 
     const existing = parent.childrenMap!.get(child.name);
     if (existing) {
         if (child.url) existing.url = child.url;
-        if (child.type && !['version', 'archive'].includes(existing.type || '')) {
-            existing.type = child.type;
-        }
+        if (child.summary && !existing.summary) existing.summary = child.summary;
         return existing;
     }
 
@@ -88,15 +87,20 @@ function compareVersions(a: string, b: string): number {
     return 0;
 }
 
+function cleanSummary(content: string, title: string): string {
+    if (!content) return "";
+    let clean = content.trim();
+    const cleanTitle = title.trim();
+    if (clean.startsWith(cleanTitle)) clean = clean.substring(cleanTitle.length).trim();
+    return clean.substring(0, 450).trim() + (clean.length > 450 ? "..." : "");
+}
+
 function run() {
     const dataPath = path.join(process.cwd(), 'full_site_data.json');
-    if (!fs.existsSync(dataPath)) {
-        console.error('Data file not found!');
-        return;
-    }
+    if (!fs.existsSync(dataPath)) return;
 
     const data: any[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-    console.log(`Processing ${data.length} nodes with Alpha-Sorting and Platform Consolidation...`);
+    console.log(`Processing ${data.length} nodes with Delimiter-First Breadcrumb Integrity...`);
 
     const root: D3Node = { name: "Forcepoint", children: [], type: 'category' };
 
@@ -106,92 +110,81 @@ function run() {
         let urlPath = '';
         try { urlPath = new URL(page.url).pathname; } catch (e) { continue; }
         const segments = urlPath.split('/').filter(s => s && !s.endsWith('.html'));
-        if (segments.length === 0) continue;
+        let productCode = segments[0] === 'docs' ? (segments[1] || 'general') : segments[0];
+        let familyName = PRODUCT_FAMILY_MAP[productCode.toLowerCase()] || humanize(productCode);
 
-        // --- Step 1: Detect Family ---
-        let productCode = segments[0].toLowerCase();
-        if (productCode === 'docs') {
-            productCode = (segments[1] || 'general').toLowerCase();
+        // --- Step 1: Intelligent Platform Routing ---
+        const fullIdentity = (page.title + ' ' + page.url).toLowerCase();
+        let pathStack: string[] = [];
+
+        if (fullIdentity.includes('sse') || fullIdentity.includes('swg') || fullIdentity.includes('casb') || fullIdentity.includes('data security cloud')) {
+            pathStack.push('ONE');
+            if (fullIdentity.includes('swg')) pathStack.push('SWG');
+            else if (fullIdentity.includes('casb')) pathStack.push('CASB');
+            else if (fullIdentity.includes('firewall')) pathStack.push('Firewall');
+        } else {
+            pathStack.push(familyName);
         }
-        if (['tech_pubs', 'shared', 'product-docs'].includes(productCode)) productCode = 'general';
 
-        const familyName = PRODUCT_FAMILY_MAP[productCode] || humanize(productCode);
-        const type = familyName === 'ONE' ? 'platform' : 'category';
-
-        let current = addChild(root, { name: familyName, children: [], type });
-
-        // --- Step 2: Version Extraction ---
+        // --- Step 2: Version and Breadcrumbs ---
         const versionMatch = urlPath.match(/\/(\d+(\.\d+)*)\//);
-        let injectedVersion = '';
-        if (versionMatch) {
-            injectedVersion = versionMatch[1];
-            current = addChild(current, { name: injectedVersion, children: [], type: 'version' });
-        }
+        if (versionMatch) pathStack.push(versionMatch[1]);
 
-        // --- Step 3: Breadcrumb Pathing ---
-        const crumbs = (page.breadcrumbs || []).filter((b: string) => {
-            const lower = b.toLowerCase();
-            return !['home', 'documentation', 'product documentation', 'sitemap', 'forcepoint', familyName.toLowerCase(), injectedVersion.toLowerCase(), 'general'].includes(lower);
+        let rawCrumbs = page.breadcrumbs || [];
+        if (rawCrumbs.length === 0) rawCrumbs = page.title.split(/[|>]/).map((s: string) => s.trim());
+
+        const filteredCrumbs = rawCrumbs.filter((c: string) => {
+            const low = c.toLowerCase();
+            return !['home', 'documentation', 'product documentation', 'sitemap', 'forcepoint', familyName.toLowerCase(), 'general'].includes(low);
         });
+        pathStack = [...pathStack, ...filteredCrumbs];
 
-        for (const crumb of crumbs) {
-            const cleanCrumb = humanize(crumb);
-            if (!cleanCrumb || cleanCrumb === current.name) continue;
-            current = addChild(current, { name: cleanCrumb, children: [], type: isVersionString(cleanCrumb) ? 'version' : 'category' });
+        // --- Step 3: Build Tree ---
+        let current = root;
+        for (let i = 0; i < pathStack.length; i++) {
+            const name = humanize(pathStack[i]);
+            if (!name || name === current.name) continue;
+            const nodeType = name === 'ONE' ? 'platform' : (isVersionString(name) ? 'version' : 'category');
+            current = addChild(current, { name, children: [], type: nodeType });
         }
 
-        // --- Step 4: Add Leaf Node ---
-        const pageTitle = humanize(page.title);
+        // --- Step 4: Final Leaf with Summary ---
+        const finalTitle = humanize(page.title);
+        const summary = cleanSummary(page.content, page.title);
         const isLegal = getCategory(page.title + ' ' + page.url) === 'Legal & Third Party';
         
-        if (current.name !== pageTitle) {
-            addChild(current, { name: pageTitle, url: page.url, type: isLegal ? 'legal' : 'document' });
+        if (current.name !== finalTitle) {
+            addChild(current, { name: finalTitle, url: page.url, summary, type: isLegal ? 'legal' : 'document' });
         } else {
             current.url = page.url;
+            current.summary = summary;
             current.type = isLegal ? 'legal' : 'document';
         }
     }
 
-    // --- Step 5: Post-Processing (Final Sorting & Pruning) ---
     const finalizeNodes = (node: D3Node) => {
         if (!node.children || node.children.length === 0) return;
-
-        // Priority sort: Categories/Platforms first, then alphabetical
+        
+        // Consistent Sorting: Platforms first, then Alphabetical
         node.children.sort((a, b) => {
-            // Put 'ONE' at the very top if it exists
             if (a.name === 'ONE') return -1;
             if (b.name === 'ONE') return 1;
-            
-            // Standard alpha sort
             return a.name.localeCompare(b.name);
         });
 
-        // Prune Versions (Avoid nesting archives)
-        if (node.type !== 'archive') {
-            const versionChildren = node.children.filter(c => c.type === 'version' || isVersionString(c.name));
-            if (versionChildren.length > 1) {
-                versionChildren.sort((a, b) => compareVersions(b.name, a.name));
-                const latest = versionChildren[0];
-                const others = versionChildren.slice(1);
-
-                const archiveNode: D3Node = { name: "Version Archives", children: others, type: 'archive' };
-                const nonVersions = node.children.filter(c => !versionChildren.includes(c));
-                
-                node.children = [...nonVersions, latest, archiveNode];
-                if (!latest.name.includes("(Latest)")) latest.name = `${latest.name} (Latest)`;
-            }
+        const versionChildren = node.children.filter(c => c.type === 'version' || isVersionString(c.name));
+        if (versionChildren.length > 1 && node.type !== 'archive') {
+            versionChildren.sort((a, b) => compareVersions(b.name, a.name));
+            const archiveNode: D3Node = { name: "Version Archives", children: versionChildren.slice(1), type: 'archive' };
+            const nonVersions = node.children.filter(c => !versionChildren.includes(c));
+            node.children = [...nonVersions, versionChildren[0], archiveNode];
+            if (!versionChildren[0].name.includes("(Latest)")) versionChildren[0].name = `${versionChildren[0].name} (Latest)`;
         }
-
         node.children?.forEach(finalizeNodes);
     };
 
     finalizeNodes(root);
-
-    const outputPath = path.join(process.cwd(), 'd3-data.json');
-    fs.writeFileSync(outputPath, JSON.stringify(root, null, 2));
-    console.log(`D3 data saved with Alpha-Sorting to ${outputPath}`);
+    fs.writeFileSync(path.join(process.cwd(), 'd3-data.json'), JSON.stringify(root, null, 2));
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-    run();
-}
+run();
