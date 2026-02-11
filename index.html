@@ -214,6 +214,17 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Compression Classes */
+        .node--compressed {
+            opacity: 0.4;
+        }
+        .node--compressed rect {
+            stroke-width: 1px;
+        }
+        .node--compressed text {
+            font-size: 10px;
+        }
+
         /* Ghost Node Tooltip */
         #ghost-tooltip {
             position: absolute;
@@ -242,6 +253,53 @@
         #ghost-tooltip ul {
             margin: 0;
             padding-left: 16px;
+        }
+
+        /* Directory Scroller */
+        .directory-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+        .directory-header {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--fp-green);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .directory-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin: 0;
+            list-style: none;
+            scrollbar-width: thin;
+            scrollbar-color: var(--fp-green) transparent;
+        }
+        .directory-list::-webkit-scrollbar { width: 4px; }
+        .directory-list::-webkit-scrollbar-thumb { background: var(--fp-green); border-radius: 10px; }
+
+        .directory-item {
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .directory-item:hover {
+            background: var(--fp-light);
+            color: var(--fp-green);
+        }
+        .dark-mode .directory-item:hover {
+            background: rgba(255,255,255,0.05);
         }
 
         /* Level of Detail (LOD) classes */
@@ -316,6 +374,7 @@
         .tag-variant { background: #faf5ff; color: #6b46c1; }
         .tag-document { background: #f0fff4; color: #2f855a; }
         .tag-legal { background: #fff5f5; color: #c53030; }
+        .tag-platform { background: var(--fp-navy); color: white; }
 
         .dark-mode .tag-category { background: #2d3748; color: #cbd5e0; }
         .dark-mode .tag-version { background: #2c5282; color: #bee3f8; }
@@ -394,7 +453,7 @@
 <body>
     <div id="loading-overlay" aria-live="polite" aria-busy="true">
         <div class="spinner"></div>
-        <div style="font-weight: 500; color: var(--text-secondary);">Loading visualization...</div>
+        <div style="font-weight: 500; color: var(--text-secondary);">Optimizing Layout...</div>
     </div>
     
     <header>
@@ -418,15 +477,17 @@
             <button class="btn" title="Zoom Out" onclick="zoomOut()">-</button>
             <button class="btn" title="Reset View" onclick="resetZoom()">⟲</button>
         </div>
-        <div class="help-text">Select node for details • Click to expand • Drag to pan</div>
+        <div class="help-text">Large branches use Directory Cards • Other branches compress automatically</div>
     </div>
 
     <script>
         const config = {
-            nodeWidth: 260,
+            nodeWidth: 280,
             nodeHeight: 52,
-            expandedHeight: 140,
-            levelWidth: 380
+            expandedHeight: 160,
+            directoryHeight: 320,
+            levelWidth: 400,
+            directoryThreshold: 12
         };
 
         let root;
@@ -435,8 +496,6 @@
         let i = 0;
         let selectedNode = null;
         const duration = 600;
-
-        const treeLayout = d3.tree().nodeSize([160, config.levelWidth]);
 
         // Theme management
         const themeToggle = document.getElementById('theme-toggle');
@@ -491,19 +550,19 @@
                 .on("zoom", (event) => {
                     const transform = event.transform;
                     g.attr("transform", transform);
-                    
-                    // LOD implementation
                     svg.classed("zoom-far", transform.k < 0.6);
-                    svg.classed("zoom-near", transform.k > 1.2);
                 });
 
             svg.call(zoom);
 
             root = d3.hierarchy(data, d => d.children);
             
-            // Pre-calculate descendant counts for weighted paths
             root.eachAfter(d => {
                 d.value = d.children ? d.children.reduce((sum, c) => sum + c.value, 0) : 1;
+                // Identify Directory Nodes
+                if (d.children && d.children.length > config.directoryThreshold) {
+                    d.data.isDirectory = true;
+                }
             });
 
             root.x0 = height / 2;
@@ -521,14 +580,12 @@
             update(root);
             resetZoom();
 
-            // Remove loader
             const loader = document.getElementById('loading-overlay');
             if (loader) {
                 loader.style.opacity = '0';
                 setTimeout(() => loader.remove(), 500);
             }
 
-            // Shortcuts
             window.addEventListener('keydown', (e) => {
                 if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
                     e.preventDefault();
@@ -536,7 +593,6 @@
                 }
             });
 
-            // Search
             d3.select("#search-input").on("input", function() {
                 const term = this.value.toLowerCase();
                 if (!term) {
@@ -570,6 +626,7 @@
             const width = container.node().clientWidth;
             const height = container.node().clientHeight;
             
+            // Move parents to show the node if it's currently hidden
             const ancestors = d.ancestors();
             for (let i = ancestors.length - 1; i > 0; i--) {
                 const parent = ancestors[i];
@@ -580,19 +637,23 @@
                 }
             }
 
+            // Determine optimal scale based on node type and state
+            let targetScale = 1.0;
+            if (d.data.type === 'platform') targetScale = 0.7; // Platforms need more breathing room
+            if (d.data.isDirectory) targetScale = 0.9;
+            if (d.data.type === 'document') targetScale = 1.2; // Documents should be clear
+
             svg.transition().duration(750).call(
                 zoom.transform,
                 d3.zoomIdentity
-                    .translate(width / 2, height / 2)
-                    .scale(1)
-                    .translate(-d.y - config.nodeWidth / 2, -d.x)
+                    .translate(width / 3, height / 2) // Center at 1/3 width to allow horizontal branch growth
+                    .scale(targetScale)
+                    .translate(-d.y, -d.x)
             );
         }
 
         function showGhost(event, d) {
-            // Only show ghost if node is collapsed and has children
             if (!d._children || d.children) return;
-
             const tooltip = d3.select("#ghost-tooltip");
             const content = d._children.slice(0, 5).map(c => `<li>${c.data.name}</li>`).join("");
             const remaining = d._children.length - 5;
@@ -608,8 +669,40 @@
             d3.select("#ghost-tooltip").style("opacity", 0);
         }
 
-        function update(source) {
+        // --- DYNAMIC POSITIONING LOGIC (FISHEYE) ---
+        function calculateDynamicTree(source) {
+            const treeLayout = d3.tree().nodeSize([160, config.levelWidth]);
             const treeData = treeLayout(root);
+            const nodes = treeData.descendants();
+
+            // Vertical Focus Logic
+            if (selectedNode) {
+                const activePath = new Set(selectedNode.ancestors());
+                
+                // Adjust Y (vertical in our L-to-R map) based on proximity to active path
+                let currentPos = 0;
+                let lastDepth = -1;
+
+                nodes.sort((a, b) => a.x - b.x); // Sort by original vertical position
+
+                // We override the 'x' (vertical) to compress non-active branches
+                nodes.forEach((d, index) => {
+                    const isFocus = activePath.has(d) || (selectedNode.parent && activePath.has(d.parent));
+                    const step = isFocus ? 160 : 45;
+                    
+                    if (index > 0) {
+                        d.x = nodes[index-1].x + step;
+                    } else {
+                        d.x = 0;
+                    }
+                });
+            }
+
+            return treeData;
+        }
+
+        function update(source) {
+            const treeData = calculateDynamicTree(source);
             const nodes = treeData.descendants();
             const links = treeData.links();
 
@@ -619,11 +712,15 @@
                 .data(nodes, d => d.id || (d.id = ++i));
 
             const nodeEnter = node.enter().append("g")
-                .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
+                .attr("class", d => "node node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => {
                     selectNode(d);
-                    if (d.children || d._children) {
+                    
+                    // If it's a directory node, we don't expand children as D3 nodes
+                    if (d.data.isDirectory && !d.children && !d._children) {
+                        // Do nothing to expansion
+                    } else if (d.children || d._children) {
                         if (d.children) {
                             d._children = d.children;
                             d.children = null;
@@ -638,26 +735,24 @@
                         }
                     }
                     update(d);
+                    focusNode(d);
                 })
                 .on("mouseenter", showGhost)
                 .on("mouseleave", hideGhost);
 
-            // The card rectangle
             nodeEnter.append("rect")
                 .attr("width", config.nodeWidth)
                 .attr("height", config.nodeHeight)
                 .attr("y", -config.nodeHeight / 2)
                 .style("fill-opacity", 0);
 
-            // Simple text for collapsed state
             nodeEnter.append("text")
                 .attr("class", "node-label")
                 .attr("dy", ".35em")
                 .attr("x", 16)
-                .text(d => d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name)
+                .text(d => d.data.name.length > 32 ? d.data.name.substring(0, 29) + "..." : d.data.name)
                 .style("fill-opacity", 0);
 
-            // Foreign object for rich details
             const details = nodeEnter.append("foreignObject")
                 .attr("class", "details-container")
                 .attr("width", config.nodeWidth)
@@ -668,20 +763,31 @@
 
             const nodeUpdate = nodeEnter.merge(node);
 
-            nodeUpdate.classed("node--selected", d => d === selectedNode);
+            // Apply Compression Classes
+            const activePath = selectedNode ? new Set(selectedNode.ancestors()) : new Set();
+            nodeUpdate.classed("node--selected", d => d === selectedNode)
+                      .classed("node--compressed", d => {
+                          if (!selectedNode) return false;
+                          if (activePath.has(d)) return false;
+                          if (d.parent && activePath.has(d.parent)) return false;
+                          return true;
+                      });
 
-            // Transition nodes to their new position
             nodeUpdate.transition().duration(duration)
                 .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
-            // Update Rect dimensions
             nodeUpdate.select("rect")
                 .transition().duration(duration)
-                .attr("height", d => d === selectedNode ? config.expandedHeight : config.nodeHeight)
-                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2)
+                .attr("height", d => {
+                    if (d !== selectedNode) return config.nodeHeight;
+                    return d.data.isDirectory ? config.directoryHeight : config.expandedHeight;
+                })
+                .attr("y", d => {
+                    const h = (d === selectedNode && d.data.isDirectory) ? config.directoryHeight : (d === selectedNode ? config.expandedHeight : config.nodeHeight);
+                    return -h / 2;
+                })
                 .style("fill-opacity", 1);
 
-            // Hide/Show labels vs details
             nodeUpdate.select(".node-label")
                 .transition().duration(duration)
                 .style("opacity", d => d === selectedNode ? 0 : 1)
@@ -689,10 +795,13 @@
 
             nodeUpdate.select(".details-container")
                 .transition().duration(duration)
+                .attr("height", d => d.data.isDirectory ? config.directoryHeight : config.expandedHeight)
                 .style("opacity", d => d === selectedNode ? 1 : 0)
-                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2);
+                .attr("y", d => {
+                    const h = d.data.isDirectory ? config.directoryHeight : config.expandedHeight;
+                    return -h / 2;
+                });
 
-            // Inject HTML
             nodeUpdate.each(function(d) {
                 const g = d3.select(this);
                 const fo = g.select(".details-container");
@@ -703,13 +812,36 @@
                     const safeType = (d.data.type || 'category').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
                     const safeUrl = (d.data.url && /^https?:\/\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
 
-                    fo.html(`
-                        <div class="node-details" xmlns="http://www.w3.org/1999/xhtml">
-                            <div class="type-tag tag-${safeType}">${safeType}</div>
-                            <div class="detail-title">${safeName}</div>
-                            ${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Documentation ↗</a>` : ''}
-                        </div>
-                    `);
+                    if (d.data.isDirectory) {
+                        const children = (d.children || d._children || []);
+                        const listHtml = children.map(c => `
+                            <li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('${c.id}')">
+                                ${c.data.name}
+                            </li>
+                        `).join("");
+
+                        fo.html(`
+                            <div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml">
+                                <div class="directory-header">
+                                    <span>${safeType} Directory</span>
+                                    <span>${children.length} items</span>
+                                </div>
+                                <div class="detail-title" style="margin-bottom:8px">${safeName}</div>
+                                <ul class="directory-list">
+                                    ${listHtml}
+                                </ul>
+                                ${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">Main Docs ↗</a>` : ''}
+                            </div>
+                        `);
+                    } else {
+                        fo.html(`
+                            <div class="node-details" xmlns="http://www.w3.org/1999/xhtml">
+                                <div class="type-tag tag-${safeType}">${safeType}</div>
+                                <div class="detail-title">${safeName}</div>
+                                ${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Documentation ↗</a>` : ''}
+                            </div>
+                        `);
+                    }
                 } else {
                     fo.style("pointer-events", "none");
                 }
@@ -719,10 +851,6 @@
                 .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
                 .remove();
 
-            nodeExit.select("rect").style("fill-opacity", 0);
-            nodeExit.select("text").style("fill-opacity", 0);
-
-            // --- Links section with Smart Weighted Paths ---
             const link = linkGroup.selectAll("path.link")
                 .data(links, d => d.target.id);
 
@@ -741,10 +869,9 @@
                     return diagonal(s, t);
                 })
                 .attr("stroke-width", d => {
-                    // Smart weighting based on pre-calculated descendants (logarithmic scale)
-                    // Base width 2px, max around 8px for heavy branches
                     return Math.max(2, Math.log(d.target.value || 1) * 1.5) + "px";
-                });
+                })
+                .style("opacity", d => activePath.has(d.target) || activePath.has(d.source) ? 1 : 0.2);
 
             const linkExit = link.exit().transition().duration(duration)
                 .attr("d", d => {
@@ -765,6 +892,15 @@
                    " " + (s.y + d.y) / 2 + "," + d.x +
                    " " + d.y + "," + d.x;
         }
+
+        window.focusNodeById = (id) => {
+            const target = root.descendants().find(d => String(d.id) === String(id));
+            if (target) {
+                focusNode(target);
+                selectNode(target);
+                update(target);
+            }
+        };
 
         function selectNode(d) {
             selectedNode = d;
@@ -793,6 +929,7 @@
                         event.stopPropagation();
                         focusNode(a);
                         selectNode(a);
+                        update(a);
                     });
             });
         }
@@ -801,9 +938,7 @@
         function zoomOut() { svg.transition().call(zoom.scaleBy, 0.7); }
         function resetZoom() {
             const container = d3.select("#canvas-container");
-            const width = container.node().clientWidth;
             const height = container.node().clientHeight;
-            
             svg.transition().duration(750).call(
                 zoom.transform,
                 d3.zoomIdentity.translate(60, height / 2).scale(0.7)
