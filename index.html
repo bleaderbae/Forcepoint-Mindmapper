@@ -61,9 +61,14 @@
 
         .node rect { fill: var(--node-bg); stroke: var(--border-color); stroke-width: 1.5px; rx: 12; ry: 12; transition: all 0.3s ease; }
         .node--selected rect { stroke: var(--fp-green) !important; stroke-width: 3px !important; }
+        .node--search-match rect { stroke: #eab308 !important; stroke-width: 3px !important; filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.4)); }
         .node text { font-size: 13px; font-weight: 600; pointer-events: none; fill: var(--text-primary); transition: fill 0.3s ease; }
         .link { fill: none; stroke: var(--edge-color); stroke-width: 2.5px; transition: all 0.3s ease; }
         .node--compressed { opacity: 0.4; }
+
+        /* Semantic Zooming */
+        #canvas-container.zoom-low .node-label { opacity: 0 !important; }
+        #canvas-container.zoom-low .node:hover .node-label { opacity: 1 !important; }
 
         #breadcrumb-navigator { position: absolute; top: 80px; left: 40px; z-index: 900; background: var(--card-bg); padding: 8px 16px; border-radius: 8px; box-shadow: var(--shadow); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         #breadcrumb-navigator.visible { opacity: 1; pointer-events: auto; }
@@ -76,6 +81,13 @@
         .node-summary { font-size: 12px; line-height: 1.5; color: var(--text-secondary); flex: 1; overflow-y: auto; scrollbar-width: thin; padding-right: 4px; margin-bottom: 8px; }
         .node-summary::-webkit-scrollbar { width: 3px; }
         .node-summary::-webkit-scrollbar-thumb { background: var(--fp-green); }
+
+        .related-links { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border-color); font-size: 11px; }
+        .related-links h4 { margin: 0 0 4px; font-size: 11px; text-transform: uppercase; color: var(--text-secondary); }
+        .related-links ul { list-style: none; padding: 0; margin: 0; }
+        .related-links li { margin-bottom: 2px; }
+        .related-links a { color: var(--fp-green); text-decoration: none; }
+        .related-links a:hover { text-decoration: underline; }
 
         .type-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; width: fit-content; }
         .tag-document { background: #f0fff4; color: #2f855a; }
@@ -91,6 +103,11 @@
         #loading-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; transition: opacity 0.5s ease-out; }
         .spinner { width: 40px; height: 40px; border: 4px solid var(--border-color); border-top: 4px solid var(--fp-green); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 16px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #minimap { position: absolute; bottom: 32px; right: 32px; width: 240px; height: 160px; background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: var(--shadow); border-radius: 8px; z-index: 90; overflow: hidden; }
+        #minimap rect.viewport { fill: none; stroke: var(--fp-green); stroke-width: 2px; }
+        #minimap circle { fill: var(--fp-gray); opacity: 0.5; }
+        #minimap circle.active { fill: var(--fp-green); opacity: 1; }
     </style>
 </head>
 <body>
@@ -98,11 +115,12 @@
     <header><h1>Forcepoint Documentation</h1><div class="header-actions"><input type="text" id="search-input" placeholder="Search..."><button class="theme-toggle" id="theme-toggle">🌓</button></div></header>
     <aside id="global-finder"><div class="finder-header">Documentation Explorer</div><div class="finder-scroll" id="finder-list"></div></aside>
     <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()">‹</button>
-    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()">+</button><button class="btn" onclick="zoomOut()">-</button><button class="btn" onclick="resetZoom()">⟲</button></div></div></main>
+    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()">+</button><button class="btn" onclick="zoomOut()">-</button><button class="btn" onclick="resetZoom()">⟲</button></div><svg id="minimap"></svg></div></main>
 
     <script>
         const config = { nodeWidth: 320, nodeHeight: 52, expandedHeight: 280, directoryHeight: 360, levelWidth: 450, directoryThreshold: 12 };
         let root, allNodes, svg, g, linkGroup, nodeGroup, zoom, i = 0, selectedNode = null;
+        let minimapSvg, minimapScale, minimapTransform;
         const duration = 600;
 
         function toggleSidebar() {
@@ -128,8 +146,14 @@
             const container = d3.select("#canvas-container");
             svg = container.append("svg").attr("width", "100%").attr("height", "100%").style("overflow", "visible");
             g = svg.append("g"); linkGroup = g.append("g").attr("class", "links"); nodeGroup = g.append("g").attr("class", "nodes");
-            zoom = d3.zoom().scaleExtent([0.05, 3]).on("zoom", (event) => g.attr("transform", event.transform));
+            zoom = d3.zoom().scaleExtent([0.05, 3]).on("zoom", (event) => {
+                g.attr("transform", event.transform);
+                container.classed("zoom-low", event.transform.k < 0.4);
+                updateMinimapViewport(event.transform);
+            });
             svg.call(zoom);
+
+            minimapSvg = d3.select("#minimap");
 
             root = d3.hierarchy(data, d => d.children);
             root.sort((a, b) => {
@@ -155,9 +179,30 @@
 
             d3.select("#search-input").on("input", function() {
                 const term = this.value.toLowerCase();
+                // Clear previous highlights
+                d3.selectAll(".node--search-match").classed("node--search-match", false);
+
                 if (!term) return;
-                const match = allNodes.find(d => d.data.name.toLowerCase().includes(term));
-                if (match) window.focusNodeById(match.id);
+
+                const matches = allNodes.filter(d => d.data.name.toLowerCase().includes(term));
+
+                // Highlight all matches
+                matches.forEach(m => {
+                    // We need to find the DOM element for this node if it's visible
+                    // But since nodes might be collapsed, we might not see them all.
+                    // The requirement implies visual highlighting.
+                    // If we just add class to existing nodes:
+                    d3.select(`.node[data-id="${m.id}"]`).classed("node--search-match", true);
+                });
+
+                // Still jump to the first match
+                if (matches.length > 0) window.focusNodeById(matches[0].id);
+
+                // Also update the rendered nodes to ensure class is applied if they appear later?
+                // The current update logic re-renders nodes.
+                // We should store the search term or matched IDs to apply class during update()
+                window.searchMatches = new Set(matches.map(d => d.id));
+                update(root);
             });
         }
 
@@ -247,6 +292,7 @@
             const node = nodeGroup.selectAll("g.node").data(nodes, d => d.id);
             const nodeEnter = node.enter().append("g")
                 .attr("class", d => "node node--" + (d.data.type || 'category'))
+                .attr("data-id", d => d.id)
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => window.focusNodeById(d.id));
 
@@ -257,7 +303,8 @@
             const nodeUpdate = nodeEnter.merge(node);
             const activePath = selectedNode ? new Set(selectedNode.ancestors()) : new Set();
             nodeUpdate.classed("node--selected", d => d === selectedNode)
-                      .classed("node--compressed", d => selectedNode && !activePath.has(d) && !(d.parent && activePath.has(d.parent)));
+                      .classed("node--compressed", d => selectedNode && !activePath.has(d) && !(d.parent && activePath.has(d.parent)))
+                      .classed("node--search-match", d => window.searchMatches && window.searchMatches.has(d.id));
 
             nodeUpdate.transition().duration(duration).attr("transform", d => "translate(" + d.y + "," + d.x + ")");
             nodeUpdate.select("rect").transition().duration(duration).attr("height", d => d === selectedNode ? (d.data.isDirectory ? config.directoryHeight : config.expandedHeight) : config.nodeHeight)
@@ -277,13 +324,19 @@
                     const summaryText = summaryData ? summaryData.summary : "No summary content found for this document.";
                     const safeSummary = summaryText.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
 
+                    let relatedLinksHtml = '';
+                    if (summaryData && summaryData.relatedLinks && summaryData.relatedLinks.length > 0) {
+                        const links = summaryData.relatedLinks.map(l => `<li><a href="${l.url}" target="_blank">${l.title}</a></li>`).join('');
+                        relatedLinksHtml = `<div class="related-links"><h4>Related Links</h4><ul>${links}</ul></div>`;
+                    }
+
                     const safeUrl = (d.data.url && /^https?:\/\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
                     
                     if (d.data.isDirectory) {
                         const items = (d.children || d._children || []).map(c => `<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('${c.id}')">${c.data.name}</li>`).join("");
                         fo.html(`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>${(d.children||d._children).length} items</span></div><div class="detail-title">${safeName}</div><ul class="directory-list">${items}</ul></div>`);
                     } else {
-                        fo.html(`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-${d.data.type}">${d.data.type}</div><div class="detail-title">${safeName}</div><div class="node-summary">${safeSummary}</div>${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>` : ''}</div>`);
+                        fo.html(`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-${d.data.type}">${d.data.type}</div><div class="detail-title">${safeName}</div><div class="node-summary">${safeSummary}</div>${relatedLinksHtml}${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>` : ''}</div>`);
                     }
                 } else {
                     fo.style("pointer-events", "none").transition().duration(duration).style("opacity", 0);
@@ -298,6 +351,71 @@
                 .style("opacity", d => activePath.has(d.target) || activePath.has(d.source) ? 1 : 0.2);
             link.exit().remove();
             nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+
+            updateMinimap(nodes);
+        }
+
+        function updateMinimap(nodes) {
+            if (!nodes || nodes.length === 0) return;
+            // Calculate bounding box of all nodes
+            const xExtent = d3.extent(nodes, d => d.y);
+            const yExtent = d3.extent(nodes, d => d.x);
+            const width = 240, height = 160;
+            const padding = 20;
+
+            const xRange = xExtent[1] - xExtent[0] || 1;
+            const yRange = yExtent[1] - yExtent[0] || 1;
+
+            // Fit to box
+            const scaleX = (width - 2 * padding) / xRange;
+            const scaleY = (height - 2 * padding) / yRange;
+            minimapScale = Math.min(scaleX, scaleY);
+
+            const tx = padding - xExtent[0] * minimapScale + (width - 2 * padding - xRange * minimapScale) / 2;
+            const ty = padding - yExtent[0] * minimapScale + (height - 2 * padding - yRange * minimapScale) / 2;
+
+            minimapTransform = { k: minimapScale, x: tx, y: ty };
+
+            const circles = minimapSvg.selectAll("circle").data(nodes, d => d.id);
+            circles.enter().append("circle").attr("r", 2)
+                .merge(circles)
+                .attr("cx", d => d.y * minimapScale + tx)
+                .attr("cy", d => d.x * minimapScale + ty)
+                .classed("active", d => d === selectedNode);
+            circles.exit().remove();
+
+            // Draw/Update Viewport Rect
+            // The viewport rect represents the visible area of the main canvas
+            // We need the current transform of the main svg to calculate this
+            const transform = d3.zoomTransform(svg.node());
+            updateMinimapViewport(transform);
+        }
+
+        function updateMinimapViewport(transform) {
+            if (!minimapTransform) return;
+
+            // Viewport dimensions
+            const container = document.getElementById("canvas-container");
+            const vw = container.clientWidth;
+            const vh = container.clientHeight;
+
+            // Calculate the visible area in the coordinate space of the graph
+            // visible_x = (0 - transform.x) / transform.k
+            const vx = -transform.x / transform.k;
+            const vy = -transform.y / transform.k;
+            const vWidth = vw / transform.k;
+            const vHeight = vh / transform.k;
+
+            // Map to minimap coordinates
+            const mx = vx * minimapTransform.k + minimapTransform.x;
+            const my = vy * minimapTransform.k + minimapTransform.y;
+            const mw = vWidth * minimapTransform.k;
+            const mh = vHeight * minimapTransform.k;
+
+            let rect = minimapSvg.select("rect.viewport");
+            if (rect.empty()) rect = minimapSvg.append("rect").attr("class", "viewport");
+
+            rect.attr("x", mx).attr("y", my).attr("width", mw).attr("height", mh);
         }
 
         function diagonal(s, d) { return "M" + s.y + "," + s.x + "C" + (s.y + d.y) / 2 + "," + s.x + " " + (s.y + d.y) / 2 + "," + d.x + " " + d.y + "," + d.x; }
