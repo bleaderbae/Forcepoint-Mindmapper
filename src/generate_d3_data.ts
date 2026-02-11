@@ -6,7 +6,7 @@ import type { DocNode } from './types.ts';
 import { humanize, getCategory } from './utils/string_utils.ts';
 import { getVariant } from './utils/product_utils.ts';
 
-interface D3Node {
+export interface D3Node {
     name: string;
     url?: string;
     children?: D3Node[];
@@ -14,6 +14,25 @@ interface D3Node {
     _children?: D3Node[];
     type?: 'document' | 'legal' | 'category' | 'variant' | 'version';
 }
+
+export const findChild = (parent: D3Node, name: string): D3Node | undefined => {
+    // Optimization: Use O(1) map lookup instead of O(N) array search
+    return parent.childrenMap?.get(name);
+};
+
+export const addChild = (parent: D3Node, child: D3Node) => {
+    if (!parent.children) parent.children = [];
+    parent.children.push(child);
+
+    if (!parent.childrenMap) {
+        Object.defineProperty(parent, 'childrenMap', {
+            value: new Map<string, D3Node>(),
+            enumerable: false,
+            writable: true
+        });
+    }
+    parent.childrenMap!.set(child.name, child);
+};
 
 function run() {
     const dataPath = path.join(process.cwd(), 'full_site_data.json');
@@ -27,26 +46,12 @@ function run() {
 
     const root: D3Node = { name: "Forcepoint", children: [], type: 'category' };
 
-    const findChild = (parent: D3Node, name: string): D3Node | undefined => {
-        if (parent.childrenMap) {
-            return parent.childrenMap.get(name);
-        }
-        return parent.children?.find(c => c.name === name);
-    };
-
-    const addChild = (parent: D3Node, child: D3Node) => {
-        if (!parent.children) parent.children = [];
-        parent.children.push(child);
-
-        if (!parent.childrenMap) {
-            Object.defineProperty(parent, 'childrenMap', {
-                value: new Map<string, D3Node>(),
-                enumerable: false,
-                writable: true
-            });
-        }
-        parent.childrenMap!.set(child.name, child);
-    };
+    // Initialize root with childrenMap to support O(1) lookups immediately
+    Object.defineProperty(root, 'childrenMap', {
+        value: new Map<string, D3Node>(),
+        enumerable: false,
+        writable: true
+    });
 
     for (const page of data) {
         if (!page.title || !page.url) continue;
