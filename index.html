@@ -366,6 +366,7 @@
         function update(source) {
             const treeData = calculateDynamicTree();
             const nodes = treeData.descendants();
+            const links = treeData.links();
             nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
             
             // Pre-calculate bounds for minimap
