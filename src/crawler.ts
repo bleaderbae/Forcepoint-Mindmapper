@@ -255,22 +255,36 @@ process.on('SIGINT', async () => {
 });
 
 async function run() {
-    while (queue.length > 0 || processing > 0) {
-        if (queue.length > 0 && processing < MAX_CONCURRENCY && visited.size < MAX_PAGES) {
+    // ⚡ Performance: Worker pool pattern eliminates polling delay in the main loop.
+    // Instead of checking queue/concurrency every 50ms, workers immediately pick up
+    // the next task. This significantly improves throughput for fast-loading pages.
+    const workers = new Array(MAX_CONCURRENCY).fill(null).map(async () => {
+        while (visited.size < MAX_PAGES) {
             const item = queue.shift();
-            if (item) {
-                processing++;
-                processUrl(item.url, item.parentUrl).then(async () => {
-                    if (results.length % 500 === 0) await save();
-                }).finally(() => {
-                    processing--;
-                });
+
+            if (!item) {
+                // If queue is empty and no other workers are active, we are done.
+                if (processing === 0 && queue.length === 0) return;
+
+                // If queue is empty but others are working, wait briefly for new work.
+                await new Promise(resolve => setTimeout(resolve, 50));
+                continue;
             }
-        } else {
-            await new Promise(resolve => setTimeout(resolve, 50));
-            if (visited.size >= MAX_PAGES && processing === 0 && queue.length === 0) break;
+
+            processing++;
+            try {
+                await processUrl(item.url, item.parentUrl);
+                if (results.length % 500 === 0) await save();
+            } catch (error) {
+                // Should be caught in processUrl, but safe guard here
+                logger.error(`Worker error: ${error}`);
+            } finally {
+                processing--;
+            }
         }
-    }
+    });
+
+    await Promise.all(workers);
     await save();
     logger.info(`Crawl finished. Total pages: ${results.length}`);
 }
