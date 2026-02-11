@@ -212,9 +212,28 @@ function run() {
 
     finalizeNodes(root);
 
+    const summaries: Record<string, { summary: string; relatedLinks: any[] }> = {};
+    const pruneContent = (node: D3Node) => {
+        if (node.url) {
+            summaries[node.url] = { 
+                summary: node.summary || "", 
+                relatedLinks: node.relatedLinks || [] 
+            };
+        }
+        delete node.summary;
+        delete node.relatedLinks;
+        node.children?.forEach(pruneContent);
+    };
+    pruneContent(root);
+
     const outputPath = path.join(process.cwd(), 'd3-data.json');
-    fs.writeFileSync(outputPath, JSON.stringify(root, null, 2));
-    console.log(`D3 data saved with Platform Consolidation to ${outputPath}`);
+    const summaryPath = path.join(process.cwd(), 'summaries.json');
+    
+    fs.writeFileSync(outputPath, JSON.stringify(root)); // Minified for production speed
+    fs.writeFileSync(summaryPath, JSON.stringify(summaries));
+    
+    console.log(`D3 structure saved to ${outputPath}`);
+    console.log(`Summaries lookup saved to ${summaryPath}`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

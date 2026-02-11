@@ -136,6 +136,7 @@
         const config = { nodeWidth: 320, nodeHeight: 52, expandedHeight: 280, directoryHeight: 360, levelWidth: 450, directoryThreshold: 12 };
         let root, svg, g, linkGroup, nodeGroup, zoom, i = 0, selectedNode = null;
         let minimapSvg, minimapG, minimapViewport, minimapScale;
+        let summariesLookup = null;
         const duration = 600;
 
         function toggleSidebar() {
@@ -151,7 +152,16 @@
 
         async function init() {
             let data;
-            try { data = await d3.json('d3-data.json?v=' + new Date().getTime()); } catch (error) { return; }
+            try { 
+                // Load structure first
+                data = await d3.json('d3-data.json?v=' + new Date().getTime()); 
+                // Lazy load summaries in background
+                d3.json('summaries.json').then(res => {
+                    summariesLookup = res;
+                    if (selectedNode) update(selectedNode); // Refresh if something is already selected
+                });
+            } catch (error) { return; }
+            
             const container = d3.select("#canvas-container");
             svg = container.append("svg").attr("width", "100%").attr("height", "100%").style("overflow", "visible");
             g = svg.append("g"); linkGroup = g.append("g").attr("class", "links"); nodeGroup = g.append("g").attr("class", "nodes");
@@ -392,15 +402,18 @@
                 if (d === selectedNode) {
                     fo.style("pointer-events", "auto").transition().duration(duration).style("opacity", 1);
                     const safeName = d.data.name.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
-                    const safeSummary = (d.data.summary || "No summary content found for this document.").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
                     const safeUrl = (d.data.url && /^https?:\/\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
                     
                     if (d.data.isDirectory) {
                         const items = (d.children || d._children || []).map(c => `<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('${c.id}')">${c.data.name}</li>`).join("");
                         fo.html(`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>${(d.children||d._children).length} items</span></div><div class="detail-title">${safeName}</div><ul class="directory-list">${items}</ul></div>`);
                     } else {
+                        const info = summariesLookup ? summariesLookup[d.data.url] : null;
+                        const summaryText = info ? (info.summary || "No summary found.") : "Fetching intelligence...";
+                        const safeSummary = summaryText.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+                        
                         const statusBadge = d.data.status ? `<div class="type-tag tag-status-${d.data.status}">${d.data.status}</div>` : '';
-                        const related = (d.data.relatedLinks || []).slice(0, 3).map(l => `<a href="${l.url}" class="related-link-item" target="_blank">🔗 ${l.title}</a>`).join('');
+                        const related = (info && info.relatedLinks || []).slice(0, 3).map(l => `<a href="${l.url}" class="related-link-item" target="_blank">🔗 ${l.title}</a>`).join('');
                         const relatedHtml = related ? `<div class="related-links-container"><div class="related-links-title">Related Documentation</div>${related}</div>` : '';
                         
                         fo.html(`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div style="display:flex; gap:8px;">${statusBadge}<div class="type-tag tag-${d.data.type}">${d.data.type}</div></div><div class="detail-title">${safeName}</div><div class="node-summary">${safeSummary}</div>${relatedHtml}${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>` : ''}</div>`);
