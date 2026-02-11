@@ -196,11 +196,50 @@ async function save(): Promise<void> {
     if (savePromise) return savePromise;
 
     savePromise = (async () => {
+        const TEMP_FILE = `${DATA_FILE}.tmp`;
         try {
             logger.info(`Saving ${results.length} pages...`);
-            await fs.promises.writeFile(DATA_FILE, JSON.stringify(results, null, 2));
+            await new Promise<void>((resolve, reject) => {
+                const stream = fs.createWriteStream(TEMP_FILE, { flags: 'w' });
+                stream.write('[\n');
+
+                let i = 0;
+                // Capture length to ensure snapshot consistency during async write
+                const total = results.length;
+
+                function write() {
+                    let ok = true;
+                    while (i < total && ok) {
+                        const isLast = i === total - 1;
+                        // Manual JSON formatting to match JSON.stringify(results, null, 2)
+                        // Indent object with 2 spaces
+                        const itemStr = JSON.stringify(results[i], null, 2);
+                        // Add indentation to each line of the item
+                        const indentedItem = itemStr.split('\n').map(line => '  ' + line).join('\n');
+                        const str = indentedItem + (isLast ? '' : ',\n');
+
+                        ok = stream.write(str);
+                        i++;
+                    }
+
+                    if (i < total) {
+                        stream.once('drain', write);
+                    } else {
+                        stream.write('\n]');
+                        stream.end();
+                    }
+                }
+
+                write();
+
+                stream.on('finish', resolve);
+                stream.on('error', reject);
+            });
+            await fs.promises.rename(TEMP_FILE, DATA_FILE);
         } catch (err) {
             logger.error(`Failed to save data: ${err}`);
+            // Attempt to clean up temp file on error
+            try { await fs.promises.unlink(TEMP_FILE); } catch (e) {}
         } finally {
             savePromise = null;
         }
