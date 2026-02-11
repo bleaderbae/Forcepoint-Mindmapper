@@ -2,9 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { PRODUCT_CONFIG } from './product_config.ts';
-import type { DocNode } from './types.ts';
 import { humanize, getCategory } from './utils/string_utils.ts';
-import { getVariant } from './utils/product_utils.ts';
 
 export interface D3Node {
     name: string;
@@ -14,7 +12,29 @@ export interface D3Node {
     _children?: D3Node[];
     type?: 'document' | 'legal' | 'category' | 'variant' | 'version' | 'archive' | 'platform';
     value?: number;
+    id?: number;
 }
+
+// Comprehensive Mapping for Product Families
+const PRODUCT_FAMILY_MAP: Record<string, string> = {
+    'dlp': 'DLP',
+    'fpone': 'ONE',
+    'fponefirewall': 'ONE',
+    'fponemobile': 'ONE',
+    'fponesse': 'ONE',
+    'frbi': 'ONE',
+    'getvisibility': 'ONE',
+    'fpdsc': 'ONE', // Data Security Cloud is part of the ONE SSE platform
+    'emailsec': 'Email Security',
+    'websec': 'Web Security',
+    'f1e': 'F1E',
+    'appliance': 'Appliances',
+    'ngfw': 'NGFW',
+    'dspm': 'DSPM',
+    'insights': 'Insights',
+    'dup': 'DUP',
+    'datasecurity': 'Data Security'
+};
 
 export const findChild = (parent: D3Node, name: string): D3Node | undefined => {
     return parent.childrenMap?.get(name);
@@ -22,7 +42,6 @@ export const findChild = (parent: D3Node, name: string): D3Node | undefined => {
 
 export const addChild = (parent: D3Node, child: D3Node) => {
     if (!parent.children) parent.children = [];
-    
     if (!parent.childrenMap) {
         Object.defineProperty(parent, 'childrenMap', {
             value: new Map<string, D3Node>(),
@@ -31,20 +50,17 @@ export const addChild = (parent: D3Node, child: D3Node) => {
         });
     }
 
-    // Normalization for merging: strip "Forcepoint " if it's a child of Forcepoint or repeats parent name
-    let cleanName = child.name;
-    if (parent.name === "Forcepoint" && cleanName.startsWith("Forcepoint ")) {
-        cleanName = cleanName.replace(/^Forcepoint\s+/, "");
+    // Normalization: Strip brand name and parent name to keep canvas clean
+    let cleanName = child.name.replace(/^Forcepoint\s+/i, "").trim();
+    if (parent.name !== "Forcepoint" && cleanName.startsWith(parent.name + " ")) {
+        cleanName = cleanName.replace(new RegExp(`^${parent.name}\\s+`, 'i'), "").trim();
     }
-    if (cleanName.startsWith(parent.name + " ")) {
-        cleanName = cleanName.replace(new RegExp(`^${parent.name}\\s+`, 'i'), "");
-    }
-    child.name = cleanName;
+    child.name = cleanName || child.name;
 
     const existing = parent.childrenMap!.get(child.name);
     if (existing) {
         if (child.url) existing.url = child.url;
-        if (child.type && existing.type !== 'version' && existing.type !== 'archive') {
+        if (child.type && !['version', 'archive'].includes(existing.type || '')) {
             existing.type = child.type;
         }
         return existing;
@@ -80,7 +96,7 @@ function run() {
     }
 
     const data: any[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-    console.log(`Processing ${data.length} nodes with Platform Consolidation...`);
+    console.log(`Processing ${data.length} nodes with Alpha-Sorting and Platform Consolidation...`);
 
     const root: D3Node = { name: "Forcepoint", children: [], type: 'category' };
 
@@ -90,23 +106,24 @@ function run() {
         let urlPath = '';
         try { urlPath = new URL(page.url).pathname; } catch (e) { continue; }
         const segments = urlPath.split('/').filter(s => s && !s.endsWith('.html'));
-        
-        // --- Step 1: Detect Platform / Product Root ---
-        let productCode = segments[0] === 'docs' ? (segments[1] || 'general') : segments[0];
-        if (productCode === 'Tech_Pubs' || productCode === 'shared') productCode = 'general';
+        if (segments.length === 0) continue;
 
-        // Forcepoint ONE Platform Check
-        const isOnePlatform = (page.title + ' ' + page.url).toLowerCase().includes('forcepoint one') || productCode === 'fpone';
-        
-        let prodName = isOnePlatform ? 'Forcepoint ONE' : (PRODUCT_CONFIG[productCode]?.name || humanize(productCode));
-        if (prodName.toLowerCase() === 'docs' || prodName.toLowerCase() === 'documentation') prodName = 'Forcepoint General';
+        // --- Step 1: Detect Family ---
+        let productCode = segments[0].toLowerCase();
+        if (productCode === 'docs') {
+            productCode = (segments[1] || 'general').toLowerCase();
+        }
+        if (['tech_pubs', 'shared', 'product-docs'].includes(productCode)) productCode = 'general';
 
-        let current = addChild(root, { name: prodName, children: [], type: isOnePlatform ? 'platform' : 'category' });
+        const familyName = PRODUCT_FAMILY_MAP[productCode] || humanize(productCode);
+        const type = familyName === 'ONE' ? 'platform' : 'category';
 
-        // --- Step 2: Version Injection from URL ---
+        let current = addChild(root, { name: familyName, children: [], type });
+
+        // --- Step 2: Version Extraction ---
         const versionMatch = urlPath.match(/\/(\d+(\.\d+)*)\//);
         let injectedVersion = '';
-        if (versionMatch && !isOnePlatform) { // For platform like ONE, versions are often date-based or inside sub-docs
+        if (versionMatch) {
             injectedVersion = versionMatch[1];
             current = addChild(current, { name: injectedVersion, children: [], type: 'version' });
         }
@@ -114,20 +131,13 @@ function run() {
         // --- Step 3: Breadcrumb Pathing ---
         const crumbs = (page.breadcrumbs || []).filter((b: string) => {
             const lower = b.toLowerCase();
-            return !['home', 'documentation', 'product documentation', 'sitemap', 'forcepoint', prodName.toLowerCase(), injectedVersion.toLowerCase()].includes(lower);
+            return !['home', 'documentation', 'product documentation', 'sitemap', 'forcepoint', familyName.toLowerCase(), injectedVersion.toLowerCase(), 'general'].includes(lower);
         });
 
         for (const crumb of crumbs) {
-            let cleanCrumb = humanize(crumb);
+            const cleanCrumb = humanize(crumb);
             if (!cleanCrumb || cleanCrumb === current.name) continue;
-            
-            // Further redundancy check: if crumb is "Forcepoint ONE Firewall" and we are inside "Forcepoint ONE", rename to "Firewall"
-            if (cleanCrumb.startsWith(current.name + " ")) {
-                cleanCrumb = cleanCrumb.replace(new RegExp(`^${current.name}\\s+`, 'i'), "");
-            }
-
-            const nodeType = isVersionString(cleanCrumb) ? 'version' : 'category';
-            current = addChild(current, { name: cleanCrumb, children: [], type: nodeType });
+            current = addChild(current, { name: cleanCrumb, children: [], type: isVersionString(cleanCrumb) ? 'version' : 'category' });
         }
 
         // --- Step 4: Add Leaf Node ---
@@ -135,38 +145,43 @@ function run() {
         const isLegal = getCategory(page.title + ' ' + page.url) === 'Legal & Third Party';
         
         if (current.name !== pageTitle) {
-            addChild(current, { 
-                name: pageTitle, 
-                url: page.url, 
-                type: isLegal ? 'legal' : 'document' 
-            });
+            addChild(current, { name: pageTitle, url: page.url, type: isLegal ? 'legal' : 'document' });
         } else {
             current.url = page.url;
             current.type = isLegal ? 'legal' : 'document';
         }
     }
 
-    // --- Step 5: Post-Process: Prune and Label ---
+    // --- Step 5: Post-Processing (Final Sorting & Pruning) ---
     const finalizeNodes = (node: D3Node) => {
         if (!node.children || node.children.length === 0) return;
 
-        // 1. Prune Versions into Archives
-        const versionChildren = node.children.filter(c => c.type === 'version' || isVersionString(c.name));
-        if (versionChildren.length > 1) {
-            versionChildren.sort((a, b) => compareVersions(b.name, a.name));
-            const latest = versionChildren[0];
-            const others = versionChildren.slice(1);
-
-            const archiveNode: D3Node = { name: "Version Archives", children: others, type: 'archive' };
-            const nonVersions = node.children.filter(c => !versionChildren.includes(c));
+        // Priority sort: Categories/Platforms first, then alphabetical
+        node.children.sort((a, b) => {
+            // Put 'ONE' at the very top if it exists
+            if (a.name === 'ONE') return -1;
+            if (b.name === 'ONE') return 1;
             
-            node.children = [...nonVersions, latest, archiveNode];
-            if (!latest.name.includes("(Latest)")) {
-                latest.name = `${latest.name} (Latest)`;
+            // Standard alpha sort
+            return a.name.localeCompare(b.name);
+        });
+
+        // Prune Versions (Avoid nesting archives)
+        if (node.type !== 'archive') {
+            const versionChildren = node.children.filter(c => c.type === 'version' || isVersionString(c.name));
+            if (versionChildren.length > 1) {
+                versionChildren.sort((a, b) => compareVersions(b.name, a.name));
+                const latest = versionChildren[0];
+                const others = versionChildren.slice(1);
+
+                const archiveNode: D3Node = { name: "Version Archives", children: others, type: 'archive' };
+                const nonVersions = node.children.filter(c => !versionChildren.includes(c));
+                
+                node.children = [...nonVersions, latest, archiveNode];
+                if (!latest.name.includes("(Latest)")) latest.name = `${latest.name} (Latest)`;
             }
         }
 
-        // 2. Recursive cleanup
         node.children?.forEach(finalizeNodes);
     };
 
@@ -174,7 +189,7 @@ function run() {
 
     const outputPath = path.join(process.cwd(), 'd3-data.json');
     fs.writeFileSync(outputPath, JSON.stringify(root, null, 2));
-    console.log(`D3 data saved with Platform Consolidation to ${outputPath}`);
+    console.log(`D3 data saved with Alpha-Sorting to ${outputPath}`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

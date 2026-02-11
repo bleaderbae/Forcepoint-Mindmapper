@@ -34,7 +34,7 @@ function run() {
             --node-bg: #ffffff;
             --edge-color: #cbd5e0;
             --grid-color: #d1d1d1;
-            --sidebar-width: 320px;
+            --sidebar-width: 340px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -107,33 +107,36 @@ function run() {
 
         .finder-header {
             padding: 16px;
-            border-bottom: 1px solid var(--border-color);
-            font-weight: 700;
-            font-size: 14px;
+            background: var(--fp-green);
+            color: white;
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--text-primary);
         }
 
         .finder-scroll {
             flex: 1;
             overflow-y: auto;
-            padding: 8px 0;
+            padding: 0;
         }
 
         .finder-item {
-            padding: 6px 16px;
+            padding: 10px 16px;
             cursor: pointer;
             font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: background 0.2s, color 0.2s;
+            gap: 10px;
+            transition: all 0.2s;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             color: var(--text-primary);
+            border-bottom: 1px solid transparent;
         }
 
         .finder-item:hover {
@@ -145,12 +148,38 @@ function run() {
             background: rgba(255,255,255,0.05);
         }
 
-        .finder-item--platform { font-weight: 700; color: var(--fp-green); border-bottom: 1px solid var(--border-color); margin-top: 8px; }
+        .finder-item--active {
+            background: rgba(0, 175, 154, 0.1);
+            color: var(--fp-green);
+            border-left: 4px solid var(--fp-green);
+            font-weight: 600;
+        }
+
+        .finder-item--platform { 
+            background: var(--header-bg); 
+            color: white !important; 
+            font-weight: 700; 
+            margin-top: 0; 
+            position: sticky; 
+            top: 0;
+            z-index: 10;
+        }
+        
+        .finder-item--product {
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            color: var(--fp-green);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
         .finder-item--version { color: var(--text-secondary); font-style: italic; font-size: 11px; }
-        .finder-item--indent-1 { padding-left: 32px; }
-        .finder-item--indent-2 { padding-left: 48px; }
-        .finder-item--indent-3 { padding-left: 64px; }
-        .finder-item--indent-4 { padding-left: 80px; }
+        .finder-item--indent-1 { padding-left: 16px; }
+        .finder-item--indent-2 { padding-left: 32px; }
+        .finder-item--indent-3 { padding-left: 48px; }
+        .finder-item--indent-4 { padding-left: 64px; }
 
         .sidebar-toggle {
             position: absolute;
@@ -175,7 +204,7 @@ function run() {
             left: 0;
         }
 
-        /* Layout adjustment for main container */
+        /* Layout adjustment */
         #main-content {
             flex: 1;
             position: relative;
@@ -264,10 +293,6 @@ function run() {
             transition: all 0.2s;
         }
 
-        .theme-toggle:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
         #canvas-container {
             width: 100%;
             height: 100%;
@@ -278,16 +303,11 @@ function run() {
             position: relative;
         }
 
-        #canvas-container:active {
-            cursor: grabbing;
-        }
-
         .node rect {
             fill: var(--node-bg);
             stroke: var(--border-color);
             stroke-width: 1.5px;
-            rx: 12;
-            ry: 12;
+            rx: 12; ry: 12;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), fill 0.3s ease, stroke 0.3s ease;
         }
 
@@ -314,45 +334,6 @@ function run() {
 
         .node--compressed { opacity: 0.4; }
 
-        /* Directory Scroller (Inline) */
-        .directory-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            overflow: hidden;
-        }
-        .directory-header {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--fp-green);
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .directory-list {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 4px;
-            margin: 0;
-            list-style: none;
-        }
-        .directory-item {
-            padding: 6px 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 12px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: var(--text-primary);
-        }
-        .directory-item:hover {
-            background: var(--bg-color);
-            color: var(--fp-green);
-        }
-
         .controls {
             position: absolute;
             bottom: 32px;
@@ -365,53 +346,23 @@ function run() {
         .btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            font-size: 20px;
-            color: var(--text-primary);
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        #ghost-tooltip {
-            position: absolute;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            border-radius: 8px;
-            padding: 12px;
-            pointer-events: none;
-            opacity: 0;
-            z-index: 950;
-            max-width: 300px;
-            font-size: 12px;
-            color: var(--text-primary);
-            transition: opacity 0.2s ease, background-color 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: var(--shadow);
+            font-size: 20px; color: var(--text-primary);
+            transition: all 0.2s;
         }
 
         #loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            transition: opacity 0.5s ease-out;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 2000; transition: opacity 0.5s ease-out;
         }
 
         .spinner {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border: 4px solid var(--border-color);
             border-top: 4px solid var(--fp-green);
             border-radius: 50%;
@@ -425,7 +376,7 @@ function run() {
 <body>
     <div id="loading-overlay">
         <div class="spinner"></div>
-        <div style="font-weight: 500; color: var(--text-secondary);">Initializing Global Finder...</div>
+        <div style="font-weight: 500; color: var(--text-secondary);">Building Directory...</div>
     </div>
     
     <header>
@@ -440,18 +391,16 @@ function run() {
 
     <aside id="global-finder">
         <div class="finder-header">
-            <span>DOCUMENTATION FINDER</span>
-            <span style="font-size: 10px; opacity: 0.6;">v1.0</span>
+            <span>Documentation Hub</span>
+            <span id="finder-stats" style="font-size: 10px; opacity: 0.8;"></span>
         </div>
-        <div class="finder-scroll" id="finder-list">
-            <!-- Populated by script -->
-        </div>
+        <div class="finder-scroll" id="finder-list"></div>
     </aside>
     <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()">‹</button>
 
     <main id="main-content">
         <div id="breadcrumb-navigator"></div>
-        <div id="ghost-tooltip"></div>
+        <div id="ghost-tooltip" style="position:absolute; background:var(--card-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; opacity:0; pointer-events:none; z-index:1000; box-shadow:var(--shadow-lg);"></div>
         <div id="canvas-container">
             <div class="controls">
                 <button class="btn" title="Zoom In" onclick="zoomIn()">+</button>
@@ -463,12 +412,8 @@ function run() {
 
     <script>
         const config = {
-            nodeWidth: 280,
-            nodeHeight: 52,
-            expandedHeight: 160,
-            directoryHeight: 320,
-            levelWidth: 400,
-            directoryThreshold: 12
+            nodeWidth: 280, nodeHeight: 52, expandedHeight: 160, directoryHeight: 320,
+            levelWidth: 400, directoryThreshold: 12
         };
 
         let root;
@@ -478,35 +423,14 @@ function run() {
         let selectedNode = null;
         const duration = 600;
 
-        // Theme management
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-mode');
-            }
-        }
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-            localStorage.setItem('theme', theme);
-        });
-
-        initTheme();
-
         function toggleSidebar() {
             const finder = document.getElementById('global-finder');
             const toggle = document.getElementById('finder-toggle');
             const isCollapsed = finder.classList.toggle('collapsed');
             toggle.innerText = isCollapsed ? '›' : '‹';
-            
             setTimeout(() => {
-                const container = d3.select("#canvas-container");
-                const width = container.node().clientWidth;
-                const height = container.node().clientHeight;
+                const width = document.getElementById('canvas-container').clientWidth;
+                const height = document.getElementById('canvas-container').clientHeight;
                 svg.attr("width", width).attr("height", height);
             }, 300);
         }
@@ -515,10 +439,7 @@ function run() {
             let data;
             try {
                 data = await d3.json('d3-data.json?v=' + new Date().getTime());
-            } catch (error) {
-                console.error(error);
-                return;
-            }
+            } catch (error) { console.error(error); return; }
             
             const container = d3.select("#canvas-container");
             svg = container.append("svg").attr("width", "100%").attr("height", "100%").style("overflow", "visible");
@@ -538,19 +459,7 @@ function run() {
             root.x0 = container.node().clientHeight / 2;
             root.y0 = 0;
 
-            const finderList = document.getElementById('finder-list');
-            root.descendants().forEach(d => {
-                if (d.depth === 0) return;
-                const item = document.createElement('div');
-                item.className = \`finder-item finder-item--indent-\${Math.min(d.depth, 4)}\`;
-                if (d.data.type === 'platform') item.classList.add('finder-item--platform');
-                if (d.data.type === 'version') item.classList.add('finder-item--version');
-                
-                const icon = d.data.url ? '📄 ' : (d.children || d._children ? '📁 ' : '○ ');
-                item.innerText = icon + d.data.name;
-                item.onclick = () => window.focusNodeById(d.id);
-                finderList.appendChild(item);
-            });
+            buildFinder();
 
             if (root.children) root.children.forEach(d => { if (d.children) d.children.forEach(collapse); });
 
@@ -560,11 +469,36 @@ function run() {
             document.getElementById('loading-overlay').style.opacity = '0';
             setTimeout(() => document.getElementById('loading-overlay').remove(), 500);
 
+            // Search
             d3.select("#search-input").on("input", function() {
                 const term = this.value.toLowerCase();
                 if (!term) return;
                 const match = root.descendants().find(d => d.data.name.toLowerCase().includes(term));
                 if (match) window.focusNodeById(match.id);
+            });
+        }
+
+        function buildFinder() {
+            const finderList = document.getElementById('finder-list');
+            finderList.innerHTML = "";
+            const descendants = root.descendants();
+            
+            document.getElementById('finder-stats').innerText = \`\${descendants.length - 1} Docs\`;
+
+            descendants.forEach(d => {
+                if (d.depth === 0) return;
+                const item = document.createElement('div');
+                item.className = \`finder-item finder-item--indent-\${Math.min(d.depth, 4)}\`;
+                item.dataset.id = d.id;
+                
+                if (d.data.type === 'platform') item.classList.add('finder-item--platform');
+                else if (d.depth === 1) item.classList.add('finder-item--product');
+                else if (d.data.type === 'version') item.classList.add('finder-item--version');
+                
+                const icon = d.data.url ? '📄' : (d.data.type === 'platform' ? '🌐' : '📁');
+                item.innerHTML = \`<span style="opacity:0.6">\${icon}</span> <span>\${d.data.name}</span>\`;
+                item.onclick = () => window.focusNodeById(d.id);
+                finderList.appendChild(item);
             });
         }
 
@@ -593,6 +527,14 @@ function run() {
             selectNode(target);
             update(target);
             
+            // Highlight in sidebar
+            document.querySelectorAll('.finder-item').forEach(el => el.classList.remove('finder-item--active'));
+            const activeItem = document.querySelector(\`.finder-item[data-id="\${id}"]\`);
+            if (activeItem) {
+                activeItem.classList.add('finder-item--active');
+                activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
             const container = d3.select("#canvas-container");
             const w = container.node().clientWidth;
             const h = container.node().clientHeight;
@@ -697,7 +639,7 @@ function run() {
 </html>`;
 
     fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
-    console.log('Global Finder Sidebar index.html generated.');
+    console.log('Polished Global Finder Sidebar index.html generated.');
 }
 
 run();
