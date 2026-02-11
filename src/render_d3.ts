@@ -34,6 +34,7 @@ function run() {
             --node-bg: #ffffff;
             --edge-color: #cbd5e0;
             --grid-color: #d1d1d1;
+            --sidebar-width: 320px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -60,6 +61,8 @@ function run() {
             background-color: var(--bg-color);
             color: var(--text-primary);
             transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            height: 100vh;
         }
 
         header {
@@ -84,6 +87,101 @@ function run() {
             font-weight: 600;
         }
 
+        /* Finder Sidebar */
+        #global-finder {
+            width: var(--sidebar-width);
+            background: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 950;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+            margin-top: 64px;
+            height: calc(100vh - 64px);
+        }
+
+        #global-finder.collapsed {
+            transform: translateX(-100%);
+            position: absolute;
+        }
+
+        .finder-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .finder-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+
+        .finder-item {
+            padding: 6px 16px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-primary);
+        }
+
+        .finder-item:hover {
+            background: var(--fp-light);
+            color: var(--fp-green);
+        }
+
+        .dark-mode .finder-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .finder-item--platform { font-weight: 700; color: var(--fp-green); border-bottom: 1px solid var(--border-color); margin-top: 8px; }
+        .finder-item--version { color: var(--text-secondary); font-style: italic; font-size: 11px; }
+        .finder-item--indent-1 { padding-left: 32px; }
+        .finder-item--indent-2 { padding-left: 48px; }
+        .finder-item--indent-3 { padding-left: 64px; }
+        .finder-item--indent-4 { padding-left: 80px; }
+
+        .sidebar-toggle {
+            position: absolute;
+            top: 80px;
+            left: var(--sidebar-width);
+            background: var(--fp-green);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 48px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            z-index: 960;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        #global-finder.collapsed + .sidebar-toggle {
+            left: 0;
+        }
+
+        /* Layout adjustment for main container */
+        #main-content {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
         .header-actions {
             display: flex;
             align-items: center;
@@ -93,7 +191,7 @@ function run() {
         #breadcrumb-navigator {
             position: absolute;
             top: 80px;
-            left: 24px;
+            left: 40px;
             z-index: 900;
             background: var(--card-bg);
             padding: 8px 16px;
@@ -105,12 +203,12 @@ function run() {
             gap: 8px;
             font-size: 12px;
             color: var(--text-secondary);
-            max-width: 80vw;
+            max-width: 60vw;
             overflow-x: auto;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
         }
 
         #breadcrumb-navigator.visible {
@@ -171,8 +269,8 @@ function run() {
         }
 
         #canvas-container {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             cursor: grab;
             background-image: 
                 radial-gradient(circle, var(--grid-color) 1.5px, transparent 1.5px);
@@ -190,17 +288,13 @@ function run() {
             stroke-width: 1.5px;
             rx: 12;
             ry: 12;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), fill 0.3s ease, stroke 0.3s ease;
         }
 
         .node--selected rect {
             stroke: var(--fp-green) !important;
             stroke-width: 3px !important;
             filter: drop-shadow(0 8px 24px rgba(0, 175, 154, 0.2));
-        }
-
-        .node--internal rect {
-            stroke: var(--fp-green);
         }
 
         .node text {
@@ -211,53 +305,53 @@ function run() {
             transition: fill 0.3s ease;
         }
 
-        .node.highlight rect {
-            stroke: var(--fp-green);
-            stroke-width: 4px;
-            filter: drop-shadow(0 0 12px rgba(0, 175, 154, 0.5));
-        }
-
         .link {
             fill: none;
             stroke: var(--edge-color);
             stroke-width: 2.5px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s ease;
         }
 
-        /* Ghost Node Tooltip */
-        #ghost-tooltip {
-            position: absolute;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            border-radius: 8px;
-            padding: 12px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            z-index: 950;
-            max-width: 300px;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        
-        #ghost-tooltip h4 {
-            margin: 0 0 8px 0;
-            color: var(--text-primary);
-            font-size: 13px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 4px;
-        }
+        .node--compressed { opacity: 0.4; }
 
-        #ghost-tooltip ul {
+        /* Directory Scroller (Inline) */
+        .directory-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+        .directory-header {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--fp-green);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .directory-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
             margin: 0;
-            padding-left: 16px;
+            list-style: none;
         }
-
-        /* Level of Detail (LOD) classes */
-        .zoom-far .link { opacity: 0.5; }
-        .zoom-far .node text { display: none; }
-        .zoom-far .node rect { stroke-width: 1px; }
+        .directory-item {
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-primary);
+        }
+        .directory-item:hover {
+            background: var(--bg-color);
+            color: var(--fp-green);
+        }
 
         .controls {
             position: absolute;
@@ -281,93 +375,23 @@ function run() {
             box-shadow: var(--shadow);
             font-size: 20px;
             color: var(--text-primary);
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        .btn:hover {
-            background: var(--bg-color);
-            border-color: var(--fp-green);
-            color: var(--fp-green);
-            transform: translateY(-2px);
-        }
-
-        /* Inline Detail Components */
-        .node-details {
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            color: var(--text-primary);
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: transparent;
-        }
-
-        .detail-title {
-            font-weight: 700;
-            font-size: 15px;
-            line-height: 1.2;
-            color: var(--text-primary);
-        }
-
-        .type-tag {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 9px;
-            text-transform: uppercase;
-            font-weight: 800;
-            letter-spacing: 0.8px;
-            width: fit-content;
-        }
-        .tag-category { background: #edf2f7; color: #4a5568; }
-        .tag-version { background: #ebf8ff; color: #2b6cb0; }
-        .tag-variant { background: #faf5ff; color: #6b46c1; }
-        .tag-document { background: #f0fff4; color: #2f855a; }
-        .tag-legal { background: #fff5f5; color: #c53030; }
-
-        .dark-mode .tag-category { background: #2d3748; color: #cbd5e0; }
-        .dark-mode .tag-version { background: #2c5282; color: #bee3f8; }
-        .dark-mode .tag-variant { background: #44337a; color: #e9d8fd; }
-        .dark-mode .tag-document { background: #22543d; color: #c6f6d5; }
-        .dark-mode .tag-legal { background: #742a2a; color: #fed7d7; }
-
-        .external-link-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--fp-green);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 12px;
-            transition: background 0.2s, transform 0.1s;
-            width: fit-content;
-            margin-top: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .external-link-btn:hover {
-            background-color: var(--fp-dark-green);
-            transform: translateY(-1px);
-        }
-
-        .help-text {
+        #ghost-tooltip {
             position: absolute;
-            bottom: 32px;
-            right: 32px;
-            font-size: 12px;
-            color: var(--text-secondary);
             background: var(--card-bg);
-            padding: 8px 16px;
-            border-radius: 8px;
-            pointer-events: none;
-            box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
-            opacity: 0.9;
+            box-shadow: var(--shadow-lg);
+            border-radius: 8px;
+            padding: 12px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 950;
+            max-width: 300px;
+            font-size: 12px;
+            color: var(--text-primary);
+            transition: opacity 0.2s ease, background-color 0.3s ease;
         }
 
         #loading-overlay {
@@ -395,16 +419,13 @@ function run() {
             margin-bottom: 16px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div id="loading-overlay" aria-live="polite" aria-busy="true">
+    <div id="loading-overlay">
         <div class="spinner"></div>
-        <div style="font-weight: 500; color: var(--text-secondary);">Loading visualization...</div>
+        <div style="font-weight: 500; color: var(--text-secondary);">Initializing Global Finder...</div>
     </div>
     
     <header>
@@ -413,30 +434,41 @@ function run() {
             <div id="search-container">
                 <input type="text" id="search-input" placeholder="Search docs (Press / to focus)">
             </div>
-            <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
-                🌓
-            </button>
+            <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">🌓</button>
         </div>
     </header>
 
-    <div id="breadcrumb-navigator"></div>
-    <div id="ghost-tooltip"></div>
-
-    <div id="canvas-container">
-        <div class="controls">
-            <button class="btn" title="Zoom In" onclick="zoomIn()">+</button>
-            <button class="btn" title="Zoom Out" onclick="zoomOut()">-</button>
-            <button class="btn" title="Reset View" onclick="resetZoom()">⟲</button>
+    <aside id="global-finder">
+        <div class="finder-header">
+            <span>DOCUMENTATION FINDER</span>
+            <span style="font-size: 10px; opacity: 0.6;">v1.0</span>
         </div>
-        <div class="help-text">Select node for details • Click to expand • Drag to pan</div>
-    </div>
+        <div class="finder-scroll" id="finder-list">
+            <!-- Populated by script -->
+        </div>
+    </aside>
+    <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()">‹</button>
+
+    <main id="main-content">
+        <div id="breadcrumb-navigator"></div>
+        <div id="ghost-tooltip"></div>
+        <div id="canvas-container">
+            <div class="controls">
+                <button class="btn" title="Zoom In" onclick="zoomIn()">+</button>
+                <button class="btn" title="Zoom Out" onclick="zoomOut()">-</button>
+                <button class="btn" title="Reset View" onclick="resetZoom()">⟲</button>
+            </div>
+        </div>
+    </main>
 
     <script>
         const config = {
-            nodeWidth: 260,
+            nodeWidth: 280,
             nodeHeight: 52,
-            expandedHeight: 140,
-            levelWidth: 380
+            expandedHeight: 160,
+            directoryHeight: 320,
+            levelWidth: 400,
+            directoryThreshold: 12
         };
 
         let root;
@@ -445,8 +477,6 @@ function run() {
         let i = 0;
         let selectedNode = null;
         const duration = 600;
-
-        const treeLayout = d3.tree().nodeSize([160, config.levelWidth]);
 
         // Theme management
         const themeToggle = document.getElementById('theme-toggle');
@@ -467,103 +497,74 @@ function run() {
 
         initTheme();
 
+        function toggleSidebar() {
+            const finder = document.getElementById('global-finder');
+            const toggle = document.getElementById('finder-toggle');
+            const isCollapsed = finder.classList.toggle('collapsed');
+            toggle.innerText = isCollapsed ? '›' : '‹';
+            
+            setTimeout(() => {
+                const container = d3.select("#canvas-container");
+                const width = container.node().clientWidth;
+                const height = container.node().clientHeight;
+                svg.attr("width", width).attr("height", height);
+            }, 300);
+        }
+
         async function init() {
             let data;
             try {
                 data = await d3.json('d3-data.json?v=' + new Date().getTime());
             } catch (error) {
                 console.error(error);
-                const loader = document.getElementById('loading-overlay');
-                if (loader) {
-                    loader.innerHTML = \`<div style="color: #ef4444; text-align: center;">
-                        <h3 style="margin: 0 0 8px 0">Failed to load data</h3>
-                        <p style="margin: 0">Please check console for details.</p>
-                    </div>\`;
-                }
                 return;
             }
             
             const container = d3.select("#canvas-container");
-            const width = container.node().clientWidth;
-            const height = container.node().clientHeight;
-
-            svg = container.append("svg")
-                .attr("width", "100%")
-                .attr("height", "100%")
-                .style("overflow", "visible");
-
+            svg = container.append("svg").attr("width", "100%").attr("height", "100%").style("overflow", "visible");
             g = svg.append("g");
             linkGroup = g.append("g").attr("class", "links");
             nodeGroup = g.append("g").attr("class", "nodes");
 
-            zoom = d3.zoom()
-                .scaleExtent([0.05, 3])
-                .on("zoom", (event) => {
-                    const transform = event.transform;
-                    g.attr("transform", transform);
-                    
-                    // LOD implementation
-                    svg.classed("zoom-far", transform.k < 0.6);
-                    svg.classed("zoom-near", transform.k > 1.2);
-                });
-
+            zoom = d3.zoom().scaleExtent([0.05, 3]).on("zoom", (event) => g.attr("transform", event.transform));
             svg.call(zoom);
 
             root = d3.hierarchy(data, d => d.children);
-            
-            // Pre-calculate descendant counts for weighted paths
             root.eachAfter(d => {
                 d.value = d.children ? d.children.reduce((sum, c) => sum + c.value, 0) : 1;
+                if (d.children && d.children.length > config.directoryThreshold) d.data.isDirectory = true;
             });
 
-            root.x0 = height / 2;
+            root.x0 = container.node().clientHeight / 2;
             root.y0 = 0;
 
-            // Initial state: Expand level 0 and 1
-            if (root.children) {
-                root.children.forEach(d => {
-                    if (d.children) {
-                        d.children.forEach(collapse);
-                    }
-                });
-            }
+            const finderList = document.getElementById('finder-list');
+            root.descendants().forEach(d => {
+                if (d.depth === 0) return;
+                const item = document.createElement('div');
+                item.className = \`finder-item finder-item--indent-\${Math.min(d.depth, 4)}\`;
+                if (d.data.type === 'platform') item.classList.add('finder-item--platform');
+                if (d.data.type === 'version') item.classList.add('finder-item--version');
+                
+                const icon = d.data.url ? '📄 ' : (d.children || d._children ? '📁 ' : '○ ');
+                item.innerText = icon + d.data.name;
+                item.onclick = () => window.focusNodeById(d.id);
+                finderList.appendChild(item);
+            });
+
+            if (root.children) root.children.forEach(d => { if (d.children) d.children.forEach(collapse); });
 
             update(root);
             resetZoom();
 
-            // Remove loader
-            const loader = document.getElementById('loading-overlay');
-            if (loader) {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.remove(), 500);
-            }
+            document.getElementById('loading-overlay').style.opacity = '0';
+            setTimeout(() => document.getElementById('loading-overlay').remove(), 500);
 
-            // Shortcuts
-            window.addEventListener('keydown', (e) => {
-                if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
-                    e.preventDefault();
-                    document.getElementById('search-input').focus();
-                }
-            });
-
-            // Search
             d3.select("#search-input").on("input", function() {
                 const term = this.value.toLowerCase();
-                if (!term) {
-                    nodeGroup.selectAll(".node").classed("highlight", false);
-                    return;
-                }
-                
-                let found = false;
-                nodeGroup.selectAll(".node").classed("highlight", d => {
-                    const match = d.data.name.toLowerCase().includes(term);
-                    if (match && !found) {
-                        focusNode(d);
-                        selectNode(d);
-                        found = true;
-                    }
-                    return match;
-                });
+                if (!term) return;
+                const match = root.descendants().find(d => d.data.name.toLowerCase().includes(term));
+                if (match) window.focusNodeById(match.id);
             });
         }
 
@@ -575,12 +576,11 @@ function run() {
             }
         }
 
-        function focusNode(d) {
-            const container = d3.select("#canvas-container");
-            const width = container.node().clientWidth;
-            const height = container.node().clientHeight;
-            
-            const ancestors = d.ancestors();
+        window.focusNodeById = (id) => {
+            const target = root.descendants().find(d => String(d.id) === String(id));
+            if (!target) return;
+
+            const ancestors = target.ancestors();
             for (let i = ancestors.length - 1; i > 0; i--) {
                 const parent = ancestors[i];
                 if (parent._children) {
@@ -590,242 +590,106 @@ function run() {
                 }
             }
 
+            selectNode(target);
+            update(target);
+            
+            const container = d3.select("#canvas-container");
+            const w = container.node().clientWidth;
+            const h = container.node().clientHeight;
+            let scale = target.data.type === 'document' ? 1.2 : 0.8;
+
             svg.transition().duration(750).call(
                 zoom.transform,
-                d3.zoomIdentity
-                    .translate(width / 2, height / 2)
-                    .scale(1)
-                    .translate(-d.y - config.nodeWidth / 2, -d.x)
+                d3.zoomIdentity.translate(w/3, h/2).scale(scale).translate(-target.y, -target.x)
             );
-        }
+        };
 
-        function showGhost(event, d) {
-            // Only show ghost if node is collapsed and has children
-            if (!d._children || d.children) return;
-
-            const tooltip = d3.select("#ghost-tooltip");
-            const content = d._children.slice(0, 5).map(c => \`<li>\${c.data.name}</li>\`).join("");
-            const remaining = d._children.length - 5;
-            const footer = remaining > 0 ? \`<div style="margin-top:4px; font-style:italic">+\${remaining} more...</div>\` : "";
-
-            tooltip.html(\`<h4>Preview (\${d._children.length} items)</h4><ul>\${content}</ul>\${footer}\`)
-                .style("left", (event.pageX + 20) + "px")
-                .style("top", (event.pageY + 20) + "px")
-                .style("opacity", 1);
-        }
-
-        function hideGhost() {
-            d3.select("#ghost-tooltip").style("opacity", 0);
+        function calculateDynamicTree() {
+            const layout = d3.tree().nodeSize([160, config.levelWidth]);
+            const treeData = layout(root);
+            const nodes = treeData.descendants();
+            if (selectedNode) {
+                const activePath = new Set(selectedNode.ancestors());
+                nodes.sort((a,b) => a.x - b.x);
+                nodes.forEach((d, index) => {
+                    const isFocus = activePath.has(d) || (selectedNode.parent && activePath.has(d.parent));
+                    d.x = index > 0 ? nodes[index-1].x + (isFocus ? 160 : 45) : 0;
+                });
+            }
+            return treeData;
         }
 
         function update(source) {
-            const treeData = treeLayout(root);
+            const treeData = calculateDynamicTree();
             const nodes = treeData.descendants();
             const links = treeData.links();
-
             nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
 
-            const node = nodeGroup.selectAll("g.node")
-                .data(nodes, d => d.id || (d.id = ++i));
-
+            const node = nodeGroup.selectAll("g.node").data(nodes, d => d.id || (d.id = ++i));
             const nodeEnter = node.enter().append("g")
-                .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
+                .attr("class", d => "node node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
-                .on("click", (event, d) => {
-                    selectNode(d);
-                    if (d.children || d._children) {
-                        if (d.children) {
-                            d._children = d.children;
-                            d.children = null;
-                        } else {
-                            if (d.parent && d.parent.children) {
-                                d.parent.children.forEach(sibling => {
-                                    if (sibling !== d && sibling.children) collapse(sibling);
-                                });
-                            }
-                            d.children = d._children;
-                            d._children = null;
-                        }
-                    }
-                    update(d);
-                })
-                .on("mouseenter", showGhost)
-                .on("mouseleave", hideGhost);
+                .on("click", (event, d) => window.focusNodeById(d.id));
 
-            // The card rectangle
-            nodeEnter.append("rect")
-                .attr("width", config.nodeWidth)
-                .attr("height", config.nodeHeight)
-                .attr("y", -config.nodeHeight / 2)
-                .style("fill-opacity", 0);
-
-            // Simple text for collapsed state
-            nodeEnter.append("text")
-                .attr("class", "node-label")
-                .attr("dy", ".35em")
-                .attr("x", 16)
-                .text(d => d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name)
-                .style("fill-opacity", 0);
-
-            // Foreign object for rich details
-            const details = nodeEnter.append("foreignObject")
-                .attr("class", "details-container")
-                .attr("width", config.nodeWidth)
-                .attr("height", config.expandedHeight)
-                .attr("y", -config.expandedHeight / 2)
-                .style("opacity", 0)
-                .style("pointer-events", "none");
+            nodeEnter.append("rect").attr("width", config.nodeWidth).attr("height", config.nodeHeight).attr("y", -config.nodeHeight/2);
+            nodeEnter.append("text").attr("class", "node-label").attr("dy", ".35em").attr("x", 16).text(d => d.data.name.length > 32 ? d.data.name.substring(0, 29) + "..." : d.data.name);
+            nodeEnter.append("foreignObject").attr("class", "details-container").attr("width", config.nodeWidth).attr("y", -config.expandedHeight/2);
 
             const nodeUpdate = nodeEnter.merge(node);
+            const activePath = selectedNode ? new Set(selectedNode.ancestors()) : new Set();
+            nodeUpdate.classed("node--selected", d => d === selectedNode)
+                      .classed("node--compressed", d => selectedNode && !activePath.has(d) && !(d.parent && activePath.has(d.parent)));
 
-            nodeUpdate.classed("node--selected", d => d === selectedNode);
+            nodeUpdate.transition().duration(duration).attr("transform", d => "translate(" + d.y + "," + d.x + ")");
+            nodeUpdate.select("rect").transition().duration(duration).attr("height", d => d === selectedNode ? (d.data.isDirectory ? config.directoryHeight : config.expandedHeight) : config.nodeHeight)
+                .attr("y", d => { const h = d === selectedNode ? (d.data.isDirectory ? config.directoryHeight : config.expandedHeight) : config.nodeHeight; return -h/2; });
 
-            // Transition nodes to their new position
-            nodeUpdate.transition().duration(duration)
-                .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
-
-            // Update Rect dimensions
-            nodeUpdate.select("rect")
-                .transition().duration(duration)
-                .attr("height", d => d === selectedNode ? config.expandedHeight : config.nodeHeight)
-                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2)
-                .style("fill-opacity", 1);
-
-            // Hide/Show labels vs details
-            nodeUpdate.select(".node-label")
-                .transition().duration(duration)
-                .style("opacity", d => d === selectedNode ? 0 : 1)
-                .style("fill-opacity", d => d === selectedNode ? 0 : 1);
-
-            nodeUpdate.select(".details-container")
-                .transition().duration(duration)
-                .style("opacity", d => d === selectedNode ? 1 : 0)
-                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2);
-
-            // Inject HTML
             nodeUpdate.each(function(d) {
-                const g = d3.select(this);
-                const fo = g.select(".details-container");
-
-                if (d === selectedNode) {
-                    fo.style("pointer-events", "auto");
-                    const safeName = d.data.name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-                    const safeType = (d.data.type || 'category').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-                    const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
-
-                    fo.html(\`
-                        <div class="node-details" xmlns="http://www.w3.org/1999/xhtml">
-                            <div class="type-tag tag-\${safeType}">\${safeType}</div>
-                            <div class="detail-title">\${safeName}</div>
-                            \${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Documentation ↗</a>\` : ''}
-                        </div>
-                    \`);
+                if (d !== selectedNode) return;
+                const fo = d3.select(this).select(".details-container");
+                fo.style("pointer-events", "auto");
+                const safeName = d.data.name.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+                const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
+                
+                if (d.data.isDirectory) {
+                    const items = (d.children || d._children || []).map(c => \`<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('\${c.id}')">\${c.data.name}</li>\`).join("");
+                    fo.html(\`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>\${(d.children||d._children).length} items</span></div><div class="detail-title">\${safeName}</div><ul class="directory-list">\${items}</ul></div>\`);
                 } else {
-                    fo.style("pointer-events", "none");
+                    fo.html(\`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-\${d.data.type}">\${d.data.type}</div><div class="detail-title">\${safeName}</div>\${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">Documentation ↗</a>\` : ''}</div>\`);
                 }
             });
 
-            const nodeExit = node.exit().transition().duration(duration)
-                .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
-                .remove();
+            node.exit().transition().duration(duration).attr("transform", d => "translate(" + source.y + "," + source.x + ")").remove();
 
-            nodeExit.select("rect").style("fill-opacity", 0);
-            nodeExit.select("text").style("fill-opacity", 0);
+            const link = linkGroup.selectAll("path.link").data(links, d => d.target.id);
+            link.enter().insert("path", "g").attr("class", "link").attr("d", d => { const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth }; return diagonal(o, o); })
+                .merge(link).transition().duration(duration).attr("d", d => diagonal({ x: d.source.x, y: d.source.y + config.nodeWidth }, { x: d.target.x, y: d.target.y }))
+                .attr("stroke-width", d => Math.max(2, Math.log(d.target.value || 1) * 1.5) + "px")
+                .style("opacity", d => activePath.has(d.target) || activePath.has(d.source) ? 1 : 0.2);
+            link.exit().remove();
 
-            // --- Links section with Smart Weighted Paths ---
-            const link = linkGroup.selectAll("path.link")
-                .data(links, d => d.target.id);
-
-            const linkEnter = link.enter().insert("path", "g")
-                .attr("class", "link")
-                .attr("d", d => {
-                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth };
-                    return diagonal(o, o);
-                });
-
-            const linkUpdate = linkEnter.merge(link);
-            linkUpdate.transition().duration(duration)
-                .attr("d", d => {
-                    const s = { x: d.source.x, y: d.source.y + config.nodeWidth };
-                    const t = { x: d.target.x, y: d.target.y };
-                    return diagonal(s, t);
-                })
-                .attr("stroke-width", d => {
-                    // Smart weighting based on pre-calculated descendants (logarithmic scale)
-                    // Base width 2px, max around 8px for heavy branches
-                    return Math.max(2, Math.log(d.target.value || 1) * 1.5) + "px";
-                });
-
-            const linkExit = link.exit().transition().duration(duration)
-                .attr("d", d => {
-                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth };
-                    return diagonal(o, o);
-                })
-                .remove();
-
-            nodes.forEach(d => {
-                d.x0 = d.x;
-                d.y0 = d.y;
-            });
+            nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
         }
 
-        function diagonal(s, d) {
-            return "M" + s.y + "," + s.x +
-                   "C" + (s.y + d.y) / 2 + "," + s.x +
-                   " " + (s.y + d.y) / 2 + "," + d.x +
-                   " " + d.y + "," + d.x;
-        }
+        function diagonal(s, d) { return "M" + s.y + "," + s.x + "C" + (s.y + d.y) / 2 + "," + s.x + " " + (s.y + d.y) / 2 + "," + d.x + " " + d.y + "," + d.x; }
 
         function selectNode(d) {
             selectedNode = d;
-            updateBreadcrumbs(d);
-            nodeGroup.selectAll(".node").classed("node--selected", n => n === d);
-        }
-
-        function updateBreadcrumbs(d) {
             const nav = d3.select("#breadcrumb-navigator");
-            if (!d) {
-                nav.classed("visible", false);
-                return;
-            }
-            
+            if (!d) return nav.classed("visible", false);
             nav.classed("visible", true).html("");
-            const ancestors = d.ancestors().reverse();
-            
-            ancestors.forEach((a, index) => {
-                if (index > 0) {
-                    nav.append("span").attr("class", "breadcrumb-separator").text("›");
-                }
-                nav.append("span")
-                    .attr("class", "breadcrumb-item")
-                    .text(a.data.name)
-                    .on("click", (event) => {
-                        event.stopPropagation();
-                        focusNode(a);
-                        selectNode(a);
-                    });
+            d.ancestors().reverse().forEach((a, i) => {
+                if (i > 0) nav.append("span").attr("class", "breadcrumb-separator").text("›");
+                nav.append("span").attr("class", "breadcrumb-item").text(a.data.name).on("click", (e) => { e.stopPropagation(); window.focusNodeById(a.id); });
             });
         }
 
         function zoomIn() { svg.transition().call(zoom.scaleBy, 1.4); }
         function zoomOut() { svg.transition().call(zoom.scaleBy, 0.7); }
-        function resetZoom() {
-            const container = d3.select("#canvas-container");
-            const width = container.node().clientWidth;
-            const height = container.node().clientHeight;
-            
-            svg.transition().duration(750).call(
-                zoom.transform,
-                d3.zoomIdentity.translate(60, height / 2).scale(0.7)
-            );
+        function resetZoom() { 
+            const h = document.getElementById('canvas-container').clientHeight;
+            svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(60, h/2).scale(0.7)); 
         }
-
-        window.addEventListener('resize', () => {
-            const container = d3.select("#canvas-container");
-            const width = container.node().clientWidth;
-            const height = container.node().clientHeight;
-            svg.attr("width", width).attr("height", height);
-        });
 
         init();
     </script>
@@ -833,7 +697,7 @@ function run() {
 </html>`;
 
     fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
-    console.log('Phase 2 Organic Canvas index.html generated.');
+    console.log('Global Finder Sidebar index.html generated.');
 }
 
 run();
