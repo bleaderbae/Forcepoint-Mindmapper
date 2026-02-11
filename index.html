@@ -214,8 +214,38 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Ghost Node Tooltip */
+        #ghost-tooltip {
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            border-radius: 8px;
+            padding: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 950;
+            max-width: 300px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        #ghost-tooltip h4 {
+            margin: 0 0 8px 0;
+            color: var(--text-primary);
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        #ghost-tooltip ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+
         /* Level of Detail (LOD) classes */
-        .zoom-far .link { stroke-width: 1px; opacity: 0.5; }
+        .zoom-far .link { opacity: 0.5; }
         .zoom-far .node text { display: none; }
         .zoom-far .node rect { stroke-width: 1px; }
 
@@ -380,6 +410,7 @@
     </header>
 
     <div id="breadcrumb-navigator"></div>
+    <div id="ghost-tooltip"></div>
 
     <div id="canvas-container">
         <div class="controls">
@@ -469,6 +500,12 @@
             svg.call(zoom);
 
             root = d3.hierarchy(data, d => d.children);
+            
+            // Pre-calculate descendant counts for weighted paths
+            root.eachAfter(d => {
+                d.value = d.children ? d.children.reduce((sum, c) => sum + c.value, 0) : 1;
+            });
+
             root.x0 = height / 2;
             root.y0 = 0;
 
@@ -533,7 +570,6 @@
             const width = container.node().clientWidth;
             const height = container.node().clientHeight;
             
-            // Move parents to show the node if it's currently hidden
             const ancestors = d.ancestors();
             for (let i = ancestors.length - 1; i > 0; i--) {
                 const parent = ancestors[i];
@@ -553,6 +589,25 @@
             );
         }
 
+        function showGhost(event, d) {
+            // Only show ghost if node is collapsed and has children
+            if (!d._children || d.children) return;
+
+            const tooltip = d3.select("#ghost-tooltip");
+            const content = d._children.slice(0, 5).map(c => `<li>${c.data.name}</li>`).join("");
+            const remaining = d._children.length - 5;
+            const footer = remaining > 0 ? `<div style="margin-top:4px; font-style:italic">+${remaining} more...</div>` : "";
+
+            tooltip.html(`<h4>Preview (${d._children.length} items)</h4><ul>${content}</ul>${footer}`)
+                .style("left", (event.pageX + 20) + "px")
+                .style("top", (event.pageY + 20) + "px")
+                .style("opacity", 1);
+        }
+
+        function hideGhost() {
+            d3.select("#ghost-tooltip").style("opacity", 0);
+        }
+
         function update(source) {
             const treeData = treeLayout(root);
             const nodes = treeData.descendants();
@@ -567,16 +622,12 @@
                 .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => {
-                    // Always Select
                     selectNode(d);
-
-                    // Toggle expansion
                     if (d.children || d._children) {
                         if (d.children) {
                             d._children = d.children;
                             d.children = null;
                         } else {
-                            // Accordion behavior: collapse siblings
                             if (d.parent && d.parent.children) {
                                 d.parent.children.forEach(sibling => {
                                     if (sibling !== d && sibling.children) collapse(sibling);
@@ -587,7 +638,9 @@
                         }
                     }
                     update(d);
-                });
+                })
+                .on("mouseenter", showGhost)
+                .on("mouseleave", hideGhost);
 
             // The card rectangle
             nodeEnter.append("rect")
@@ -639,7 +692,7 @@
                 .style("opacity", d => d === selectedNode ? 1 : 0)
                 .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2);
 
-            // Inject HTML and manage pointer events
+            // Inject HTML
             nodeUpdate.each(function(d) {
                 const g = d3.select(this);
                 const fo = g.select(".details-container");
@@ -648,7 +701,6 @@
                     fo.style("pointer-events", "auto");
                     const safeName = d.data.name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
                     const safeType = (d.data.type || 'category').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-                    // Secure URL validation: only allow http/https protocols
                     const safeUrl = (d.data.url && /^https?:\/\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
 
                     fo.html(`
@@ -670,7 +722,7 @@
             nodeExit.select("rect").style("fill-opacity", 0);
             nodeExit.select("text").style("fill-opacity", 0);
 
-            // --- Links section ---
+            // --- Links section with Smart Weighted Paths ---
             const link = linkGroup.selectAll("path.link")
                 .data(links, d => d.target.id);
 
@@ -687,6 +739,11 @@
                     const s = { x: d.source.x, y: d.source.y + config.nodeWidth };
                     const t = { x: d.target.x, y: d.target.y };
                     return diagonal(s, t);
+                })
+                .attr("stroke-width", d => {
+                    // Smart weighting based on pre-calculated descendants (logarithmic scale)
+                    // Base width 2px, max around 8px for heavy branches
+                    return Math.max(2, Math.log(d.target.value || 1) * 1.5) + "px";
                 });
 
             const linkExit = link.exit().transition().duration(duration)
