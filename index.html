@@ -4,27 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forcepoint Documentation Mind Map</title>
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'base',
-            themeVariables: {
-                primaryColor: '#00af9a',
-                primaryTextColor: '#fff',
-                primaryBorderColor: '#007565',
-                lineColor: '#00af9a',
-                secondaryColor: '#f5f6f6',
-                tertiaryColor: '#1d252c',
-                mainBkg: '#fff',
-                nodeBorder: '#00af9a',
-                clusterBkg: '#f5f6f6',
-                titleColor: '#1d252c',
-                edgeColor: '#007565'
-            }
-        });
-    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'none';">
+    <title>Forcepoint Mind Map Canvas</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --fp-green: #00af9a;
@@ -94,5 +77,309 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const config = {
+            nodeWidth: 260,
+            nodeHeight: 52,
+            expandedHeight: 140,
+            levelWidth: 380
+        };
+
+        let root;
+        let svg, g, linkGroup, nodeGroup;
+        let zoom;
+        let i = 0;
+        let selectedNode = null;
+        const duration = 600;
+
+        const treeLayout = d3.tree().nodeSize([160, config.levelWidth]);
+
+        // Theme management
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        });
+
+        initTheme();
+
+        async function init() {
+            let data;
+            try {
+                data = await d3.json('d3-data.json?v=' + new Date().getTime());
+            } catch (error) {
+                console.error(error);
+                const loader = document.getElementById('loading-overlay');
+                if (loader) {
+                    loader.innerHTML = `<div style="color: #ef4444; text-align: center;">
+                        <h3 style="margin: 0 0 8px 0">Failed to load data</h3>
+                        <p style="margin: 0">Please check console for details.</p>
+                    </div>`;
+                }
+                return;
+            }
+            
+            const container = d3.select("#canvas-container");
+            const width = container.node().clientWidth;
+            const height = container.node().clientHeight;
+
+            svg = container.append("svg")
+                .attr("width", "100%")
+                .attr("height", "100%")
+                .style("overflow", "visible");
+
+            g = svg.append("g");
+            linkGroup = g.append("g").attr("class", "links");
+            nodeGroup = g.append("g").attr("class", "nodes");
+
+            zoom = d3.zoom()
+                .scaleExtent([0.05, 3])
+                .on("zoom", (event) => {
+                    g.attr("transform", event.transform);
+                });
+
+            svg.call(zoom);
+
+            root = d3.hierarchy(data, d => d.children);
+            root.x0 = height / 2;
+            root.y0 = 0;
+
+            // Initial state: Expand level 0 and 1
+            if (root.children) {
+                root.children.forEach(d => {
+                    if (d.children) {
+                        d.children.forEach(collapse);
+                    }
+                });
+            }
+
+            update(root);
+            resetZoom();
+
+            // Remove loader
+            const loader = document.getElementById('loading-overlay');
+            if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 500);
+            }
+
+            // Shortcuts
+            window.addEventListener('keydown', (e) => {
+                if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    document.getElementById('search-input').focus();
+                }
+            });
+
+            // Search
+            d3.select("#search-input").on("input", function() {
+                const term = this.value.toLowerCase();
+                if (!term) {
+                    nodeGroup.selectAll(".node").classed("highlight", false);
+                    return;
+                }
+                nodeGroup.selectAll(".node").classed("highlight", d => {
+                    return d.data.name.toLowerCase().includes(term);
+                });
+            });
+        }
+
+        function collapse(d) {
+            if (d.children) {
+                d._children = d.children;
+                d._children.forEach(collapse);
+                d.children = null;
+            }
+        }
+
+        function update(source) {
+            const treeData = treeLayout(root);
+            const nodes = treeData.descendants();
+            const links = treeData.links();
+
+            nodes.forEach(d => { d.y = d.depth * config.levelWidth; });
+
+            const node = nodeGroup.selectAll("g.node")
+                .data(nodes, d => d.id || (d.id = ++i));
+
+            const nodeEnter = node.enter().append("g")
+                .attr("class", d => "node " + (d.children || d._children ? "node--internal" : "node--leaf") + " node--" + (d.data.type || 'category'))
+                .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
+                .on("click", (event, d) => {
+                    // Always Select
+                    selectedNode = d;
+
+                    // Toggle expansion
+                    if (d.children || d._children) {
+                        if (d.children) {
+                            d._children = d.children;
+                            d.children = null;
+                        } else {
+                            // Accordion behavior: collapse siblings
+                            if (d.parent && d.parent.children) {
+                                d.parent.children.forEach(sibling => {
+                                    if (sibling !== d && sibling.children) collapse(sibling);
+                                });
+                            }
+                            d.children = d._children;
+                            d._children = null;
+                        }
+                    }
+                    update(d);
+                });
+
+            // The card rectangle
+            nodeEnter.append("rect")
+                .attr("width", config.nodeWidth)
+                .attr("height", config.nodeHeight)
+                .attr("y", -config.nodeHeight / 2)
+                .style("fill-opacity", 0);
+
+            // Simple text for collapsed state
+            nodeEnter.append("text")
+                .attr("class", "node-label")
+                .attr("dy", ".35em")
+                .attr("x", 16)
+                .text(d => d.data.name.length > 30 ? d.data.name.substring(0, 27) + "..." : d.data.name)
+                .style("fill-opacity", 0);
+
+            // Foreign object for rich details
+            const details = nodeEnter.append("foreignObject")
+                .attr("class", "details-container")
+                .attr("width", config.nodeWidth)
+                .attr("height", config.expandedHeight)
+                .attr("y", -config.expandedHeight / 2)
+                .style("opacity", 0)
+                .style("pointer-events", "none");
+
+            const nodeUpdate = nodeEnter.merge(node);
+
+            nodeUpdate.classed("node--selected", d => d === selectedNode);
+
+            // Transition nodes to their new position
+            nodeUpdate.transition().duration(duration)
+                .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
+
+            // Update Rect dimensions
+            nodeUpdate.select("rect")
+                .transition().duration(duration)
+                .attr("height", d => d === selectedNode ? config.expandedHeight : config.nodeHeight)
+                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2)
+                .style("fill-opacity", 1);
+
+            // Hide/Show labels vs details
+            nodeUpdate.select(".node-label")
+                .transition().duration(duration)
+                .style("opacity", d => d === selectedNode ? 0 : 1)
+                .style("fill-opacity", d => d === selectedNode ? 0 : 1);
+
+            nodeUpdate.select(".details-container")
+                .transition().duration(duration)
+                .style("opacity", d => d === selectedNode ? 1 : 0)
+                .attr("y", d => d === selectedNode ? -config.expandedHeight / 2 : -config.nodeHeight / 2);
+
+            // Inject HTML and manage pointer events
+            nodeUpdate.each(function(d) {
+                const g = d3.select(this);
+                const fo = g.select(".details-container");
+
+                if (d === selectedNode) {
+                    fo.style("pointer-events", "auto");
+                    const safeName = d.data.name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+                    const safeType = (d.data.type || 'category').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+                    // Secure URL validation: only allow http/https protocols
+                    const safeUrl = (d.data.url && /^https?:\/\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
+
+                    fo.html(`
+                        <div class="node-details" xmlns="http://www.w3.org/1999/xhtml">
+                            <div class="type-tag tag-${safeType}">${safeType}</div>
+                            <div class="detail-title">${safeName}</div>
+                            ${safeUrl ? `<a href="${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Documentation ↗</a>` : ''}
+                        </div>
+                    `);
+                } else {
+                    fo.style("pointer-events", "none");
+                }
+            });
+
+            const nodeExit = node.exit().transition().duration(duration)
+                .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
+                .remove();
+
+            nodeExit.select("rect").style("fill-opacity", 0);
+            nodeExit.select("text").style("fill-opacity", 0);
+
+            // --- Links section ---
+            const link = linkGroup.selectAll("path.link")
+                .data(links, d => d.target.id);
+
+            const linkEnter = link.enter().insert("path", "g")
+                .attr("class", "link")
+                .attr("d", d => {
+                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth };
+                    return diagonal(o, o);
+                });
+
+            const linkUpdate = linkEnter.merge(link);
+            linkUpdate.transition().duration(duration)
+                .attr("d", d => {
+                    const s = { x: d.source.x, y: d.source.y + config.nodeWidth };
+                    const t = { x: d.target.x, y: d.target.y };
+                    return diagonal(s, t);
+                });
+
+            const linkExit = link.exit().transition().duration(duration)
+                .attr("d", d => {
+                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth };
+                    return diagonal(o, o);
+                })
+                .remove();
+
+            nodes.forEach(d => {
+                d.x0 = d.x;
+                d.y0 = d.y;
+            });
+        }
+
+        function diagonal(s, d) {
+            return "M" + s.y + "," + s.x +
+                   "C" + (s.y + d.y) / 2 + "," + s.x +
+                   " " + (s.y + d.y) / 2 + "," + d.x +
+                   " " + d.y + "," + d.x;
+        }
+
+        function zoomIn() { svg.transition().call(zoom.scaleBy, 1.4); }
+        function zoomOut() { svg.transition().call(zoom.scaleBy, 0.7); }
+        function resetZoom() {
+            const container = d3.select("#canvas-container");
+            const width = container.node().clientWidth;
+            const height = container.node().clientHeight;
+            
+            svg.transition().duration(750).call(
+                zoom.transform,
+                d3.zoomIdentity.translate(60, height / 2).scale(0.7)
+            );
+        }
+
+        window.addEventListener('resize', () => {
+            const container = d3.select("#canvas-container");
+            const width = container.node().clientWidth;
+            const height = container.node().clientHeight;
+            svg.attr("width", width).attr("height", height);
+        });
+
+        init();
+    </script>
 </body>
 </html>
