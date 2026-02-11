@@ -34,7 +34,6 @@ function run() {
             --node-bg: #ffffff;
             --edge-color: #cbd5e0;
             --grid-color: #d1d1d1;
-            --sidebar-width: 350px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -89,6 +88,48 @@ function run() {
             display: flex;
             align-items: center;
             gap: 16px;
+        }
+
+        #breadcrumb-navigator {
+            position: absolute;
+            top: 80px;
+            left: 24px;
+            z-index: 900;
+            background: var(--card-bg);
+            padding: 8px 16px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            max-width: 80vw;
+            overflow-x: auto;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #breadcrumb-navigator.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .breadcrumb-item {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--fp-green);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--border-color);
         }
 
         #search-input {
@@ -182,6 +223,11 @@ function run() {
             stroke-width: 2.5px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        /* Level of Detail (LOD) classes */
+        .zoom-far .link { stroke-width: 1px; opacity: 0.5; }
+        .zoom-far .node text { display: none; }
+        .zoom-far .node rect { stroke-width: 1px; }
 
         .controls {
             position: absolute;
@@ -330,6 +376,7 @@ function run() {
         <div class="spinner"></div>
         <div style="font-weight: 500; color: var(--text-secondary);">Loading visualization...</div>
     </div>
+    
     <header>
         <h1>Forcepoint Documentation</h1>
         <div class="header-actions">
@@ -342,13 +389,15 @@ function run() {
         </div>
     </header>
 
+    <div id="breadcrumb-navigator"></div>
+
     <div id="canvas-container">
         <div class="controls">
             <button class="btn" title="Zoom In" onclick="zoomIn()">+</button>
             <button class="btn" title="Zoom Out" onclick="zoomOut()">-</button>
             <button class="btn" title="Reset View" onclick="resetZoom()">⟲</button>
         </div>
-        <div class="help-text">Click node to expand details and sub-items • Drag to pan</div>
+        <div class="help-text">Select node for details • Click to expand • Drag to pan</div>
     </div>
 
     <script>
@@ -419,7 +468,12 @@ function run() {
             zoom = d3.zoom()
                 .scaleExtent([0.05, 3])
                 .on("zoom", (event) => {
-                    g.attr("transform", event.transform);
+                    const transform = event.transform;
+                    g.attr("transform", transform);
+                    
+                    // LOD implementation
+                    svg.classed("zoom-far", transform.k < 0.6);
+                    svg.classed("zoom-near", transform.k > 1.2);
                 });
 
             svg.call(zoom);
@@ -462,8 +516,16 @@ function run() {
                     nodeGroup.selectAll(".node").classed("highlight", false);
                     return;
                 }
+                
+                let found = false;
                 nodeGroup.selectAll(".node").classed("highlight", d => {
-                    return d.data.name.toLowerCase().includes(term);
+                    const match = d.data.name.toLowerCase().includes(term);
+                    if (match && !found) {
+                        focusNode(d);
+                        selectNode(d);
+                        found = true;
+                    }
+                    return match;
                 });
             });
         }
@@ -474,6 +536,31 @@ function run() {
                 d._children.forEach(collapse);
                 d.children = null;
             }
+        }
+
+        function focusNode(d) {
+            const container = d3.select("#canvas-container");
+            const width = container.node().clientWidth;
+            const height = container.node().clientHeight;
+            
+            // Move parents to show the node if it's currently hidden
+            const ancestors = d.ancestors();
+            for (let i = ancestors.length - 1; i > 0; i--) {
+                const parent = ancestors[i];
+                if (parent._children) {
+                    parent.children = parent._children;
+                    parent._children = null;
+                    update(parent);
+                }
+            }
+
+            svg.transition().duration(750).call(
+                zoom.transform,
+                d3.zoomIdentity
+                    .translate(width / 2, height / 2)
+                    .scale(1)
+                    .translate(-d.y - config.nodeWidth / 2, -d.x)
+            );
         }
 
         function update(source) {
@@ -491,7 +578,7 @@ function run() {
                 .attr("transform", d => "translate(" + (source.y0 ?? source.y ?? 0) + "," + (source.x0 ?? source.x ?? 0) + ")")
                 .on("click", (event, d) => {
                     // Always Select
-                    selectedNode = d;
+                    selectNode(d);
 
                     // Toggle expansion
                     if (d.children || d._children) {
@@ -632,6 +719,37 @@ function run() {
                    " " + d.y + "," + d.x;
         }
 
+        function selectNode(d) {
+            selectedNode = d;
+            updateBreadcrumbs(d);
+            nodeGroup.selectAll(".node").classed("node--selected", n => n === d);
+        }
+
+        function updateBreadcrumbs(d) {
+            const nav = d3.select("#breadcrumb-navigator");
+            if (!d) {
+                nav.classed("visible", false);
+                return;
+            }
+            
+            nav.classed("visible", true).html("");
+            const ancestors = d.ancestors().reverse();
+            
+            ancestors.forEach((a, index) => {
+                if (index > 0) {
+                    nav.append("span").attr("class", "breadcrumb-separator").text("›");
+                }
+                nav.append("span")
+                    .attr("class", "breadcrumb-item")
+                    .text(a.data.name)
+                    .on("click", (event) => {
+                        event.stopPropagation();
+                        focusNode(a);
+                        selectNode(a);
+                    });
+            });
+        }
+
         function zoomIn() { svg.transition().call(zoom.scaleBy, 1.4); }
         function zoomOut() { svg.transition().call(zoom.scaleBy, 0.7); }
         function resetZoom() {
@@ -658,7 +776,7 @@ function run() {
 </html>`;
 
     fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
-    console.log('Canvas with Inline Details index.html generated.');
+    console.log('Phase 1 Canvas Evolution index.html generated.');
 }
 
 run();

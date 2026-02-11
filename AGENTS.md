@@ -9,8 +9,12 @@
 4.  **Generate Mermaid**: Run `npx ts-node src/mapper.ts` to generate `flowchart.mmd` and update `mermaid.html`.
 
 ## Visualization
-*   **Interactive (Primary)**: `index.html` uses D3.js to render a collapsible, searchable tree from `d3-data.json`.
-    *   **Inline Experience**: As of branch `feat/inline-node-details`, details are rendered directly on the nodes via SVG `foreignObject`, replacing the old sidebar.
+*   **Interactive Canvas (Primary)**: `index.html` uses D3.js to render a collapsible, searchable tree.
+*   **Spatial Intelligence (Phase 1)**:
+    *   **Search-to-Focus**: Searching for a term automatically pans and zooms the canvas to center the first match.
+    *   **Breadcrumb Navigator**: A persistent, interactive breadcrumb trail at the top-left tracks the "Selection Path" and allows jumping back to ancestors.
+    *   **Contextual Zoom (LOD)**: Level of Detail thresholds (`zoom-far`, `zoom-near`) adjust element visibility based on zoom scale to reduce clutter.
+    *   **Inline Experience**: Details are rendered directly on the nodes via SVG `foreignObject`, replacing the old sidebar.
     *   **Accordion Logic**: Expanding a branch automatically collapses siblings to maintain focus.
     *   **Security**: Includes a strict Content Security Policy (CSP) and manual HTML entity escaping for all node metadata to prevent XSS.
 *   **Product-Centric Hierarchy**: Documentation nodes are redistributed into relevant product branches (`DLP`, `Email Security`, etc.) instead of a loose top-level "Documentation" node.
