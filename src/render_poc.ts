@@ -1,5 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function run() {
     const mmdPath = path.join(process.cwd(), 'mindmap.mmd');
@@ -10,104 +14,14 @@ function run() {
 
     const mermaidContent = fs.readFileSync(mmdPath, 'utf-8');
 
-    const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forcepoint Documentation Mind Map</title>
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'base',
-            themeVariables: {
-                primaryColor: '#00af9a',
-                primaryTextColor: '#fff',
-                primaryBorderColor: '#007565',
-                lineColor: '#00af9a',
-                secondaryColor: '#f5f6f6',
-                tertiaryColor: '#1d252c',
-                mainBkg: '#fff',
-                nodeBorder: '#00af9a',
-                clusterBkg: '#f5f6f6',
-                titleColor: '#1d252c',
-                edgeColor: '#007565'
-            }
-        });
-    </script>
-    <style>
-        :root {
-            --fp-green: #00af9a;
-            --fp-dark-green: #007565;
-            --fp-navy: #1d252c;
-            --fp-gray: #636569;
-            --fp-light: #f5f6f6;
-        }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: var(--fp-light); 
-            margin: 0; 
-            padding: 0;
-            color: var(--fp-navy);
-        }
-        header {
-            background-color: var(--fp-navy);
-            color: white;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        header h1 { margin: 0; font-size: 1.5rem; }
-        .container {
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            overflow: auto;
-        }
-        .mermaid {
-            display: flex;
-            justify-content: center;
-        }
-        .btn {
-            background-color: var(--fp-green);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 2px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-        .btn:hover {
-            background-color: var(--fp-dark-green);
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Forcepoint Documentation Mind Map</h1>
-        <a href="https://help.forcepoint.com" class="btn">View Original Docs</a>
-    </header>
-    <div class="container">
-        <div class="card">
-            <div class="mermaid">
-${mermaidContent}
-            </div>
-        </div>
-    </div>
-</body>
-</html>`;
+    const templatePath = path.join(__dirname, 'templates', 'poc_template.html');
+    if (!fs.existsSync(templatePath)) {
+        console.error('Template file not found at:', templatePath);
+        return;
+    }
+
+    let html = fs.readFileSync(templatePath, 'utf-8');
+    html = html.replace('<!-- MERMAID_CONTENT -->', () => mermaidContent);
 
     fs.writeFileSync(path.join(process.cwd(), 'index.html'), html);
     console.log('POC index.html updated with Forcepoint branding.');
