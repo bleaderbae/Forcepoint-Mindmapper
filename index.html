@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'none';">
     <title>Forcepoint Mind Map Canvas</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -559,7 +560,8 @@
                     fo.style("pointer-events", "auto");
                     const safeName = d.data.name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
                     const safeType = (d.data.type || 'category').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-                    const safeUrl = d.data.url ? d.data.url.replace(/"/g, "&quot;") : '';
+                    // Secure URL validation: only allow http/https protocols
+                    const safeUrl = (d.data.url && /^https?:\/\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
 
                     fo.html(`
                         <div class="node-details" xmlns="http://www.w3.org/1999/xhtml">
