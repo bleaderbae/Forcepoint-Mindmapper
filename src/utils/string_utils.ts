@@ -2,7 +2,7 @@
  * Sanitizes text for use in Mermaid diagrams and other visual formats.
  * Removes special characters that might break Mermaid syntax.
  */
-export function sanitize(text: any): string {
+export function sanitize(text: unknown): string {
     if (typeof text !== 'string') return 'Untitled';
     if (!text.trim()) return 'Untitled';
 
