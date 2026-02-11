@@ -14,7 +14,7 @@ function run() {
     const data: any[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
     console.log(`Mapping ${data.length} pages into a flowchart...`);
 
-    let mermaid = `graph TD\n`;
+    const mermaidLines: string[] = ['graph TD'];
     
     // 1. Assign unique IDs to each unique URL
     const urlToId = new Map<string, string>();
@@ -38,7 +38,7 @@ function run() {
     for (const [url, page] of uniqueNodes) {
         const id = urlToId.get(url)!;
         const title = sanitize(page.title);
-        mermaid += `  ${id}["${title}"]\n`;
+        mermaidLines.push(`  ${id}["${title}"]`);
     }
 
     // 3. Output Edges
@@ -51,7 +51,7 @@ function run() {
             if (urlToId.has(nextUrl)) {
                 const nextId = urlToId.get(nextUrl)!;
                 if (id !== nextId) {
-                    mermaid += `  ${id} --> ${nextId}\n`;
+                    mermaidLines.push(`  ${id} --> ${nextId}`);
                 }
             }
         }
@@ -62,11 +62,14 @@ function run() {
             if (urlToId.has(parentUrl)) {
                 const parentId = urlToId.get(parentUrl)!;
                 if (id !== parentId) {
-                     mermaid += `  ${parentId} -.-> ${id}\n`;
+                     mermaidLines.push(`  ${parentId} -.-> ${id}`);
                 }
             }
         }
     }
+
+    // Combine lines
+    const mermaid = mermaidLines.join('\n') + '\n';
 
     // Write Mermaid file
     fs.writeFileSync(path.join(process.cwd(), 'flowchart.mmd'), mermaid);

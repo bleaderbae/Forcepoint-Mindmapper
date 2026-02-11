@@ -13,6 +13,7 @@ function run() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'none';">
     <title>Forcepoint Mind Map Canvas</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,6 +34,7 @@ function run() {
             --node-bg: #ffffff;
             --edge-color: #cbd5e0;
             --grid-color: #d1d1d1;
+            --sidebar-width: 350px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -291,9 +293,43 @@ function run() {
             border: 1px solid var(--border-color);
             opacity: 0.9;
         }
+
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--fp-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <div id="loading-overlay" aria-live="polite" aria-busy="true">
+        <div class="spinner"></div>
+        <div style="font-weight: 500; color: var(--text-secondary);">Loading visualization...</div>
+    </div>
     <header>
         <h1>Forcepoint Documentation</h1>
         <div class="header-actions">
@@ -352,7 +388,20 @@ function run() {
         initTheme();
 
         async function init() {
-            const data = await d3.json('d3-data.json?v=' + new Date().getTime());
+            let data;
+            try {
+                data = await d3.json('d3-data.json?v=' + new Date().getTime());
+            } catch (error) {
+                console.error(error);
+                const loader = document.getElementById('loading-overlay');
+                if (loader) {
+                    loader.innerHTML = \`<div style="color: #ef4444; text-align: center;">
+                        <h3 style="margin: 0 0 8px 0">Failed to load data</h3>
+                        <p style="margin: 0">Please check console for details.</p>
+                    </div>\`;
+                }
+                return;
+            }
             
             const container = d3.select("#canvas-container");
             const width = container.node().clientWidth;
@@ -390,6 +439,13 @@ function run() {
 
             update(root);
             resetZoom();
+
+            // Remove loader
+            const loader = document.getElementById('loading-overlay');
+            if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 500);
+            }
 
             // Shortcuts
             window.addEventListener('keydown', (e) => {
@@ -436,7 +492,7 @@ function run() {
                 .on("click", (event, d) => {
                     // Always Select
                     selectedNode = d;
-                    
+
                     // Toggle expansion
                     if (d.children || d._children) {
                         if (d.children) {
@@ -510,14 +566,19 @@ function run() {
             nodeUpdate.each(function(d) {
                 const g = d3.select(this);
                 const fo = g.select(".details-container");
-                
+
                 if (d === selectedNode) {
                     fo.style("pointer-events", "auto");
+                    const safeName = d.data.name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+                    const safeType = (d.data.type || 'category').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+                    // Secure URL validation: only allow http/https protocols
+                    const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
+
                     fo.html(\`
                         <div class="node-details" xmlns="http://www.w3.org/1999/xhtml">
-                            <div class="type-tag tag-\${d.data.type || 'category'}">\${d.data.type || 'category'}</div>
-                            <div class="detail-title">\${d.data.name}</div>
-                            \${d.data.url ? \`<a href="\${d.data.url}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Documentation ↗</a>\` : ''}
+                            <div class="type-tag tag-\${safeType}">\${safeType}</div>
+                            <div class="detail-title">\${safeName}</div>
+                            \${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Documentation ↗</a>\` : ''}
                         </div>
                     \`);
                 } else {
@@ -539,7 +600,7 @@ function run() {
             const linkEnter = link.enter().insert("path", "g")
                 .attr("class", "link")
                 .attr("d", d => {
-                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth / 2 };
+                    const o = { x: source.x0 ?? source.x ?? 0, y: (source.y0 ?? source.y ?? 0) + config.nodeWidth };
                     return diagonal(o, o);
                 });
 
@@ -553,7 +614,7 @@ function run() {
 
             const linkExit = link.exit().transition().duration(duration)
                 .attr("d", d => {
-                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth / 2 };
+                    const o = { x: source.x ?? 0, y: (source.y ?? 0) + config.nodeWidth };
                     return diagonal(o, o);
                 })
                 .remove();

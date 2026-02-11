@@ -72,11 +72,16 @@ export function buildTree(data: DocNode[]): TreeNode {
 export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
     if (!node.children || node.children.length === 0) return;
 
-    // Create a map of URL -> node for accurate lookup
+    // Create a map of URL -> node and Title -> node for accurate lookup
     const urlToNode = new Map<string, TreeNode>();
+    const titleToNode = new Map<string, TreeNode>();
     node.children.forEach(c => {
         if (c.url) {
             urlToNode.set(c.url, c);
+        }
+        // Store first occurrence of title for heuristic matching
+        if (!titleToNode.has(c.title)) {
+            titleToNode.set(c.title, c);
         }
     });
 
@@ -86,7 +91,16 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
 
     node.children.forEach(child => {
         if (child.url && child.nextUrl) {
-            const sibling = urlToNode.get(child.nextUrl);
+            let sibling = urlToNode.get(child.nextUrl);
+
+            // Optimization: Use O(1) map lookup for title matching fallback
+            if (!sibling) {
+                const nextDoc = urlToDoc.get(child.nextUrl);
+                if (nextDoc) {
+                    sibling = titleToNode.get(nextDoc.title);
+                }
+            }
+
             if (sibling && sibling !== child) {
                 nextMap.set(child, sibling);
                 prevMap.set(sibling, child);
@@ -105,13 +119,14 @@ export function sortChildren(node: TreeNode, urlToDoc: Map<string, DocNode>) {
     const sorted: TreeNode[] = [];
     const visited = new Set<TreeNode>();
 
-    const traverse = (n: TreeNode) => {
-        if (visited.has(n)) return;
-        visited.add(n);
-        sorted.push(n);
-
-        const nextNode = nextMap.get(n);
-        if (nextNode) traverse(nextNode);
+    const traverse = (startNode: TreeNode) => {
+        let current: TreeNode | undefined = startNode;
+        while (current) {
+            if (visited.has(current)) break;
+            visited.add(current);
+            sorted.push(current);
+            current = nextMap.get(current);
+        }
     };
 
     starts.forEach(start => traverse(start));

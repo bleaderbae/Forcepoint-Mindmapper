@@ -1,0 +1,3 @@
+## 2025-02-19 - [Crawler Polling Loop Optimization]
+**Learning:** Polling loops with fixed delays (e.g., `setTimeout(50)`) introduce significant cumulative overhead when tasks are short or when the queue has intermittent work. A worker pool pattern, where multiple workers continuously pull from the queue and only wait when the queue is truly empty *and* other workers are busy, provides much higher throughput.
+**Action:** Replace `while` loops that poll for work with `Promise.all(workers)` where each worker is an async loop that processes items as fast as possible. Ensure termination conditions handle the "empty queue but others working" state correctly.

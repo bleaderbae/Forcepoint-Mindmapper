@@ -196,11 +196,50 @@ async function save(): Promise<void> {
     if (savePromise) return savePromise;
 
     savePromise = (async () => {
+        const TEMP_FILE = `${DATA_FILE}.tmp`;
         try {
             logger.info(`Saving ${results.length} pages...`);
-            await fs.promises.writeFile(DATA_FILE, JSON.stringify(results, null, 2));
+            await new Promise<void>((resolve, reject) => {
+                const stream = fs.createWriteStream(TEMP_FILE, { flags: 'w' });
+                stream.write('[\n');
+
+                let i = 0;
+                // Capture length to ensure snapshot consistency during async write
+                const total = results.length;
+
+                function write() {
+                    let ok = true;
+                    while (i < total && ok) {
+                        const isLast = i === total - 1;
+                        // Manual JSON formatting to match JSON.stringify(results, null, 2)
+                        // Indent object with 2 spaces
+                        const itemStr = JSON.stringify(results[i], null, 2);
+                        // Add indentation to each line of the item
+                        const indentedItem = itemStr.split('\n').map(line => '  ' + line).join('\n');
+                        const str = indentedItem + (isLast ? '' : ',\n');
+
+                        ok = stream.write(str);
+                        i++;
+                    }
+
+                    if (i < total) {
+                        stream.once('drain', write);
+                    } else {
+                        stream.write('\n]');
+                        stream.end();
+                    }
+                }
+
+                write();
+
+                stream.on('finish', resolve);
+                stream.on('error', reject);
+            });
+            await fs.promises.rename(TEMP_FILE, DATA_FILE);
         } catch (err) {
             logger.error(`Failed to save data: ${err}`);
+            // Attempt to clean up temp file on error
+            try { await fs.promises.unlink(TEMP_FILE); } catch (e) {}
         } finally {
             savePromise = null;
         }
@@ -216,22 +255,36 @@ process.on('SIGINT', async () => {
 });
 
 async function run() {
-    while (queue.length > 0 || processing > 0) {
-        if (queue.length > 0 && processing < MAX_CONCURRENCY && visited.size < MAX_PAGES) {
+    // ⚡ Performance: Worker pool pattern eliminates polling delay in the main loop.
+    // Instead of checking queue/concurrency every 50ms, workers immediately pick up
+    // the next task. This significantly improves throughput for fast-loading pages.
+    const workers = new Array(MAX_CONCURRENCY).fill(null).map(async () => {
+        while (visited.size < MAX_PAGES) {
             const item = queue.shift();
-            if (item) {
-                processing++;
-                processUrl(item.url, item.parentUrl).then(async () => {
-                    if (results.length % 500 === 0) await save();
-                }).finally(() => {
-                    processing--;
-                });
+
+            if (!item) {
+                // If queue is empty and no other workers are active, we are done.
+                if (processing === 0 && queue.length === 0) return;
+
+                // If queue is empty but others are working, wait briefly for new work.
+                await new Promise(resolve => setTimeout(resolve, 50));
+                continue;
             }
-        } else {
-            await new Promise(resolve => setTimeout(resolve, 50));
-            if (visited.size >= MAX_PAGES && processing === 0 && queue.length === 0) break;
+
+            processing++;
+            try {
+                await processUrl(item.url, item.parentUrl);
+                if (results.length % 500 === 0) await save();
+            } catch (error) {
+                // Should be caught in processUrl, but safe guard here
+                logger.error(`Worker error: ${error}`);
+            } finally {
+                processing--;
+            }
         }
-    }
+    });
+
+    await Promise.all(workers);
     await save();
     logger.info(`Crawl finished. Total pages: ${results.length}`);
 }
