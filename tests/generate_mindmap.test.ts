@@ -235,4 +235,28 @@ describe('sortChildren', () => {
         assert.strictEqual(parent.children[1], d1);
         assert.strictEqual(parent.children[2], d2);
    });
+
+   test('should sort siblings based on title when URL matching fails', () => {
+        const urlToDoc = new Map<string, DocNode>();
+        // n1 -> n2 via nextUrl, but n2's URL in tree is different from n1's nextUrl
+        // However, n2's title matches the doc retrieved by n1's nextUrl
+
+        const n1: TreeNode = { title: 'Node 1', url: 'u1', nextUrl: 'u2-alias', children: [] };
+        // n2 has url 'u2-real', but n1 points to 'u2-alias'
+        const n2: TreeNode = { title: 'Node 2', url: 'u2-real', children: [] };
+
+        // urlToDoc must have entry for 'u2-alias' which has title 'Node 2'
+        urlToDoc.set('u2-alias', { title: 'Node 2', url: 'u2-alias', breadcrumbs: [] });
+
+        const parent: TreeNode = {
+            title: 'Parent',
+            children: [n2, n1],
+            childrenMap: new Map()
+        };
+
+        sortChildren(parent, urlToDoc);
+
+        assert.strictEqual(parent.children[0].title, 'Node 1');
+        assert.strictEqual(parent.children[1].title, 'Node 2');
+    });
 });
