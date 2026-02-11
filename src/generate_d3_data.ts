@@ -9,11 +9,31 @@ import { getVariant } from './utils/product_utils.ts';
 export interface D3Node {
     name: string;
     url?: string;
+    summary?: string;
+    status?: 'current' | 'eol';
+    relatedLinks?: { title: string; url: string }[];
     children?: D3Node[];
     childrenMap?: Map<string, D3Node>;
     _children?: D3Node[];
     type?: 'document' | 'legal' | 'category' | 'variant' | 'version' | 'archive' | 'platform';
     value?: number;
+}
+
+const EOL_VERSIONS = new Set(['8.3', '8.4', '8.5', '8.6', '8.7', '8.8', '8.9']);
+const CURRENT_VERSIONS = new Set(['10.2', '10.3', '10.4', '7.2', '7.3']);
+
+function getVersionStatus(name: string, prodName: string): 'current' | 'eol' {
+    const version = name.replace(/\s*\(Latest\)/i, '').trim();
+    if (EOL_VERSIONS.has(version)) return 'eol';
+    if (CURRENT_VERSIONS.has(version)) return 'current';
+    
+    // Default logic: older major versions (typically < 9 for DLP/Web) are EOL
+    const major = parseInt(version.split('.')[0]);
+    if (!isNaN(major)) {
+        if (prodName.includes('NGFW') && major < 6) return 'eol';
+        if (major < 9) return 'eol';
+    }
+    return 'current';
 }
 
 export const findChild = (parent: D3Node, name: string): D3Node | undefined => {
@@ -134,21 +154,32 @@ function run() {
         const pageTitle = humanize(page.title);
         const isLegal = getCategory(page.title + ' ' + page.url) === 'Legal & Third Party';
         
+        const relatedLinks = (page.relatedUrls || []).map((u: string) => ({
+            url: u,
+            title: u.split('/').pop()?.replace('.html', '').replace(/[-_]/g, ' ') || 'Related Link'
+        }));
+
         if (current.name !== pageTitle) {
             addChild(current, { 
                 name: pageTitle, 
                 url: page.url, 
-                type: isLegal ? 'legal' : 'document' 
+                type: isLegal ? 'legal' : 'document',
+                summary: page.content,
+                relatedLinks
             });
         } else {
             current.url = page.url;
             current.type = isLegal ? 'legal' : 'document';
+            current.summary = page.content;
+            current.relatedLinks = relatedLinks;
         }
     }
 
     // --- Step 5: Post-Process: Prune and Label ---
-    const finalizeNodes = (node: D3Node) => {
+    const finalizeNodes = (node: D3Node, parentProd?: string) => {
         if (!node.children || node.children.length === 0) return;
+
+        const currentProd = node.type === 'category' || node.type === 'platform' ? node.name : parentProd;
 
         // 1. Prune Versions into Archives
         const versionChildren = node.children.filter(c => c.type === 'version' || isVersionString(c.name));
@@ -157,17 +188,26 @@ function run() {
             const latest = versionChildren[0];
             const others = versionChildren.slice(1);
 
-            const archiveNode: D3Node = { name: "Version Archives", children: others, type: 'archive' };
+            const archiveNode: D3Node = { name: "Version Archives", children: others, type: 'archive', status: 'eol' };
             const nonVersions = node.children.filter(c => !versionChildren.includes(c));
             
             node.children = [...nonVersions, latest, archiveNode];
             if (!latest.name.includes("(Latest)")) {
                 latest.name = `${latest.name} (Latest)`;
             }
+
+            // Assign status
+            latest.status = 'current';
+            others.forEach(o => o.status = getVersionStatus(o.name, currentProd || ''));
+        } else if (versionChildren.length === 1) {
+            versionChildren[0].status = 'current';
         }
 
-        // 2. Recursive cleanup
-        node.children?.forEach(finalizeNodes);
+        // 2. Propagate status to documents
+        node.children?.forEach(child => {
+            if (node.status === 'eol') child.status = 'eol';
+            finalizeNodes(child, currentProd);
+        });
     };
 
     finalizeNodes(root);
