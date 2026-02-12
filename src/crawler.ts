@@ -13,10 +13,33 @@ const MAX_CONCURRENCY = 10;
 const MAX_PAGES = 10000;
 const MAX_RETRIES = 3;
 const DATA_FILE = path.join(process.cwd(), 'full_site_data.json');
+const CHECKPOINT_FILE = path.join(process.cwd(), 'full_site_data.checkpoint.jsonl');
+let checkpointStream = fs.createWriteStream(CHECKPOINT_FILE, { flags: 'a' });
 
 let results: DocNode[] = [];
 if (fs.existsSync(DATA_FILE)) {
     try { results = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8')); } catch (e) { results = []; }
+}
+
+if (fs.existsSync(CHECKPOINT_FILE)) {
+    try {
+        const content = fs.readFileSync(CHECKPOINT_FILE, 'utf-8');
+        const lines = content.split('\n').filter(line => line.trim());
+        for (const line of lines) {
+            try {
+                const node = JSON.parse(line);
+                results.push(node);
+            } catch (e) {
+                logger.error(`Failed to parse checkpoint line: ${e}`);
+            }
+        }
+        // Deduplicate loaded results
+        const uniqueResults = new Map<string, DocNode>();
+        results.forEach(r => uniqueResults.set(normalizeUrl(r.url), r));
+        results = Array.from(uniqueResults.values());
+    } catch (e) {
+        logger.error(`Failed to load checkpoint file: ${e}`);
+    }
 }
 
 const visited = new Set<string>(results.map(r => normalizeUrl(r.url)));
@@ -127,15 +150,17 @@ async function processUrl(url: string, parentUrl?: string) {
             }
         });
 
-        results.push({
+        const newNode: DocNode = {
             url: normalizedUrl,
             title,
             breadcrumbs,
             content: content.substring(0, 1500),
-            parentUrl: parentUrl ? normalizeUrl(parentUrl) : undefined,
+            ...(parentUrl ? { parentUrl: normalizeUrl(parentUrl) } : {}),
             relatedUrls,
             lastScraped: new Date().toISOString()
-        });
+        };
+        results.push(newNode);
+        checkpointStream.write(JSON.stringify(newNode) + '\n');
 
         for (const link of links) {
             queue.push({ url: link, parentUrl: url });
@@ -146,7 +171,7 @@ async function processUrl(url: string, parentUrl?: string) {
     }
 }
 
-async function save(): Promise<void> {
+async function saveFinal(): Promise<void> {
     const TEMP_FILE = `${DATA_FILE}.tmp`;
     try {
         const stream = fs.createWriteStream(TEMP_FILE);
@@ -159,10 +184,34 @@ async function save(): Promise<void> {
         stream.end();
         await new Promise(r => stream.on('finish', r));
         await fs.promises.rename(TEMP_FILE, DATA_FILE);
+
+        // Close and remove checkpoint
+        await new Promise<void>(resolve => checkpointStream.end(resolve));
+        if (fs.existsSync(CHECKPOINT_FILE)) {
+            await fs.promises.unlink(CHECKPOINT_FILE);
+        }
     } catch (err) { logger.error(`Save error: ${err}`); }
 }
 
+process.on('SIGINT', async () => {
+    logger.info('Received SIGINT. Saving data...');
+    await saveFinal();
+    process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+    logger.info('Received SIGTERM. Saving data...');
+    await saveFinal();
+    process.exit(0);
+});
+
 async function run() {
+    // If we loaded from checkpoint, compact immediately
+    if (fs.existsSync(CHECKPOINT_FILE)) {
+        await saveFinal();
+        checkpointStream = fs.createWriteStream(CHECKPOINT_FILE, { flags: 'a' });
+    }
+
     const workers = new Array(MAX_CONCURRENCY).fill(null).map(async () => {
         while (visited.size < MAX_PAGES) {
             const item = queue.shift();
@@ -173,12 +222,11 @@ async function run() {
             processing++;
             try {
                 await processUrl(item.url, item.parentUrl);
-                if (results.length % 100 === 0) await save();
             } finally { processing--; }
         }
     });
     await Promise.all(workers);
-    await save();
+    await saveFinal();
 }
 
 run();
