@@ -30,9 +30,19 @@ export function sanitize(text: unknown): string {
 /**
  * Transforms technical strings/URLs into human-readable titles.
  */
+const humanizeCache = new Map<string, string>();
+const MAX_CACHE_SIZE = 10000;
+
 export function humanize(text: string): string {
     if (!text) return '';
-    if (/^v?\d+(\.\d+|x)*$/.test(text)) return text; // Versions
+    const cached = humanizeCache.get(text);
+    if (cached !== undefined) return cached;
+
+    if (/^v?\d+(\.\d+|x)*$/.test(text)) {
+        if (humanizeCache.size >= MAX_CACHE_SIZE) humanizeCache.clear();
+        humanizeCache.set(text, text);
+        return text; // Versions
+    }
 
     let result = text
         .replace(/&amp;/g, '&')
@@ -53,7 +63,7 @@ export function humanize(text: string): string {
         result = beforeGeneric.trim();
     }
 
-    return result
+    const finalResult = result
         .replace(/\s+/g, ' ')
         .split(' ')
         .map(w => {
@@ -61,6 +71,10 @@ export function humanize(text: string): string {
             return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
         })
         .join(' ');
+
+    if (humanizeCache.size >= MAX_CACHE_SIZE) humanizeCache.clear();
+    humanizeCache.set(text, finalResult);
+    return finalResult;
 }
 
 /**
