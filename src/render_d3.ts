@@ -345,8 +345,11 @@ function run() {
 
                     let relatedLinksHtml = '';
                     if (summaryData && summaryData.relatedLinks && summaryData.relatedLinks.length > 0) {
-                        const links = summaryData.relatedLinks.map(l => \`<li><a href="\${l.url}" target="_blank">\${l.title}</a></li>\`).join('');
-                        relatedLinksHtml = \`<div class="related-links"><h4>Related Links</h4><ul>\${links}</ul></div>\`;
+                        const links = summaryData.relatedLinks
+                            .filter(l => /^https?:\\/\\//i.test(l.url))
+                            .map(l => \`<li><a href="\${escapeHtml(l.url)}" target="_blank">\${escapeHtml(l.title)}</a></li>\`)
+                            .join('');
+                        if (links) relatedLinksHtml = \`<div class="related-links"><h4>Related Links</h4><ul>\${links}</ul></div>\`;
                     }
 
                     const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
