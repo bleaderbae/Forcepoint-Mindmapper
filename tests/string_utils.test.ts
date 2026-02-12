@@ -151,6 +151,8 @@ describe('humanize', () => {
         { input: 'httpClient', expected: 'Http Client' }, // CamelCase splitting
         { input: 'v1.2.3.4', expected: 'v1.2.3.4' }, // Complex version pattern
         { input: 'test.doc', expected: 'Test.doc' }, // Non-HTML extension preservation
+        { input: 'forcepoint-one', expected: 'Forcepoint One' },
+        { input: 'Forcepoint ONE', expected: 'Forcepoint ONE' }, // Uppercase word preservation
     ];
 
     testCases.forEach(({ input, expected }) => {
