@@ -45,7 +45,8 @@
         .finder-row:hover { background: var(--fp-light); }
         .dark-mode .finder-row:hover { background: rgba(255,255,255,0.05); }
         .finder-row--active { background: rgba(0, 175, 154, 0.1) !important; color: var(--fp-green) !important; font-weight: 600; }
-        
+        .finder-row:focus-visible { outline: 2px solid var(--fp-green); outline-offset: -2px; }
+
         .finder-children { display: none; padding-left: 12px; border-left: 1px solid var(--border-color); margin-left: 22px; }
         .finder-node.expanded > .finder-children { display: block; }
         
@@ -112,10 +113,10 @@
 </head>
 <body>
     <div id="loading-overlay"><div class="spinner"></div><div style="font-weight: 500;">Building Knowledge Base...</div></div>
-    <header><h1>Forcepoint Documentation</h1><div class="header-actions"><input type="text" id="search-input" placeholder="Search..."><button class="theme-toggle" id="theme-toggle">🌓</button></div></header>
+    <header><h1>Forcepoint Documentation</h1><div class="header-actions"><input type="text" id="search-input" placeholder="Search..." aria-label="Search documentation"><button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">🌓</button></div></header>
     <aside id="global-finder"><div class="finder-header">Documentation Explorer</div><div class="finder-scroll" id="finder-list"></div></aside>
-    <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()">‹</button>
-    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()">+</button><button class="btn" onclick="zoomOut()">-</button><button class="btn" onclick="resetZoom()">⟲</button></div><svg id="minimap"></svg></div></main>
+    <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">‹</button>
+    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()" aria-label="Zoom In">+</button><button class="btn" onclick="zoomOut()" aria-label="Zoom Out">-</button><button class="btn" onclick="resetZoom()" aria-label="Reset Zoom">⟲</button></div><svg id="minimap"></svg></div></main>
 
     <script>
         const config = { nodeWidth: 320, nodeHeight: 52, expandedHeight: 280, directoryHeight: 360, levelWidth: 450, directoryThreshold: 12 };
@@ -219,13 +220,33 @@
             if (d.depth === 0) { d.children.forEach(c => renderFinderRecursive(c, container)); return; }
             const nodeDiv = document.createElement('div');
             nodeDiv.className = 'finder-node'; nodeDiv.dataset.id = d.id;
-            const row = document.createElement('div'); row.className = 'finder-row';
+
+            const row = document.createElement('div');
+            row.className = 'finder-row';
+            row.tabIndex = 0;
+            row.role = 'button';
+            row.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    row.click();
+                }
+            });
+
             const hasChildren = d.children || d._children;
             if (hasChildren) {
-                row.innerHTML = `<span class="toggle-icon">▶</span> 📁 ${d.data.name}`;
-                row.onclick = (e) => { e.stopPropagation(); nodeDiv.classList.toggle('expanded'); window.focusNodeById(d.id); };
+                row.setAttribute('aria-expanded', 'false');
+                row.innerHTML = `<span class="toggle-icon">▶</span> 📁 `;
+                row.appendChild(document.createTextNode(d.data.name));
+                row.onclick = (e) => {
+                    e.stopPropagation();
+                    nodeDiv.classList.toggle('expanded');
+                    const isExpanded = nodeDiv.classList.contains('expanded');
+                    row.setAttribute('aria-expanded', isExpanded);
+                    window.focusNodeById(d.id);
+                };
             } else {
-                row.innerHTML = `<span class="leaf-dot"></span> 📄 ${d.data.name}`;
+                row.innerHTML = `<span class="leaf-dot"></span> 📄 `;
+                row.appendChild(document.createTextNode(d.data.name));
                 row.onclick = (e) => { e.stopPropagation(); window.focusNodeById(d.id); };
             }
             nodeDiv.appendChild(row);
@@ -261,7 +282,13 @@
                 }
                 
                 const sidebarNode = document.querySelector(`.finder-node[data-id="${nodeOnPath.id}"]`);
-                if (sidebarNode) sidebarNode.classList.add('expanded');
+                if (sidebarNode) {
+                    sidebarNode.classList.add('expanded');
+                    const row = sidebarNode.querySelector('.finder-row');
+                    if (row && row.hasAttribute('aria-expanded')) {
+                        row.setAttribute('aria-expanded', 'true');
+                    }
+                }
             }
 
             selectNode(target);
