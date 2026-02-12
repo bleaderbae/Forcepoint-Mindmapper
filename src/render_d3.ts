@@ -133,6 +133,15 @@ function run() {
         let minimapSvg, minimapScale, minimapTransform;
         const duration = 600;
 
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
         function toggleSidebar() {
             const isCollapsed = document.getElementById('global-finder').classList.toggle('collapsed');
             document.getElementById('finder-toggle').innerText = isCollapsed ? '›' : '‹';
@@ -328,11 +337,11 @@ function run() {
                     const h = d.data.isDirectory ? config.directoryHeight : config.expandedHeight;
                     fo.attr("height", h).attr("y", -h/2);
                     fo.style("pointer-events", "auto").transition().duration(duration).style("opacity", 1);
-                    const safeName = d.data.name.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+                    const safeName = escapeHtml(d.data.name);
 
                     const summaryData = window.summaries && d.data.url ? window.summaries[d.data.url] : null;
                     const summaryText = summaryData ? summaryData.summary : "No summary content found for this document.";
-                    const safeSummary = summaryText.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[m]));
+                    const safeSummary = escapeHtml(summaryText);
 
                     let relatedLinksHtml = '';
                     if (summaryData && summaryData.relatedLinks && summaryData.relatedLinks.length > 0) {
@@ -343,7 +352,7 @@ function run() {
                     const safeUrl = (d.data.url && /^https?:\\/\\//i.test(d.data.url)) ? d.data.url.replace(/"/g, "&quot;") : '';
                     
                     if (d.data.isDirectory) {
-                        const items = (d.children || d._children || []).map(c => \`<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('\${c.id}')">\${c.data.name}</li>\`).join("");
+                        const items = (d.children || d._children || []).map(c => \`<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('\${c.id}')">\${escapeHtml(c.data.name)}</li>\`).join("");
                         fo.html(\`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>\${(d.children||d._children).length} items</span></div><div class="detail-title">\${safeName}</div><ul class="directory-list">\${items}</ul></div>\`);
                     } else {
                         fo.html(\`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-\${d.data.type}">\${d.data.type}</div><div class="detail-title">\${safeName}</div><div class="node-summary">\${safeSummary}</div>\${relatedLinksHtml}\${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>\` : ''}</div>\`);
