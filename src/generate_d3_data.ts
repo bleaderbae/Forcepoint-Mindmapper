@@ -71,6 +71,9 @@ function run() {
 
     const root: D3Node = { name: "Forcepoint", children: [], type: 'category' };
 
+    // Local cache for breadcrumbs to avoid global cache thrashing
+    const crumbCache = new Map<string, string>();
+
     for (const page of data) {
         if (!page.title || !page.url) continue;
 
@@ -105,7 +108,12 @@ function run() {
         });
 
         for (const crumb of crumbs) {
-            let cleanCrumb = humanize(crumb);
+            let cleanCrumb = crumbCache.get(crumb);
+            if (cleanCrumb === undefined) {
+                cleanCrumb = humanize(crumb);
+                crumbCache.set(crumb, cleanCrumb);
+            }
+
             if (!cleanCrumb || cleanCrumb === current.name) continue;
             
             // Further redundancy check: if crumb is "Forcepoint ONE Firewall" and we are inside "Forcepoint ONE", rename to "Firewall"
