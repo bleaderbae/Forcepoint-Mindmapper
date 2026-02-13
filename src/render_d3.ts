@@ -126,7 +126,7 @@ function run() {
     <header><h1>Forcepoint Documentation</h1><div class="header-actions"><input type="text" id="search-input" placeholder="Search..." aria-label="Search documentation"><button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">🌓</button></div></header>
     <aside id="global-finder"><div class="finder-header">Documentation Explorer</div><div class="finder-scroll" id="finder-list"></div></aside>
     <button class="sidebar-toggle" id="finder-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">‹</button>
-    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()" aria-label="Zoom In">+</button><button class="btn" onclick="zoomOut()" aria-label="Zoom Out">-</button><button class="btn" onclick="resetZoom()" aria-label="Reset Zoom">⟲</button></div><svg id="minimap"></svg></div></main>
+    <main id="main-content"><div id="breadcrumb-navigator"></div><div id="canvas-container"><div class="controls"><button class="btn" onclick="zoomIn()" aria-label="Zoom In" title="Zoom In (+)">+</button><button class="btn" onclick="zoomOut()" aria-label="Zoom Out" title="Zoom Out (-)">-</button><button class="btn" onclick="resetZoom()" aria-label="Reset Zoom" title="Reset Zoom (0)">⟲</button></div><svg id="minimap"></svg></div></main>
 
     <script>
         const config = { nodeWidth: 320, nodeHeight: 52, expandedHeight: 280, directoryHeight: 360, levelWidth: 450, directoryThreshold: 12 };
@@ -489,6 +489,20 @@ function run() {
         document.getElementById('theme-toggle').addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if (e.key === '/' || (e.key === 'f' && (e.metaKey || e.ctrlKey))) {
+                e.preventDefault();
+                document.getElementById('search-input').focus();
+            } else if (e.key === '=' || e.key === '+') {
+                zoomIn();
+            } else if (e.key === '-' || e.key === '_') {
+                zoomOut();
+            } else if (e.key === '0') {
+                resetZoom();
+            }
         });
 
         init();
