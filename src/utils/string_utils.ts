@@ -45,16 +45,23 @@ export function humanize(text: string): string {
     }
 
     let result = text
-        .replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
+        .replace(/&amp;|&lt;|&gt;/g, (m) => {
+             if (m === '&amp;') return '&';
+             if (m === '&lt;') return '<';
+             return '>';
+        })
         .replace(/[\(\)\[\]\{\}"'#;]/g, '') 
         .replace(/[-_]/g, ' ')
         .replace(/\.html$/i, '')
         .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase
-        .replace(/\b(ack|rn|relnotes|release notes)\b/gi, 'Release Notes')
-        .replace(/\b(install|installation)\b/gi, 'Installation')
-        .replace(/\b(admin|administrator)\b/gi, 'Administrator');
+
+        // Combined keyword replacement
+        .replace(/\b(ack|rn|relnotes|release notes|install|installation|admin|administrator)\b/gi, (m) => {
+            const lower = m.toLowerCase();
+            if (lower === 'ack' || lower === 'rn' || lower.startsWith('rel')) return 'Release Notes';
+            if (lower.startsWith('install')) return 'Installation';
+            return 'Administrator';
+        });
 
     const beforeGeneric = result;
     result = result.replace(/\b(guide|help|online help|documentation|sitemap)\b/gi, '').trim();
