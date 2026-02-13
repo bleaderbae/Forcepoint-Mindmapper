@@ -11,6 +11,13 @@ export function escapeHtml(unsafe: string): string {
 }
 
 /**
+ * Escapes characters that have special meaning in regular expressions.
+ */
+export function escapeRegExp(string: string): string {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
  * Sanitizes text for use in Mermaid diagrams and other visual formats.
  * Removes special characters that might break Mermaid syntax.
  */

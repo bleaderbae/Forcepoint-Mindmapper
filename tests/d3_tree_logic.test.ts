@@ -79,4 +79,25 @@ describe('D3 Tree Logic', () => {
 
         assert.strictEqual(findChild(root, 'Child'), child);
     });
+
+    test('addChild should handle parent names with special regex characters', () => {
+        const parent: D3Node = { name: 'Parent [With] Special (Chars)', children: [] };
+        const child: D3Node = { name: 'Parent [With] Special (Chars) Child', children: [] };
+
+        // This should not throw
+        addChild(parent, child);
+
+        // The child name should be stripped of the parent name prefix
+        assert.strictEqual(child.name, 'Child');
+    });
+
+    test('addChild should not crash with invalid regex characters in parent name', () => {
+        const parent: D3Node = { name: 'Parent [Unclosed', children: [] };
+        const child: D3Node = { name: 'Parent [Unclosed Child', children: [] };
+
+        // This should not throw "Invalid regular expression"
+        addChild(parent, child);
+
+        assert.strictEqual(child.name, 'Child');
+    });
 });

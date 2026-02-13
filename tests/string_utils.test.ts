@@ -1,6 +1,17 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import { sanitize, escapeHtml, getCategory, humanize } from '../src/utils/string_utils.ts';
+import { sanitize, escapeHtml, getCategory, humanize, escapeRegExp } from '../src/utils/string_utils.ts';
+
+describe('escapeRegExp', () => {
+    test('should escape special regex characters', () => {
+        assert.strictEqual(escapeRegExp('abc'), 'abc');
+        assert.strictEqual(escapeRegExp('.*+?^${}()|[]\\'), '\\.\\*\\+\\?\\^\\$\\{\\}\\(\\)\\|\\[\\]\\\\');
+    });
+
+    test('should handle strings with mixed characters', () => {
+        assert.strictEqual(escapeRegExp('foo[bar]'), 'foo\\[bar\\]');
+    });
+});
 
 describe('escapeHtml', () => {
     test('should escape HTML special characters', () => {
