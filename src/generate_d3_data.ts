@@ -3,7 +3,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { PRODUCT_CONFIG } from './product_config.ts';
 import type { DocNode } from './types.ts';
-import { humanize, getCategory } from './utils/string_utils.ts';
+import { humanize, getCategory, escapeRegExp } from './utils/string_utils.ts';
 import { getVariant } from './utils/product_utils.ts';
 import { getVersionStatus, isVersionString, compareVersions } from './utils/version_utils.ts';
 
@@ -40,8 +40,9 @@ export const addChild = (parent: D3Node, child: D3Node) => {
     if (parent.name === "Forcepoint" && cleanName.startsWith("Forcepoint ")) {
         cleanName = cleanName.replace(/^Forcepoint\s+/, "");
     }
+    const escapedParentName = escapeRegExp(parent.name);
     if (cleanName.startsWith(parent.name + " ")) {
-        cleanName = cleanName.replace(new RegExp(`^${parent.name}\\s+`, 'i'), "");
+        cleanName = cleanName.replace(new RegExp(`^${escapedParentName}\\s+`, 'i'), "");
     }
     child.name = cleanName;
 
@@ -118,7 +119,8 @@ function run() {
             
             // Further redundancy check: if crumb is "Forcepoint ONE Firewall" and we are inside "Forcepoint ONE", rename to "Firewall"
             if (cleanCrumb.startsWith(current.name + " ")) {
-                cleanCrumb = cleanCrumb.replace(new RegExp(`^${current.name}\\s+`, 'i'), "");
+                const escapedCurrentName = escapeRegExp(current.name);
+                cleanCrumb = cleanCrumb.replace(new RegExp(`^${escapedCurrentName}\\s+`, 'i'), "");
             }
 
             const nodeType = isVersionString(cleanCrumb) ? 'version' : 'category';
