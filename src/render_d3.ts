@@ -365,6 +365,7 @@ function run() {
                     fo.attr("height", h).attr("y", -h/2);
                     fo.style("pointer-events", "auto").transition().duration(duration).style("opacity", 1);
                     const safeName = escapeHtml(d.data.name);
+                    const safeType = escapeHtml(d.data.type || 'category');
 
                     const summaryData = window.summaries && d.data.url ? window.summaries[d.data.url] : null;
                     const summaryText = summaryData ? summaryData.summary : "No summary content found for this document.";
@@ -385,7 +386,9 @@ function run() {
                         const items = (d.children || d._children || []).map(c => \`<li class="directory-item" onclick="event.stopPropagation(); window.focusNodeById('\${c.id}')">\${escapeHtml(c.data.name)}</li>\`).join("");
                         fo.html(\`<div class="node-details directory-container" xmlns="http://www.w3.org/1999/xhtml"><div class="directory-header"><span>DIRECTORY</span><span>\${(d.children||d._children).length} items</span></div><div class="detail-title">\${safeName}</div><ul class="directory-list">\${items}</ul></div>\`);
                     } else {
-                        fo.html(\`<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-\${d.data.type}">\${d.data.type}</div><div class="detail-title">\${safeName}</div><div class="node-summary">\${safeSummary}</div>\${relatedLinksHtml}\${safeUrl ? \`<a href="\${safeUrl}" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation ↗</a>\` : ''}</div>\`);
+                        const linkHtml = safeUrl ? '<a href="' + safeUrl + '" target="_blank" class="external-link-btn" onclick="event.stopPropagation()">View Official Documentation &#x2197;</a>' : '';
+                        const content = '<div class="node-details" xmlns="http://www.w3.org/1999/xhtml"><div class="type-tag tag-' + safeType + '">' + safeType + '</div><div class="detail-title">' + safeName + '</div><div class="node-summary">' + safeSummary + '</div>' + relatedLinksHtml + linkHtml + '</div>';
+                        fo.html(content);
                     }
                 } else {
                     fo.style("pointer-events", "none").transition().duration(duration).style("opacity", 0);
