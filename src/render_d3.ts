@@ -85,6 +85,7 @@ function run() {
         #breadcrumb-navigator.visible { opacity: 1; pointer-events: auto; }
         .breadcrumb-item { cursor: pointer; color: var(--text-primary); }
         .breadcrumb-item:hover { color: var(--fp-green); text-decoration: underline; }
+        .breadcrumb-item:focus-visible { outline: 2px solid var(--fp-green); outline-offset: 2px; border-radius: 2px; }
 
         /* Rich Knowledge Card Styling */
         .node-details { padding: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-primary); width: 100%; height: 100%; overflow: hidden; background: transparent; }
@@ -477,8 +478,21 @@ function run() {
             if (!d) return nav.classed("visible", false);
             nav.classed("visible", true).html("");
             d.ancestors().reverse().forEach((a, i) => {
-                if (i > 0) nav.append("span").text("›").style("opacity", 0.5).style("margin", "0 4px");
-                nav.append("span").attr("class", "breadcrumb-item").text(a.data.name).on("click", (e) => { e.stopPropagation(); window.focusNodeById(a.id); });
+                if (i > 0) nav.append("span").text("›").style("opacity", 0.5).style("margin", "0 4px").attr("aria-hidden", "true");
+                nav.append("span")
+                    .attr("class", "breadcrumb-item")
+                    .attr("tabindex", "0")
+                    .attr("role", "button")
+                    .attr("aria-label", "Navigate to " + a.data.name)
+                    .text(a.data.name)
+                    .on("click", (e) => { e.stopPropagation(); window.focusNodeById(a.id); })
+                    .on("keydown", (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.focusNodeById(a.id);
+                        }
+                    });
             });
         }
 
